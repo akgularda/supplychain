@@ -164,18 +164,108 @@ body.profile-mode #ly,body.card-visible #ly{top:220px}
 #mobileToggle{display:none}
 #mobileSheet{display:none}
 @media (max-width: 768px) {
-  #bar{display:none}
-  #companyCard{width:260px;top:100px;right:8px}
-  #searchWrap{top:12px;right:8px;width:190px}
-  #subtitle{display:none}
-  .st b{font-size:14px}
-  #lg{max-width:80vw}
-  #mobileToggle{display:block;position:fixed;left:8px;bottom:8px;z-index:130;background:#111;border:1px solid #333;color:#ddd;padding:8px 10px;font-size:9px;letter-spacing:.5px;text-transform:uppercase}
-  #mobileSheet{position:fixed;left:0;right:0;bottom:0;z-index:140;background:rgba(8,8,8,.98);border-top:1px solid #2a2a2a;padding:10px;display:none}
-  #mobileSheet .mHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-  #mobileSheet .mHead h3{font-size:10px;color:#ddd;text-transform:uppercase}
-  #mobileSheet .mGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-  #mobileSheet button{background:#111;border:1px solid #333;color:#aaa;padding:8px 6px;font-size:8px;letter-spacing:.4px;text-transform:uppercase}
+  #bar {
+    display: none;
+  }
+  
+  #companyCard {
+    width: calc(100% - 16px);
+    right: 8px;
+    left: 8px;
+    top: 80px !important;
+    max-height: calc(100vh - 100px);
+  }
+  
+  #searchWrap {
+    top: 12px;
+    right: 8px;
+    width: calc(100% - 100px);
+  }
+  
+  #subtitle {
+    display: none;
+  }
+  
+  .st {
+    gap: 10px;
+  }
+  
+  .st b {
+    font-size: 14px;
+  }
+  
+  .st span {
+    font-size: 7px;
+  }
+  
+  #lg {
+    max-width: 80vw;
+  }
+  
+  #mobileToggle {
+    display: block;
+    position: fixed;
+    left: 8px;
+    bottom: 8px;
+    z-index: 130;
+    background: linear-gradient(135deg, #1a1a1a, #222);
+    border: 1px solid #333;
+    color: #ddd;
+    padding: 10px 14px;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  
+  #mobileSheet {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 140;
+    background: linear-gradient(180deg, rgba(8,8,8,0.98) 0%, rgba(8,8,8,0.99) 100%);
+    border-top: 1px solid #2a2a2a;
+    padding: 12px;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+  }
+  
+  #mobileSheet .mGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  
+  #mobileSheet button {
+    background: linear-gradient(135deg, #1a1a1a, #222);
+    border: 1px solid #333;
+    color: #aaa;
+    padding: 10px 8px;
+    font-size: 8px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    transition: all 0.15s;
+  }
+  
+  #mobileSheet button:hover, #mobileSheet button:active {
+    border-color: var(--acc);
+    color: var(--acc);
+    transform: translateY(-2px);
+  }
+  
+  /* Improve touch targets */
+  #bar button, #bar select, #companyCard button {
+    min-height: 36px;
+    min-width: 36px;
+  }
+  
+  /* Larger tooltips on mobile */
+  #tt {
+    max-width: calc(100vw - 24px);
+    padding: 14px;
+  }
 }
 @media print {
   #top,#bar,#searchWrap,#companyCard,#hint,#lg,#ly,#filterPanel,#loading,#helpModal,#compareModal,#footer,#provenanceDrawer,#mobileToggle,#mobileSheet{display:none!important}
