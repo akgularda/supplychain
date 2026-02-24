@@ -1,0 +1,74 @@
+name: Auto-Update Market Cap Data
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # Every Monday at 6:00 AM UTC
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies (if any)
+        run: |
+          if [ -f package.json ]; then
+            npm install
+          fi
+      
+      - name: Create backup timestamp
+        id: timestamp
+        run: echo "timestamp=$(date +%Y%m%d-%H%M%S) >> $GITHUB_OUTPUT"
+      
+      - name: Download and parse latest CSV
+        run: node scripts/update-marketcap-data.mjs
+        env:
+          NODE_TLS_REJECT_UNAUTHORIZED: '0'
+      
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --quiet data/ || echo "changes=true" >> $GITHUB_OUTPUT
+      
+      - name: Generate change summary
+        id: summary
+        if: steps.git-check.outputs.changes == 'true'
+        run: |
+          echo "## Auto-Update Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Market cap data updated successfully" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Update Time:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Changes Detected:** Yes" >> $GITHUB_STEP_SUMMARY
+      
+      - name: Commit and push if changes
+        if: steps.git-check.outputs.changes == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/
+          git commit -m "chore: auto-update market cap data $(date +%Y-%m-%d)"
+          git push
+      
+      - name: No changes detected
+        if: steps.git-check.outputs.changes != 'true'
+        run: |
+          echo "## Auto-Update Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "ℹ️ No changes detected in market cap data" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Check Time:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
