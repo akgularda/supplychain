@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Global Supply Chain - Top 100 Market Cap</title>
+<title>Monarch Castle Technologies | Market Intelligence</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="./data/top100-map.js"></script>
@@ -18,8 +18,12 @@ html,body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',mo
 @keyframes pageFadeIn{from{opacity:0}to{opacity:1}}
 #top{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;padding:12px 16px 10px;background:linear-gradient(180deg, rgba(15,15,15,0.98) 0%, rgba(10,10,10,0.95) 100%);backdrop-filter:blur(8px);box-shadow:0 1px 0 rgba(255,255,255,0.05), 0 4px 20px rgba(0,0,0,0.4);border-bottom:1px solid #1a1a1a;pointer-events:none}
 #top>*{pointer-events:auto}
-#title{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:800;letter-spacing:-.3px;line-height:1;text-shadow:0 1px 2px rgba(0,0,0,0.3)}
-#title span{color:var(--acc)}
+#title{display:flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:-0.3px;line-height:1;text-shadow:0 1px 2px rgba(0,0,0,0.3);transition:filter 0.2s ease}
+#title:hover{filter:brightness(1.1)}
+#title .logo{width:32px;height:32px;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.3);object-fit:contain}
+#title .companyName{font-weight:500;color:#fff}
+#title .tagline{font-weight:400;color:#888}
+#title .separator{color:#505050;margin:0 2px}
 #subtitle{font-size:9px;color:var(--dim);margin-top:4px;letter-spacing:.3px;font-weight:300;max-width:680px}
 .st{display:flex;gap:16px;text-align:center}
 .st span{font-size:8px;color:var(--dim);letter-spacing:.5px;text-transform:uppercase}
@@ -367,7 +371,12 @@ body.profile-mode #ly,body.card-visible #ly{top:220px}
 
   <div id="top">
     <div>
-      <div id="title"><span>Global Supply Chain</span> / Top 100 Market Cap</div>
+      <div id="title">
+        <img src="./assets/monarch-logo.png" alt="Monarch Castle Technologies" class="logo">
+        <span class="companyName">Monarch Castle Technologies</span>
+        <span class="separator">|</span>
+        <span class="tagline">Market Intelligence</span>
+      </div>
       <div id="subtitle">Click any company node to open its dedicated supply-chain profile. Profile data includes relationship confidence and source references where available.</div>
     </div>
     <div class="st">
