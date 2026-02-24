@@ -299,29 +299,21 @@ body.profile-mode #ly,body.card-visible #ly{top:220px}
 #footer .statusDot.stale{background:#ff9800}
 #footer .statusDot.outdated{background:#f44336}
 
-/* Top 10 Cards */
-#top10Cards{padding:0 16px}
-.top10-card{background:linear-gradient(180deg,rgba(18,18,18,0.98) 0%,rgba(10,10,10,0.96) 100%);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:14px;box-shadow:0 4px 16px rgba(0,0,0,0.3);transition:all 0.2s ease;cursor:pointer;display:flex;flex-direction:column;gap:10px}
-.top10-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,0.4);border-color:rgba(255,255,255,0.12)}
-.top10-card .cardHeader{display:flex;align-items:center;gap:10px}
-.top10-card .cardLogo{width:40px;height:40px;border-radius:6px;object-fit:contain;background:#0f0f0f;border:1px solid rgba(255,255,255,0.08)}
-.top10-card .cardLogoFallback{width:40px;height:40px;border-radius:6px;background:linear-gradient(135deg,#1a1a1a,#2a2a2a);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;color:#ddd}
-.top10-card .cardSymbol{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#fff}
-.top10-card .cardName{font-family:'Inter',sans-serif;font-size:11px;color:#888;margin-top:2px}
-.top10-card .cardSection{padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.06)}
-.top10-card .cardSection:last-child{border-bottom:none;padding-bottom:0}
-.top10-card .cardStat{display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#aaa;margin-bottom:6px}
-.top10-card .cardStat:last-child{margin-bottom:0}
-.top10-card .cardStat b{color:#fff;font-weight:600}
-.rank-up{color:#4caf50}.rank-down{color:#f44336}.rank-same{color:#666}
-.top10-card .creditRatings{display:flex;gap:4px;flex-wrap:wrap}
-.top10-card .supplyChainStats{display:flex;flex-wrap:wrap;gap:6px;font-size:8px;color:#888}
-.top10-card .supplyChainStats span{background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:3px;border:1px solid rgba(255,255,255,0.08)}
-.top10-card .viewProfile{width:100%;background:rgba(232,69,60,0.15);border:1px solid rgba(232,69,60,0.3);color:#e8453c;padding:6px 10px;font-size:9px;text-transform:uppercase;letter-spacing:0.5px;border-radius:4px;cursor:pointer;transition:all 0.15s;text-align:center;text-decoration:none;display:block;font-family:'JetBrains Mono',monospace}
-.top10-card .viewProfile:hover{background:rgba(232,69,60,0.25);border-color:rgba(232,69,60,0.5)}
-#seeFullTop100:hover{border-color:var(--acc);color:var(--acc);transform:translateY(-2px);box-shadow:0 4px 16px rgba(232,69,60,0.3)}
-@media(max-width:1200px){#top10Cards{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:768px){#top10Cards{grid-template-columns:repeat(2,1fr);gap:8px;padding:12px}#top10Container{top:auto;bottom:0;background:rgba(8,8,8,0.98);border-top:1px solid #2a2a2a;max-height:50vh;overflow-y:auto}#seeFullTop100{margin:16px auto}}
+/* Top 10 Compact Sidebar */
+#top10Sidebar{background:rgba(10,10,10,0.95);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:10px}
+#top10Sidebar::-webkit-scrollbar{width:4px}
+#top10Sidebar::-webkit-scrollbar-track{background:transparent}
+#top10Sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px}
+.top10-item{display:flex;align-items:center;gap:8px;padding:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:4px;cursor:pointer;transition:all 0.15s}
+.top10-item:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.12);transform:translateX(2px)}
+.top10-item .rank{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#666;min-width:20px}
+.top10-item .logo{width:24px;height:24px;border-radius:4px;object-fit:contain;background:#0f0f0f;border:1px solid rgba(255,255,255,0.08)}
+.top10-item .logoFallback{width:24px;height:24px;border-radius:4px;background:linear-gradient(135deg,#1a1a1a,#2a2a2a);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-size:10px;font-weight:700;color:#666}
+.top10-item .info{flex:1;min-width:0}
+.top10-item .symbol{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#fff}
+.top10-item .name{font-family:'Inter',sans-serif;font-size:8px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top10-item .marketCap{font-family:'JetBrains Mono',monospace;font-size:8px;color:#4caf50;font-weight:600}
+@media(max-width:768px){#top10Sidebar{display:none!important}}
 </style>
 </head>
 <body>
@@ -418,6 +410,12 @@ body.profile-mode #ly,body.card-visible #ly{top:220px}
       <span><b id="sY">0</b>layers</span>
       <span><b id="sM">$0T</b>cap</span>
     </div>
+  </div>
+
+  <!-- Top 10 Compact Sidebar -->
+  <div id="top10Sidebar" style="position:fixed;top:60px;left:12px;z-index:95;width:220px;max-height:calc(100vh - 80px);overflow-y:auto;display:none">
+    <div style="font-size:8px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Top 10 by Market Cap</div>
+    <div id="top10List" style="display:flex;flex-direction:column;gap:6px"></div>
   </div>
 
   <div id="bar">
@@ -538,11 +536,6 @@ body.profile-mode #ly,body.card-visible #ly{top:220px}
   <div id="ly"></div>
   <svg id="canvas" role="img" aria-label="Supply chain network visualization"></svg>
   <div id="hint">Global: click company to open profile · Scroll zoom · Drag pan · Press H for help</div>
-  <!-- Top 10 Companies Grid -->
-  <div id="top10Container" style="position:fixed;top:60px;left:0;right:0;z-index:95;padding:16px;pointer-events:none;display:none">
-    <div id="top10Cards" style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;max-width:1400px;margin:0 auto;pointer-events:auto"></div>
-    <button id="seeFullTop100" onclick="scrollToVisualization()" style="display:block;max-width:300px;margin:24px auto;background:linear-gradient(135deg,#1a1a1a,#222);border:1px solid #333;color:#ddd;padding:12px 24px;font-size:10px;text-transform:uppercase;letter-spacing:1px;border-radius:6px;cursor:pointer;transition:all 0.2s;text-align:center">See Full Top 100 →</button>
-  </div>
   <div id="footer" style="position:fixed;bottom:8px;left:12px;font-size:8px;color:#444;display:flex;align-items:center;gap:8px">
     <span class="updateStatus">
       <span class="statusDot" id="updateStatusDot"></span>
@@ -2425,64 +2418,34 @@ function updateStatusIndicator() {
   }
 }
 
-// Top 10 Cards Rendering
-function renderTop10Cards() {
+// Top 10 List Rendering
+function renderTop10List() {
   const data = window.SUPPLY_MAP_DATA;
   if (!data || !data.nodes) return;
   
-  const container = document.getElementById('top10Cards');
+  const container = document.getElementById('top10List');
   // Get top 10 companies by rank from nodes array
   const top10 = data.nodes.filter(n => n.rank).sort((a, b) => a.rank - b.rank).slice(0, 10);
   
   container.innerHTML = top10.map((company, index) => {
     const logoUrl = `https://companiesmarketcap.com/img/company-logos/64/${company.symbol}.png`;
-    const profile = data.profiles?.[company.symbol] || {};
-    const supplierCount = profile.upstream?.length || 0;
-    const serviceCount = profile.services?.length || 0;
-    const channelCount = profile.channels?.length || 0;
-    const demandCount = profile.demand?.length || 0;
-    const ratings = window.CREDIT_RATINGS?.ratingsBySymbol?.[company.symbol];
+    const rank = company.rank || index + 1;
     
     return `
-      <div class="top10-card" data-symbol="${company.symbol}" onclick="openCompanyProfile('${company.symbol}')">
-        <div class="cardHeader">
-          <img src="${logoUrl}" alt="${company.company}" class="cardLogo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="cardLogoFallback" style="display:none">${getInitials(company.company)}</div>
-          <div>
-            <div class="cardSymbol">${company.symbol}</div>
-            <div class="cardName">${company.company}</div>
-          </div>
+      <div class="top10-item" data-symbol="${company.symbol}" onclick="openCompanyProfile('${company.symbol}')">
+        <span class="rank">#${rank}</span>
+        <img src="${logoUrl}" alt="${company.company}" class="logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logoFallback" style="display:none">${getInitials(company.company)}</div>
+        <div class="info">
+          <div class="symbol">${company.symbol}</div>
+          <div class="name">${company.company.length > 20 ? company.company.slice(0, 20) + '…' : company.company}</div>
         </div>
-        <div class="cardSection">
-          <div class="cardStat"><span>Market Cap</span><b>$${formatMarketCap((company.marketcap || 0) / 1e12)}</b></div>
-          <div class="cardStat"><span>Rank</span><span>#${company.rank || index + 1}</span></div>
-          <div class="cardStat"><span>Country</span><span>${company.country || 'Unknown'}</span></div>
-          <div class="cardStat"><span>Sector</span><span>${data.layers[company.y] || 'Diversified'}</span></div>
-        </div>
-        ${ratings && (ratings.fitch || ratings.spGlobal || ratings.moodys) ? `
-        <div class="cardSection">
-          <div class="cardStat"><span>Credit Ratings</span></div>
-          <div class="creditRatings">
-            ${ratings.spGlobal ? `<span class="credit-rating sp"><span class="credit-rating-grade">${ratings.spGlobal}</span></span>` : ''}
-            ${ratings.moodys ? `<span class="credit-rating moodys"><span class="credit-rating-grade">${ratings.moodys}</span></span>` : ''}
-            ${ratings.fitch ? `<span class="credit-rating fitch"><span class="credit-rating-grade">${ratings.fitch.grade || ratings.fitch}</span></span>` : ''}
-          </div>
-        </div>` : ''}
-        <div class="cardSection">
-          <div class="cardStat"><span>Supply Chain</span></div>
-          <div class="supplyChainStats">
-            <span><b style="color:#4caf50">${supplierCount}</b> suppliers</span>
-            <span><b style="color:#4caf50">${serviceCount}</b> services</span>
-            <span><b style="color:#4caf50">${channelCount}</b> channels</span>
-            <span><b style="color:#4caf50">${demandCount}</b> demand</span>
-          </div>
-        </div>
-        <button class="viewProfile">View Profile →</button>
+        <div class="marketCap">$${formatMarketCap((company.marketcap || 0) / 1e12)}</div>
       </div>
     `;
   }).join('');
   
-  document.getElementById('top10Container').style.display = 'block';
+  document.getElementById('top10Sidebar').style.display = 'block';
 }
 
 function getInitials(name) {
@@ -2504,18 +2467,9 @@ function openCompanyProfile(symbol) {
   setTimeout(() => { openProfile(symbol); }, 500);
 }
 
-function scrollToVisualization() {
-  document.getElementById('canvas').scrollIntoView({ behavior: 'smooth' });
-  highlightAllNodes();
-}
-
-function highlightAllNodes() {
-  d3.selectAll('.node').transition().duration(300).style('opacity', 0.5).transition().duration(300).style('opacity', 1);
-}
-
 // Initialize
 updateStatusIndicator();
-renderTop10Cards();
+renderTop10List();
 </script>
 </body>
 </html>
