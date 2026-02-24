@@ -2174,7 +2174,7 @@ function render() {
   STATE.sourceIndex = graph.sourceIndex || {};
 
   titleEl.innerHTML = STATE.mode === "global"
-    ? "<span>Global Supply Chain</span> / Top 100 Market Cap"
+    ? `<img src="./assets/monarch-logo.png" alt="Monarch Castle Technologies" class="logo"><span class="companyName">Monarch Castle Technologies</span><span class="separator">|</span><span class="tagline">Market Intelligence</span>`
     : `<span>Company Profile</span> / ${STATE.symbol}`;
   subtitleEl.textContent = graph.subtitle;
   hintEl.textContent = graph.hint;
