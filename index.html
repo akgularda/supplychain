@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Supply Chain - Top 100 Market Cap</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="./data/top100-map.js"></script>
+<script src="./data/credit-ratings.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0a;--text:#d4d4d4;--dim:#505050;--acc:#e8453c;--blue:#4488cc;--green:#4caf50;--purple:#9c27b0;
+}
+html,body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;overflow:hidden;height:100vh;width:100vw}
+#top{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;padding:12px 16px 10px;background:linear-gradient(180deg, rgba(15,15,15,0.98) 0%, rgba(10,10,10,0.95) 100%);backdrop-filter:blur(8px);box-shadow:0 1px 0 rgba(255,255,255,0.05), 0 4px 20px rgba(0,0,0,0.4);border-bottom:1px solid #1a1a1a;pointer-events:none}
+#top>*{pointer-events:auto}
+#title{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:800;letter-spacing:-.3px;line-height:1;text-shadow:0 1px 2px rgba(0,0,0,0.3)}
+#title span{color:var(--acc)}
+#subtitle{font-size:9px;color:var(--dim);margin-top:4px;letter-spacing:.3px;font-weight:300;max-width:680px}
+.st{display:flex;gap:16px;text-align:center}
+.st span{font-size:8px;color:var(--dim);letter-spacing:.5px;text-transform:uppercase}
+.st b{font-size:18px;font-weight:700;color:var(--text);display:block;line-height:1.2;font-family:'Bricolage Grotesque',sans-serif;font-variant-numeric:tabular-nums;background:linear-gradient(135deg, #fff 0%, #b0b0b0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-live{display:inline-block;width:6px;height:6px;background:#4caf50;border-radius:50%;margin-right:6px;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(0.9)}}
+#lastUpdated{color:#666;font-size:8px}
+#lastUpdated.updated{color:#4caf50;animation:flash 0.5s ease}
+@keyframes flash{0%,100%{color:#666}50%{color:#4caf50}}
+#bar{position:fixed;top:52px;left:12px;z-index:100;display:flex;gap:3px;flex-wrap:wrap;max-width:72vw}
+#bar button,#bar select{background:transparent;border:1px solid #222;color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:8px;padding:4px 9px;cursor:pointer;letter-spacing:.6px;text-transform:uppercase;transition:all .12s;white-space:nowrap}
+#bar button:hover,#bar button.on,#bar select:hover{background:#1a1a1a;border-color:var(--acc);color:var(--acc)}
+#bar .sep{width:1px;background:#1a1a1a;align-self:stretch;margin:0 4px}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:1px solid var(--acc);outline-offset:1px}
+#searchWrap{position:fixed;top:52px;right:12px;z-index:100;width:260px}
+#q{position:static;background:#111;border:1px solid #222;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:9px;padding:5px 10px;width:100%;outline:none}
+#q:focus{border-color:var(--acc)}
+#q::placeholder{color:#444}
+#companyCard{position:fixed;right:12px;top:92px;z-index:120;width:300px;background:linear-gradient(180deg, rgba(18,18,18,0.98) 0%, rgba(10,10,10,0.96) 100%);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.08);padding:12px;display:none;pointer-events:auto;box-shadow:0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3);border-radius:8px;max-height:calc(100vh - 120px);overflow-y:auto}
+#companyCard::-webkit-scrollbar{width:6px}
+#companyCard::-webkit-scrollbar-track{background:rgba(255,255,255,0.03)}
+#companyCard::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:3px}
+#companyCard .cTop{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.06)}
+#companyCard .cLogoWrap{width:50px;height:50px;border:1px solid rgba(255,255,255,0.08);background:#0f0f0f;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.3)}
+#companyCard .cLogo{width:100%;height:100%;object-fit:contain;display:none}
+#companyCard .cLogoFallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:700;color:#ddd;background:linear-gradient(135deg,#1a1a1a,#2a2a2a)}
+#companyCard .cName{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;line-height:1.05;background:linear-gradient(135deg, #fff 0%, #d0d0d0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+#companyCard .cSym{font-size:9px;color:#9a9a9a;letter-spacing:.7px;text-transform:uppercase;margin-top:3px}
+#companyCard .cStats{display:flex;gap:8px;margin-top:8px;font-size:8px;color:#666;background:rgba(255,255,255,0.03);padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.05)}
+#companyCard .cStat{background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:3px;border:1px solid rgba(255,255,255,0.08)}
+#companyCard .cStat b{background:linear-gradient(135deg, #4caf50 0%, #45a049 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+#companyCard .cHq{margin-top:10px;padding-top:10px;border-top:1px solid #212121;display:flex;align-items:center;gap:8px}
+#companyCard .cFlag{width:20px;height:14px;object-fit:cover;border:1px solid #252525;display:none;border-radius:2px}
+#companyCard .cFlagFallback{width:20px;height:14px;border:1px solid #252525;display:flex;align-items:center;justify-content:center;color:#666;font-size:8px;border-radius:2px}
+#companyCard .cHqText{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:#e4e4e4}
+#companyCard .cInsights{margin-top:10px;padding-top:10px;border-top:1px solid #212121}
+#companyCard .cSecTitle{font-size:8px;color:#6f6f6f;text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px}
+#companyCard .cRiskRow{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+#companyCard .cRiskBadge{font-size:8px;padding:2px 6px;border-radius:2px;border:1px solid #333;text-transform:uppercase;font-weight:600;letter-spacing:0.3px}
+#companyCard .cRiskBadge.high{color:#ff8f8f;border-color:#6c2c2c;background:linear-gradient(135deg, rgba(108,44,44,0.3) 0%, rgba(108,44,44,0.1) 100%)}
+#companyCard .cRiskBadge.medium{color:#ffd899;border-color:#6a5125;background:linear-gradient(135deg, rgba(106,81,37,0.3) 0%, rgba(106,81,37,0.1) 100%)}
+#companyCard .cRiskBadge.low{color:#9fdbac;border-color:#2a5a35;background:linear-gradient(135deg, rgba(42,90,53,0.3) 0%, rgba(42,90,53,0.1) 100%)}
+.credit-rating{display:inline-flex;align-items:center;gap:4px;padding:3px 6px;border-radius:3px;font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.credit-rating.sp{background:rgba(232,69,60,0.15);color:#e8453c;border:1px solid rgba(232,69,60,0.3)}
+.credit-rating.moodys{background:rgba(76,136,204,0.15);color:#4c88cc;border:1px solid rgba(76,136,204,0.3)}
+.credit-rating.fitch{background:rgba(156,39,176,0.15);color:#9c27b0;border:1px solid rgba(156,39,176,0.3)}
+.credit-rating-grade{font-weight:700;min-width:20px;text-align:center}
+#companyCard .cMuted{font-size:8px;color:#777;line-height:1.45}
+#companyCard .cList{display:flex;flex-direction:column;gap:3px;margin-top:4px}
+#companyCard .cItem{display:flex;justify-content:space-between;gap:8px;font-size:8px;color:#8a8a8a}
+#companyCard .cItem b{color:#ddd;font-weight:600}
+#companyCard .cRatings{display:flex;flex-direction:column;gap:4px;margin-bottom:8px}
+#companyCard .cRate{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:8px;color:#8f8f8f}
+#companyCard .cActions{display:flex;gap:6px;margin-top:8px}
+#companyCard .cActions button{flex:1;background:#111;border:1px solid #2b2b2b;color:#888;padding:4px 6px;font-size:8px;cursor:pointer;text-transform:uppercase}
+#companyCard .cActions button:hover{border-color:var(--acc);color:var(--acc)}
+body.profile-mode #ly,body.card-visible #ly{top:220px}
+#tt{position:fixed;z-index:300;background:var(--bg);border:1px solid #333;padding:12px 14px;max-width:450px;display:none;box-shadow:0 4px 20px rgba(0,0,0,.5);border-radius:4px}
+#tt .tn{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.2}
+#tt .tf{font-size:9px;color:#777;letter-spacing:.7px;text-transform:uppercase;margin-bottom:8px}
+#tt .td{font-size:11px;line-height:1.45;color:#bbb;white-space:pre-line}
+#tt .ts{margin-top:8px;padding-top:8px;border-top:1px solid #222;font-size:10px;color:#888}
+#tt .tc{margin-top:6px;font-size:9px;color:#888}
+#tt .tv{margin-top:4px;font-size:9px;color:var(--green);display:flex;align-items:center;gap:4px}
+#tt .tv::before{content:"✓"}
+#tt .tu{margin-top:6px;font-size:9px;color:#86b7ff;word-break:break-all}
+#lg{position:fixed;left:12px;bottom:12px;z-index:90;display:flex;gap:8px;flex-wrap:wrap;max-width:60vw}
+#lg .li{display:flex;align-items:center;gap:5px;font-size:9px;color:#666}
+#lg .ld{width:7px;height:7px;border-radius:0}
+#ly{position:fixed;right:12px;top:92px;z-index:90;display:flex;flex-direction:column;gap:3px;max-height:68vh}
+#ly .lb{font-size:9px;color:#555;border:1px solid #1f1f1f;padding:4px 7px;background:#0f0f0f;cursor:pointer;border-radius:2px;transition:all .12s}
+#ly .lb:hover{border-color:#333;color:#aaa}
+#hint{position:fixed;right:12px;bottom:12px;z-index:90;font-size:8px;color:#444;letter-spacing:.6px;text-transform:uppercase}
+.bn-ring{fill:none;stroke:var(--acc);stroke-width:1.2;stroke-dasharray:3 4;opacity:.75}
+.verified-node{filter:drop-shadow(0 0 3px var(--green))}
+#loading{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;background:rgba(10,10,10,.9);display:none;align-items:center;justify-content:center;flex-direction:column}
+#loading .spinner{width:50px;height:50px;border:3px solid #222;border-top-color:var(--acc);border-radius:50%;animation:spin 1s linear infinite}
+#loading .text{margin-top:16px;font-size:11px;color:#666;letter-spacing:.5px}
+#fatalError{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:2000;background:#2a1111;border:1px solid #5a2222;color:#ffdede;padding:10px 14px;font-size:11px;line-height:1.4;max-width:min(92vw,860px);display:none}
+#fatalError b{color:#ff8c84}
+#onboardingPanel{position:fixed;left:12px;bottom:38px;z-index:110;background:rgba(10,10,10,.96);border:1px solid #252525;border-radius:6px;padding:12px;max-width:320px;display:none}
+#onboardingPanel h3{font-family:'Bricolage Grotesque',sans-serif;font-size:14px;color:#fff;margin-bottom:8px}
+#onboardingPanel p,#onboardingPanel li{font-size:10px;color:#a8a8a8;line-height:1.5}
+#onboardingPanel ul{margin:6px 0 10px 16px}
+#onboardingPanel .actions{display:flex;justify-content:flex-end}
+#onboardingPanel button{background:#111;border:1px solid #333;color:#ddd;padding:5px 10px;font-size:9px;cursor:pointer;text-transform:uppercase;letter-spacing:.5px}
+#onboardingPanel button:hover{border-color:var(--acc);color:var(--acc)}
+@keyframes spin{to{transform:rotate(360deg)}}
+#helpModal{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center}
+#helpModal .content{background:#111;border:1px solid #333;padding:24px;max-width:500px;max-height:80vh;overflow-y:auto;border-radius:6px}
+#helpModal h2{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:16px}
+#helpModal h3{font-size:12px;color:var(--acc);margin:16px 0 8px;text-transform:uppercase;letter-spacing:.5px}
+#helpModal p,#helpModal li{font-size:11px;color:#aaa;line-height:1.6}
+#helpModal ul{margin:8px 0 8px 16px}
+#helpModal kbd{background:#222;padding:2px 6px;border-radius:3px;font-size:10px;border:1px solid #333}
+#helpModal .close{position:absolute;top:12px;right:12px;background:none;border:none;color:#666;font-size:20px;cursor:pointer}
+#filterPanel{position:fixed;top:92px;left:12px;z-index:95;background:rgba(10,10,10,.95);border:1px solid #252525;padding:10px;display:none;max-width:280px}
+#filterPanel h3{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+#filterPanel .fg{margin-bottom:10px}
+#filterPanel .fg label{display:block;font-size:8px;color:#888;margin-bottom:4px;text-transform:uppercase}
+#filterPanel .fg select,#filterPanel .fg input{width:100%;background:#111;border:1px solid #222;color:var(--text);font-size:9px;padding:4px 6px;font-family:'JetBrains Mono',monospace}
+#filterPanel .fg input[type="checkbox"]{width:auto;margin-right:6px}
+#filterPanel .fa{display:flex;gap:6px;margin-top:8px}
+#filterPanel .fa button{flex:1;background:transparent;border:1px solid #222;color:var(--dim);font-size:8px;padding:4px;cursor:pointer;text-transform:uppercase}
+#filterPanel .fa button:hover{border-color:var(--acc);color:var(--acc)}
+#compareModal{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;background:rgba(0,0,0,.9);display:none;overflow-y:auto}
+#compareModal .content{padding:24px;max-width:1200px;margin:0 auto}
+#compareModal .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+#compareModal h2{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:700;color:#fff}
+#compareModal .close{background:none;border:none;color:#666;font-size:24px;cursor:pointer}
+#compareModal .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+#compareModal .card{background:#111;border:1px solid #222;padding:16px;border-radius:4px}
+#compareModal .card h3{font-size:13px;color:#fff;margin-bottom:12px}
+#compareModal .card .stat{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1a1a1a;font-size:10px}
+#compareModal .card .stat:last-child{border-bottom:none}
+#compareModal .card .stat b{color:var(--acc)}
+#searchSuggest,#searchHistory{position:absolute;top:100%;right:0;left:0;background:#111;border:1px solid #222;border-top:none;display:none;max-height:210px;overflow-y:auto}
+#searchHistory{top:calc(100% + 2px)}
+#searchSuggest .sg-item,#searchHistory .sh-item{padding:6px 10px;font-size:9px;color:#888;cursor:pointer;border-bottom:1px solid #1a1a1a}
+#searchSuggest .sg-item:hover,#searchHistory .sh-item:hover,#searchSuggest .sg-item.on{background:#1a1a1a;color:#fff}
+#searchSuggest .sym{color:#ddd}
+#searchSuggest .cmp{color:#666;margin-left:4px}
+#provenanceDrawer{position:fixed;right:12px;bottom:12px;z-index:105;width:min(360px,90vw);max-height:50vh;background:rgba(8,8,8,.97);border:1px solid #2a2a2a;padding:10px;display:none;overflow:auto}
+#provenanceDrawer .ph{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+#provenanceDrawer .ph h3{font-size:10px;color:#ddd;text-transform:uppercase;letter-spacing:.7px}
+#provenanceDrawer .ph button{background:none;border:none;color:#666;font-size:18px;cursor:pointer}
+#provenanceDrawer .pi{padding:6px 0;border-bottom:1px solid #1a1a1a}
+#provenanceDrawer .pi:last-child{border-bottom:none}
+#provenanceDrawer .pi .t{font-size:9px;color:#ddd}
+#provenanceDrawer .pi a{display:block;margin-top:2px;font-size:8px;color:#77a8ff;word-break:break-all}
+#mobileToggle{display:none}
+#mobileSheet{display:none}
+@media (max-width: 768px) {
+  #bar{display:none}
+  #companyCard{width:260px;top:100px;right:8px}
+  #searchWrap{top:12px;right:8px;width:190px}
+  #subtitle{display:none}
+  .st b{font-size:14px}
+  #lg{max-width:80vw}
+  #mobileToggle{display:block;position:fixed;left:8px;bottom:8px;z-index:130;background:#111;border:1px solid #333;color:#ddd;padding:8px 10px;font-size:9px;letter-spacing:.5px;text-transform:uppercase}
+  #mobileSheet{position:fixed;left:0;right:0;bottom:0;z-index:140;background:rgba(8,8,8,.98);border-top:1px solid #2a2a2a;padding:10px;display:none}
+  #mobileSheet .mHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  #mobileSheet .mHead h3{font-size:10px;color:#ddd;text-transform:uppercase}
+  #mobileSheet .mGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+  #mobileSheet button{background:#111;border:1px solid #333;color:#aaa;padding:8px 6px;font-size:8px;letter-spacing:.4px;text-transform:uppercase}
+}
+@media print {
+  #top,#bar,#searchWrap,#companyCard,#hint,#lg,#ly,#filterPanel,#loading,#helpModal,#compareModal,#footer,#provenanceDrawer,#mobileToggle,#mobileSheet{display:none!important}
+  #canvas{position:static;width:100%;height:600px}
+  body{background:white;color:black;overflow:visible}
+}
+@keyframes fadeOut{0%{opacity:1}80%{opacity:1}100%{opacity:0}}
+</style>
+</head>
+<body>
+  <div id="loading">
+    <div class="spinner"></div>
+    <div class="text">Loading supply chain data...</div>
+  </div>
+
+  <div id="fatalError" role="alert" aria-live="assertive"></div>
+
+  <div id="onboardingPanel" role="dialog" aria-modal="true" aria-labelledby="onboardingTitle" tabindex="-1">
+    <h3 id="onboardingTitle">Quick Start</h3>
+    <p>Use this flow to get value quickly:</p>
+    <ul>
+      <li>Open a company from the dropdown or map.</li>
+      <li>Use Filter to narrow confidence/type.</li>
+      <li>Add companies to compare with the + button.</li>
+    </ul>
+    <div class="actions">
+      <button id="onboardingDismiss" type="button" aria-label="Dismiss quick start guide">Start exploring</button>
+    </div>
+  </div>
+
+  <div id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1">
+    <div class="content" style="position:relative">
+      <button class="close" onclick="toggleHelp()" aria-label="Close help dialog">&times;</button>
+      <h2 id="helpTitle">Global Supply Chain Viewer</h2>
+      
+      <h3>Navigation</h3>
+      <ul>
+        <li><strong>Click</strong> company node → Open supply chain profile</li>
+        <li><strong>Scroll</strong> → Zoom in/out</li>
+        <li><strong>Drag</strong> → Pan view</li>
+        <li><strong>Drag node</strong> → Reposition</li>
+        <li><strong>Click background</strong> → Deselect</li>
+      </ul>
+
+      <h3>Keyboard Shortcuts</h3>
+      <ul>
+        <li><kbd>Esc</kbd> Close tooltip / Reset view</li>
+        <li><kbd>G</kbd> Return to global view</li>
+        <li><kbd>L</kbd> Toggle labels</li>
+        <li><kbd>F</kbd> Toggle flow animation</li>
+        <li><kbd>B</kbd> Highlight bottlenecks</li>
+        <li><kbd>/</kbd> Focus search</li>
+        <li><kbd>E</kbd> Export data</li>
+        <li><kbd>H</kbd> Toggle this help</li>
+      </ul>
+
+      <h3>Data Quality</h3>
+      <ul>
+        <li><span style="color:var(--green)">✓ Source-verified</span> - Verified from SEC filings, annual reports, official disclosures</li>
+        <li><span style="color:#888">Inferred</span> - Industry-standard relationships based on structural dependencies</li>
+        <li><strong>Confidence levels:</strong> High (company disclosure), Medium (source-backed), Low (industry-inferred)</li>
+      </ul>
+
+      <h3>Filters</h3>
+      <ul>
+        <li>Filter by relationship confidence (High/Medium/Low)</li>
+        <li>Filter by entity type (Supplier/Service/Channel/Demand)</li>
+        <li>Filter by verification status (Source-backed vs Inferred)</li>
+      </ul>
+
+      <h3>About</h3>
+      <p>Top 100 companies by market capitalization. Data sourced from companiesmarketcap.com with supply chain relationships verified from primary sources including SEC 10-K filings, annual reports, and official company disclosures.</p>
+      <p style="margin-top:12px;font-size:10px;color:#666">All 100 companies have source-verified profile data. 103 automated tests ensure data quality.</p>
+    </div>
+  </div>
+
+  <div id="compareModal" role="dialog" aria-modal="true" aria-labelledby="compareTitle" tabindex="-1">
+    <div class="content">
+      <div class="header">
+        <h2 id="compareTitle">Compare Companies</h2>
+        <button class="close" onclick="closeCompare()" aria-label="Close compare dialog">&times;</button>
+      </div>
+      <div class="grid" id="compareGrid"></div>
+    </div>
+  </div>
+
+  <div id="top">
+    <div>
+      <div id="title"><span>Global Supply Chain</span> / Top 100 Market Cap</div>
+      <div id="subtitle">Click any company node to open its dedicated supply-chain profile. Profile data includes relationship confidence and source references where available.</div>
+    </div>
+    <div class="st">
+      <span><span class="stat-live"></span><b id="sN">0</b>nodes</span>
+      <span><b id="sL">0</b>links</span>
+      <span><b id="sC">0</b>countries</span>
+      <span><b id="sY">0</b>layers</span>
+      <span><b id="sM">$0T</b>cap</span>
+    </div>
+  </div>
+
+  <div id="bar">
+    <button id="bBack" style="display:none" aria-label="Back to global view">Back</button>
+    <button id="bReset" aria-label="Reset zoom and pan">Reset</button>
+    <button id="bLabels" aria-label="Toggle node labels">Labels</button>
+    <button id="bFlow" aria-label="Toggle flow animation">Flow</button>
+    <button id="bBottlenecks" aria-label="Highlight bottlenecks">Bottlenecks</button>
+    <button id="bFilter" aria-label="Open filters panel">Filter</button>
+    <button id="bExport" aria-label="Export current data view">Export</button>
+    <button id="bSave" title="Save view (Ctrl+S)" aria-label="Save current view">Save</button>
+    <button id="bBookmarks" title="Bookmarks" aria-label="Open saved views">Bookmarks</button>
+    <button id="bCompare" aria-label="Compare selected companies">Compare</button>
+    <button id="bHelp" style="border-color:var(--acc);color:var(--acc)" aria-label="Open help dialog">?</button>
+    <span class="sep"></span>
+    <select id="companyJump" aria-label="Open company profile"><option value="">Open company...</option></select>
+    <span class="sep"></span>
+    <span id="countryBtns"></span>
+  </div>
+
+  <div id="filterPanel">
+    <h3>Filters</h3>
+    <div class="fg">
+      <label>Confidence</label>
+      <select id="fConfidence">
+        <option value="all">All Levels</option>
+        <option value="high">High (Disclosure)</option>
+        <option value="medium">Medium (Source-backed)</option>
+        <option value="low">Low (Inferred)</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label>Entity Type</label>
+      <select id="fType">
+        <option value="all">All Types</option>
+        <option value="supplier">Suppliers</option>
+        <option value="service">Services</option>
+        <option value="channel">Channels</option>
+        <option value="demand">Demand</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label>Verification</label>
+      <select id="fVerified">
+        <option value="all">All</option>
+        <option value="verified">Source-verified Only</option>
+        <option value="inferred">Inferred Only</option>
+      </select>
+    </div>
+    <div class="fa">
+      <button onclick="applyFilters()">Apply</button>
+      <button onclick="resetFilters()">Reset</button>
+    </div>
+  </div>
+
+  <div id="searchWrap">
+    <input id="q" type="text" placeholder="Search nodes... (type / to focus)" aria-label="Search nodes">
+    <div id="searchSuggest"></div>
+    <div id="searchHistory"></div>
+  </div>
+
+  <div id="companyCard">
+    <div class="cTop">
+      <div class="cLogoWrap">
+        <img class="cLogo" id="cardLogo" alt="Company logo">
+        <div class="cLogoFallback" id="cardLogoFallback">--</div>
+      </div>
+      <div style="flex:1">
+        <div class="cName" id="cardName">Company</div>
+        <div class="cSym" id="cardSymbol">SYMB</div>
+      </div>
+      <button id="cardCompare" style="background:#111;border:1px solid #222;color:#666;font-size:16px;cursor:pointer;width:28px;height:28px;border-radius:4px" title="Add to compare" aria-label="Add company to compare">+</button>
+    </div>
+    <div class="cStats">
+      <div class="cStat"><b id="cardSuppliers">0</b> suppliers</div>
+      <div class="cStat"><b id="cardServices">0</b> services</div>
+      <div class="cStat"><b id="cardChannels">0</b> channels</div>
+    </div>
+    <div class="cHq">
+      <img class="cFlag" id="cardFlag" alt="Country flag">
+      <div class="cFlagFallback" id="cardFlagFallback">--</div>
+      <div class="cHqText" id="cardHqText">City, Country</div>
+    </div>
+    <div class="cInsights">
+      <div class="cSecTitle">Credit Ratings</div>
+      <div class="cRatings" id="cardRatings"></div>
+
+      <div class="cSecTitle">Risk & Resilience</div>
+      <div class="cRiskRow">
+        <span class="cRiskBadge low" id="cardRiskBadge">Low Risk</span>
+        <span class="cMuted" id="cardRiskText">Profile risk summary</span>
+      </div>
+      <div class="cList" id="cardRiskDetails"></div>
+
+      <div class="cSecTitle" style="margin-top:8px">Shared Supplier Overlap</div>
+      <div class="cList" id="cardOverlap"></div>
+
+      <div class="cSecTitle" style="margin-top:8px">Evidence Timeline</div>
+      <div class="cList" id="cardTimeline"></div>
+
+      <div class="cActions">
+        <button id="cardSourcesBtn" type="button" aria-label="Open source provenance panel">Sources</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tt">
+    <div class="tn"></div>
+    <div class="tf"></div>
+    <div class="td"></div>
+    <div class="ts"></div>
+    <div class="tc"></div>
+    <div class="tv" style="display:none"></div>
+    <div class="tu"></div>
+  </div>
+
+  <div id="lg"></div>
+  <div id="ly"></div>
+  <svg id="canvas" role="img" aria-label="Supply chain network visualization"></svg>
+  <div id="hint">Global: click company to open profile · Scroll zoom · Drag pan · Press H for help</div>
+  <div id="footer" style="position:fixed;bottom:8px;left:12px;font-size:8px;color:#444">Data updated: <span id="lastUpdated">--</span></div>
+  <button id="mobileToggle" type="button" aria-label="Open mobile controls">Controls</button>
+  <div id="mobileSheet" role="dialog" aria-modal="true" aria-label="Mobile controls">
+    <div class="mHead">
+      <h3>Quick Controls</h3>
+      <button id="mobileClose" type="button" aria-label="Close mobile controls">&times;</button>
+    </div>
+    <div class="mGrid">
+      <button id="mBack" type="button">Back</button>
+      <button id="mReset" type="button">Reset</button>
+      <button id="mFilter" type="button">Filter</button>
+      <button id="mExport" type="button">Export</button>
+      <button id="mCompare" type="button">Compare</button>
+      <button id="mHelp" type="button">Help</button>
+      <button id="mSave" type="button">Save</button>
+      <button id="mBookmarks" type="button">Bookmarks</button>
+      <button id="mGlobal" type="button">Global</button>
+    </div>
+  </div>
+  <div id="provenanceDrawer" role="complementary" aria-label="Profile source provenance">
+    <div class="ph">
+      <h3>Source Provenance</h3>
+      <button id="provenanceClose" type="button" aria-label="Close provenance panel">&times;</button>
+    </div>
+    <div id="provenanceItems"></div>
+  </div>
+
+<script>
+const loadingEl = document.getElementById("loading");
+const fatalErrorEl = document.getElementById("fatalError");
+const onboardingPanelEl = document.getElementById("onboardingPanel");
+const ONBOARDING_STORAGE_KEY = "onboardingSeen";
+
+function showFatalError(message, detail = "") {
+  if (!fatalErrorEl) return;
+  const detailLine = detail ? `<br><b>Details:</b> ${String(detail)}` : "";
+  fatalErrorEl.innerHTML = `<b>Application error:</b> ${String(message)}${detailLine}`;
+  fatalErrorEl.style.display = "block";
+  if (loadingEl) loadingEl.style.display = "none";
+}
+
+window.addEventListener("error", (event) => {
+  showFatalError("The viewer hit an unexpected error.", event?.message || "");
+});
+
+window.addEventListener("unhandledrejection", (event) => {
+  const reason = event?.reason?.message || event?.reason || "Unknown promise rejection";
+  showFatalError("A background operation failed.", String(reason));
+});
+
+function safeLoadList(key) {
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (_) {
+    return [];
+  }
+}
+
+function safeSaveJSON(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (_) {
+    // Ignore storage write failures (private mode/full quota).
+  }
+}
+
+function safeReadFlag(key) {
+  try {
+    return localStorage.getItem(key);
+  } catch (_) {
+    return null;
+  }
+}
+
+function safeWriteFlag(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch (_) {
+    // Ignore storage write failures (private mode/full quota).
+  }
+}
+
+const DATA = window.SUPPLY_MAP_DATA;
+if (!DATA || !Array.isArray(DATA.nodes) || !Array.isArray(DATA.links) || !DATA.profiles) {
+  showFatalError("Missing or invalid data/top100-map.js");
+  throw new Error("Missing or invalid data/top100-map.js");
+}
+const CREDIT_RATINGS = window.CREDIT_RATINGS || { ratingsBySymbol: {}, meta: {} };
+
+// Hide loading indicator
+if (loadingEl) loadingEl.style.display = "none";
+
+const W = innerWidth;
+const H = innerHeight;
+const svg = d3.select("#canvas").attr("width", W).attr("height", H);
+const defs = svg.append("defs");
+defs.append("marker").attr("id", "a").attr("viewBox", "0 -3 7 6").attr("refX", 16).attr("refY", 0).attr("markerWidth", 4).attr("markerHeight", 4).attr("orient", "auto")
+  .append("path").attr("d", "M0,-2.5L7,0L0,2.5").attr("fill", "#2a2a2a");
+
+const g = svg.append("g");
+const zoom = d3.zoom().scaleExtent([0.12, 6]).on("zoom", (e) => g.attr("transform", e.transform));
+svg.call(zoom);
+
+const STATE = {
+  mode: "global",
+  symbol: null,
+  hoverSymbol: null,
+  labelsVisible: true,
+  particlesOn: false,
+  particleTimer: null,
+  settleTimer: null,
+  simulation: null,
+  nodes: [],
+  links: [],
+  layerMap: {},
+  lockId: null,
+  sourceIndex: {},
+  compareList: [],
+  searchHistory: safeLoadList("searchHistory"),
+  filters: { confidence: 'all', type: 'all', verified: 'all' },
+  savedViews: safeLoadList("savedViews"),
+};
+
+// Animated counter utility
+function animateCounter(elementId, target, duration = 1000, prefix = '', suffix = '') {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  
+  const start = 0;
+  const startTime = performance.now();
+  const easeOutQuad = t => t * (2 - t);
+  
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = easeOutQuad(progress);
+    const current = Math.floor(start + (target - start) * eased);
+    
+    el.textContent = prefix + current.toLocaleString() + suffix;
+    
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    }
+  }
+  
+  requestAnimationFrame(update);
+}
+
+// Update stats display with animation (helper function)
+function updateStatsAnimated(nodes, links, countries, layers, marketCap) {
+  animateCounter('sN', nodes.length, 800);
+  animateCounter('sL', links.length, 800);
+  animateCounter('sC', countries, 800);
+  animateCounter('sY', layers, 800);
+  animateCounter('sM', marketCap, 1000, '$', 'T');
+}
+
+const titleEl = document.getElementById("title");
+const subtitleEl = document.getElementById("subtitle");
+const hintEl = document.getElementById("hint");
+const tt = document.getElementById("tt");
+const legendEl = document.getElementById("lg");
+const layerEl = document.getElementById("ly");
+const countryBtns = document.getElementById("countryBtns");
+const companyCard = document.getElementById("companyCard");
+const cardName = document.getElementById("cardName");
+const cardSymbol = document.getElementById("cardSymbol");
+const cardHqText = document.getElementById("cardHqText");
+const cardFlag = document.getElementById("cardFlag");
+const cardFlagFallback = document.getElementById("cardFlagFallback");
+const cardLogo = document.getElementById("cardLogo");
+const cardLogoFallback = document.getElementById("cardLogoFallback");
+const cardSuppliers = document.getElementById("cardSuppliers");
+const cardServices = document.getElementById("cardServices");
+const cardChannels = document.getElementById("cardChannels");
+const cardRatings = document.getElementById("cardRatings");
+const cardRiskBadge = document.getElementById("cardRiskBadge");
+const cardRiskText = document.getElementById("cardRiskText");
+const cardRiskDetails = document.getElementById("cardRiskDetails");
+const cardOverlap = document.getElementById("cardOverlap");
+const cardTimeline = document.getElementById("cardTimeline");
+const cardSourcesBtn = document.getElementById("cardSourcesBtn");
+const provenanceDrawer = document.getElementById("provenanceDrawer");
+const provenanceItems = document.getElementById("provenanceItems");
+const provenanceClose = document.getElementById("provenanceClose");
+const mobileToggleBtn = document.getElementById("mobileToggle");
+const mobileSheet = document.getElementById("mobileSheet");
+const searchSuggestEl = document.getElementById("searchSuggest");
+const searchHistoryEl = document.getElementById("searchHistory");
+const helpModalEl = document.getElementById("helpModal");
+const compareModalEl = document.getElementById("compareModal");
+const onboardingDismissEl = document.getElementById("onboardingDismiss");
+
+let activeModal = null;
+let focusBeforeModal = null;
+
+function getFocusableElements(container) {
+  return [...container.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])')]
+    .filter((el) => !el.hasAttribute("disabled"));
+}
+
+function trapFocus(event, container) {
+  const focusable = getFocusableElements(container);
+  if (focusable.length === 0) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  const isShift = event.shiftKey;
+
+  if (isShift && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!isShift && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+}
+
+function openModal(modal, display = "flex") {
+  if (!modal) return;
+  focusBeforeModal = document.activeElement;
+  modal.style.display = display;
+  activeModal = modal;
+  const focusable = getFocusableElements(modal);
+  if (focusable[0]) focusable[0].focus();
+  else modal.focus();
+}
+
+function closeModal(modal) {
+  if (!modal) return;
+  modal.style.display = "none";
+  if (activeModal === modal) activeModal = null;
+  if (focusBeforeModal && typeof focusBeforeModal.focus === "function") {
+    focusBeforeModal.focus();
+  }
+}
+
+function dismissOnboarding() {
+  if (!onboardingPanelEl) return;
+  closeModal(onboardingPanelEl);
+  safeWriteFlag(ONBOARDING_STORAGE_KEY, "1");
+}
+
+function maybeShowOnboarding() {
+  if (!onboardingPanelEl) return;
+  if (safeReadFlag(ONBOARDING_STORAGE_KEY) === "1") return;
+  openModal(onboardingPanelEl, "block");
+}
+
+if (onboardingDismissEl) onboardingDismissEl.addEventListener("click", dismissOnboarding);
+if (helpModalEl) {
+  helpModalEl.addEventListener("click", (event) => {
+    if (event.target === helpModalEl) toggleHelp(false);
+  });
+}
+if (compareModalEl) {
+  compareModalEl.addEventListener("click", (event) => {
+    if (event.target === compareModalEl) closeCompare();
+  });
+}
+
+const SEARCH_TARGETS = DATA.nodes
+  .slice()
+  .sort((a, b) => a.rank - b.rank)
+  .map((n) => ({
+    symbol: n.symbol,
+    company: n.company,
+    search: `${n.symbol} ${n.company}`.toLowerCase(),
+  }));
+
+function normalizeEntityLabel(label) {
+  return String(label || "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function buildSharedSupplierOverlapIndex() {
+  const supplierToSymbols = new Map();
+  Object.entries(DATA.profiles).forEach(([symbol, profile]) => {
+    const suppliers = (profile.nodes || [])
+      .filter((n) => n.kind === "supplier")
+      .map((n) => normalizeEntityLabel((n.l || "").split("\n")[0]))
+      .filter(Boolean);
+    for (const supplier of new Set(suppliers)) {
+      if (!supplierToSymbols.has(supplier)) supplierToSymbols.set(supplier, new Set());
+      supplierToSymbols.get(supplier).add(symbol);
+    }
+  });
+
+  const overlapBySymbol = {};
+  Object.entries(DATA.profiles).forEach(([symbol, profile]) => {
+    const overlapCounts = new Map();
+    const suppliers = (profile.nodes || [])
+      .filter((n) => n.kind === "supplier")
+      .map((n) => normalizeEntityLabel((n.l || "").split("\n")[0]))
+      .filter(Boolean);
+    for (const supplier of new Set(suppliers)) {
+      const shared = supplierToSymbols.get(supplier) || new Set();
+      shared.forEach((peer) => {
+        if (peer === symbol) return;
+        overlapCounts.set(peer, (overlapCounts.get(peer) || 0) + 1);
+      });
+    }
+    overlapBySymbol[symbol] = [...overlapCounts.entries()]
+      .map(([peer, count]) => ({ peer, count }))
+      .sort((a, b) => b.count - a.count);
+  });
+
+  return overlapBySymbol;
+}
+
+const SHARED_SUPPLIER_OVERLAP = buildSharedSupplierOverlapIndex();
+
+function getTopOverlap(symbol, limit = 3) {
+  return (SHARED_SUPPLIER_OVERLAP[symbol] || []).slice(0, limit);
+}
+
+function parseYearsFromSources(profile) {
+  const yearCounts = new Map();
+  for (const source of profile?.sources || []) {
+    const text = `${source.id || ""} ${source.t || ""} ${source.url || ""}`;
+    const matches = text.match(/(19|20)\d{2}/g) || [];
+    const uniqueYears = new Set(matches.map((y) => Number(y)).filter((y) => y >= 1990 && y <= 2099));
+    uniqueYears.forEach((year) => yearCounts.set(year, (yearCounts.get(year) || 0) + 1));
+  }
+  return [...yearCounts.entries()].sort((a, b) => b[0] - a[0]);
+}
+
+function computeProfileRisk(profile) {
+  const nodes = profile?.nodes || [];
+  const suppliers = nodes.filter((n) => n.kind === "supplier");
+  const supplierCountries = new Set(suppliers.map((n) => n.c).filter(Boolean));
+  const sourceBacked = nodes.filter((n) => String(n.confidence || "").toLowerCase().includes("source")).length;
+  const sourceRatio = nodes.length ? sourceBacked / nodes.length : 0;
+
+  const supplierRisk = suppliers.length <= 3 ? "high" : suppliers.length <= 5 ? "medium" : "low";
+  const geoRisk = supplierCountries.size <= 2 ? "high" : supplierCountries.size <= 4 ? "medium" : "low";
+  const evidenceRisk = sourceRatio < 0.35 ? "high" : sourceRatio < 0.6 ? "medium" : "low";
+  const highCount = [supplierRisk, geoRisk, evidenceRisk].filter((x) => x === "high").length;
+  const mediumCount = [supplierRisk, geoRisk, evidenceRisk].filter((x) => x === "medium").length;
+  const overall = highCount >= 2 ? "high" : highCount === 1 || mediumCount >= 2 ? "medium" : "low";
+
+  return {
+    overall,
+    supplierRisk,
+    geoRisk,
+    evidenceRisk,
+    suppliers: suppliers.length,
+    supplierCountries: supplierCountries.size,
+    sourceRatio,
+  };
+}
+
+function ratingText(fitchBlock) {
+  if (!fitchBlock?.longTerm?.code && !fitchBlock?.shortTerm?.code) return "Not found";
+  const pieces = [];
+  if (fitchBlock.longTerm?.code) pieces.push(`LT ${fitchBlock.longTerm.code}`);
+  if (fitchBlock.shortTerm?.code) pieces.push(`ST ${fitchBlock.shortTerm.code}`);
+  return pieces.join(" | ");
+}
+
+function getRatingsForSymbol(symbol) {
+  return CREDIT_RATINGS?.ratingsBySymbol?.[symbol] || null;
+}
+
+function escapeHtml(input) {
+  return String(input || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function closeProvenance() {
+  if (!provenanceDrawer) return;
+  provenanceDrawer.style.display = "none";
+}
+
+function openProvenance() {
+  const symbol = STATE.mode === "profile" ? STATE.symbol : STATE.hoverSymbol;
+  if (!symbol || !DATA.profiles[symbol]) return;
+  const profile = DATA.profiles[symbol];
+  if (!provenanceItems) return;
+  const rows = (profile.sources || []).map((src) => {
+    const title = escapeHtml(src.t || src.id || "Source");
+    const href = escapeHtml(src.url || "");
+    return `<div class="pi"><div class="t">${title}</div>${href ? `<a href="${href}" target="_blank" rel="noopener noreferrer">${href}</a>` : ""}</div>`;
+  });
+  provenanceItems.innerHTML = rows.length ? rows.join("") : `<div class="cMuted">No source links in this profile.</div>`;
+  provenanceDrawer.style.display = "block";
+}
+
+function setMobileSheetOpen(open) {
+  if (!mobileSheet) return;
+  if (open) openModal(mobileSheet, "block");
+  else closeModal(mobileSheet);
+}
+
+function hideSearchPopovers() {
+  if (searchSuggestEl) searchSuggestEl.style.display = "none";
+  if (searchHistoryEl) searchHistoryEl.style.display = "none";
+}
+
+function renderSearchSuggestions(query) {
+  if (!searchSuggestEl) return;
+  const q = String(query || "").trim().toLowerCase();
+  if (!q) {
+    searchSuggestEl.style.display = "none";
+    return;
+  }
+  if (searchHistoryEl) searchHistoryEl.style.display = "none";
+  const suggestions = SEARCH_TARGETS
+    .filter((item) => item.search.includes(q))
+    .slice(0, 8);
+  if (!suggestions.length) {
+    searchSuggestEl.style.display = "none";
+    return;
+  }
+  searchSuggestEl.innerHTML = suggestions
+    .map(
+      (item, idx) =>
+        `<div class="sg-item${idx === 0 ? " on" : ""}" data-symbol="${item.symbol}" data-company="${escapeHtml(
+          item.company,
+        )}"><span class="sym">${item.symbol}</span><span class="cmp">${escapeHtml(
+          item.company,
+        )}</span></div>`,
+    )
+    .join("");
+  searchSuggestEl.style.display = "block";
+  searchSuggestEl.querySelectorAll(".sg-item").forEach((el) => {
+    el.addEventListener("click", () => {
+      const symbol = el.getAttribute("data-symbol");
+      if (symbol && DATA.profiles[symbol]) {
+        document.getElementById("q").value = symbol;
+        addToSearchHistory(symbol);
+        openProfile(symbol);
+        hideSearchPopovers();
+      }
+    });
+  });
+}
+
+function syncUrlState() {
+  const params = new URLSearchParams();
+  params.set("mode", STATE.mode);
+  if (STATE.symbol) params.set("symbol", STATE.symbol);
+  if (STATE.filters.confidence !== "all") params.set("confidence", STATE.filters.confidence);
+  if (STATE.filters.type !== "all") params.set("type", STATE.filters.type);
+  if (STATE.filters.verified !== "all") params.set("verified", STATE.filters.verified);
+  if (STATE.compareList.length) params.set("compare", STATE.compareList.join(","));
+  const url = `${location.pathname}?${params.toString()}`;
+  history.replaceState(null, "", url);
+}
+
+function applyUrlState() {
+  const params = new URLSearchParams(location.search);
+  const mode = params.get("mode");
+  const symbol = params.get("symbol");
+  if (mode === "profile" && symbol && DATA.profiles[symbol]) {
+    STATE.mode = "profile";
+    STATE.symbol = symbol;
+  }
+  const confidence = params.get("confidence");
+  const type = params.get("type");
+  const verified = params.get("verified");
+  if (["all", "high", "medium", "low"].includes(confidence || "")) STATE.filters.confidence = confidence;
+  if (["all", "supplier", "service", "channel", "demand"].includes(type || "")) STATE.filters.type = type;
+  if (["all", "verified", "inferred"].includes(verified || "")) STATE.filters.verified = verified;
+
+  const compareRaw = params.get("compare");
+  if (compareRaw) {
+    STATE.compareList = compareRaw
+      .split(",")
+      .map((s) => s.trim())
+      .filter((s) => DATA.profiles[s])
+      .slice(0, 3);
+  }
+}
+
+// Build company jump dropdown and search history
+const jump = document.getElementById("companyJump");
+DATA.nodes.sort((a, b) => a.rank - b.rank).forEach((n) => {
+  const o = document.createElement("option");
+  o.value = n.symbol;
+  o.textContent = `${n.symbol} - ${n.company}`;
+  jump.appendChild(o);
+});
+jump.addEventListener("change", () => {
+  if (jump.value && DATA.profiles[jump.value]) {
+    openProfile(jump.value);
+  } else if (jump.value) {
+    showToast(`Profile not available for ${jump.value}`);
+    jump.value = "";
+  }
+});
+
+// Render search history
+function renderSearchHistory() {
+  const sh = searchHistoryEl;
+  if (!sh) return;
+  if (searchSuggestEl) searchSuggestEl.style.display = "none";
+  if (STATE.searchHistory.length === 0) {
+    sh.style.display = "none";
+    return;
+  }
+  sh.innerHTML = STATE.searchHistory
+    .map((s) => `<div class="sh-item" data-q="${escapeHtml(s)}">${escapeHtml(s)}</div>`)
+    .join("");
+  sh.style.display = "block";
+  sh.querySelectorAll(".sh-item").forEach((el) => {
+    el.addEventListener("click", () => {
+      document.getElementById("q").value = el.dataset.q;
+      triggerSearch(el.dataset.q);
+      hideSearchPopovers();
+    });
+  });
+}
+
+function addToSearchHistory(query) {
+  if (!query || query.length < 2) return;
+  STATE.searchHistory = STATE.searchHistory.filter(s => s !== query);
+  STATE.searchHistory.unshift(query);
+  STATE.searchHistory = STATE.searchHistory.slice(0, 10);
+  safeSaveJSON("searchHistory", STATE.searchHistory);
+  renderSearchHistory();
+}
+
+function asCountryName(code) {
+  return DATA.countries[code]?.n || "Global";
+}
+
+function graphForMode() {
+  if (STATE.mode === "global") {
+    return {
+      nodes: DATA.nodes.map((n) => ({ ...n, layer: n.y })),
+      links: DATA.links.map((l) => ({
+        ...l,
+        source: l.s,
+        target: l.t,
+        v: l.v,
+        k: l.k || "global-layer-flow",
+        cf: l.cf || "medium (structural)",
+        sf: l.sf || "",
+        n: l.n || "",
+      })),
+      layers: DATA.layers,
+      subtitle: "Click any company node to open its dedicated supply-chain profile. Profile data includes relationship confidence and source references where available.",
+      hint: "Global: click company to open profile · Scroll zoom · Drag pan · Press H for help",
+    };
+  }
+  const p = DATA.profiles[STATE.symbol];
+  return {
+    nodes: p.nodes.map((n) => ({ ...n, layer: n.tier })),
+    links: p.links.map((l) => ({
+      ...l,
+      source: l.s,
+      target: l.t,
+      v: l.v,
+      k: l.k || "profile-relationship",
+      cf: l.cf || "medium (inferred)",
+      sf: l.sf || "",
+      n: l.n || "",
+    })),
+    layers: p.layers || { "-2": "Upstream", "-1": "Services", "0": "Company", "1": "Channels", "2": "Demand" },
+    subtitle: `${p.company} (${p.symbol}) profile. Category: ${p.category}.`,
+    hint: "Profile: inspect suppliers/services/channels · Click back for global map · Press H for help",
+    sourceIndex: Object.fromEntries((p.sources || []).map((s) => [s.id, s])),
+  };
+}
+
+function updateStats() {
+  const countryCount = new Set(STATE.nodes.map((n) => n.c)).size;
+  const layerCount = Object.keys(STATE.layerMap).length;
+  const totalCap = STATE.nodes.filter(n => n.marketcap).reduce((sum, n) => sum + n.marketcap, 0);
+  const marketCapT = totalCap / 1e12;
+  
+  // Use animated counter function
+  animateCounter('sN', STATE.nodes.length, 800);
+  animateCounter('sL', STATE.links.length, 800);
+  animateCounter('sC', countryCount, 800);
+  animateCounter('sY', layerCount, 800);
+  animateCounter('sM', marketCapT, 1000, '$', 'T');
+}
+
+function buildLegend() {
+  legendEl.innerHTML = "";
+  
+  // Q6: Node type counts
+  const typeCounts = {
+    company: STATE.nodes.filter(n => n.kind === 'company').length,
+    supplier: STATE.nodes.filter(n => n.kind === 'supplier').length,
+    service: STATE.nodes.filter(n => n.kind === 'service').length,
+    channel: STATE.nodes.filter(n => n.kind === 'channel').length,
+    demand: STATE.nodes.filter(n => n.kind === 'demand').length
+  };
+  
+  const typeHeader = document.createElement('div');
+  typeHeader.style.cssText = 'font-size:8px;color:#666;text-transform:uppercase;margin-bottom:4px';
+  typeHeader.textContent = 'Node Types';
+  legendEl.appendChild(typeHeader);
+  
+  Object.entries(typeCounts).forEach(([type, count]) => {
+    if (count > 0) {
+      const li = document.createElement("div");
+      li.style.cssText = 'font-size:9px;color:#888;margin-bottom:2px';
+      li.innerHTML = `${type}: <b style="color:#aaa">${count}</b>`;
+      legendEl.appendChild(li);
+    }
+  });
+  
+  // Country section
+  const countryHeader = document.createElement('div');
+  countryHeader.style.cssText = 'font-size:8px;color:#666;text-transform:uppercase;margin:8px 0 4px';
+  countryHeader.textContent = 'Countries';
+  legendEl.appendChild(countryHeader);
+  
+  const used = [...new Set(STATE.nodes.map((n) => n.c))];
+  used.forEach((code) => {
+    const li = document.createElement("div");
+    li.className = "li";
+    const color = DATA.countries[code]?.c || "#777";
+    li.innerHTML = `<span class="ld" style="background:${color}"></span>${code} ${asCountryName(code)}`;
+    legendEl.appendChild(li);
+  });
+}
+
+function buildLayerSidebar() {
+  layerEl.innerHTML = "";
+  const keys = [...new Set(STATE.nodes.map((n) => n.layer))].sort((a, b) => a - b);
+  keys.forEach((layer) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "lb";
+    b.textContent = `${layer} / ${STATE.layerMap[layer] || ""}`;
+    b.setAttribute("aria-label", `Highlight layer ${layer}`);
+    b.onclick = () => highlightBy((n) => n.layer === layer);
+    layerEl.appendChild(b);
+  });
+}
+
+function buildCountryButtons() {
+  countryBtns.innerHTML = "";
+  if (STATE.mode !== "global") return;
+  const counts = d3.rollups(STATE.nodes, (v) => v.length, (d) => d.c).sort((a, b) => b[1] - a[1]).slice(0, 8);
+  counts.forEach(([code]) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = code;
+    b.setAttribute("aria-label", `Highlight country ${code}`);
+    b.onclick = () => highlightBy((n) => n.c === code);
+    countryBtns.appendChild(b);
+  });
+  const all = document.createElement("button");
+  all.type = "button";
+  all.textContent = "All";
+  all.setAttribute("aria-label", "Reset country highlight");
+  all.onclick = () => resetHighlight();
+  countryBtns.appendChild(all);
+}
+
+function clearGraph() {
+  if (STATE.simulation) STATE.simulation.stop();
+  if (STATE.particleTimer) cancelAnimationFrame(STATE.particleTimer);
+  if (STATE.settleTimer) clearTimeout(STATE.settleTimer);
+  g.selectAll("*").remove();
+  STATE.particleTimer = null;
+  STATE.settleTimer = null;
+  STATE.particlesOn = false;
+  STATE.lockId = null;
+  tt.style.display = "none";
+}
+
+let nodeSel;
+let linkSel;
+let labelSel;
+let subSel;
+let particleLayer;
+
+function showTooltip(d, ev) {
+  tt.style.display = "block";
+  tt.querySelector(".tn").textContent = d.l.replace("\n", " - ");
+  tt.querySelector(".tf").textContent = `${d.c} ${asCountryName(d.c)} / ${STATE.layerMap[d.layer] || `Layer ${d.layer}`}`;
+  tt.querySelector(".td").textContent = d.d || "";
+  
+  // Q2: Source count
+  const sourceCount = d.sourceId ? 1 : 0;
+  const tsEl = tt.querySelector(".ts");
+  tsEl.textContent = (d.s || '') + (sourceCount > 0 ? ` | ${sourceCount} source` : '');
+  
+  const verifiedEl = tt.querySelector(".tv");
+  if (d.confidence && d.confidence.includes("source-backed")) {
+    verifiedEl.style.display = "flex";
+    verifiedEl.textContent = "Source-verified entity";
+  } else {
+    verifiedEl.style.display = "none";
+  }
+  
+  tt.querySelector(".tc").textContent = d.confidence ? `Confidence: ${d.confidence}` : "";
+  if (d.sourceId && STATE.sourceIndex[d.sourceId]) {
+    tt.querySelector(".tu").textContent = `Source: ${STATE.sourceIndex[d.sourceId].url}`;
+  } else {
+    tt.querySelector(".tu").textContent = "";
+  }
+  moveTooltip(ev);
+}
+
+function linkNodeLabel(endpoint) {
+  if (!endpoint) return "Unknown";
+  const node = typeof endpoint === "object" ? endpoint : STATE.nodes.find((n) => n.id === endpoint);
+  if (!node) return "Unknown";
+  return (node.l || node.id || "Unknown").split("\n")[0];
+}
+
+function showLinkTooltip(d, ev) {
+  tt.style.display = "block";
+  tt.querySelector(".tn").textContent = `${linkNodeLabel(d.source)} → ${linkNodeLabel(d.target)}`;
+  tt.querySelector(".tf").textContent = `Relationship / ${d.k || "flow"}`;
+  tt.querySelector(".td").textContent = d.n || "Supply-chain relationship.";
+  tt.querySelector(".ts").textContent = `Weight: ${d.v || 1}`;
+  
+  const verifiedEl = tt.querySelector(".tv");
+  if (d.cf && d.cf.includes("source-backed")) {
+    verifiedEl.style.display = "flex";
+    verifiedEl.textContent = "Source-verified relationship";
+  } else {
+    verifiedEl.style.display = "none";
+  }
+  
+  tt.querySelector(".tc").textContent = d.cf ? `Confidence: ${d.cf}` : "";
+  if (d.sf && STATE.sourceIndex[d.sf]) {
+    tt.querySelector(".tu").textContent = `Source: ${STATE.sourceIndex[d.sf].url}`;
+  } else {
+    tt.querySelector(".tu").textContent = "";
+  }
+  moveTooltip(ev);
+}
+
+function moveTooltip(ev) {
+  let x = ev.clientX + 14;
+  let y = ev.clientY - 10;
+  if (x + 450 > W) x = ev.clientX - 460;
+  if (y + 250 > H) y = H - 260;
+  tt.style.left = `${x}px`;
+  tt.style.top = `${y}px`;
+}
+
+function connected(id) {
+  const all = new Set([id]);
+  const up = new Set();
+  const down = new Set();
+  STATE.links.forEach((l) => {
+    const s = typeof l.source === "object" ? l.source.id : l.source;
+    const t = typeof l.target === "object" ? l.target.id : l.target;
+    if (s === id) { down.add(t); all.add(t); }
+    if (t === id) { up.add(s); all.add(s); }
+  });
+  return { all, up, down };
+}
+
+function highlightNode(d) {
+  const conn = connected(d.id);
+  nodeSel.select(".mc").transition().duration(150).attr("fill-opacity", (n) => conn.all.has(n.id) ? 0.95 : 0.05);
+  labelSel.transition().duration(150).attr("fill-opacity", (n) => conn.all.has(n.id) ? 1 : 0.05);
+  subSel.transition().duration(150).attr("fill-opacity", (n) => conn.all.has(n.id) ? 1 : 0.05);
+  linkSel.transition().duration(150)
+    .attr("stroke-opacity", (l) => {
+      const s = typeof l.source === "object" ? l.source.id : l.source;
+      const t = typeof l.target === "object" ? l.target.id : l.target;
+      return (s === d.id || t === d.id) ? 1 : 0.03;
+    })
+    .attr("stroke", (l) => {
+      const s = typeof l.source === "object" ? l.source.id : l.source;
+      const t = typeof l.target === "object" ? l.target.id : l.target;
+      if (s === d.id) return "var(--acc)";
+      if (t === d.id) return "var(--blue)";
+      return "#111";
+    })
+    .attr("stroke-width", (l) => {
+      const s = typeof l.source === "object" ? l.source.id : l.source;
+      const t = typeof l.target === "object" ? l.target.id : l.target;
+      return (s === d.id || t === d.id) ? 2 : 0.3;
+    });
+}
+
+function resetHighlight() {
+  nodeSel.select(".mc").transition().duration(180).attr("fill-opacity", (d) => d.bn ? 0.82 : 0.35);
+  labelSel.transition().duration(180).attr("fill-opacity", 1);
+  subSel.transition().duration(180).attr("fill-opacity", STATE.labelsVisible ? 1 : 0);
+  linkSel.transition().duration(180)
+    .attr("stroke-opacity", 1)
+    .attr("stroke", (d) => d.v >= 3 ? "rgba(232,69,60,.18)" : d.v >= 2 ? "#1e1e1e" : "#151515")
+    .attr("stroke-width", (d) => d.v >= 3 ? 1.4 : d.v >= 2 ? 0.7 : 0.35);
+}
+
+function highlightBy(fn) {
+  STATE.lockId = null;
+  tt.style.display = "none";
+  nodeSel.select(".mc").transition().duration(160).attr("fill-opacity", (d) => fn(d) ? 1 : 0.03);
+  labelSel.transition().duration(160).attr("fill-opacity", (d) => fn(d) ? 1 : 0.03);
+  subSel.transition().duration(160).attr("fill-opacity", (d) => fn(d) ? (STATE.labelsVisible ? 1 : 0) : 0.03);
+  linkSel.transition().duration(160).attr("stroke-opacity", 0.015);
+}
+
+function toggleParticles() {
+  STATE.particlesOn = !STATE.particlesOn;
+  if (!STATE.particlesOn) {
+    if (STATE.particleTimer) cancelAnimationFrame(STATE.particleTimer);
+    particleLayer.selectAll("*").remove();
+    return;
+  }
+  const step = () => {
+    if (!STATE.particlesOn) return;
+    const strong = STATE.links.filter((l) => l.v >= 3);
+    strong.forEach((l) => {
+      if (Math.random() > 0.9) return;
+      const s = typeof l.source === "object" ? l.source : STATE.nodes.find((n) => n.id === l.source);
+      const t = typeof l.target === "object" ? l.target : STATE.nodes.find((n) => n.id === l.target);
+      if (!s || !t) return;
+      particleLayer.append("circle").attr("r", 1.2).attr("fill", "var(--acc)").attr("opacity", 0.55).attr("cx", s.x).attr("cy", s.y)
+        .transition().duration(1400 + Math.random() * 900).ease(d3.easeLinear)
+        .attr("cx", t.x).attr("cy", t.y).attr("opacity", 0).attr("r", 0.4).remove();
+    });
+    STATE.particleTimer = requestAnimationFrame(() => setTimeout(step, 120));
+  };
+  step();
+}
+
+function openProfile(symbol) {
+  if (!DATA.profiles[symbol]) {
+    showToast(`Company ${symbol} not found`);
+    return;
+  }
+  STATE.mode = "profile";
+  STATE.symbol = symbol;
+  STATE.hoverSymbol = null;
+  document.getElementById("bBack").style.display = "inline-block";
+  jump.value = symbol;
+  closeProvenance();
+  render();
+  syncUrlState();
+}
+
+function openGlobal() {
+  STATE.mode = "global";
+  STATE.symbol = null;
+  STATE.hoverSymbol = null;
+  document.getElementById("bBack").style.display = "none";
+  jump.value = "";
+  closeProvenance();
+  render();
+  syncUrlState();
+}
+
+function updateCompanyCard() {
+  const symbol = STATE.mode === "profile" ? STATE.symbol : STATE.hoverSymbol;
+  if (!symbol) {
+    companyCard.style.display = "none";
+    document.body.classList.remove("profile-mode");
+    document.body.classList.remove("card-visible");
+    closeProvenance();
+    logoLoadToken += 1;
+    return;
+  }
+  const isProfile = STATE.mode === "profile";
+  const profile = DATA.profiles[symbol];
+  const globalNode = DATA.nodes.find((n) => n.symbol === symbol);
+  const countryCode = globalNode?.c || "XX";
+  const countryName = asCountryName(countryCode);
+  const city = globalNode?.hq?.city || HQ_CITY_BY_SYMBOL[symbol] || COUNTRY_CAPITAL_BY_CODE[countryCode] || "Global";
+
+  companyCard.style.display = "block";
+  document.body.classList.toggle("profile-mode", isProfile);
+  document.body.classList.add("card-visible");
+  cardName.textContent = profile?.company || globalNode?.company || symbol;
+  cardSymbol.textContent = symbol;
+  cardSymbol.style.cursor = 'pointer';
+  cardSymbol.title = 'Click to copy symbol';
+  cardSymbol.onclick = () => {
+    navigator.clipboard.writeText(symbol).then(
+      () => showToast(`Copied ${symbol}`),
+      () => showToast("Clipboard unavailable"),
+    );
+  };
+  cardHqText.textContent = `${city}, ${countryName}`;
+  cardLogoFallback.textContent = String(symbol || "").replace(/[^A-Z0-9]/g, "").slice(0, 4) || "--";
+  
+  // Update stats
+  if (profile) {
+    cardSuppliers.textContent = profile.nodes.filter(n => n.kind === 'supplier').length;
+    cardServices.textContent = profile.nodes.filter(n => n.kind === 'service').length;
+    cardChannels.textContent = profile.nodes.filter(n => n.kind === 'channel').length;
+  } else {
+    cardSuppliers.textContent = "0";
+    cardServices.textContent = "0";
+    cardChannels.textContent = "0";
+  }
+  renderCardRatings(symbol);
+  renderCardInsights(symbol, profile);
+  if (cardSourcesBtn) {
+    cardSourcesBtn.style.display = STATE.mode === "profile" && profile ? "inline-block" : "none";
+  }
+  
+  setCompanyLogo(symbol);
+
+  const flagCode = flagCdnCode(countryCode);
+  if (!flagCode) {
+    cardFlag.style.display = "none";
+    cardFlagFallback.style.display = "flex";
+    cardFlagFallback.textContent = "--";
+  } else {
+    cardFlagFallback.style.display = "none";
+    cardFlag.style.display = "block";
+    cardFlag.src = `https://flagcdn.com/w80/${flagCode}.png`;
+    cardFlag.srcset = `https://flagcdn.com/w80/${flagCode}.png 1x, https://flagcdn.com/w160/${flagCode}.png 2x`;
+    cardFlag.onerror = () => {
+      cardFlag.style.display = "none";
+      cardFlagFallback.style.display = "flex";
+      cardFlagFallback.textContent = countryCode;
+    };
+  }
+}
+
+function logoCandidatesForSymbol(symbol) {
+  const safeA = symbol.toUpperCase();
+  const safeB = safeA.replace(/\./g, "-");
+  const safeC = safeA.replace(/\./g, "_");
+  const safeD = safeA.replace(/[^A-Z0-9]/g, "");
+  return [
+    `https://companiesmarketcap.com/img/company-logos/64/${safeA}.png`,
+    `https://companiesmarketcap.com/img/company-logos/64/${safeB}.png`,
+    `https://companiesmarketcap.com/img/company-logos/64/${safeC}.png`,
+    `https://companiesmarketcap.com/img/company-logos/64/${safeD}.png`,
+  ];
+}
+
+let logoLoadToken = 0;
+
+function setCompanyLogo(symbol) {
+  const token = ++logoLoadToken;
+  const candidates = logoCandidatesForSymbol(symbol);
+  let i = 0;
+  const tryNext = () => {
+    if (token !== logoLoadToken) return;
+    if (i >= candidates.length) {
+      cardLogo.style.display = "none";
+      cardLogoFallback.style.display = "flex";
+      return;
+    }
+    const src = candidates[i];
+    i += 1;
+    cardLogo.onload = () => {
+      if (token !== logoLoadToken) return;
+      cardLogo.style.display = "block";
+      cardLogoFallback.style.display = "none";
+    };
+    cardLogo.onerror = () => {
+      if (token !== logoLoadToken) return;
+      tryNext();
+    };
+    cardLogo.src = src;
+  };
+  tryNext();
+}
+
+function flagCdnCode(code) {
+  if (!code || code === "XX") return "";
+  if (code === "UK") return "gb";
+  return code.toLowerCase();
+}
+
+function renderCardRatings(symbol) {
+  if (!cardRatings) return;
+  const ratings = getRatingsForSymbol(symbol);
+  if (!ratings) {
+    cardRatings.innerHTML = '<div class="cMuted">No credit rating data available</div>';
+    return;
+  }
+  
+  const ratingHTML = [];
+  
+  if (ratings.spGlobal) {
+    ratingHTML.push(`
+      <div class="cRate">
+        <span class="credit-rating sp">
+          <span class="credit-rating-grade">${ratings.spGlobal.grade || 'N/A'}</span>
+          <span>S&P</span>
+        </span>
+        <span>${ratings.spGlobal.outlook || 'Stable'}</span>
+      </div>
+    `);
+  }
+  
+  if (ratings.moodys) {
+    ratingHTML.push(`
+      <div class="cRate">
+        <span class="credit-rating moodys">
+          <span class="credit-rating-grade">${ratings.moodys.grade || 'N/A'}</span>
+          <span>Moody's</span>
+        </span>
+        <span>${ratings.moodys.outlook || 'Stable'}</span>
+      </div>
+    `);
+  }
+  
+  if (ratings.fitch) {
+    const fitch = ratings.fitch;
+    const outlook = fitch?.longTerm?.outlook ? fitch.longTerm.outlook.replace("Rating Outlook ", "") : 'Stable';
+    ratingHTML.push(`
+      <div class="cRate">
+        <span class="credit-rating fitch">
+          <span class="credit-rating-grade">${fitch?.longTerm?.code || 'N/A'}</span>
+          <span>Fitch</span>
+        </span>
+        <span>${outlook}</span>
+      </div>
+    `);
+  }
+  
+  cardRatings.innerHTML = ratingHTML.join('') || '<div class="cMuted">No credit rating data available</div>';
+}
+
+function renderCardInsights(symbol, profile) {
+  if (!profile) {
+    if (cardRiskDetails) cardRiskDetails.innerHTML = "";
+    if (cardOverlap) cardOverlap.innerHTML = "";
+    if (cardTimeline) cardTimeline.innerHTML = "";
+    if (cardRiskText) cardRiskText.textContent = "Open a profile to view insights.";
+    if (cardRiskBadge) {
+      cardRiskBadge.textContent = "N/A";
+      cardRiskBadge.className = "cRiskBadge low";
+    }
+    return;
+  }
+
+  const risk = computeProfileRisk(profile);
+  if (cardRiskBadge) {
+    cardRiskBadge.className = `cRiskBadge ${risk.overall}`;
+    cardRiskBadge.textContent = `${risk.overall} risk`;
+  }
+  if (cardRiskText) {
+    cardRiskText.textContent = `${risk.suppliers} suppliers across ${risk.supplierCountries} countries`;
+  }
+  if (cardRiskDetails) {
+    cardRiskDetails.innerHTML = [
+      `<div class="cItem"><span>Supplier concentration</span><b>${risk.supplierRisk}</b></div>`,
+      `<div class="cItem"><span>Geographic concentration</span><b>${risk.geoRisk}</b></div>`,
+      `<div class="cItem"><span>Source-backed ratio</span><b>${Math.round(risk.sourceRatio * 100)}%</b></div>`,
+    ].join("");
+  }
+
+  const overlaps = getTopOverlap(symbol, 3);
+  if (cardOverlap) {
+    if (!overlaps.length) {
+      cardOverlap.innerHTML = `<div class="cMuted">No significant overlaps detected.</div>`;
+    } else {
+      cardOverlap.innerHTML = overlaps
+        .map((row) => {
+          const peerName = DATA.profiles[row.peer]?.company || row.peer;
+          return `<div class="cItem"><span>${escapeHtml(row.peer)} ${escapeHtml(peerName)}</span><b>${row.count}</b></div>`;
+        })
+        .join("");
+    }
+  }
+
+  const timeline = parseYearsFromSources(profile).slice(0, 5);
+  if (cardTimeline) {
+    if (!timeline.length) {
+      cardTimeline.innerHTML = `<div class="cMuted">No dated source evidence extracted.</div>`;
+    } else {
+      cardTimeline.innerHTML = timeline
+        .map(([year, count]) => `<div class="cItem"><span>${year}</span><b>${count} source${count === 1 ? "" : "s"}</b></div>`)
+        .join("");
+    }
+  }
+}
+
+// Export functionality
+function exportData() {
+  const data = STATE.mode === 'global' ? 
+    { nodes: DATA.nodes, links: DATA.links, profiles: Object.keys(DATA.profiles).length } :
+    DATA.profiles[STATE.symbol];
+  
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = STATE.mode === 'global' ? 'supply-chain-global.json' : `supply-chain-${STATE.symbol}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// Filter functionality
+function applyFilters() {
+  STATE.filters.confidence = document.getElementById('fConfidence').value;
+  STATE.filters.type = document.getElementById('fType').value;
+  STATE.filters.verified = document.getElementById('fVerified').value;
+  
+  const fn = (d) => {
+    let pass = true;
+    if (STATE.filters.confidence !== 'all') {
+      const conf = (d.confidence || '').toLowerCase();
+      if (STATE.filters.confidence === 'high' && !conf.includes('high') && !conf.includes('company')) pass = false;
+      if (STATE.filters.confidence === 'medium' && !conf.includes('medium') && !conf.includes('source')) pass = false;
+      if (STATE.filters.confidence === 'low' && !conf.includes('low') && !conf.includes('inferred')) pass = false;
+    }
+    if (STATE.filters.type !== 'all' && d.kind !== STATE.filters.type) pass = false;
+    if (STATE.filters.verified === 'verified' && (!d.confidence || !d.confidence.includes('source'))) pass = false;
+    if (STATE.filters.verified === 'inferred' && d.confidence && d.confidence.includes('source')) pass = false;
+    return pass;
+  };
+  
+  highlightBy(fn);
+  document.getElementById('filterPanel').style.display = 'none';
+  syncUrlState();
+}
+
+function resetFilters() {
+  document.getElementById('fConfidence').value = 'all';
+  document.getElementById('fType').value = 'all';
+  document.getElementById('fVerified').value = 'all';
+  STATE.filters = { confidence: 'all', type: 'all', verified: 'all' };
+  resetHighlight();
+  document.getElementById('filterPanel').style.display = 'none';
+  syncUrlState();
+}
+
+// Compare functionality
+function addToCompare(symbol) {
+  if (!symbol) return;
+  if (STATE.compareList.includes(symbol)) {
+    STATE.compareList = STATE.compareList.filter(s => s !== symbol);
+  } else {
+    if (STATE.compareList.length >= 3) STATE.compareList.shift();
+    STATE.compareList.push(symbol);
+  }
+  updateCompareButton();
+  if (STATE.compareList.length >= 2) {
+    showCompare();
+  }
+  syncUrlState();
+}
+
+function updateCompareButton() {
+  const symbol = STATE.mode === 'profile' ? STATE.symbol : STATE.hoverSymbol;
+  const btn = document.getElementById('cardCompare');
+  if (symbol && STATE.compareList.includes(symbol)) {
+    btn.style.color = 'var(--acc)';
+    btn.textContent = 'x';
+  } else {
+    btn.style.color = '#666';
+    btn.textContent = '+';
+  }
+}
+
+function showCompare() {
+  if (STATE.compareList.length < 2) return;
+  const grid = document.getElementById('compareGrid');
+  grid.innerHTML = STATE.compareList.map(sym => {
+    const p = DATA.profiles[sym];
+    if (!p) return '';
+    const rating = getRatingsForSymbol(sym);
+    const fitchLabel = ratingText(rating?.fitch);
+    const suppliers = p.nodes.filter(n => n.kind === 'supplier').length;
+    const services = p.nodes.filter(n => n.kind === 'service').length;
+    const channels = p.nodes.filter(n => n.kind === 'channel').length;
+    const demand = p.nodes.filter(n => n.kind === 'demand').length;
+    const verified = p.nodes.filter(n => n.confidence && n.confidence.includes('source')).length;
+    return `
+      <div class="card">
+        <h3>${escapeHtml(sym)} - ${escapeHtml(p.company)}</h3>
+        <div class="stat"><span>Suppliers</span><b>${suppliers}</b></div>
+        <div class="stat"><span>Services</span><b>${services}</b></div>
+        <div class="stat"><span>Channels</span><b>${channels}</b></div>
+        <div class="stat"><span>Demand Nodes</span><b>${demand}</b></div>
+        <div class="stat"><span>Verified Entities</span><b>${verified}</b></div>
+        <div class="stat"><span>Fitch Rating</span><b>${escapeHtml(fitchLabel)}</b></div>
+        <div class="stat"><span>Category</span><b>${escapeHtml(p.category.split('(')[0].trim())}</b></div>
+      </div>
+    `;
+  }).join('');
+  openModal(compareModalEl, "block");
+}
+
+function closeCompare() {
+  closeModal(compareModalEl);
+}
+
+function toggleHelp(forceOpen) {
+  const isOpen = helpModalEl?.style.display === "flex";
+  const shouldOpen = typeof forceOpen === "boolean" ? forceOpen : !isOpen;
+  if (shouldOpen) openModal(helpModalEl, "flex");
+  else closeModal(helpModalEl);
+}
+
+// Search with history + autocomplete
+const searchInput = document.getElementById("q");
+let activeSuggestIndex = 0;
+
+function triggerSearch(q, options = {}) {
+  const recordHistory = options.recordHistory !== false;
+  if (!q) { resetHighlight(); return; }
+  if (recordHistory) addToSearchHistory(q);
+  
+  if (STATE.mode === "global") {
+    const exact = STATE.nodes.find((n) => n.symbol?.toLowerCase() === q.toLowerCase());
+    if (exact && DATA.profiles[exact.symbol]) { openProfile(exact.symbol); return; }
+  }
+  highlightBy((d) => (`${d.l} ${d.d} ${d.s} ${d.id}`).toLowerCase().includes(q.toLowerCase()));
+}
+
+function selectSuggestion(index) {
+  if (!searchSuggestEl || searchSuggestEl.style.display === "none") return false;
+  const items = [...searchSuggestEl.querySelectorAll(".sg-item")];
+  if (!items.length) return false;
+  const clamped = Math.max(0, Math.min(items.length - 1, index));
+  items.forEach((el, i) => el.classList.toggle("on", i === clamped));
+  activeSuggestIndex = clamped;
+  return true;
+}
+
+searchInput.addEventListener("focus", () => {
+  if (searchInput.value.trim()) renderSearchSuggestions(searchInput.value.trim());
+  else renderSearchHistory();
+});
+
+searchInput.addEventListener("blur", () => {
+  setTimeout(() => hideSearchPopovers(), 200);
+});
+
+searchInput.addEventListener("input", function () {
+  const raw = this.value.trim();
+  const q = raw.toLowerCase();
+  STATE.lockId = null;
+  tt.style.display = "none";
+  if (!raw) {
+    hideSearchPopovers();
+    resetHighlight();
+    return;
+  }
+  renderSearchSuggestions(raw);
+  if (searchSuggestEl && searchSuggestEl.style.display !== "none") {
+    selectSuggestion(0);
+  }
+  triggerSearch(q, { recordHistory: false });
+});
+
+searchInput.addEventListener("keydown", (event) => {
+  if (!searchSuggestEl || searchSuggestEl.style.display === "none") {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const value = searchInput.value.trim();
+      if (value) triggerSearch(value, { recordHistory: true });
+      hideSearchPopovers();
+    }
+    return;
+  }
+
+  const items = [...searchSuggestEl.querySelectorAll(".sg-item")];
+  if (!items.length) return;
+  if (event.key === "ArrowDown") {
+    event.preventDefault();
+    selectSuggestion(activeSuggestIndex + 1);
+    return;
+  }
+  if (event.key === "ArrowUp") {
+    event.preventDefault();
+    selectSuggestion(activeSuggestIndex - 1);
+    return;
+  }
+  if (event.key === "Enter") {
+    event.preventDefault();
+    const active = items[activeSuggestIndex] || items[0];
+    const symbol = active?.getAttribute("data-symbol");
+    if (symbol && DATA.profiles[symbol]) {
+      searchInput.value = symbol;
+      openProfile(symbol);
+      hideSearchPopovers();
+      return;
+    }
+    const value = searchInput.value.trim();
+    if (value) triggerSearch(value, { recordHistory: true });
+    hideSearchPopovers();
+  }
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  const key = e.key.toLowerCase();
+  const tag = e.target?.tagName || "";
+
+  if (activeModal && key === "tab") {
+    trapFocus(e, activeModal);
+    return;
+  }
+
+  if (activeModal && key === "escape") {
+    e.preventDefault();
+    if (activeModal === helpModalEl) toggleHelp(false);
+    else if (activeModal === compareModalEl) closeCompare();
+    else if (activeModal === onboardingPanelEl) dismissOnboarding();
+    else if (activeModal === mobileSheet) setMobileSheetOpen(false);
+    return;
+  }
+
+  if (key === "escape" && provenanceDrawer?.style.display === "block") {
+    e.preventDefault();
+    closeProvenance();
+    return;
+  }
+
+  if (tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA") return;
+
+  // Ctrl+S / Cmd+S for save
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    promptSaveView();
+    return;
+  }
+
+  switch(key) {
+    case 'escape':
+      if (STATE.lockId) { STATE.lockId = null; tt.style.display = 'none'; resetHighlight(); }
+      else openGlobal();
+      break;
+    case 'g': openGlobal(); break;
+    case 'l': STATE.labelsVisible = !STATE.labelsVisible; labelSel.attr('opacity', STATE.labelsVisible ? 1 : 0); subSel.attr('opacity', STATE.labelsVisible ? 1 : 0); break;
+    case 'f': toggleParticles(); break;
+    case 'b': if (STATE.mode === "global") highlightBy((d) => d.bn); else highlightBy((d) => d.kind === "supplier" || d.kind === "risk"); break;
+    case '/': e.preventDefault(); searchInput.focus(); break;
+    case 'e': exportData(); break;
+    case 'h': toggleHelp(); break;
+  }
+});
+
+// Button handlers
+document.getElementById("bBack").onclick = openGlobal;
+document.getElementById("bReset").onclick = () => {
+  STATE.lockId = null;
+  tt.style.display = "none";
+  resetHighlight();
+  svg.transition().duration(450).call(zoom.transform, d3.zoomIdentity.scale(0.8));
+  if (STATE.simulation) STATE.simulation.alpha(0.22).restart();
+  if (STATE.settleTimer) clearTimeout(STATE.settleTimer);
+  STATE.settleTimer = setTimeout(() => {
+    if (STATE.simulation) STATE.simulation.stop();
+    STATE.settleTimer = null;
+  }, STATE.mode === "global" ? 7000 : 4500);
+};
+document.getElementById("bLabels").onclick = () => {
+  STATE.labelsVisible = !STATE.labelsVisible;
+  labelSel.attr("opacity", STATE.labelsVisible ? 1 : 0);
+  subSel.attr("opacity", STATE.labelsVisible ? 1 : 0);
+};
+document.getElementById("bFlow").onclick = () => toggleParticles();
+document.getElementById("bBottlenecks").onclick = () => {
+  if (STATE.mode === "global") highlightBy((d) => d.bn);
+  else highlightBy((d) => d.kind === "supplier" || d.kind === "risk");
+};
+document.getElementById("bFilter").onclick = () => {
+  const panel = document.getElementById('filterPanel');
+  panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+};
+document.getElementById("bExport").onclick = exportData;
+document.getElementById("bSave").onclick = () => promptSaveView();
+document.getElementById("bBookmarks").onclick = () => toggleBookmarks();
+document.getElementById("bCompare").onclick = () => {
+  if (STATE.compareList.length >= 2) showCompare();
+  else alert('Select at least 2 companies to compare (use + button on company card)');
+};
+document.getElementById("bHelp").onclick = toggleHelp;
+document.getElementById("cardCompare").onclick = () => {
+  const symbol = STATE.mode === 'profile' ? STATE.symbol : STATE.hoverSymbol;
+  addToCompare(symbol);
+};
+if (cardSourcesBtn) cardSourcesBtn.onclick = openProvenance;
+if (provenanceClose) provenanceClose.onclick = closeProvenance;
+if (mobileToggleBtn) mobileToggleBtn.onclick = () => setMobileSheetOpen(true);
+if (document.getElementById("mobileClose")) {
+  document.getElementById("mobileClose").onclick = () => setMobileSheetOpen(false);
+}
+
+const closeMobileAfterAction = () => {
+  if (window.matchMedia("(max-width: 768px)").matches) setMobileSheetOpen(false);
+};
+const wireMobile = (id, action) => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.onclick = () => {
+    action();
+    closeMobileAfterAction();
+  };
+};
+wireMobile("mBack", openGlobal);
+wireMobile("mGlobal", openGlobal);
+wireMobile("mReset", () => document.getElementById("bReset").click());
+wireMobile("mFilter", () => document.getElementById("bFilter").click());
+wireMobile("mExport", exportData);
+wireMobile("mCompare", () => document.getElementById("bCompare").click());
+wireMobile("mHelp", () => toggleHelp(true));
+wireMobile("mSave", promptSaveView);
+wireMobile("mBookmarks", toggleBookmarks);
+
+// HQ city mapping (fallback if not in data)
+const HQ_CITY_BY_SYMBOL = {
+  NVDA: "Santa Clara", AAPL: "Cupertino", GOOG: "Mountain View", MSFT: "Redmond", AMZN: "Seattle",
+  TSM: "Hsinchu", META: "Menlo Park", "2222.SR": "Dhahran", AVGO: "Palo Alto", TSLA: "Austin",
+  "BRK-B": "Omaha", WMT: "Bentonville", LLY: "Indianapolis", "005930.KS": "Suwon", JPM: "New York",
+  XOM: "Spring", V: "San Francisco", TCEHY: "Shenzhen", JNJ: "New Brunswick", ASML: "Veldhoven",
+  MU: "Boise", MA: "Purchase", "000660.KS": "Icheon", COST: "Issaquah", ORCL: "Austin",
+  ABBV: "North Chicago", BAC: "Charlotte", HD: "Atlanta", "ROG.SW": "Basel", PG: "Cincinnati",
+  BABA: "Hangzhou", CVX: "San Ramon", "1398.HK": "Beijing", GE: "Boston", CAT: "Irving",
+  KO: "Atlanta", NFLX: "Los Gatos", "601288.SS": "Beijing", "601939.SS": "Beijing", AMD: "Santa Clara",
+  "MC.PA": "Paris", PLTR: "Denver", AZN: "Cambridge", NVS: "Basel", CSCO: "San Jose",
+  TM: "Toyota City", LRCX: "Fremont", MRK: "Rahway", HSBC: "London", "0857.HK": "Beijing",
+  AMAT: "Santa Clara", PM: "Stamford", GS: "New York", MS: "New York", WFC: "San Francisco",
+  RTX: "Arlington", "600519.SS": "Renhuai", "NESN.SW": "Vevey", UNH: "Eden Prairie", "RMS.PA": "Paris",
+  "OR.PA": "Clichy", "601988.SS": "Beijing", "300750.SZ": "Ningde", RY: "Toronto", TMUS: "Bellevue",
+  IBM: "Armonk", "IHC.AE": "Abu Dhabi", AXP: "New York", SAP: "Walldorf", MCD: "Chicago",
+  LIN: "Woking", "PRX.AS": "Amsterdam", "SIE.DE": "Munich", PEP: "Purchase", GEV: "Cambridge",
+  SHEL: "London", INTC: "Santa Clara", "0941.HK": "Hong Kong", MUFG: "Tokyo", "CBA.AX": "Sydney",
+  "ITX.MC": "Arteixo", "RELIANCE.NS": "Mumbai", NVO: "Bagsvaerd", VZ: "New York", C: "New York",
+  AMGN: "Thousand Oaks", TXN: "Dallas", T: "Dallas", BHP: "Melbourne", KLAC: "Milpitas",
+  ABT: "Abbott Park", "601628.SS": "Beijing", RIO: "London", NEE: "Juno Beach", TMO: "Waltham",
+  "DTE.DE": "Bonn", SAN: "Madrid", GILD: "Foster City", DIS: "Burbank", APH: "Wallingford",
+};
+
+const COUNTRY_CAPITAL_BY_CODE = {
+  US: "Washington", TW: "Taipei", SA: "Riyadh", KR: "Seoul", CN: "Beijing", NL: "Amsterdam",
+  CH: "Bern", FR: "Paris", UK: "London", JP: "Tokyo", CA: "Ottawa", AE: "Abu Dhabi",
+  DE: "Berlin", AU: "Canberra", ES: "Madrid", IN: "New Delhi", DK: "Copenhagen", XX: "Global",
+};
+
+// Q3: Toast notification function
+function showToast(message) {
+  const toast = document.createElement('div');
+  toast.textContent = message;
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--acc);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 11px;
+    z-index: 2000;
+    animation: fadeOut 2s forwards;
+  `;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2000);
+}
+
+// B1: Saved Views/Bookmarks
+function saveView(name) {
+  if (!name) return;
+  const transform = d3.zoomTransform(svg.node());
+  const state = {
+    mode: STATE.mode,
+    symbol: STATE.symbol,
+    filters: STATE.filters,
+    zoom: transform.k,
+    x: transform.x,
+    y: transform.y,
+    timestamp: Date.now()
+  };
+  const existing = STATE.savedViews.findIndex(v => v.name === name);
+  const view = { name, state, date: new Date().toLocaleDateString() };
+  if (existing >= 0) STATE.savedViews[existing] = view;
+  else STATE.savedViews.push(view);
+  safeSaveJSON("savedViews", STATE.savedViews);
+  renderBookmarksPanel();
+  showToast(`View "${name}" saved`);
+}
+
+function loadView(name) {
+  const view = STATE.savedViews.find(v => v.name === name);
+  if (!view) return;
+  STATE.mode = view.state.mode;
+  STATE.symbol = view.state.symbol;
+  STATE.filters = view.state.filters;
+  if (STATE.mode === 'profile' && !DATA.profiles[STATE.symbol]) {
+    showToast('Profile no longer available');
+    return;
+  }
+  render();
+  svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(view.state.x, view.state.y).scale(view.state.zoom));
+  showToast(`Loaded "${name}"`);
+  syncUrlState();
+}
+
+function deleteView(name) {
+  STATE.savedViews = STATE.savedViews.filter(v => v.name !== name);
+  safeSaveJSON("savedViews", STATE.savedViews);
+  renderBookmarksPanel();
+  showToast(`Deleted "${name}"`);
+}
+
+function renderBookmarksPanel() {
+  let panel = document.getElementById('bookmarksPanel');
+  if (!panel) {
+    panel = document.createElement('div');
+    panel.id = 'bookmarksPanel';
+    panel.style.cssText = 'position:fixed;top:92px;right:12px;z-index:95;background:rgba(10,10,10,.95);border:1px solid #252525;padding:10px;display:none;max-width:280px;max-height:400px;overflow-y:auto;border-radius:4px';
+    document.body.appendChild(panel);
+  }
+  if (STATE.savedViews.length === 0) {
+    panel.innerHTML = '<div style="font-size:9px;color:#666">No saved views</div>';
+    return;
+  }
+  panel.innerHTML = `<h3 style="font-size:9px;color:var(--dim);text-transform:uppercase;margin-bottom:8px">Saved Views</h3>` + STATE.savedViews.map(v => `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #1a1a1a"><div style="cursor:pointer;font-size:9px;color:#aaa" onclick="loadView('${v.name}')"><b style="color:#fff">${v.name}</b><div style="color:#666;font-size:8px">${v.date} • ${v.state.mode === 'profile' ? v.state.symbol : 'Global'}</div></div><button style="background:none;border:none;color:#666;cursor:pointer;font-size:14px" onclick="deleteView('${v.name}')">&times;</button></div>`).join('');
+}
+
+function toggleBookmarks() {
+  let panel = document.getElementById('bookmarksPanel');
+  if (!panel) {
+    renderBookmarksPanel();
+    panel = document.getElementById('bookmarksPanel');
+  }
+  if (panel) panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+}
+
+function promptSaveView() {
+  const name = prompt('Enter view name:');
+  if (name) saveView(name);
+}
+
+function render() {
+  clearGraph();
+  hideSearchPopovers();
+  const graph = graphForMode();
+  STATE.nodes = graph.nodes;
+  STATE.links = graph.links;
+  STATE.layerMap = graph.layers;
+  STATE.sourceIndex = graph.sourceIndex || {};
+
+  titleEl.innerHTML = STATE.mode === "global"
+    ? "<span>Global Supply Chain</span> / Top 100 Market Cap"
+    : `<span>Company Profile</span> / ${STATE.symbol}`;
+  subtitleEl.textContent = graph.subtitle;
+  hintEl.textContent = graph.hint;
+  document.getElementById("bBack").style.display = STATE.mode === "profile" ? "inline-block" : "none";
+  jump.value = STATE.mode === "profile" ? STATE.symbol : "";
+  document.getElementById("fConfidence").value = STATE.filters.confidence;
+  document.getElementById("fType").value = STATE.filters.type;
+  document.getElementById("fVerified").value = STATE.filters.verified;
+  
+  // Update footer with last updated timestamp
+  const footerEl = document.getElementById('lastUpdated');
+  if (footerEl && DATA.meta?.lastUpdated) {
+    footerEl.textContent = DATA.meta.lastUpdated;
+  }
+  
+  updateCompanyCard();
+  updateCompareButton();
+
+  updateStats();
+  buildLegend();
+  buildLayerSidebar();
+  buildCountryButtons();
+
+  const layerKeys = [...new Set(STATE.nodes.map((n) => n.layer))].sort((a, b) => a - b);
+  const bandH = H / Math.max(1, layerKeys.length);
+
+  layerKeys.forEach((layer, i) => {
+    const y = (layerKeys.length - 1 - i) * bandH;
+    if (STATE.mode === "global") {
+      g.append("rect").attr("x", -10000).attr("y", y).attr("width", 20000).attr("height", bandH)
+        .attr("fill", i % 2 === 0 ? "#0d0d0d" : "transparent").attr("pointer-events", "none");
+    }
+    g.append("text")
+      .attr("x", STATE.mode === "global" ? -9950 : 40)
+      .attr("y", y + 16)
+      .attr("fill", "#1e1e1e")
+      .attr("font-size", "10px")
+      .attr("font-family", "'Bricolage Grotesque',sans-serif")
+      .text(STATE.layerMap[layer] || "")
+      .attr("pointer-events", "none");
+  });
+
+  STATE.nodes.forEach((n) => {
+    if (STATE.mode === "global") {
+      const idx = layerKeys.indexOf(n.layer);
+      n.targetY = (layerKeys.length - 1 - idx) * bandH + bandH * 0.5;
+      n.x = W * 0.1 + Math.random() * W * 0.8;
+      n.y = n.targetY + (Math.random() - 0.5) * bandH * 0.2;
+    } else {
+      n.targetX = 0;
+      n.targetY = 0;
+      n.x = W * 0.5 + (Math.random() - 0.5) * 40;
+      n.y = H * 0.5 + (Math.random() - 0.5) * 40;
+    }
+  });
+
+  if (STATE.mode === "profile") {
+    const groupByLayer = new Map(layerKeys.map((layer) => [layer, []]));
+    STATE.nodes.forEach((n) => {
+      groupByLayer.get(n.layer).push(n);
+    });
+    layerKeys.forEach((layer, i) => {
+      const arr = groupByLayer.get(layer).sort((a, b) => (a.kind > b.kind ? 1 : -1));
+      const x = (i + 1) * (W / (layerKeys.length + 1));
+      const spacing = Math.max(70, Math.min(120, (H * 0.62) / Math.max(1, arr.length)));
+      const startY = H * 0.52 - ((arr.length - 1) * spacing) / 2;
+      arr.forEach((n, j) => {
+        n.targetX = x;
+        n.targetY = startY + j * spacing;
+        n.x = n.targetX + (Math.random() - 0.5) * 20;
+        n.y = n.targetY + (Math.random() - 0.5) * 20;
+      });
+    });
+  }
+
+  linkSel = g.append("g").selectAll("line").data(STATE.links).join("line")
+    .attr("stroke", (d) => d.v >= 3 ? "rgba(232,69,60,.18)" : d.v >= 2 ? "#1e1e1e" : "#151515")
+    .attr("stroke-width", (d) => d.v >= 3 ? 1.4 : d.v >= 2 ? 0.7 : 0.35)
+    .attr("marker-end", "url(#a)")
+    .attr("cursor", "pointer")
+    .on("mouseenter", (ev, d) => { if (!STATE.lockId) showLinkTooltip(d, ev); })
+    .on("mousemove", (ev) => { if (!STATE.lockId) moveTooltip(ev); })
+    .on("mouseleave", () => { if (!STATE.lockId) tt.style.display = "none"; });
+
+  particleLayer = g.append("g");
+
+  nodeSel = g.append("g").selectAll("g").data(STATE.nodes).join("g").attr("cursor", "pointer")
+    .call(d3.drag()
+      .on("start", (e, d) => { if (!e.active) STATE.simulation.alphaTarget(0.06).restart(); d.fx = d.x; d.fy = d.y; })
+      .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; })
+      .on("end", (e, d) => { if (!e.active) STATE.simulation.alphaTarget(0); d.fx = null; d.fy = null; }));
+
+  nodeSel.filter((d) => d.bn).append("circle").attr("r", (d) => (d.z || 10) + 5).attr("class", "bn-ring");
+  nodeSel.append("circle").attr("class", "mc").attr("r", (d) => d.z || 10)
+    .attr("fill", (d) => DATA.countries[d.c]?.c || "#777")
+    .attr("fill-opacity", (d) => d.bn ? 0.82 : 0.35)
+    .attr("stroke", (d) => d.bn ? "var(--acc)" : "#222")
+    .attr("stroke-width", (d) => d.bn ? 1.4 : 0.5)
+    .classed("verified-node", (d) => d.confidence && d.confidence.includes("source"));
+
+  labelSel = nodeSel.append("text")
+    .text((d) => d.l.split("\n")[0])
+    .attr("dy", (d) => -(d.z || 10) - 4)
+    .attr("text-anchor", "middle")
+    .attr("fill", (d) => d.bn ? "#ccc" : "#666")
+    .attr("font-size", (d) => d.z >= 18 ? "9px" : "7px")
+    .attr("font-family", "'JetBrains Mono',monospace")
+    .attr("pointer-events", "none");
+
+  subSel = nodeSel.append("text")
+    .text((d) => d.l.split("\n")[1] || "")
+    .attr("dy", (d) => -(d.z || 10) + 6)
+    .attr("text-anchor", "middle")
+    .attr("fill", "#444")
+    .attr("font-size", "6px")
+    .attr("font-family", "'JetBrains Mono',monospace")
+    .attr("pointer-events", "none");
+
+  nodeSel.append("text")
+    .text((d) => d.c)
+    .attr("dy", (d) => (d.z || 10) + 11)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "7px")
+    .attr("fill", "#333")
+    .attr("font-family", "'JetBrains Mono',monospace")
+    .attr("pointer-events", "none");
+
+  nodeSel
+    .on("mouseenter", (ev, d) => {
+      if (STATE.mode === "global" && d.symbol) {
+        STATE.hoverSymbol = d.symbol;
+        updateCompanyCard();
+      }
+      if (!STATE.lockId) { showTooltip(d, ev); highlightNode(d); }
+    })
+    .on("mousemove", (ev) => { if (!STATE.lockId) moveTooltip(ev); })
+    .on("mouseleave", () => {
+      if (STATE.mode === "global") {
+        STATE.hoverSymbol = null;
+        updateCompanyCard();
+      }
+      if (!STATE.lockId) { tt.style.display = "none"; resetHighlight(); }
+    })
+    .on("click", (ev, d) => {
+      ev.stopPropagation();
+      if (STATE.mode === "global" && d.symbol && DATA.profiles[d.symbol]) {
+        openProfile(d.symbol);
+        return;
+      }
+      if (STATE.lockId === d.id) {
+        STATE.lockId = null;
+        tt.style.display = "none";
+        resetHighlight();
+      } else {
+        STATE.lockId = d.id;
+        showTooltip(d, ev);
+        highlightNode(d);
+      }
+    });
+
+  svg.on("click", () => {
+    if (STATE.lockId) {
+      STATE.lockId = null;
+      tt.style.display = "none";
+      resetHighlight();
+    }
+  });
+
+  STATE.simulation = d3.forceSimulation(STATE.nodes)
+    .force("link", d3.forceLink(STATE.links).id((d) => d.id).distance((d) => d.v >= 3 ? 70 : 110).strength((d) => (d.v || 1) * 0.11))
+    .force("charge", d3.forceManyBody().strength(STATE.mode === "global" ? -180 : -220))
+    .force("x", d3.forceX((d) => STATE.mode === "global" ? W / 2 : d.targetX).strength(STATE.mode === "global" ? 0.03 : 0.25))
+    .force("y", d3.forceY((d) => d.targetY).strength(STATE.mode === "global" ? 0.4 : 0.14))
+    .force("collision", d3.forceCollide().radius((d) => (d.z || 10) + 8))
+    .alphaDecay(0.016)
+    .on("tick", () => {
+      STATE.nodes.forEach((n) => {
+        const m = (n.z || 10) + 12;
+        const topPad = 78;
+        const bottomPad = 20;
+        n.x = Math.max(m, Math.min(W - m, n.x));
+        n.y = Math.max(topPad + m, Math.min(H - bottomPad - m, n.y));
+      });
+      linkSel.attr("x1", (d) => d.source.x).attr("y1", (d) => d.source.y).attr("x2", (d) => d.target.x).attr("y2", (d) => d.target.y);
+      nodeSel.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    });
+
+  STATE.settleTimer = setTimeout(() => {
+    if (STATE.simulation) STATE.simulation.stop();
+    STATE.settleTimer = null;
+  }, STATE.mode === "global" ? 7000 : 4500);
+
+  svg.transition().duration(450).call(zoom.transform, d3.zoomIdentity.scale(0.8));
+  syncUrlState();
+}
+
+window.addEventListener("resize", () => {
+  svg.attr("width", innerWidth).attr("height", innerHeight);
+});
+
+// Expose functions for global access
+window.toggleHelp = toggleHelp;
+window.closeCompare = closeCompare;
+window.applyFilters = applyFilters;
+window.resetFilters = resetFilters;
+window.loadView = loadView;
+window.deleteView = deleteView;
+
+applyUrlState();
+render();
+maybeShowOnboarding();
+</script>
+</body>
+</html>
+
+
