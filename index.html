@@ -24,7 +24,7 @@ html,body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',mo
 #title .companyName{font-weight:500;color:#fff}
 #title .tagline{font-weight:400;color:#888}
 #title .separator{color:#505050;margin:0 2px}
-#subtitle{font-size:9px;color:var(--dim);margin-top:4px;letter-spacing:.3px;font-weight:300;max-width:680px}
+#subtitle{position:fixed;top:12px;right:16px;font-size:9px;color:var(--dim);letter-spacing:.3px;font-weight:300;max-width:400px;text-align:right;background:rgba(10,10,10,0.9);padding:8px 12px;border:1px solid rgba(255,255,255,0.08);border-radius:6px;backdrop-filter:blur(8px)}
 .st{display:flex;gap:16px;text-align:center}
 .st span{font-size:8px;color:var(--dim);letter-spacing:.5px;text-transform:uppercase}
 .st b{font-size:18px;font-weight:700;color:var(--text);display:block;line-height:1.2;font-family:'Bricolage Grotesque',sans-serif;font-variant-numeric:tabular-nums;background:linear-gradient(135deg, #fff 0%, #b0b0b0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -401,7 +401,6 @@ body.profile-mode #ly,body.card-visible #ly{top:220px}
         <span class="separator">|</span>
         <span class="tagline">Market Intelligence</span>
       </div>
-      <div id="subtitle">Click any company node to open its dedicated supply-chain profile. Profile data includes relationship confidence and source references where available.</div>
     </div>
     <div class="st">
       <span><span class="stat-live"></span><b id="sN">0</b>nodes</span>
@@ -411,6 +410,8 @@ body.profile-mode #ly,body.card-visible #ly{top:220px}
       <span><b id="sM">$0T</b>cap</span>
     </div>
   </div>
+
+  <div id="subtitle">Click any company node to open its dedicated supply-chain profile. Profile data includes relationship confidence and source references where available.</div>
 
   <!-- Top 10 Compact Sidebar -->
   <div id="top10Sidebar" style="position:fixed;top:60px;left:12px;z-index:95;width:220px;max-height:calc(100vh - 80px);overflow-y:auto;display:none">
