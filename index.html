@@ -76,10 +76,21 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:1px solid 
 #companyCard .cActions button{flex:1;background:#111;border:1px solid #2b2b2b;color:#888;padding:4px 6px;font-size:8px;cursor:pointer;text-transform:uppercase}
 #companyCard .cActions button:hover{border-color:var(--acc);color:var(--acc)}
 body.profile-mode #ly,body.card-visible #ly{top:220px}
-#tt{position:fixed;z-index:300;background:var(--bg);border:1px solid #333;padding:12px 14px;max-width:450px;display:none;box-shadow:0 4px 20px rgba(0,0,0,.5);border-radius:4px}
-#tt .tn{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.2}
+/* Enhanced Tooltip */
+#tt{position:fixed;z-index:300;background:linear-gradient(180deg, rgba(20,20,20,0.98) 0%, rgba(12,12,12,0.96) 100%);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 32px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.4);border-radius:8px;max-width:500px;padding:12px 14px;display:none}
+#tt .tn{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.2;text-shadow:0 1px 2px rgba(0,0,0,0.3)}
 #tt .tf{font-size:9px;color:#777;letter-spacing:.7px;text-transform:uppercase;margin-bottom:8px}
-#tt .td{font-size:11px;line-height:1.45;color:#bbb;white-space:pre-line}
+#tt .td{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+#tt .td-col{display:flex;flex-direction:column;gap:6px}
+#tt .td-item{display:flex;align-items:flex-start;gap:6px;font-size:10px}
+#tt .td-label{color:#888;text-transform:uppercase;font-size:8px;letter-spacing:0.5px;min-width:70px}
+#tt .td-value{color:#ddd;font-weight:500}
+#tt .source-link{color:#86b7ff;text-decoration:none;border-bottom:1px solid rgba(134,183,255,0.3);transition:all 0.2s}
+#tt .source-link:hover{color:#a8d0ff;border-bottom-color:rgba(134,183,255,0.6)}
+#tt .confidence-badge{display:inline-block;padding:2px 6px;border-radius:3px;font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.3px}
+.confidence-high{background:rgba(76,175,80,0.2);color:#66bb6a;border:1px solid rgba(76,175,80,0.4)}
+.confidence-medium{background:rgba(255,193,7,0.2);color:#ffb300;border:1px solid rgba(255,193,7,0.4)}
+.confidence-low{background:rgba(158,158,158,0.2);color:#9e9e9e;border:1px solid rgba(158,158,158,0.4)}
 #tt .ts{margin-top:8px;padding-top:8px;border-top:1px solid #222;font-size:10px;color:#888}
 #tt .tc{margin-top:6px;font-size:9px;color:#888}
 #tt .tv{margin-top:4px;font-size:9px;color:var(--green);display:flex;align-items:center;gap:4px}
@@ -1065,31 +1076,72 @@ let subSel;
 let particleLayer;
 
 function showTooltip(d, ev) {
-  tt.style.display = "block";
-  tt.querySelector(".tn").textContent = d.l.replace("\n", " - ");
-  tt.querySelector(".tf").textContent = `${d.c} ${asCountryName(d.c)} / ${STATE.layerMap[d.layer] || `Layer ${d.layer}`}`;
-  tt.querySelector(".td").textContent = d.d || "";
+  const tt = document.getElementById('tt');
   
-  // Q2: Source count
-  const sourceCount = d.sourceId ? 1 : 0;
-  const tsEl = tt.querySelector(".ts");
-  tsEl.textContent = (d.s || '') + (sourceCount > 0 ? ` | ${sourceCount} source` : '');
+  // Check for source verification
+  const confidenceRaw = d.confidence || 'low';
+  const confidenceLower = confidenceRaw.toLowerCase();
+  let confidenceLevel = 'low';
+  if (confidenceLower.includes('high') || confidenceLower.includes('company')) confidenceLevel = 'high';
+  else if (confidenceLower.includes('medium') || confidenceLower.includes('source')) confidenceLevel = 'medium';
   
-  const verifiedEl = tt.querySelector(".tv");
-  if (d.confidence && d.confidence.includes("source-backed")) {
-    verifiedEl.style.display = "flex";
-    verifiedEl.textContent = "Source-verified entity";
-  } else {
-    verifiedEl.style.display = "none";
-  }
+  const verified = confidenceLevel === 'high' || d.sourceId;
+  const confidenceClass = `confidence-${confidenceLevel}`;
+  const confidenceLabel = confidenceLevel.charAt(0).toUpperCase() + confidenceLevel.slice(1);
   
-  tt.querySelector(".tc").textContent = d.confidence ? `Confidence: ${d.confidence}` : "";
-  if (d.sourceId && STATE.sourceIndex[d.sourceId]) {
-    tt.querySelector(".tu").textContent = `Source: ${STATE.sourceIndex[d.sourceId].url}`;
-  } else {
-    tt.querySelector(".tu").textContent = "";
-  }
+  // Helper to format value
+  const formatValue = (v) => {
+    if (typeof v === 'number') {
+      if (v >= 1e12) return '$' + (v / 1e12).toFixed(2) + 'T';
+      if (v >= 1e9) return '$' + (v / 1e9).toFixed(2) + 'B';
+      if (v >= 1e6) return '$' + (v / 1e6).toFixed(2) + 'M';
+      return '$' + v.toFixed(2);
+    }
+    return v;
+  };
+  
+  tt.innerHTML = `
+    <div class="tn">${(d.l || d.label || d.id || '').replace("\n", " - ")}</div>
+    <div class="tf">${d.kind || 'Node'} · <span class="confidence-badge ${confidenceClass}">${confidenceLabel} Confidence</span></div>
+    <div class="td">
+      <div class="td-col">
+        ${d.country || d.c ? `
+          <div class="td-item">
+            <span class="td-label">Country</span>
+            <span class="td-value">${d.country || asCountryName(d.c)}</span>
+          </div>
+        ` : ''}
+        ${d.type ? `
+          <div class="td-item">
+            <span class="td-label">Type</span>
+            <span class="td-value">${d.type}</span>
+          </div>
+        ` : ''}
+      </div>
+      <div class="td-col">
+        ${d.value ? `
+          <div class="td-item">
+            <span class="td-label">Value</span>
+            <span class="td-value">${formatValue(d.value)}</span>
+          </div>
+        ` : ''}
+        ${verified ? `
+          <div class="td-item">
+            <span class="td-label">Source</span>
+            <span class="td-value">✓ Verified</span>
+          </div>
+        ` : ''}
+      </div>
+    </div>
+    ${d.sourceUrl || (d.sourceId && STATE.sourceIndex[d.sourceId]) ? `
+      <div class="tu">
+        <a href="${d.sourceUrl || STATE.sourceIndex[d.sourceId].url}" target="_blank" rel="noopener" class="source-link">View Source →</a>
+      </div>
+    ` : ''}
+  `;
+  
   moveTooltip(ev);
+  tt.style.display = 'block';
 }
 
 function linkNodeLabel(endpoint) {
@@ -1100,27 +1152,55 @@ function linkNodeLabel(endpoint) {
 }
 
 function showLinkTooltip(d, ev) {
-  tt.style.display = "block";
-  tt.querySelector(".tn").textContent = `${linkNodeLabel(d.source)} → ${linkNodeLabel(d.target)}`;
-  tt.querySelector(".tf").textContent = `Relationship / ${d.k || "flow"}`;
-  tt.querySelector(".td").textContent = d.n || "Supply-chain relationship.";
-  tt.querySelector(".ts").textContent = `Weight: ${d.v || 1}`;
+  const tt = document.getElementById('tt');
   
-  const verifiedEl = tt.querySelector(".tv");
-  if (d.cf && d.cf.includes("source-backed")) {
-    verifiedEl.style.display = "flex";
-    verifiedEl.textContent = "Source-verified relationship";
-  } else {
-    verifiedEl.style.display = "none";
-  }
+  // Check for source verification
+  const confidenceRaw = d.cf || 'low';
+  const confidenceLower = confidenceRaw.toLowerCase();
+  let confidenceLevel = 'low';
+  if (confidenceLower.includes('high') || confidenceLower.includes('company')) confidenceLevel = 'high';
+  else if (confidenceLower.includes('medium') || confidenceLower.includes('source')) confidenceLevel = 'medium';
   
-  tt.querySelector(".tc").textContent = d.cf ? `Confidence: ${d.cf}` : "";
-  if (d.sf && STATE.sourceIndex[d.sf]) {
-    tt.querySelector(".tu").textContent = `Source: ${STATE.sourceIndex[d.sf].url}`;
-  } else {
-    tt.querySelector(".tu").textContent = "";
-  }
+  const verified = confidenceLevel === 'high' || d.sf;
+  const confidenceClass = `confidence-${confidenceLevel}`;
+  const confidenceLabel = confidenceLevel.charAt(0).toUpperCase() + confidenceLevel.slice(1);
+  
+  tt.innerHTML = `
+    <div class="tn">${linkNodeLabel(d.source)} → ${linkNodeLabel(d.target)}</div>
+    <div class="tf">Relationship · <span class="confidence-badge ${confidenceClass}">${confidenceLabel} Confidence</span></div>
+    <div class="td">
+      <div class="td-col">
+        <div class="td-item">
+          <span class="td-label">Type</span>
+          <span class="td-value">${d.k || "flow"}</span>
+        </div>
+        <div class="td-item">
+          <span class="td-label">Weight</span>
+          <span class="td-value">${d.v || 1}</span>
+        </div>
+      </div>
+      <div class="td-col">
+        <div class="td-item">
+          <span class="td-label">Note</span>
+          <span class="td-value">${d.n || "Supply-chain relationship"}</span>
+        </div>
+        ${verified ? `
+          <div class="td-item">
+            <span class="td-label">Source</span>
+            <span class="td-value">✓ Verified</span>
+          </div>
+        ` : ''}
+      </div>
+    </div>
+    ${d.sf && STATE.sourceIndex[d.sf] ? `
+      <div class="tu">
+        <a href="${STATE.sourceIndex[d.sf].url}" target="_blank" rel="noopener" class="source-link">View Source →</a>
+      </div>
+    ` : ''}
+  `;
+  
   moveTooltip(ev);
+  tt.style.display = 'block';
 }
 
 function moveTooltip(ev) {
