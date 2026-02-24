@@ -290,6 +290,38 @@ body.profile-mode #ly,body.card-visible #ly{top:220px}
 #companyCard.show,#tt.show,.modal.show{animation:fadeIn 0.2s ease forwards}
 .btn-press{transition:transform 0.05s ease}
 .btn-press:active{transform:scale(0.96)}
+
+/* Update Status Indicator */
+#footer{display:flex;align-items:center;gap:8px}
+#footer .updateStatus{display:inline-flex;align-items:center;gap:4px;font-size:8px;color:#666}
+#footer .statusDot{width:6px;height:6px;border-radius:50%;animation:pulse 2s ease-in-out infinite}
+#footer .statusDot.fresh{background:#4caf50}
+#footer .statusDot.stale{background:#ff9800}
+#footer .statusDot.outdated{background:#f44336}
+
+/* Top 10 Cards */
+#top10Cards{padding:0 16px}
+.top10-card{background:linear-gradient(180deg,rgba(18,18,18,0.98) 0%,rgba(10,10,10,0.96) 100%);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:14px;box-shadow:0 4px 16px rgba(0,0,0,0.3);transition:all 0.2s ease;cursor:pointer;display:flex;flex-direction:column;gap:10px}
+.top10-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,0.4);border-color:rgba(255,255,255,0.12)}
+.top10-card .cardHeader{display:flex;align-items:center;gap:10px}
+.top10-card .cardLogo{width:40px;height:40px;border-radius:6px;object-fit:contain;background:#0f0f0f;border:1px solid rgba(255,255,255,0.08)}
+.top10-card .cardLogoFallback{width:40px;height:40px;border-radius:6px;background:linear-gradient(135deg,#1a1a1a,#2a2a2a);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;color:#ddd}
+.top10-card .cardSymbol{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#fff}
+.top10-card .cardName{font-family:'Inter',sans-serif;font-size:11px;color:#888;margin-top:2px}
+.top10-card .cardSection{padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.top10-card .cardSection:last-child{border-bottom:none;padding-bottom:0}
+.top10-card .cardStat{display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#aaa;margin-bottom:6px}
+.top10-card .cardStat:last-child{margin-bottom:0}
+.top10-card .cardStat b{color:#fff;font-weight:600}
+.rank-up{color:#4caf50}.rank-down{color:#f44336}.rank-same{color:#666}
+.top10-card .creditRatings{display:flex;gap:4px;flex-wrap:wrap}
+.top10-card .supplyChainStats{display:flex;flex-wrap:wrap;gap:6px;font-size:8px;color:#888}
+.top10-card .supplyChainStats span{background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:3px;border:1px solid rgba(255,255,255,0.08)}
+.top10-card .viewProfile{width:100%;background:rgba(232,69,60,0.15);border:1px solid rgba(232,69,60,0.3);color:#e8453c;padding:6px 10px;font-size:9px;text-transform:uppercase;letter-spacing:0.5px;border-radius:4px;cursor:pointer;transition:all 0.15s;text-align:center;text-decoration:none;display:block;font-family:'JetBrains Mono',monospace}
+.top10-card .viewProfile:hover{background:rgba(232,69,60,0.25);border-color:rgba(232,69,60,0.5)}
+#seeFullTop100:hover{border-color:var(--acc);color:var(--acc);transform:translateY(-2px);box-shadow:0 4px 16px rgba(232,69,60,0.3)}
+@media(max-width:1200px){#top10Cards{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){#top10Cards{grid-template-columns:repeat(2,1fr);gap:8px;padding:12px}#top10Container{top:auto;bottom:0;background:rgba(8,8,8,0.98);border-top:1px solid #2a2a2a;max-height:50vh;overflow-y:auto}#seeFullTop100{margin:16px auto}}
 </style>
 </head>
 <body>
@@ -506,7 +538,19 @@ body.profile-mode #ly,body.card-visible #ly{top:220px}
   <div id="ly"></div>
   <svg id="canvas" role="img" aria-label="Supply chain network visualization"></svg>
   <div id="hint">Global: click company to open profile · Scroll zoom · Drag pan · Press H for help</div>
-  <div id="footer" style="position:fixed;bottom:8px;left:12px;font-size:8px;color:#444">Data updated: <span id="lastUpdated">--</span></div>
+  <!-- Top 10 Companies Grid -->
+  <div id="top10Container" style="position:fixed;top:60px;left:0;right:0;z-index:95;padding:16px;pointer-events:none;display:none">
+    <div id="top10Cards" style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;max-width:1400px;margin:0 auto;pointer-events:auto"></div>
+    <button id="seeFullTop100" onclick="scrollToVisualization()" style="display:block;max-width:300px;margin:24px auto;background:linear-gradient(135deg,#1a1a1a,#222);border:1px solid #333;color:#ddd;padding:12px 24px;font-size:10px;text-transform:uppercase;letter-spacing:1px;border-radius:6px;cursor:pointer;transition:all 0.2s;text-align:center">See Full Top 100 →</button>
+  </div>
+  <div id="footer" style="position:fixed;bottom:8px;left:12px;font-size:8px;color:#444;display:flex;align-items:center;gap:8px">
+    <span class="updateStatus">
+      <span class="statusDot" id="updateStatusDot"></span>
+      <span id="updateStatusText">Checking...</span>
+    </span>
+    <span>|</span>
+    <span>Data updated: <span id="lastUpdated">--</span></span>
+  </div>
   <button id="mobileToggle" type="button" aria-label="Open mobile controls">Controls</button>
   <div id="mobileSheet" role="dialog" aria-modal="true" aria-label="Mobile controls">
     <div class="mHead">
@@ -2349,6 +2393,129 @@ window.deleteView = deleteView;
 applyUrlState();
 render();
 maybeShowOnboarding();
+
+// Update Status Indicator
+function updateStatusIndicator() {
+  const data = window.SUPPLY_MAP_DATA;
+  if (!data || !data.meta || !data.meta.generatedAt) {
+    document.getElementById('updateStatusText').textContent = 'Unknown';
+    document.getElementById('updateStatusDot').className = 'statusDot outdated';
+    return;
+  }
+  
+  const lastUpdate = new Date(data.meta.generatedAt);
+  const now = new Date();
+  const daysOld = Math.floor((now - lastUpdate) / (1000 * 60 * 60 * 24));
+  
+  const dot = document.getElementById('updateStatusDot');
+  const text = document.getElementById('updateStatusText');
+  const dateEl = document.getElementById('lastUpdated');
+  
+  dateEl.textContent = lastUpdate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  
+  if (daysOld <= 7) {
+    dot.className = 'statusDot fresh';
+    text.textContent = 'Updated';
+  } else if (daysOld <= 14) {
+    dot.className = 'statusDot stale';
+    text.textContent = 'Aging';
+  } else {
+    dot.className = 'statusDot outdated';
+    text.textContent = 'Outdated';
+  }
+}
+
+// Top 10 Cards Rendering
+function renderTop10Cards() {
+  const data = window.SUPPLY_MAP_DATA;
+  if (!data || !data.nodes) return;
+  
+  const container = document.getElementById('top10Cards');
+  // Get top 10 companies by rank from nodes array
+  const top10 = data.nodes.filter(n => n.rank).sort((a, b) => a.rank - b.rank).slice(0, 10);
+  
+  container.innerHTML = top10.map((company, index) => {
+    const logoUrl = `https://companiesmarketcap.com/img/company-logos/64/${company.symbol}.png`;
+    const profile = data.profiles?.[company.symbol] || {};
+    const supplierCount = profile.upstream?.length || 0;
+    const serviceCount = profile.services?.length || 0;
+    const channelCount = profile.channels?.length || 0;
+    const demandCount = profile.demand?.length || 0;
+    const ratings = window.CREDIT_RATINGS?.ratingsBySymbol?.[company.symbol];
+    
+    return `
+      <div class="top10-card" data-symbol="${company.symbol}" onclick="openCompanyProfile('${company.symbol}')">
+        <div class="cardHeader">
+          <img src="${logoUrl}" alt="${company.company}" class="cardLogo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="cardLogoFallback" style="display:none">${getInitials(company.company)}</div>
+          <div>
+            <div class="cardSymbol">${company.symbol}</div>
+            <div class="cardName">${company.company}</div>
+          </div>
+        </div>
+        <div class="cardSection">
+          <div class="cardStat"><span>Market Cap</span><b>$${formatMarketCap((company.marketcap || 0) / 1e12)}</b></div>
+          <div class="cardStat"><span>Rank</span><span>#${company.rank || index + 1}</span></div>
+          <div class="cardStat"><span>Country</span><span>${company.country || 'Unknown'}</span></div>
+          <div class="cardStat"><span>Sector</span><span>${data.layers[company.y] || 'Diversified'}</span></div>
+        </div>
+        ${ratings && (ratings.fitch || ratings.spGlobal || ratings.moodys) ? `
+        <div class="cardSection">
+          <div class="cardStat"><span>Credit Ratings</span></div>
+          <div class="creditRatings">
+            ${ratings.spGlobal ? `<span class="credit-rating sp"><span class="credit-rating-grade">${ratings.spGlobal}</span></span>` : ''}
+            ${ratings.moodys ? `<span class="credit-rating moodys"><span class="credit-rating-grade">${ratings.moodys}</span></span>` : ''}
+            ${ratings.fitch ? `<span class="credit-rating fitch"><span class="credit-rating-grade">${ratings.fitch.grade || ratings.fitch}</span></span>` : ''}
+          </div>
+        </div>` : ''}
+        <div class="cardSection">
+          <div class="cardStat"><span>Supply Chain</span></div>
+          <div class="supplyChainStats">
+            <span><b style="color:#4caf50">${supplierCount}</b> suppliers</span>
+            <span><b style="color:#4caf50">${serviceCount}</b> services</span>
+            <span><b style="color:#4caf50">${channelCount}</b> channels</span>
+            <span><b style="color:#4caf50">${demandCount}</b> demand</span>
+          </div>
+        </div>
+        <button class="viewProfile">View Profile →</button>
+      </div>
+    `;
+  }).join('');
+  
+  document.getElementById('top10Container').style.display = 'block';
+}
+
+function getInitials(name) {
+  if (!name) return '??';
+  const words = name.split(' ');
+  if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+  return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+}
+
+function formatMarketCap(trillions) {
+  if (!trillions) return '0.00T';
+  if (trillions >= 1) return `${trillions.toFixed(2)}T`;
+  if (trillions >= 0.001) return `${(trillions * 1000).toFixed(0)}B`;
+  return `${(trillions * 1000000).toFixed(0)}M`;
+}
+
+function openCompanyProfile(symbol) {
+  document.getElementById('canvas').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => { openProfile(symbol); }, 500);
+}
+
+function scrollToVisualization() {
+  document.getElementById('canvas').scrollIntoView({ behavior: 'smooth' });
+  highlightAllNodes();
+}
+
+function highlightAllNodes() {
+  d3.selectAll('.node').transition().duration(300).style('opacity', 0.5).transition().duration(300).style('opacity', 1);
+}
+
+// Initialize
+updateStatusIndicator();
+renderTop10Cards();
 </script>
 </body>
 </html>
