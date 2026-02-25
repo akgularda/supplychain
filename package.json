@@ -8,8 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "node --test tests/*.test.mjs",
-    "build:country-data": "node scripts/generate-country-macro-data.mjs"
+    "test": "node --test tests/index-ui-integrity.test.mjs tests/no-xx-country-codes.test.mjs tests/profile-link-metadata.test.mjs tests/supply-chain-research-quality.test.mjs tests/auto-update-script.test.mjs"
   },
   "keywords": [],
   "author": "",
