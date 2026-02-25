@@ -8,3 +8,11 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 
+# Excluded workspace areas
+macro-site/
+
+# Planning artifacts
+docs/plans/
+plan*.md
+Plan*.md
+*PLAN*.md

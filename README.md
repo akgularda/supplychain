@@ -1,122 +1,96 @@
-# SupplyChain Intelligence Suite
+# SupplyChain Market Intelligence
 
-Interactive data visualization project with two web experiences:
+Interactive supply-chain intelligence map for the top 100 public companies by market cap.
 
-- `index.html`: Top-100 market cap supply-chain relationship graph (company-level).
-- `macro-site/index.html`: Country macro graph (GDP bubbles + bilateral trade links + sector leaders).
+## Scope
 
-## Highlights
+This README documents the root SupplyChain application only.
 
-- Real-time style graph UX with D3.js.
-- Company-level network with profile cards, source-linked provenance, and credit rating overlays.
-- Country-level macro graph with GDP-sized nodes, bilateral trade corridors, sector drilldowns (medicine, electronics, automotive, energy, agriculture, textiles, metals, chemicals), trade bloc filtering (EU, NATO, MERCOSUR, ASEAN, GCC, USMCA, BRICS, AfCFTA, CPTPP, RCEP, EAEU, SAARC, CARICOM, APEC, OECD, G7, G20), and real-data provenance display.
+## Core Features
+
+- Interactive D3 network graph with layer and country context.
+- Company profile card with upstream, service, channel, and demand entities.
+- Relationship metadata and source-linked provenance in profile links.
+- Credit ratings overlay from generated ratings data.
 
 ## Tech Stack
 
-- Vanilla JavaScript
-- D3.js v7
-- Node.js scripts for ingestion/generation
-- Node test runner (`node --test`)
+- HTML/CSS/Vanilla JavaScript
+- D3.js (CDN-loaded in `index.html`)
+- Node.js scripts for data generation and verification
+- Node built-in test runner (`node --test`)
 
-## Project Structure
+## Repository Structure
 
-- `index.html`: Main company supply-chain app (single-file app with inline script/style).
-- `macro-site/`: Country macro app (`index.html`, `styles.css`, `app.js`, app-specific README).
-- `data/`: Generated browser-ready datasets (`*.json`, `*.js`) and ratings data.
-- `data/raw/`: Cached raw snapshots used by generators.
-- `scripts/`: Data ingestion/generation utilities.
-- `scripts/lib/`: Source-specific fetchers (World Bank, UN Comtrade, etc.).
-- `tests/`: Data contract + UI integrity + ingestion coverage.
+- `index.html`: Main web application.
+- `data/`: Browser-ready datasets (`top100-map.*`, `credit-ratings.*`, and supporting data files).
+- `scripts/`: Data update, generation, and verification scripts.
+- `scripts/lib/`: Source-specific data fetch helpers.
+- `tests/`: Data and UI integrity tests.
 - `.github/workflows/auto-update-data.yml`: Scheduled data refresh workflow.
 
-## Data Sources
+## Requirements
 
-Main sources currently used:
-
-- World Bank API GDP: `NY.GDP.MKTP.CD`
-- World Bank API country trade totals: `NE.EXP.GNFS.CD`, `NE.IMP.GNFS.CD`
-- UN Comtrade Public Preview bilateral trade links: HS TOTAL (exports)
-- UN Comtrade Public Preview sector exports: HS chapter-level exports
-
-Real-data-only mode:
-
-- Synthetic fallback values are disabled for country macro generation.
-- If a required source is unavailable and no valid cache exists, generation fails instead of fabricating numbers.
+- Node.js 20+
+- npm
 
 ## Local Setup
 
-Requirements:
-
-- Node.js 20+
-
-Install:
-
 ```bash
 npm install
-```
-
-Run tests:
-
-```bash
-npm test
-```
-
-Serve locally:
-
-```bash
 npx http-server . -p 8080
 ```
 
-Open:
+Open `http://localhost:8080`.
 
-- `http://localhost:8080/` (company supply-chain graph)
-- `http://localhost:8080/macro-site/` (country macro graph)
+## Data Workflows
 
-## Data Generation
-
-Build country macro dataset:
+Generate top-100 company map data:
 
 ```bash
-npm run build:country-data
+node scripts/generate-top100-data.mjs
 ```
 
-Force-refresh source pulls and rebuild:
-
-```bash
-node scripts/generate-country-macro-data.mjs --refresh
-```
-
-Update market-cap-driven company dataset:
+Update market cap data and merge with existing company profile structure:
 
 ```bash
 node scripts/update-marketcap-data.mjs
 ```
 
-## Test Coverage Overview
+Fetch and generate credit ratings dataset:
 
-The test suite checks:
+```bash
+node scripts/fetch-fitch-ratings.mjs
+```
 
-- macro-site structural integrity and accessibility affordances
-- country macro schema and provenance contracts
-- ingestion module behavior
-- root index UI integrity
-- source quality/metadata checks for profile relationships
-- workflow expectations for auto-update automation
+Run data verification checks:
 
-## Automation
+```bash
+node scripts/verify-data.mjs
+```
 
-GitHub Actions workflow:
+## Testing
 
-- File: `.github/workflows/auto-update-data.yml`
-- Schedule: every Monday at 06:00 UTC
-- Manual trigger: enabled (`workflow_dispatch`)
-- Pipeline step: update market cap data
-- Pipeline step: rebuild country macro dataset
-- Pipeline step: run country ingestion/schema tests
-- Pipeline step: commit `data/` changes when diffs exist
+Run all configured tests:
 
-## Notes
+```bash
+npm test
+```
 
-- This repo currently includes generated artifacts under `data/`.
-- `node_modules/` should remain untracked in normal Git usage.
-- The workspace may contain planning docs in `docs/plans/` and `plan*.md` files used during implementation iterations.
+Run focused root-app tests:
+
+```bash
+node --test tests/index-ui-integrity.test.mjs
+node --test tests/no-xx-country-codes.test.mjs
+node --test tests/profile-link-metadata.test.mjs
+node --test tests/supply-chain-research-quality.test.mjs
+```
+
+## Outputs
+
+Main generated artifacts consumed by the app:
+
+- `data/top100-map.json`
+- `data/top100-map.js`
+- `data/credit-ratings.json`
+- `data/credit-ratings.js`
