@@ -1,0 +1,57 @@
+{
+  "sectors": [
+    {
+      "id": "medicine",
+      "name": "Medicine",
+      "description": "Pharmaceuticals, medical devices, and healthcare products",
+      "hsCodes": ["3001", "3002", "3003", "3004", "3005", "3006"]
+    },
+    {
+      "id": "electronics",
+      "name": "Electronics",
+      "description": "Consumer electronics, semiconductors, and electronic components",
+      "hsCodes": ["8517", "8528", "8542", "8543", "8544"]
+    },
+    {
+      "id": "automotive",
+      "name": "Automotive",
+      "description": "Motor vehicles, parts, and automotive accessories",
+      "hsCodes": ["8701", "8702", "8703", "8704", "8708"]
+    },
+    {
+      "id": "energy",
+      "name": "Energy",
+      "description": "Oil, gas, coal, and renewable energy products",
+      "hsCodes": ["2701", "2702", "2709", "2710", "2711"]
+    },
+    {
+      "id": "agriculture",
+      "name": "Agriculture",
+      "description": "Agricultural products, grains, and food commodities",
+      "hsCodes": ["1001", "1002", "1003", "1004", "1005", "1006"]
+    },
+    {
+      "id": "textiles",
+      "name": "Textiles",
+      "description": "Textiles, apparel, and clothing accessories",
+      "hsCodes": ["5201", "5202", "5203", "5204", "5205", "6101", "6102"]
+    },
+    {
+      "id": "metals",
+      "name": "Metals",
+      "description": "Metal ores, steel, and metal products",
+      "hsCodes": ["7201", "7202", "7203", "7204", "7205", "7206"]
+    },
+    {
+      "id": "chemicals",
+      "name": "Chemicals",
+      "description": "Industrial chemicals and chemical products",
+      "hsCodes": ["2801", "2802", "2803", "2804", "2805", "2901", "2902"]
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2026-02-24",
+    "source": "UN Comtrade HS Code Classification"
+  }
+}

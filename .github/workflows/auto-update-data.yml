@@ -37,6 +37,12 @@ jobs:
         run: node scripts/update-marketcap-data.mjs
         env:
           NODE_TLS_REJECT_UNAUTHORIZED: '0'
+
+      - name: Regenerate country macro dataset
+        run: npm run build:country-data
+
+      - name: Run data validation tests
+        run: node --test tests/country-macro-data-schema.test.mjs tests/country-macro-ingestion.test.mjs
       
       - name: Check for changes
         id: git-check
@@ -61,7 +67,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add data/
-          git commit -m "chore: auto-update market cap data $(date +%Y-%m-%d)"
+          git commit -m "chore: auto-update market cap and country macro data $(date +%Y-%m-%d)"
           git push
       
       - name: No changes detected

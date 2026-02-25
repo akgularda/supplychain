@@ -1,0 +1,3798 @@
+{
+  "last_auto_update": "2026-02-24T06:00:00.000Z",
+  "update_source": "companiesmarketcap.com",
+  "snapshot_date": "2026-02-21",
+  "top100_source_url": "https://companiesmarketcap.com/?download=csv",
+  "update_policy": "conservative_better_only",
+  "companies": [
+    {
+      "rank": 1,
+      "symbol": "NVDA",
+      "name": "NVIDIA",
+      "hq": {
+        "city": "Santa Clara",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/NVDA.png"
+      },
+      "profile": {
+        "upstream": [
+          "TSMC Foundry Capacity",
+          "SK hynix HBM Memory",
+          "Micron HBM Memory",
+          "Advanced Packaging and Substrate Suppliers",
+          "EDA and Manufacturing Software Partners"
+        ],
+        "services": [
+          "Global Semiconductor Logistics",
+          "Supply Risk and Insurance Programs",
+          "Treasury and Working Capital Banking",
+          "Semiconductor Design and Verification Stack"
+        ],
+        "channels": [
+          "Microsoft Azure AI",
+          "AWS AI Infrastructure",
+          "Oracle Cloud Infrastructure AI",
+          "Sovereign and National AI Programs"
+        ],
+        "demand": [
+          "Enterprise AI Training Demand",
+          "Inference Workload Demand",
+          "AI Factory Buildout Demand"
+        ]
+      }
+    },
+    {
+      "rank": 2,
+      "symbol": "AAPL",
+      "name": "Apple",
+      "hq": {
+        "city": "Cupertino",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/AAPL.png"
+      },
+      "profile": {
+        "upstream": [
+          "Direct Semiconductor Suppliers",
+          "Direct Display Suppliers",
+          "Global Electronics Assembly Partners",
+          "Materials and Component Suppliers",
+          "Packaging and Enclosure Suppliers"
+        ],
+        "services": [
+          "Supplier Clean Water Program",
+          "Supplier Clean Energy Program",
+          "Global Logistics and Repair Network",
+          "Commercial Risk Management and Coverage"
+        ],
+        "channels": [
+          "Apple Retail and Online Stores",
+          "Carrier Distribution Partners",
+          "Authorized Reseller Network",
+          "Enterprise and Education Procurement"
+        ],
+        "demand": [
+          "iPhone Upgrade Cycle Demand",
+          "Services Subscription Demand",
+          "Mac and iPad Refresh Demand"
+        ]
+      }
+    },
+    {
+      "rank": 3,
+      "symbol": "GOOG",
+      "name": "Alphabet (Google)",
+      "hq": {
+        "city": "Mountain View",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/GOOG.png"
+      },
+      "profile": {
+        "upstream": [
+          "Contract Manufacturers for Technical Infrastructure",
+          "NVIDIA-Accelerated Cloud Infrastructure Inputs",
+          "Data Center and Energy Infrastructure Providers",
+          "Device and Technical Hardware Assembly Partners"
+        ],
+        "services": [
+          "Supplier Code of Conduct Program",
+          "Cybersecurity and Compliance Tooling",
+          "Treasury, Billing, and Payment Operations",
+          "Workforce and Staffing Partner Network"
+        ],
+        "channels": [
+          "Google Cloud Marketplace",
+          "Google Cloud Partner Ecosystem",
+          "Developer Platform and API Ecosystem",
+          "Global Advertiser and Enterprise Channels"
+        ],
+        "demand": [
+          "Search and Advertising Demand",
+          "Google Cloud Infrastructure Demand",
+          "Generative AI Platform Demand"
+        ]
+      }
+    },
+    {
+      "rank": 4,
+      "symbol": "MSFT",
+      "name": "Microsoft",
+      "hq": {
+        "city": "Redmond",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/MSFT.png"
+      },
+      "profile": {
+        "upstream": [
+          "GPU and Server Component Suppliers",
+          "Third-Party Contract Manufacturers",
+          "Data Center Land, Energy, and Networking Inputs",
+          "Specialized Device Component Suppliers"
+        ],
+        "services": [
+          "Global Data Center Operations",
+          "Cybersecurity and Compliance Providers",
+          "Treasury and Procurement Operations",
+          "Cloud Infrastructure Services Partners"
+        ],
+        "channels": [
+          "Azure Enterprise Contracts",
+          "Azure and Partner Cloud Channels",
+          "ISV and Developer Ecosystem",
+          "Public Sector and Regulated Industry Sales"
+        ],
+        "demand": [
+          "Microsoft Cloud Demand",
+          "AI Capacity Demand",
+          "Productivity and Collaboration Demand"
+        ]
+      }
+    },
+    {
+      "rank": 5,
+      "symbol": "AMZN",
+      "name": "Amazon",
+      "hq": {
+        "city": "Seattle",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/AMZN.png"
+      },
+      "profile": {
+        "upstream": [
+          "Third-Party Sellers and Vendors",
+          "Contract Manufacturers for Devices",
+          "NVIDIA-Accelerated Compute Infrastructure",
+          "Warehouse and Robotics Integrators",
+          "Last-Mile Fleet and Vehicle Inputs"
+        ],
+        "services": [
+          "Amazon Logistics Network",
+          "Payment and Fraud Infrastructure",
+          "Cloud Security and Compliance Services",
+          "Global Procurement and Treasury Operations"
+        ],
+        "channels": [
+          "Amazon Marketplace",
+          "Prime Ecosystem",
+          "AWS Enterprise Contracts",
+          "Physical Retail and Omnichannel Delivery"
+        ],
+        "demand": [
+          "E-commerce Demand",
+          "AWS Compute Demand",
+          "Advertising and Subscription Demand"
+        ]
+      }
+    },
+    {
+      "rank": 6,
+      "symbol": "TSM",
+      "name": "TSMC",
+      "hq": {
+        "city": "Hsinchu",
+        "country": "Taiwan",
+        "country_code": "TW",
+        "flag_emoji": "🇹🇼",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/TSM.png"
+      },
+      "profile": {
+        "upstream": [
+          "ASML Lithography Systems",
+          "Applied Materials Process Equipment",
+          "ASM International Process Equipment",
+          "Linde LienHwa Industrial Gases",
+          "GlobalWafers Silicon Wafers"
+        ],
+        "services": [
+          "Fab Construction and Safety Partners",
+          "Supply Chain Localization Programs",
+          "Advanced Manufacturing Logistics",
+          "Risk and Compliance Management"
+        ],
+        "channels": [
+          "NVIDIA Programs",
+          "Apple Silicon Programs",
+          "AMD Programs",
+          "Broadcom ASIC Programs"
+        ],
+        "demand": [
+          "Advanced Node Demand",
+          "AI Accelerator Demand",
+          "Smartphone SoC Demand"
+        ]
+      }
+    },
+    {
+      "rank": 7,
+      "symbol": "META",
+      "name": "Meta Platforms (Facebook)",
+      "hq": {
+        "city": "Menlo Park",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/META.png"
+      },
+      "profile": {
+        "upstream": [
+          "Corning Fiber Optic Cables",
+          "NVIDIA AI Compute Infrastructure",
+          "Server and Networking Hardware Suppliers",
+          "Data Center Construction and Connectivity Inputs"
+        ],
+        "services": [
+          "Long-term Clean Energy Partners",
+          "Data Center Capital Partners",
+          "Cybersecurity and Compliance Programs",
+          "Infrastructure Operations and Facilities Management"
+        ],
+        "channels": [
+          "Facebook and Instagram Advertiser Ecosystem",
+          "WhatsApp Business Channels",
+          "Enterprise Llama Partnerships",
+          "Creator and Commerce Platform Channels"
+        ],
+        "demand": [
+          "Digital Advertising Demand",
+          "AI Infrastructure Demand",
+          "Messaging and Creator Economy Demand"
+        ]
+      }
+    },
+    {
+      "rank": 8,
+      "symbol": "2222.SR",
+      "name": "Saudi Aramco",
+      "hq": {
+        "city": "Dhahran",
+        "country": "Saudi Arabia",
+        "country_code": "SA",
+        "flag_emoji": "🇸🇦",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/2222.SR.png"
+      },
+      "profile": {
+        "upstream": [
+          "SLB",
+          "Halliburton",
+          "Baker Hughes",
+          "McDermott",
+          "Flowserve and NOV Equipment"
+        ],
+        "services": [
+          "iktva Localization Program",
+          "J.P. Morgan Cash Management",
+          "Asset Management and Capital Services",
+          "Engineering and Technical Services Partners"
+        ],
+        "channels": [
+          "Refining and Petrochemical Offtake",
+          "LNG and Gas Commercial Agreements",
+          "Industrial and Utility Buyers",
+          "Global Chemicals Distribution"
+        ],
+        "demand": [
+          "Global Hydrocarbon Demand",
+          "Petrochemical Demand",
+          "Industrial Energy Demand"
+        ]
+      }
+    },
+    {
+      "rank": 9,
+      "symbol": "AVGO",
+      "name": "Broadcom",
+      "hq": {
+        "city": "Palo Alto",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/AVGO.png"
+      },
+      "profile": {
+        "upstream": [
+          "TSMC Advanced Process Capacity",
+          "Co-Packaged Optics Components",
+          "Advanced Substrate and Interconnect Suppliers",
+          "HBM and Packaging Ecosystem Inputs",
+          "Hyperscale Networking Hardware Inputs"
+        ],
+        "services": [
+          "Data Center Integration Services",
+          "Cybersecurity and Compliance Programs",
+          "Global Treasury and Risk Management",
+          "Software and Platform Support Services"
+        ],
+        "channels": [
+          "VMware Cloud Foundation Partners",
+          "Telco Cloud Service Providers",
+          "Enterprise Networking OEMs",
+          "Public Cloud Infrastructure Partners"
+        ],
+        "demand": [
+          "AI Networking Demand",
+          "Private Cloud Modernization Demand",
+          "Hyperscaler ASIC Demand"
+        ]
+      }
+    },
+    {
+      "rank": 10,
+      "symbol": "TSLA",
+      "name": "Tesla",
+      "hq": {
+        "city": "Austin",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/TSLA.png"
+      },
+      "profile": {
+        "upstream": [
+          "Panasonic Energy (Gigafactory Nevada)",
+          "Battery Cell Supplier Portfolio",
+          "Automotive Semiconductor Suppliers",
+          "Battery Materials and Cathode Inputs",
+          "Power Electronics Component Suppliers"
+        ],
+        "services": [
+          "Global Vehicle and Parts Logistics",
+          "Manufacturing Site Operations Network",
+          "Commodity and Energy Risk Management",
+          "Commercial Insurance and Liability Coverage"
+        ],
+        "channels": [
+          "Direct Vehicle Sales",
+          "Tesla Energy Storage Customers",
+          "Supercharger and Service Network",
+          "Fleet and Robotaxi Programs"
+        ],
+        "demand": [
+          "EV Demand",
+          "Energy Storage Demand",
+          "Autonomy and AI Compute Demand"
+        ]
+      }
+    },
+    {
+      "rank": 11,
+      "symbol": "BRK-B",
+      "name": "Berkshire Hathaway",
+      "hq": {
+        "city": "Omaha",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/BRK-B.png"
+      },
+      "profile": {
+        "upstream": [
+          "Insurance Float and Reinsurance Counterparties",
+          "BNSF Rail Network Inputs",
+          "Berkshire Hathaway Energy Fuel and Grid Inputs",
+          "Manufacturing Subsidiary Supplier Base",
+          "Capital Markets and Treasury Holdings"
+        ],
+        "services": [
+          "Property and Catastrophe Risk Transfer",
+          "Rail and Energy Infrastructure Services",
+          "Centralized Treasury and Cash Management",
+          "Compliance, Audit, and Risk Operations"
+        ],
+        "channels": [
+          "Insurance Policyholder Channels",
+          "BNSF Freight Customers",
+          "Utility and Energy Customers",
+          "Consumer Brands and Retail Subsidiaries"
+        ],
+        "demand": [
+          "Insurance Demand Cycles",
+          "Freight and Logistics Demand",
+          "U.S. Energy and Utilities Demand"
+        ]
+      }
+    },
+    {
+      "rank": 12,
+      "symbol": "WMT",
+      "name": "Walmart",
+      "hq": {
+        "city": "Bentonville",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/WMT.png"
+      },
+      "profile": {
+        "upstream": [
+          "Food and Grocery Supplier Network",
+          "General Merchandise Vendor Base",
+          "Private Brand Manufacturing Partners",
+          "Packaging and Consumables Suppliers",
+          "Imported Goods Sourcing Partners"
+        ],
+        "services": [
+          "Walmart Transportation and Fulfillment Network",
+          "Supplier Requirements and Compliance Program",
+          "Payments and Financial Services Rails",
+          "Commercial Insurance and Risk Programs"
+        ],
+        "channels": [
+          "Supercenter and Club Store Network",
+          "Walmart.com Marketplace",
+          "Omnichannel Pickup and Delivery",
+          "Third-Party Seller Ecosystem"
+        ],
+        "demand": [
+          "U.S. Household Consumption Demand",
+          "Membership and Loyalty Demand",
+          "E-commerce and Last-Mile Demand"
+        ]
+      }
+    },
+    {
+      "rank": 13,
+      "symbol": "LLY",
+      "name": "Eli Lilly",
+      "hq": {
+        "city": "Indianapolis",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/LLY.png"
+      },
+      "profile": {
+        "upstream": [
+          "API and Biologics Manufacturing Inputs",
+          "CDMO and External Manufacturing Partners",
+          "Lab and Clinical Research Inputs",
+          "Specialty Packaging and Cold-Chain Inputs",
+          "Biotech Licensing and Collaboration Inputs"
+        ],
+        "services": [
+          "Clinical Trial Operations and CRO Services",
+          "Cold-Chain Distribution Network",
+          "Treasury and FX Risk Management",
+          "Regulatory and Pharmacovigilance Services"
+        ],
+        "channels": [
+          "Hospital and Specialist Prescriber Channels",
+          "Retail and Specialty Pharmacy Channels",
+          "Payer and Formulary Access Channels",
+          "Global Distribution Partners"
+        ],
+        "demand": [
+          "Obesity and Diabetes Therapy Demand",
+          "Oncology and Immunology Demand",
+          "Global Specialty Medicine Demand"
+        ]
+      }
+    },
+    {
+      "rank": 14,
+      "symbol": "005930.KS",
+      "name": "Samsung",
+      "hq": {
+        "city": "Suwon",
+        "country": "South Korea",
+        "country_code": "KR",
+        "flag_emoji": "🇰🇷",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/005930.KS.png"
+      },
+      "profile": {
+        "upstream": [
+          "Semiconductor and Display Component Inputs",
+          "Battery and Critical Mineral Inputs",
+          "Global Device Assembly Inputs",
+          "Memory and SoC Manufacturing Inputs",
+          "Camera and Sensor Module Suppliers"
+        ],
+        "services": [
+          "Sustainable Supply Chain Governance",
+          "Circular Battery Material Programs",
+          "Global Logistics and Distribution Services",
+          "Commercial Compliance and Quality Assurance"
+        ],
+        "channels": [
+          "Mobile Carrier and Retail Distribution",
+          "Online Direct-to-Consumer Channels",
+          "Enterprise Device Sales",
+          "Appliance and Consumer Electronics Retail Channels"
+        ],
+        "demand": [
+          "Smartphone Upgrade Demand",
+          "Consumer Electronics Replacement Demand",
+          "AI Device and Memory Demand"
+        ]
+      }
+    },
+    {
+      "rank": 15,
+      "symbol": "JPM",
+      "name": "JPMorgan Chase",
+      "hq": {
+        "city": "New York City",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/JPM.png"
+      },
+      "profile": {
+        "upstream": [
+          "Core Banking and Risk Technology Vendors",
+          "Market Data and Credit Data Providers",
+          "Global Clearing and Custody Infrastructure",
+          "Cloud and Security Infrastructure Providers"
+        ],
+        "services": [
+          "J.P. Morgan Payments Platform",
+          "Fraud, AML, and Compliance Operations",
+          "Cybersecurity and Operational Resilience Programs",
+          "Treasury and Liquidity Management Services"
+        ],
+        "channels": [
+          "Retail and Commercial Banking Channels",
+          "Corporate Treasury and Payments Channels",
+          "Investment Banking Client Coverage",
+          "Merchant Services and Embedded Finance Channels"
+        ],
+        "demand": [
+          "Credit and Lending Demand",
+          "Payments and Transaction Flow Demand",
+          "Capital Markets and Treasury Demand"
+        ]
+      }
+    },
+    {
+      "rank": 16,
+      "symbol": "XOM",
+      "name": "Exxon Mobil",
+      "hq": {
+        "city": "Spring",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/XOM.png"
+      },
+      "profile": {
+        "upstream": [
+          "Upstream Oil and Gas Service Companies",
+          "Drilling and Production Equipment Suppliers",
+          "Liquefied Natural Gas Project Inputs",
+          "Refining and Petrochemical Feedstock Inputs",
+          "Lithium Project Inputs"
+        ],
+        "services": [
+          "Global Shipping and Trading Services",
+          "Asset and Operational Risk Coverage",
+          "Treasury and Commodity Risk Management",
+          "Regulatory and Compliance Operations"
+        ],
+        "channels": [
+          "Refining and Fuel Distribution Channels",
+          "Industrial and Petrochemical Offtake",
+          "LNG and Gas Commercial Agreements",
+          "Battery Materials Offtake Agreements"
+        ],
+        "demand": [
+          "Global Fuel Demand",
+          "Industrial Energy Demand",
+          "EV Battery Materials Demand"
+        ]
+      }
+    },
+    {
+      "rank": 17,
+      "symbol": "V",
+      "name": "Visa",
+      "hq": {
+        "city": "San Francisco",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/V.png"
+      },
+      "profile": {
+        "upstream": [
+          "Issuer Bank Programs",
+          "Acquirer and Processor Integrations",
+          "Fraud and Risk Scoring Infrastructure",
+          "Tokenization and Identity Services"
+        ],
+        "services": [
+          "Global Authorization and Settlement Infrastructure",
+          "Risk and Fraud Management Services",
+          "Commercial API and Embedded Payments Services",
+          "Stablecoin and Multi-Rail Settlement Services"
+        ],
+        "channels": [
+          "Merchant Acquirer Ecosystem",
+          "Fintech and Developer Partners",
+          "Consumer and Small Business Card Programs",
+          "Cross-border and B2B Payment Channels"
+        ],
+        "demand": [
+          "Consumer Spend Volume",
+          "E-commerce Checkout Demand",
+          "B2B and Cross-border Payments Demand"
+        ]
+      }
+    },
+    {
+      "rank": 18,
+      "symbol": "TCEHY",
+      "name": "Tencent",
+      "hq": {
+        "city": "Shenzhen",
+        "country": "China",
+        "country_code": "CN",
+        "flag_emoji": "🇨🇳",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/TCEHY.png"
+      },
+      "profile": {
+        "upstream": [
+          "Data Center and Server Infrastructure Inputs",
+          "AI Compute and Networking Inputs",
+          "Content and Platform Technology Inputs",
+          "Cloud Infrastructure Components"
+        ],
+        "services": [
+          "Tencent ESG and Supply Chain Governance",
+          "Cloud Security and Compliance Services",
+          "Digital Payments and Treasury Services",
+          "Platform Operations and Trust and Safety Services"
+        ],
+        "channels": [
+          "WeChat Ecosystem Businesses",
+          "Tencent Cloud Enterprise Partners",
+          "Gaming and Digital Content Channels",
+          "Advertising and Merchant Services Channels"
+        ],
+        "demand": [
+          "Digital Advertising Demand",
+          "Cloud and Enterprise Transformation Demand",
+          "Gaming and Social Engagement Demand"
+        ]
+      }
+    },
+    {
+      "rank": 19,
+      "symbol": "JNJ",
+      "name": "Johnson & Johnson",
+      "hq": {
+        "city": "New Brunswick",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/JNJ.png"
+      },
+      "profile": {
+        "upstream": [
+          "Pharmaceutical API and Biologics Inputs",
+          "Medical Technology Component Suppliers",
+          "Packaging and Sterile Manufacturing Inputs",
+          "Clinical and R&D Collaboration Inputs",
+          "Global Raw Material and Chemical Inputs"
+        ],
+        "services": [
+          "Responsible Supplier Program",
+          "Global Quality and Regulatory Services",
+          "Product Liability and Risk Management",
+          "Treasury and Foreign Exchange Operations"
+        ],
+        "channels": [
+          "Hospital and Health System Channels",
+          "Retail and Specialty Pharmacy Channels",
+          "Surgical and MedTech Distribution",
+          "Government and Public Health Programs"
+        ],
+        "demand": [
+          "Innovative Medicine Demand",
+          "MedTech Procedure Demand",
+          "Consumer Health and OTC Demand"
+        ]
+      }
+    },
+    {
+      "rank": 20,
+      "symbol": "ASML",
+      "name": "ASML",
+      "hq": {
+        "city": "Veldhoven",
+        "country": "Netherlands",
+        "country_code": "NL",
+        "flag_emoji": "🇳🇱",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/ASML.png"
+      },
+      "profile": {
+        "upstream": [
+          "ZEISS Optics and Mechatronics",
+          "TRUMPF Laser Systems",
+          "Cymer Light Source Components",
+          "Precision Motion and Vacuum Components",
+          "Specialty Materials and Rare Gas Inputs"
+        ],
+        "services": [
+          "Responsible Supply Chain Program",
+          "Sustainability and Emissions Collaboration",
+          "Global Field Service and Installed Base Support",
+          "Logistics and Spares Distribution Network"
+        ],
+        "channels": [
+          "Leading Foundry Customers",
+          "Memory Manufacturer Customers",
+          "Logic and IDM Customer Programs",
+          "Service and Upgrade Programs"
+        ],
+        "demand": [
+          "Advanced Lithography Demand",
+          "EUV and High-NA Adoption Demand",
+          "Global Wafer Fab Equipment Demand"
+        ]
+      }
+    },
+    {
+      "rank": 21,
+      "symbol": "MU",
+      "name": "Micron Technology",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/MU.png"
+      },
+      "profile": {
+        "upstream": [
+          "Silicon Wafer and Specialty Gas Inputs",
+          "Advanced DRAM and HBM Packaging Inputs",
+          "Foundry and OSAT Ecosystem Partners",
+          "EUV and Process Equipment Supply Chain",
+          "NAND Controller and Firmware Ecosystem"
+        ],
+        "services": [
+          "Responsible Minerals and Supplier Audits",
+          "Manufacturing Water and Energy Programs",
+          "Global Semiconductor Logistics",
+          "Treasury and Capex Financing Services"
+        ],
+        "channels": [
+          "Hyperscale Cloud Memory Programs",
+          "Enterprise Server and Storage OEMs",
+          "PC and Mobile Memory Channels",
+          "Automotive and Industrial Memory Channels"
+        ],
+        "demand": [
+          "HBM and AI Accelerator Demand",
+          "Data Center DRAM Demand",
+          "Client and Mobile Memory Demand"
+        ]
+      }
+    },
+    {
+      "rank": 22,
+      "symbol": "MA",
+      "name": "Mastercard",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/MA.png"
+      },
+      "profile": {
+        "upstream": [
+          "Issuer Bank Programs",
+          "Acquirer and Processor Partners",
+          "Fraud and Identity Data Providers",
+          "Network Tokenization Infrastructure",
+          "Cross-border Settlement Partners"
+        ],
+        "services": [
+          "Cybersecurity and Fraud Services",
+          "Regulatory Compliance and KYC/AML Programs",
+          "Treasury and Network Risk Operations",
+          "Global Authorization and Settlement Operations"
+        ],
+        "channels": [
+          "Merchant Acceptance Network",
+          "Fintech and Digital Wallet Partners",
+          "Government and Transit Payment Programs",
+          "B2B and Commercial Card Programs"
+        ],
+        "demand": [
+          "Consumer Card Spend Demand",
+          "E-commerce Checkout Demand",
+          "Cross-border Travel and Commerce Demand"
+        ]
+      }
+    },
+    {
+      "rank": 23,
+      "symbol": "000660.KS",
+      "name": "SK Hynix",
+      "hq": {
+        "city": "",
+        "country": "South Korea",
+        "country_code": "KR",
+        "flag_emoji": "🇰🇷",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/000660.KS.png"
+      },
+      "profile": {
+        "upstream": [
+          "HBM Process Inputs and Advanced Packaging Materials",
+          "DRAM and NAND Equipment Suppliers",
+          "TSMC CoWoS Ecosystem Inputs",
+          "Silicon Wafer and Specialty Chemical Inputs",
+          "Substrate and Interconnect Supply Base"
+        ],
+        "services": [
+          "R&D and Product Qualification Services",
+          "Global Memory Logistics and Distribution",
+          "Supplier ESG and Audit Programs",
+          "Treasury and Capacity Investment Support"
+        ],
+        "channels": [
+          "NVIDIA and AI Accelerator Memory Programs",
+          "Hyperscaler Data Center Channels",
+          "PC and Mobile OEM Channels",
+          "Enterprise Storage Channels"
+        ],
+        "demand": [
+          "HBM AI Demand",
+          "Server DRAM Demand",
+          "Consumer Memory Demand"
+        ]
+      }
+    },
+    {
+      "rank": 24,
+      "symbol": "COST",
+      "name": "Costco",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/COST.png"
+      },
+      "profile": {
+        "upstream": [
+          "Kirkland Private Label Manufacturing Partners",
+          "Fresh Food and Grocery Supplier Base",
+          "Apparel and Hardline Merchandise Vendors",
+          "Packaging and Cold-Chain Inputs",
+          "Fuel Procurement and Ancillary Supply Partners"
+        ],
+        "services": [
+          "Depot and Warehouse Distribution Logistics",
+          "Supplier Onboarding and Compliance Programs",
+          "Payments and Merchant Services Infrastructure",
+          "Commercial Risk and Property Coverage"
+        ],
+        "channels": [
+          "Warehouse Club Store Network",
+          "E-commerce and Same-Day Delivery",
+          "Business Delivery and B2B Channels",
+          "Membership Renewal and Loyalty Programs"
+        ],
+        "demand": [
+          "Membership Fee and Renewal Demand",
+          "Household Basket Demand",
+          "Seasonal and Discretionary Demand"
+        ]
+      }
+    },
+    {
+      "rank": 25,
+      "symbol": "ORCL",
+      "name": "Oracle",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/ORCL.png"
+      },
+      "profile": {
+        "upstream": [
+          "NVIDIA and AMD Accelerated Compute Inputs",
+          "Data Center Power and Cooling Infrastructure",
+          "Server, Networking, and Storage Hardware Inputs",
+          "Database and Middleware Ecosystem Inputs",
+          "Global Colocation and Connectivity Inputs"
+        ],
+        "services": [
+          "Cloud Security and Compliance Services",
+          "Global Procurement and Treasury Operations",
+          "Risk and Incident Management Programs",
+          "Enterprise Support and Consulting Services"
+        ],
+        "channels": [
+          "OCI Enterprise Contracts",
+          "Oracle PartnerNetwork Channels",
+          "SaaS Subscription Channels",
+          "Public Sector and Sovereign Cloud Programs"
+        ],
+        "demand": [
+          "Database and ERP Modernization Demand",
+          "AI Infrastructure Demand",
+          "Mission-Critical Cloud Migration Demand"
+        ]
+      }
+    },
+    {
+      "rank": 26,
+      "symbol": "ABBV",
+      "name": "AbbVie",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/ABBV.png"
+      },
+      "profile": {
+        "upstream": [
+          "API and Biologics Raw Material Inputs",
+          "External Manufacturing and Fill-Finish Partners",
+          "Clinical Development and Research Inputs",
+          "Specialty Packaging and Cold-Chain Inputs",
+          "Licensing and Pipeline Collaboration Inputs"
+        ],
+        "services": [
+          "Pharmacovigilance and Regulatory Services",
+          "Global Quality and Supply Planning",
+          "Commercial Risk and Liability Programs",
+          "Treasury and FX Management"
+        ],
+        "channels": [
+          "Specialty and Retail Pharmacy Channels",
+          "Hospital and Infusion Center Channels",
+          "Payer and Reimbursement Access Channels",
+          "International Distribution Partners"
+        ],
+        "demand": [
+          "Immunology Portfolio Demand",
+          "Oncology and Neuroscience Demand",
+          "Aesthetics and Specialty Care Demand"
+        ]
+      }
+    },
+    {
+      "rank": 27,
+      "symbol": "BAC",
+      "name": "Bank of America",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/BAC.png"
+      },
+      "profile": {
+        "upstream": [
+          "Core Banking and Risk Model Technology Vendors",
+          "Card and Payments Processing Infrastructure",
+          "Market and Credit Data Providers",
+          "Cloud and Security Infrastructure Partners"
+        ],
+        "services": [
+          "Regulatory Reporting and Compliance Programs",
+          "Fraud, AML, and Cybersecurity Operations",
+          "Treasury and Liquidity Services",
+          "Global Transaction Banking Services"
+        ],
+        "channels": [
+          "Consumer Banking Channel",
+          "Commercial Banking and Treasury Channel",
+          "Global Markets and Investment Banking Channel",
+          "Wealth and Private Bank Channel"
+        ],
+        "demand": [
+          "Loan and Deposit Demand",
+          "Payments and Treasury Flow Demand",
+          "Capital Markets Activity Demand"
+        ]
+      }
+    },
+    {
+      "rank": 28,
+      "symbol": "HD",
+      "name": "Home Depot",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/HD.png"
+      },
+      "profile": {
+        "upstream": [
+          "Building Materials and Lumber Suppliers",
+          "Tool and Hardware Vendor Ecosystem",
+          "Appliance and Home Systems Manufacturers",
+          "Private Brand Product Manufacturing Partners",
+          "Seasonal and Garden Supply Base"
+        ],
+        "services": [
+          "Distribution Center and Last-Mile Logistics",
+          "Supplier Diversity and Compliance Program",
+          "Installation and Pro Services Network",
+          "Commercial Insurance and Risk Coverage"
+        ],
+        "channels": [
+          "Store Network and Pro Desks",
+          "HomeDepot.com and Marketplace",
+          "Pro Contractor and Enterprise Accounts",
+          "Omnichannel Pickup and Delivery"
+        ],
+        "demand": [
+          "Residential Repair and Remodel Demand",
+          "Professional Contractor Demand",
+          "Seasonal Home Improvement Demand"
+        ]
+      }
+    },
+    {
+      "rank": 29,
+      "symbol": "ROG.SW",
+      "name": "Roche",
+      "hq": {
+        "city": "",
+        "country": "Switzerland",
+        "country_code": "CH",
+        "flag_emoji": "🇨🇭",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/ROG.SW.png"
+      },
+      "profile": {
+        "upstream": [
+          "Biopharma Raw Materials and Reagents",
+          "Diagnostics Component and Instrument Inputs",
+          "External Manufacturing and Fill-Finish Partners",
+          "Clinical and Laboratory Network Inputs",
+          "Packaging and Cold-Chain Inputs"
+        ],
+        "services": [
+          "Procurement and Supplier Governance Programs",
+          "Regulatory and Quality Assurance Services",
+          "Global Distribution and Cold-Chain Logistics",
+          "Risk and Treasury Operations"
+        ],
+        "channels": [
+          "Hospital and Diagnostic Lab Channels",
+          "Oncology and Specialty Care Networks",
+          "Government and Public Health Channels",
+          "Pharmacy and Provider Channels"
+        ],
+        "demand": [
+          "Diagnostics Testing Demand",
+          "Innovative Medicines Demand",
+          "Hospital and Healthcare System Demand"
+        ]
+      }
+    },
+    {
+      "rank": 30,
+      "symbol": "PG",
+      "name": "Procter & Gamble",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/PG.png"
+      },
+      "profile": {
+        "upstream": [
+          "Multi-Category Ingredient and Chemical Inputs",
+          "Packaging Resin and Fiber Inputs",
+          "Contract and Internal Manufacturing Inputs",
+          "Agricultural and Commodity Raw Material Inputs",
+          "Fragrance and Specialty Material Inputs"
+        ],
+        "services": [
+          "Supplier Portal and Procurement Services",
+          "Global Distribution and Freight Services",
+          "Commercial Risk and Insurance Coverage",
+          "Treasury and Commodity Hedging Support"
+        ],
+        "channels": [
+          "Mass Retail and Grocery Channels",
+          "E-commerce and D2C Channels",
+          "Club and Wholesale Channels",
+          "Professional and Institutional Channels"
+        ],
+        "demand": [
+          "Household Staples Demand",
+          "Beauty and Personal Care Demand",
+          "Fabric and Home Care Demand"
+        ]
+      }
+    },
+    {
+      "rank": 31,
+      "symbol": "BABA",
+      "name": "Alibaba",
+      "hq": {
+        "city": "",
+        "country": "China",
+        "country_code": "CN",
+        "flag_emoji": "🇨🇳",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/BABA.png"
+      },
+      "profile": {
+        "upstream": [
+          "Taobao and Tmall Merchant Ecosystem",
+          "Cainiao Logistics Infrastructure",
+          "Alibaba Cloud Infrastructure Inputs",
+          "Cross-border Fulfillment Partners",
+          "Digital Payments and Risk Infrastructure"
+        ],
+        "services": [
+          "Merchant Trust and Compliance Services",
+          "Platform Cybersecurity and Data Governance",
+          "Logistics Orchestration and Last-Mile Services",
+          "Treasury and Settlement Services"
+        ],
+        "channels": [
+          "Taobao and Tmall Consumer Channels",
+          "International E-commerce Channels",
+          "Local Services and On-demand Channels",
+          "Alibaba Cloud Enterprise Channels"
+        ],
+        "demand": [
+          "China Consumption and GMV Demand",
+          "Cross-border E-commerce Demand",
+          "Cloud and AI Service Demand"
+        ]
+      }
+    },
+    {
+      "rank": 32,
+      "symbol": "CVX",
+      "name": "Chevron",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/CVX.png"
+      },
+      "profile": {
+        "upstream": [
+          "Upstream Drilling and Completion Service Providers",
+          "Subsea Engineering and Offshore EPC Partners",
+          "Refining and Petrochemical Feedstock Inputs",
+          "LNG Project Construction Inputs",
+          "Low-Carbon and New Energies Inputs"
+        ],
+        "services": [
+          "Global Marine and Pipeline Logistics",
+          "Commodity Trading and Risk Management",
+          "Project Finance and Treasury Services",
+          "Operational Safety and Insurance Programs"
+        ],
+        "channels": [
+          "Refined Products Distribution Network",
+          "Industrial and Utility Offtake Contracts",
+          "LNG and Gas Sales Agreements",
+          "Chemicals and Lubricants Channels"
+        ],
+        "demand": [
+          "Global Fuels Demand",
+          "Industrial Energy Demand",
+          "Natural Gas and LNG Demand"
+        ]
+      }
+    },
+    {
+      "rank": 33,
+      "symbol": "1398.HK",
+      "name": "ICBC",
+      "hq": {
+        "city": "",
+        "country": "China",
+        "country_code": "CN",
+        "flag_emoji": "🇨🇳",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/1398.HK.png"
+      },
+      "profile": {
+        "upstream": [
+          "Core Banking Technology Platforms",
+          "Credit and Risk Data Providers",
+          "Clearing and Settlement Infrastructure",
+          "Cloud and Cybersecurity Infrastructure"
+        ],
+        "services": [
+          "Regulatory and Compliance Operations",
+          "AML and Fraud Monitoring Services",
+          "Treasury and Liquidity Management",
+          "SWIFT and Cross-border Messaging Services"
+        ],
+        "channels": [
+          "Corporate Banking Channels",
+          "Retail Banking Channels",
+          "Trade Finance and Cross-border Channels",
+          "Digital and Mobile Banking Channels"
+        ],
+        "demand": [
+          "Corporate Credit Demand",
+          "Retail Lending and Deposits Demand",
+          "Domestic and Cross-border Payments Demand"
+        ]
+      }
+    },
+    {
+      "rank": 34,
+      "symbol": "GE",
+      "name": "General Electric",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/GE.png"
+      },
+      "profile": {
+        "upstream": [
+          "Aerospace Engine Components and Casting Suppliers",
+          "Specialty Metals and Materials Inputs",
+          "Avionics and Control Systems Suppliers",
+          "Aftermarket Parts Manufacturing Partners",
+          "Global Precision Machining Network"
+        ],
+        "services": [
+          "Supplier Portal and Transaction Services",
+          "Quality and Safety Assurance Programs",
+          "Global Logistics and Spares Distribution",
+          "Treasury and Risk Management Services"
+        ],
+        "channels": [
+          "Commercial Aerospace OEM Channels",
+          "Defense and Government Channels",
+          "MRO and Aftermarket Service Channels",
+          "Industrial Technology Channels"
+        ],
+        "demand": [
+          "Commercial Flight Hours Demand",
+          "Defense Modernization Demand",
+          "Aftermarket Services Demand"
+        ]
+      }
+    },
+    {
+      "rank": 35,
+      "symbol": "CAT",
+      "name": "Caterpillar",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/CAT.png"
+      },
+      "profile": {
+        "upstream": [
+          "Steel and Foundry Component Suppliers",
+          "Hydraulic and Powertrain Suppliers",
+          "Engine and Emissions Component Suppliers",
+          "Electronics and Control Module Suppliers",
+          "Undercarriage and Wear Parts Suppliers"
+        ],
+        "services": [
+          "Integrated Logistics and Freight Services",
+          "Supplier Excellence and Quality Programs",
+          "Dealer Financing via Cat Financial",
+          "Warranty and Field Service Operations"
+        ],
+        "channels": [
+          "Cat Dealer Network",
+          "Aftermarket Parts and Services Channels",
+          "Rental and Fleet Channels",
+          "Mining and Infrastructure Project Channels"
+        ],
+        "demand": [
+          "Construction Equipment Demand",
+          "Mining Equipment Demand",
+          "Energy and Transportation Equipment Demand"
+        ]
+      }
+    },
+    {
+      "rank": 36,
+      "symbol": "KO",
+      "name": "Coca-Cola",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/KO.png"
+      },
+      "profile": {
+        "upstream": [
+          "Sweetener and Ingredient Suppliers",
+          "Aluminum, PET and Packaging Suppliers",
+          "Concentrate and Flavor Inputs",
+          "Water and Agricultural Inputs",
+          "Global Co-manufacturing Inputs"
+        ],
+        "services": [
+          "Bottling System Coordination",
+          "Cold Chain and Distribution Logistics",
+          "Marketing and Brand Activation Services",
+          "Commercial Risk and Compliance Programs"
+        ],
+        "channels": [
+          "Independent Bottling Partners",
+          "Modern Trade and Retail Channels",
+          "Foodservice and Away-from-home Channels",
+          "E-commerce and Quick Commerce Channels"
+        ],
+        "demand": [
+          "Sparkling Beverage Demand",
+          "Hydration and Functional Drink Demand",
+          "Emerging Market Consumption Demand"
+        ]
+      }
+    },
+    {
+      "rank": 37,
+      "symbol": "NFLX",
+      "name": "Netflix",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/NFLX.png"
+      },
+      "profile": {
+        "upstream": [
+          "Cloud Compute and Storage Infrastructure",
+          "Content Production Studios and Vendors",
+          "CDN and Open Connect Appliances",
+          "Localization and Dubbing Partners",
+          "Advertising Technology Stack"
+        ],
+        "services": [
+          "Open Connect ISP Partnership Operations",
+          "Content Licensing and Rights Management",
+          "Trust and Safety and Compliance Services",
+          "Treasury and Payment Processing Services"
+        ],
+        "channels": [
+          "Direct-to-Consumer Streaming",
+          "Ad-supported Subscription Channels",
+          "Global Content Licensing Channels",
+          "Bundle and Distribution Partnerships"
+        ],
+        "demand": [
+          "Streaming Viewing Hours Demand",
+          "Advertising Inventory Demand",
+          "Global Subscription Demand"
+        ]
+      }
+    },
+    {
+      "rank": 38,
+      "symbol": "601288.SS",
+      "name": "Agricultural Bank of China",
+      "hq": {
+        "city": "",
+        "country": "China",
+        "country_code": "CN",
+        "flag_emoji": "🇨🇳",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/601288.SS.png"
+      },
+      "profile": {
+        "upstream": [
+          "Core Banking Platforms and Infrastructure",
+          "Credit and Risk Data Inputs",
+          "Clearing and Settlement Systems",
+          "Cloud and Cybersecurity Infrastructure"
+        ],
+        "services": [
+          "Regulatory Compliance Operations",
+          "AML and Fraud Monitoring",
+          "Treasury and Liquidity Management",
+          "Cross-border Payments Messaging"
+        ],
+        "channels": [
+          "Corporate Banking Channels",
+          "Retail Branch and Digital Channels",
+          "Agriculture and Rural Finance Channels",
+          "Trade Finance Channels"
+        ],
+        "demand": [
+          "Corporate Credit Demand",
+          "Retail Lending and Deposit Demand",
+          "Domestic and Cross-border Payment Demand"
+        ]
+      }
+    },
+    {
+      "rank": 39,
+      "symbol": "601939.SS",
+      "name": "China Construction Bank",
+      "hq": {
+        "city": "",
+        "country": "China",
+        "country_code": "CN",
+        "flag_emoji": "🇨🇳",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/601939.SS.png"
+      },
+      "profile": {
+        "upstream": [
+          "Core Banking and Risk Technology Stack",
+          "Credit Data and Scoring Inputs",
+          "Settlement and Clearing Infrastructure",
+          "Cloud and Cybersecurity Inputs"
+        ],
+        "services": [
+          "Regulatory and Capital Management Services",
+          "AML, Fraud, and Risk Operations",
+          "Treasury and Liquidity Services",
+          "Cross-border Payments and Messaging Operations"
+        ],
+        "channels": [
+          "Corporate and Institutional Banking Channels",
+          "Retail and Mobile Banking Channels",
+          "Mortgage and Consumer Finance Channels",
+          "Trade and Supply Chain Finance Channels"
+        ],
+        "demand": [
+          "Infrastructure and Corporate Credit Demand",
+          "Household Lending Demand",
+          "Domestic and International Settlement Demand"
+        ]
+      }
+    },
+    {
+      "rank": 40,
+      "symbol": "AMD",
+      "name": "AMD",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/AMD.png"
+      },
+      "profile": {
+        "upstream": [
+          "TSMC Foundry Capacity",
+          "Advanced Packaging and Substrate Ecosystem",
+          "HBM and Memory Supplier Ecosystem",
+          "EDA and IP Tooling Providers",
+          "Test and Assembly Partners"
+        ],
+        "services": [
+          "Global Semiconductor Logistics",
+          "Supply Risk and Quality Assurance Programs",
+          "Treasury and Working Capital Services",
+          "Design Verification and Software Enablement Services"
+        ],
+        "channels": [
+          "Data Center and Cloud OEM Channels",
+          "PC and Client OEM Channels",
+          "Gaming Console and Graphics Channels",
+          "Embedded and Automotive Channels"
+        ],
+        "demand": [
+          "AI Accelerator Demand",
+          "Server CPU Demand",
+          "Client and Gaming Compute Demand"
+        ]
+      }
+    },
+    {
+      "rank": 41,
+      "symbol": "MC.PA",
+      "name": "LVMH",
+      "hq": {
+        "city": "",
+        "country": "France",
+        "country_code": "FR",
+        "flag_emoji": "🇫🇷",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/MC.PA.png"
+      },
+      "profile": {
+        "upstream": [
+          "Premium Raw Materials and Fabric Inputs",
+          "Wines and Spirits Agricultural Inputs",
+          "Packaging and Fragrance Component Inputs",
+          "Selective Retail Supply Inputs",
+          "Jewelry and Watchmaking Component Inputs"
+        ],
+        "services": [
+          "Responsible Sourcing and ESG Programs",
+          "Global Luxury Logistics and Distribution",
+          "Brand Protection and Compliance Services",
+          "Treasury and FX Risk Management"
+        ],
+        "channels": [
+          "Fashion and Leather Goods Houses",
+          "Sephora and Selective Retail Channels",
+          "Wines and Spirits Distribution Channels",
+          "Travel Retail and Duty-Free Channels"
+        ],
+        "demand": [
+          "Global Luxury Consumption Demand",
+          "Travel Retail Demand",
+          "Beauty and Personal Luxury Demand"
+        ]
+      }
+    },
+    {
+      "rank": 42,
+      "symbol": "PLTR",
+      "name": "Palantir",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/PLTR.png"
+      },
+      "profile": {
+        "upstream": [
+          "Cloud Infrastructure and Compute Inputs",
+          "Data Integration and Governance Inputs",
+          "Security and Identity Infrastructure",
+          "Mission-Critical Deployment Tooling",
+          "Third-Party Data and Connector Ecosystem"
+        ],
+        "services": [
+          "Government and Regulated Compliance Services",
+          "Deployment and Forward-Deployed Engineering Services",
+          "Cybersecurity and Platform Hardening",
+          "Treasury and Contracting Operations"
+        ],
+        "channels": [
+          "Government and Defense Program Channels",
+          "Commercial Enterprise Channels",
+          "AIP Developer and Partner Channels",
+          "Systems Integrator and Alliance Channels"
+        ],
+        "demand": [
+          "AI Platform Adoption Demand",
+          "Public Sector Modernization Demand",
+          "Enterprise Data Operating System Demand"
+        ]
+      }
+    },
+    {
+      "rank": 43,
+      "symbol": "AZN",
+      "name": "AstraZeneca",
+      "hq": {
+        "city": "",
+        "country": "United Kingdom",
+        "country_code": "UK",
+        "flag_emoji": "🇬🇧",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/AZN.png"
+      },
+      "profile": {
+        "upstream": [
+          "API and Biologics Manufacturing Inputs",
+          "Clinical Development and Trial Inputs",
+          "External Manufacturing and Fill-Finish Inputs",
+          "Specialty Packaging and Cold-Chain Inputs",
+          "R&D Collaboration and Licensing Inputs"
+        ],
+        "services": [
+          "Supply Chain and Sustainability Programs",
+          "Regulatory Affairs and Pharmacovigilance Services",
+          "Global Distribution and Cold-Chain Services",
+          "Treasury and Risk Management Services"
+        ],
+        "channels": [
+          "Hospital and Oncology Channels",
+          "Specialty and Retail Pharmacy Channels",
+          "Government and Public Health Channels",
+          "Emerging Market Distribution Channels"
+        ],
+        "demand": [
+          "Oncology Portfolio Demand",
+          "Rare Disease and Specialty Demand",
+          "Global Biopharma Treatment Demand"
+        ]
+      }
+    },
+    {
+      "rank": 44,
+      "symbol": "NVS",
+      "name": "Novartis",
+      "hq": {
+        "city": "",
+        "country": "Switzerland",
+        "country_code": "CH",
+        "flag_emoji": "🇨🇭",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/NVS.png"
+      },
+      "profile": {
+        "upstream": [
+          "Biologics and Small-Molecule API Inputs",
+          "External Manufacturing and Supply Inputs",
+          "Clinical Research and Trial Inputs",
+          "Packaging and Device Combination Inputs",
+          "Laboratory and Diagnostics Inputs"
+        ],
+        "services": [
+          "Supplier Governance and Procurement Services",
+          "Quality and Regulatory Compliance Services",
+          "Cold-Chain and Global Distribution Services",
+          "Treasury and Currency Risk Services"
+        ],
+        "channels": [
+          "Specialty Care and Hospital Channels",
+          "Retail and Specialty Pharmacy Channels",
+          "Payer and Government Access Channels",
+          "International Distribution Channels"
+        ],
+        "demand": [
+          "Innovative Medicines Demand",
+          "Specialty Care Demand",
+          "Global Healthcare Demand"
+        ]
+      }
+    },
+    {
+      "rank": 45,
+      "symbol": "CSCO",
+      "name": "Cisco",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/CSCO.png"
+      },
+      "profile": {
+        "upstream": [
+          "Semiconductor and ASIC Inputs",
+          "Optics and Switching Component Inputs",
+          "Contract Manufacturing and Assembly Partners",
+          "Power, Cooling, and Chassis Inputs",
+          "Software and Security Ecosystem Inputs"
+        ],
+        "services": [
+          "Supply Chain ESG and Resilience Programs",
+          "Global Hardware Logistics and RMA Services",
+          "Security and Compliance Services",
+          "Treasury and Procurement Services"
+        ],
+        "channels": [
+          "Enterprise Networking Channels",
+          "Service Provider and Telecom Channels",
+          "Security and Collaboration Channels",
+          "Partner and Integrator Ecosystem"
+        ],
+        "demand": [
+          "Data Center Networking Demand",
+          "Campus and Edge Infrastructure Demand",
+          "Cybersecurity Platform Demand"
+        ]
+      }
+    },
+    {
+      "rank": 46,
+      "symbol": "TM",
+      "name": "Toyota",
+      "hq": {
+        "city": "",
+        "country": "Japan",
+        "country_code": "JP",
+        "flag_emoji": "🇯🇵",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/TM.png"
+      },
+      "profile": {
+        "upstream": [
+          "Tier-1 Powertrain and Chassis Suppliers",
+          "Battery and Electrification Component Inputs",
+          "Semiconductor and Electronics Inputs",
+          "Steel and Materials Supply Inputs",
+          "Global Parts Manufacturing Inputs"
+        ],
+        "services": [
+          "Production System and Supplier Quality Services",
+          "Global Logistics and Distribution Services",
+          "Finance and Captive Lending Services",
+          "Warranty and After-sales Service Operations"
+        ],
+        "channels": [
+          "Dealer and Retail Sales Channels",
+          "Fleet and Commercial Sales Channels",
+          "After-sales Parts and Service Channels",
+          "Mobility and Electrification Channels"
+        ],
+        "demand": [
+          "Global Vehicle Demand",
+          "Hybrid and EV Demand",
+          "Mobility Services Demand"
+        ]
+      }
+    },
+    {
+      "rank": 47,
+      "symbol": "LRCX",
+      "name": "Lam Research",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/LRCX.png"
+      },
+      "profile": {
+        "upstream": [
+          "Precision Components and Vacuum System Inputs",
+          "Process Chamber and Materials Inputs",
+          "Electronics and Control Module Inputs",
+          "Foundry and Memory Fab Capex Inputs",
+          "Sub-tier Semiconductor Supply Inputs"
+        ],
+        "services": [
+          "Supplier Management and Qualification Services",
+          "Field Service and Spares Logistics",
+          "Reliability and Process Optimization Services",
+          "Treasury and Working Capital Services"
+        ],
+        "channels": [
+          "Foundry Customer Programs",
+          "Memory Customer Programs",
+          "Logic and Specialty Device Channels",
+          "Service and Upgrade Channels"
+        ],
+        "demand": [
+          "Wafer Fab Equipment Demand",
+          "Node Transition and Capacity Demand",
+          "Advanced Packaging Equipment Demand"
+        ]
+      }
+    },
+    {
+      "rank": 48,
+      "symbol": "MRK",
+      "name": "Merck",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/MRK.png"
+      },
+      "profile": {
+        "upstream": [
+          "API and Biologics Input Materials",
+          "External Manufacturing and Fill-Finish Inputs",
+          "Clinical Development and CRO Inputs",
+          "Vaccine and Biologics Supply Inputs",
+          "Packaging and Device Inputs"
+        ],
+        "services": [
+          "Supplier Onboarding and Procurement Services",
+          "Regulatory and Quality Management Services",
+          "Cold-Chain and Global Distribution Services",
+          "Treasury and Risk Services"
+        ],
+        "channels": [
+          "Hospital and Specialty Care Channels",
+          "Retail and Specialty Pharmacy Channels",
+          "Public Sector and Government Programs",
+          "Global Distributor Channels"
+        ],
+        "demand": [
+          "Oncology and Specialty Medicine Demand",
+          "Vaccine and Preventive Care Demand",
+          "Global Pharmaceutical Demand"
+        ]
+      }
+    },
+    {
+      "rank": 49,
+      "symbol": "HSBC",
+      "name": "HSBC",
+      "hq": {
+        "city": "",
+        "country": "United Kingdom",
+        "country_code": "UK",
+        "flag_emoji": "🇬🇧",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/HSBC.png"
+      },
+      "profile": {
+        "upstream": [
+          "Core Banking and Treasury Systems",
+          "Credit and Risk Data Inputs",
+          "Clearing and Settlement Infrastructure",
+          "Cloud and Cybersecurity Inputs"
+        ],
+        "services": [
+          "Global Payments and Cash Management Services",
+          "Regulatory and Risk Management Services",
+          "AML and Financial Crime Services",
+          "Treasury and Liquidity Services"
+        ],
+        "channels": [
+          "Retail Banking Channels",
+          "Commercial and Corporate Banking Channels",
+          "Global Markets and Securities Channels",
+          "Trade Finance and Cross-border Channels"
+        ],
+        "demand": [
+          "Corporate Treasury Demand",
+          "Retail Credit and Deposit Demand",
+          "Cross-border Payment Demand"
+        ]
+      }
+    },
+    {
+      "rank": 50,
+      "symbol": "0857.HK",
+      "name": "PetroChina",
+      "hq": {
+        "city": "",
+        "country": "China",
+        "country_code": "CN",
+        "flag_emoji": "🇨🇳",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/0857.HK.png"
+      },
+      "profile": {
+        "upstream": [
+          "Exploration and Drilling Service Inputs",
+          "Pipeline and Midstream Infrastructure Inputs",
+          "Refining and Petrochemical Feedstock Inputs",
+          "Equipment and Engineering Inputs",
+          "Natural Gas and LNG Value Chain Inputs"
+        ],
+        "services": [
+          "Environmental and Safety Governance Services",
+          "Global Commodity Logistics Services",
+          "Treasury and Trading Risk Services",
+          "Operations and Maintenance Services"
+        ],
+        "channels": [
+          "Refined Products Sales Channels",
+          "Natural Gas Sales Channels",
+          "Petrochemical and Industrial Buyer Channels",
+          "Domestic Retail Fuel Channels"
+        ],
+        "demand": [
+          "Transportation Fuel Demand",
+          "Industrial Energy Demand",
+          "Natural Gas and Petrochemical Demand"
+        ]
+      }
+    },
+    {
+      "rank": 51,
+      "symbol": "AMAT",
+      "name": "Applied Materials",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/AMAT.png"
+      },
+      "profile": {
+        "upstream": [
+          "Precision Component and Vacuum System Inputs",
+          "Deposition and Etch Materials Inputs",
+          "Electronics and Motion-Control Inputs",
+          "Sub-tier Semiconductor Supply Inputs",
+          "Customer Fab Capex Program Inputs"
+        ],
+        "services": [
+          "Supplier Qualification and Risk Services",
+          "Global Field Service and Spares Logistics",
+          "Installation and Process Optimization Services",
+          "Treasury and Working Capital Services"
+        ],
+        "channels": [
+          "Foundry Customer Channels",
+          "Memory Customer Channels",
+          "Logic and Specialty Device Channels",
+          "Service and Upgrade Channels"
+        ],
+        "demand": [
+          "Wafer Fab Equipment Demand",
+          "Node Migration and Capacity Demand",
+          "Advanced Packaging Tool Demand"
+        ]
+      }
+    },
+    {
+      "rank": 52,
+      "symbol": "PM",
+      "name": "Philip Morris International",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/PM.png"
+      },
+      "profile": {
+        "upstream": [
+          "Leaf Tobacco and Agricultural Inputs",
+          "Reduced-Risk Product Component Inputs",
+          "Packaging and Filter Material Inputs",
+          "Flavor and Consumable Inputs",
+          "Manufacturing and Distribution Inputs"
+        ],
+        "services": [
+          "Responsible Sourcing and Farmer Programs",
+          "Regulatory and Compliance Services",
+          "Global Distribution and Trade Services",
+          "Treasury and FX Risk Services"
+        ],
+        "channels": [
+          "Combustible Product Retail Channels",
+          "Heated Tobacco Device Channels",
+          "Nicotine Pouch and Oral Product Channels",
+          "Duty-Free and International Trade Channels"
+        ],
+        "demand": [
+          "Adult Smoker Conversion Demand",
+          "Reduced-Risk Product Demand",
+          "Global Nicotine Product Demand"
+        ]
+      }
+    },
+    {
+      "rank": 53,
+      "symbol": "GS",
+      "name": "Goldman Sachs",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/GS.png"
+      },
+      "profile": {
+        "upstream": [
+          "Core Banking and Trading Platform Inputs",
+          "Market Data and Analytics Inputs",
+          "Clearing and Settlement Infrastructure Inputs",
+          "Cloud and Cybersecurity Inputs"
+        ],
+        "services": [
+          "Risk Management and Compliance Services",
+          "Treasury and Liquidity Services",
+          "Prime Brokerage and Financing Services",
+          "Technology and Operations Services"
+        ],
+        "channels": [
+          "Investment Banking Advisory Channels",
+          "Global Markets and Trading Channels",
+          "Asset and Wealth Management Channels",
+          "Transaction Banking Channels"
+        ],
+        "demand": [
+          "Institutional Capital Markets Demand",
+          "Corporate Treasury Demand",
+          "Wealth and Asset Management Demand"
+        ]
+      }
+    },
+    {
+      "rank": 54,
+      "symbol": "MS",
+      "name": "Morgan Stanley",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/MS.png"
+      },
+      "profile": {
+        "upstream": [
+          "Core Wealth and Trading Platform Inputs",
+          "Market Data and Research Inputs",
+          "Clearing and Custody Infrastructure Inputs",
+          "Cybersecurity and Compliance Tech Inputs"
+        ],
+        "services": [
+          "Regulatory and Enterprise Risk Services",
+          "Prime Brokerage and Financing Services",
+          "Operations and Trade Support Services",
+          "Treasury and Funding Services"
+        ],
+        "channels": [
+          "Institutional Securities Channels",
+          "Wealth Management Advisor Channels",
+          "Investment Management Channels",
+          "Corporate and Sponsor Advisory Channels"
+        ],
+        "demand": [
+          "Institutional Trading Demand",
+          "Wealth Advisory Demand",
+          "Alternative and Traditional Asset Demand"
+        ]
+      }
+    },
+    {
+      "rank": 55,
+      "symbol": "WFC",
+      "name": "Wells Fargo",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/WFC.png"
+      },
+      "profile": {
+        "upstream": [
+          "Core Banking and Payments Infrastructure Inputs",
+          "Credit Bureau and Risk Data Inputs",
+          "Branch and ATM Network Inputs",
+          "Cloud and Security Infrastructure Inputs"
+        ],
+        "services": [
+          "Consumer and Commercial Lending Services",
+          "Regulatory and Financial Crime Services",
+          "Treasury, Liquidity, and Balance Sheet Services",
+          "Supplier and Procurement Governance Services"
+        ],
+        "channels": [
+          "Retail Banking Channels",
+          "Commercial Banking Channels",
+          "Corporate and Investment Banking Channels",
+          "Home Lending and Servicing Channels"
+        ],
+        "demand": [
+          "Consumer Credit and Deposit Demand",
+          "Commercial Treasury Demand",
+          "Mortgage and Home Finance Demand"
+        ]
+      }
+    },
+    {
+      "rank": 56,
+      "symbol": "RTX",
+      "name": "RTX",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/RTX.png"
+      },
+      "profile": {
+        "upstream": [
+          "Aero Engine and Propulsion Component Inputs",
+          "Avionics and Electronics Inputs",
+          "Defense Sensor and Missile Component Inputs",
+          "Titanium, Composites, and Specialty Material Inputs",
+          "Tier-1 and Tier-2 Supplier Inputs"
+        ],
+        "services": [
+          "Program Management and Engineering Services",
+          "Quality, Certification, and Compliance Services",
+          "Global Spares and MRO Logistics Services",
+          "Government Contracting and Treasury Services"
+        ],
+        "channels": [
+          "Commercial Aerospace OEM Channels",
+          "Defense Prime and Government Channels",
+          "Aftermarket MRO and Spares Channels",
+          "International Military Sales Channels"
+        ],
+        "demand": [
+          "Commercial Flight Hour Demand",
+          "Defense Modernization Demand",
+          "Aerospace Aftermarket Demand"
+        ]
+      }
+    },
+    {
+      "rank": 57,
+      "symbol": "600519.SS",
+      "name": "Kweichow Moutai",
+      "hq": {
+        "city": "",
+        "country": "China",
+        "country_code": "CN",
+        "flag_emoji": "🇨🇳",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/600519.SS.png"
+      },
+      "profile": {
+        "upstream": [
+          "Sorghum and Grain Agricultural Inputs",
+          "Packaging and Bottle Component Inputs",
+          "Distillation and Aging Facility Inputs",
+          "Distribution and Channel Inventory Inputs",
+          "Brand Protection and Anti-Counterfeit Inputs"
+        ],
+        "services": [
+          "Procurement and Quality Assurance Services",
+          "Compliance and Regulatory Services",
+          "Logistics and Regional Distribution Services",
+          "Treasury and Working Capital Services"
+        ],
+        "channels": [
+          "Domestic Distributor Channels",
+          "Flagship Retail and Direct Sales Channels",
+          "Hospitality and Corporate Gifting Channels",
+          "International Export Channels"
+        ],
+        "demand": [
+          "Premium Baijiu Consumption Demand",
+          "Festival and Gift-Driven Demand",
+          "High-End Beverage Collectible Demand"
+        ]
+      }
+    },
+    {
+      "rank": 58,
+      "symbol": "NESN.SW",
+      "name": "Nestlé",
+      "hq": {
+        "city": "",
+        "country": "Switzerland",
+        "country_code": "CH",
+        "flag_emoji": "🇨🇭",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/NESN.SW.png"
+      },
+      "profile": {
+        "upstream": [
+          "Agricultural Commodity and Dairy Inputs",
+          "Coffee, Cocoa, and Specialty Ingredient Inputs",
+          "Packaging and Processing Material Inputs",
+          "Co-Manufacturing and Ingredient Partner Inputs",
+          "Cold-Chain and Distribution Inputs"
+        ],
+        "services": [
+          "Responsible Sourcing and Farmer Program Services",
+          "Food Safety and Quality Services",
+          "Global Logistics and Inventory Services",
+          "Treasury and Commodity Hedging Services"
+        ],
+        "channels": [
+          "Grocery and Modern Retail Channels",
+          "Out-of-Home and Food Service Channels",
+          "E-commerce and Direct-to-Consumer Channels",
+          "Health Science and Specialty Nutrition Channels"
+        ],
+        "demand": [
+          "Global Packaged Food Demand",
+          "Coffee and Beverage Demand",
+          "Pet Care and Nutrition Demand"
+        ]
+      }
+    },
+    {
+      "rank": 59,
+      "symbol": "UNH",
+      "name": "UnitedHealth",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/UNH.png"
+      },
+      "profile": {
+        "upstream": [
+          "Provider Network and Care Delivery Inputs",
+          "Pharmacy Benefit and Drug Supply Inputs",
+          "Clinical Data and Analytics Inputs",
+          "Digital Care Platform and Claims Inputs",
+          "Third-Party Vendor and Procurement Inputs"
+        ],
+        "services": [
+          "Care Management and Utilization Services",
+          "Regulatory, Privacy, and Compliance Services",
+          "Payment Integrity and Risk Services",
+          "Value-Based Care and Population Health Services"
+        ],
+        "channels": [
+          "Employer and Group Benefit Channels",
+          "Medicare and Government Program Channels",
+          "Individual and Marketplace Channels",
+          "Provider and Care Delivery Channels"
+        ],
+        "demand": [
+          "Managed Care Enrollment Demand",
+          "Healthcare Services Utilization Demand",
+          "Pharmacy and Benefit Management Demand"
+        ]
+      }
+    },
+    {
+      "rank": 60,
+      "symbol": "RMS.PA",
+      "name": "Hermès",
+      "hq": {
+        "city": "",
+        "country": "France",
+        "country_code": "FR",
+        "flag_emoji": "🇫🇷",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/RMS.PA.png"
+      },
+      "profile": {
+        "upstream": [
+          "Premium Leather and Textile Inputs",
+          "Precious Material and Hardware Inputs",
+          "Artisan Workshop and Craft Inputs",
+          "Packaging and Fragrance Component Inputs",
+          "Selective Retail and Inventory Inputs"
+        ],
+        "services": [
+          "Sustainable Sourcing and Traceability Services",
+          "Craftsmanship and Quality Assurance Services",
+          "Global Luxury Logistics and Allocation Services",
+          "Treasury and FX Risk Services"
+        ],
+        "channels": [
+          "Hermes Boutiques and Direct Retail Channels",
+          "Leather Goods and Accessories Channels",
+          "Silk, Ready-to-Wear, and Lifestyle Channels",
+          "Selective E-commerce and Clienteling Channels"
+        ],
+        "demand": [
+          "Global Luxury Consumption Demand",
+          "Ultra-Premium Leather Goods Demand",
+          "Heritage Brand Experience Demand"
+        ]
+      }
+    },
+    {
+      "rank": 61,
+      "symbol": "OR.PA",
+      "name": "L'Oréal",
+      "hq": {
+        "city": "",
+        "country": "France",
+        "country_code": "FR",
+        "flag_emoji": "🇫🇷",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/OR.PA.png"
+      },
+      "profile": {
+        "upstream": [
+          "Active Ingredient and Biotech Inputs",
+          "Packaging and Refill Component Inputs",
+          "Fragrance and Cosmetic Raw Material Inputs",
+          "Contract Manufacturing and Formulation Inputs",
+          "Retail Merchandising and Sampling Inputs"
+        ],
+        "services": [
+          "Responsible Sourcing and Supplier Auditing Services",
+          "Regulatory and Product Safety Services",
+          "Global Beauty Logistics and Fulfillment Services",
+          "Treasury and FX Risk Services"
+        ],
+        "channels": [
+          "Mass Market Retail Channels",
+          "Dermatological and Pharmacy Channels",
+          "Luxury Beauty and Selective Retail Channels",
+          "E-commerce and Direct-to-Consumer Channels"
+        ],
+        "demand": [
+          "Skincare and Dermatology Demand",
+          "Premium Beauty Demand",
+          "Global Personal Care Demand"
+        ]
+      }
+    },
+    {
+      "rank": 62,
+      "symbol": "601988.SS",
+      "name": "Bank of China",
+      "hq": {
+        "city": "",
+        "country": "China",
+        "country_code": "CN",
+        "flag_emoji": "🇨🇳",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/601988.SS.png"
+      },
+      "profile": {
+        "upstream": [
+          "Core Banking and Treasury System Inputs",
+          "Credit and Risk Data Inputs",
+          "Clearing and Settlement Infrastructure Inputs",
+          "Cloud and Cybersecurity Infrastructure Inputs"
+        ],
+        "services": [
+          "Cross-border Payments and Trade Finance Services",
+          "Regulatory, AML, and Compliance Services",
+          "Treasury and Liquidity Management Services",
+          "Corporate and Transaction Banking Services"
+        ],
+        "channels": [
+          "Retail Banking Channels",
+          "Corporate Banking Channels",
+          "Global Markets and Institutional Channels",
+          "Overseas Branch and Correspondent Channels"
+        ],
+        "demand": [
+          "Corporate Treasury Demand",
+          "Consumer Credit and Deposit Demand",
+          "Cross-border Settlement Demand"
+        ]
+      }
+    },
+    {
+      "rank": 63,
+      "symbol": "300750.SZ",
+      "name": "CATL",
+      "hq": {
+        "city": "",
+        "country": "China",
+        "country_code": "CN",
+        "flag_emoji": "🇨🇳",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/300750.SZ.png"
+      },
+      "profile": {
+        "upstream": [
+          "Lithium, Nickel, and Cathode Material Inputs",
+          "Anode, Separator, and Electrolyte Inputs",
+          "Battery Equipment and Automation Inputs",
+          "Cell Manufacturing and Pack Integration Inputs",
+          "Recycling and Second-Life Material Inputs"
+        ],
+        "services": [
+          "Supplier Quality and Procurement Services",
+          "Manufacturing Safety and ESG Services",
+          "Global Battery Logistics and Distribution Services",
+          "Treasury and Commodity Risk Services"
+        ],
+        "channels": [
+          "EV OEM Supply Channels",
+          "Energy Storage System Channels",
+          "Commercial Vehicle Electrification Channels",
+          "Global Partner and Service Channels"
+        ],
+        "demand": [
+          "Electric Vehicle Battery Demand",
+          "Grid-Scale Storage Demand",
+          "Industrial and Mobility Electrification Demand"
+        ]
+      }
+    },
+    {
+      "rank": 64,
+      "symbol": "RY",
+      "name": "Royal Bank Of Canada",
+      "hq": {
+        "city": "",
+        "country": "Canada",
+        "country_code": "CA",
+        "flag_emoji": "🇨🇦",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/RY.png"
+      },
+      "profile": {
+        "upstream": [
+          "Core Banking and Digital Platform Inputs",
+          "Credit and Risk Data Inputs",
+          "Clearing and Payment Network Inputs",
+          "Cloud and Cybersecurity Infrastructure Inputs"
+        ],
+        "services": [
+          "Wealth and Asset Management Services",
+          "Regulatory and Enterprise Risk Services",
+          "Cash Management and Trade Finance Services",
+          "Treasury and Funding Services"
+        ],
+        "channels": [
+          "Personal and Commercial Banking Channels",
+          "Capital Markets Channels",
+          "Wealth Management Advisory Channels",
+          "Insurance and Investor Services Channels"
+        ],
+        "demand": [
+          "Consumer Banking Demand",
+          "Corporate Treasury Demand",
+          "Investment and Wealth Demand"
+        ]
+      }
+    },
+    {
+      "rank": 65,
+      "symbol": "TMUS",
+      "name": "T-Mobile US",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/TMUS.png"
+      },
+      "profile": {
+        "upstream": [
+          "Radio Access and Core Network Equipment Inputs",
+          "Spectrum and Network Infrastructure Inputs",
+          "Device Procurement and Distribution Inputs",
+          "Cloud, IT, and Edge Infrastructure Inputs",
+          "Tower and Fiber Connectivity Inputs"
+        ],
+        "services": [
+          "Network Operations and Optimization Services",
+          "Customer Care and Billing Services",
+          "Cybersecurity and Fraud Prevention Services",
+          "Treasury and Procurement Services"
+        ],
+        "channels": [
+          "Postpaid Consumer Channels",
+          "Business and Enterprise Channels",
+          "Prepaid and Value Channels",
+          "Wholesale and MVNO Channels"
+        ],
+        "demand": [
+          "5G Mobile Data Demand",
+          "Enterprise Mobility Demand",
+          "Fixed Wireless Access Demand"
+        ]
+      }
+    },
+    {
+      "rank": 66,
+      "symbol": "IBM",
+      "name": "IBM",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/IBM.png"
+      },
+      "profile": {
+        "upstream": [
+          "Data Center and Server Infrastructure Inputs",
+          "Semiconductor and Hardware Component Inputs",
+          "Cloud Platform and Open-Source Ecosystem Inputs",
+          "Cybersecurity and Identity Infrastructure Inputs",
+          "Consulting Talent and Partner Ecosystem Inputs"
+        ],
+        "services": [
+          "Consulting and Transformation Services",
+          "Managed Infrastructure and Operations Services",
+          "AI Governance and Compliance Services",
+          "Treasury and Procurement Services"
+        ],
+        "channels": [
+          "Enterprise Software and Hybrid Cloud Channels",
+          "Consulting and Services Channels",
+          "Partner and Systems Integrator Channels",
+          "Industry Solution Channels"
+        ],
+        "demand": [
+          "Hybrid Cloud Modernization Demand",
+          "Enterprise AI Deployment Demand",
+          "Mission-Critical IT Operations Demand"
+        ]
+      }
+    },
+    {
+      "rank": 67,
+      "symbol": "IHC.AE",
+      "name": "International Holding Company",
+      "hq": {
+        "city": "",
+        "country": "United Arab Emirates",
+        "country_code": "AE",
+        "flag_emoji": "🇦🇪",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/IHC.AE.png"
+      },
+      "profile": {
+        "upstream": [
+          "Portfolio Company Capital and Deal Sourcing Inputs",
+          "Sector-Specific Operating Asset Inputs",
+          "Industrial and Infrastructure Project Inputs",
+          "Digital Platform and Technology Inputs",
+          "Supply and Procurement Ecosystem Inputs"
+        ],
+        "services": [
+          "Group Governance and Risk Services",
+          "Capital Allocation and Treasury Services",
+          "Shared Services and Procurement Services",
+          "ESG and Compliance Services"
+        ],
+        "channels": [
+          "Healthcare and Life Sciences Portfolio Channels",
+          "Real Estate and Infrastructure Channels",
+          "Food, Agriculture, and Consumer Channels",
+          "Digital and Technology Investment Channels"
+        ],
+        "demand": [
+          "Regional Infrastructure Demand",
+          "Strategic Investment and M&A Demand",
+          "Diversified Portfolio Earnings Demand"
+        ]
+      }
+    },
+    {
+      "rank": 68,
+      "symbol": "AXP",
+      "name": "American Express",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/AXP.png"
+      },
+      "profile": {
+        "upstream": [
+          "Card Issuance and Network Technology Inputs",
+          "Merchant Acceptance and Acquiring Inputs",
+          "Credit and Fraud Data Inputs",
+          "Cloud and Cybersecurity Infrastructure Inputs"
+        ],
+        "services": [
+          "Payments Processing and Settlement Services",
+          "Credit and Risk Management Services",
+          "Rewards and Loyalty Program Services",
+          "Treasury and Funding Services"
+        ],
+        "channels": [
+          "Consumer Card Channels",
+          "Small Business and Corporate Card Channels",
+          "Travel and Lifestyle Partner Channels",
+          "Merchant Services Channels"
+        ],
+        "demand": [
+          "Consumer Spending Demand",
+          "Business Travel and Expense Demand",
+          "Premium Card Membership Demand"
+        ]
+      }
+    },
+    {
+      "rank": 69,
+      "symbol": "SAP",
+      "name": "SAP",
+      "hq": {
+        "city": "",
+        "country": "Germany",
+        "country_code": "DE",
+        "flag_emoji": "🇩🇪",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/SAP.png"
+      },
+      "profile": {
+        "upstream": [
+          "Cloud Infrastructure and Data Center Inputs",
+          "Enterprise Data and Integration Ecosystem Inputs",
+          "Cybersecurity and Identity Platform Inputs",
+          "Partner Development and Implementation Inputs",
+          "AI Model and Compute Inputs"
+        ],
+        "services": [
+          "Enterprise Implementation and Advisory Services",
+          "Managed Cloud and Application Services",
+          "Compliance and Data Governance Services",
+          "Treasury and Procurement Services"
+        ],
+        "channels": [
+          "ERP and Business Suite Channels",
+          "Industry Cloud Solution Channels",
+          "Partner and SI Channels",
+          "SME and Midmarket Channels"
+        ],
+        "demand": [
+          "ERP Modernization Demand",
+          "Cloud Migration Demand",
+          "Business AI and Automation Demand"
+        ]
+      }
+    },
+    {
+      "rank": 70,
+      "symbol": "MCD",
+      "name": "McDonald",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/MCD.png"
+      },
+      "profile": {
+        "upstream": [
+          "OSI Group",
+          "Lamb Weston",
+          "Cargill",
+          "Tyson Foods",
+          "Independent Ingredient Suppliers"
+        ],
+        "services": [
+          "DHL Supply Chain",
+          "UPS",
+          "Commercial Insurance Carriers",
+          "Chubb",
+          "Visa",
+          "Mastercard",
+          "American Express"
+        ],
+        "channels": [
+          "Franchise Operators",
+          "Arcos Dorados",
+          "Uber Eats",
+          "DoorDash"
+        ],
+        "demand": [
+          "Consumer Meal Demand"
+        ]
+      }
+    },
+    {
+      "rank": 71,
+      "symbol": "LIN",
+      "name": "Linde",
+      "hq": {
+        "city": "",
+        "country": "United Kingdom",
+        "country_code": "UK",
+        "flag_emoji": "🇬🇧",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/LIN.png"
+      },
+      "profile": {
+        "upstream": [
+          "Air Separation Unit Inputs",
+          "Hydrogen and Carbon Feedstock Inputs",
+          "Cylinder, Bulk Storage, and Distribution Inputs",
+          "On-site Plant Engineering and EPC Inputs",
+          "Electricity and Utility Inputs"
+        ],
+        "services": [
+          "Safety, Reliability, and Plant Operations Services",
+          "Contract Gas Supply and On-site Services",
+          "Logistics and Distribution Services",
+          "Treasury and Commodity Risk Services"
+        ],
+        "channels": [
+          "Chemicals and Refining Channels",
+          "Healthcare and Life Sciences Channels",
+          "Electronics and Manufacturing Channels",
+          "Metals and Industrial Processing Channels"
+        ],
+        "demand": [
+          "Industrial Production Gas Demand",
+          "Healthcare Oxygen and Specialty Gas Demand",
+          "Clean Energy and Hydrogen Demand"
+        ]
+      }
+    },
+    {
+      "rank": 72,
+      "symbol": "PRX.AS",
+      "name": "Prosus",
+      "hq": {
+        "city": "",
+        "country": "Netherlands",
+        "country_code": "NL",
+        "flag_emoji": "🇳🇱",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/PRX.AS.png"
+      },
+      "profile": {
+        "upstream": [
+          "Portfolio Capital Allocation Inputs",
+          "Payments and Fintech Infrastructure Inputs",
+          "E-commerce Marketplace Technology Inputs",
+          "Logistics and Fulfillment Partner Inputs",
+          "Regulatory and Data Governance Inputs"
+        ],
+        "services": [
+          "Group Strategy and Portfolio Governance Services",
+          "Treasury and Capital Markets Services",
+          "Risk, Compliance, and Audit Services",
+          "Shared Technology and Procurement Services"
+        ],
+        "channels": [
+          "Classifieds and Marketplace Channels",
+          "Food Delivery and E-commerce Channels",
+          "Payments and Fintech Channels",
+          "EdTech and Emerging Platform Channels"
+        ],
+        "demand": [
+          "Digital Commerce Demand",
+          "Consumer Fintech Demand",
+          "Platform Monetization Demand"
+        ]
+      }
+    },
+    {
+      "rank": 73,
+      "symbol": "SIE.DE",
+      "name": "Siemens",
+      "hq": {
+        "city": "",
+        "country": "Germany",
+        "country_code": "DE",
+        "flag_emoji": "🇩🇪",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/SIE.DE.png"
+      },
+      "profile": {
+        "upstream": [
+          "Industrial Components and Electronics Inputs",
+          "Grid and Electrification System Inputs",
+          "Software and Automation Platform Inputs",
+          "Rail and Mobility System Inputs",
+          "Supplier Manufacturing Inputs"
+        ],
+        "services": [
+          "Engineering and Digital Twin Services",
+          "Lifecycle Maintenance and Service Contracts",
+          "Cybersecurity and Compliance Services",
+          "Treasury and Export Finance Services"
+        ],
+        "channels": [
+          "Smart Infrastructure Channels",
+          "Industrial Automation Channels",
+          "Mobility and Rail Channels",
+          "Healthcare Technology Channels"
+        ],
+        "demand": [
+          "Industrial Automation Demand",
+          "Electrification and Grid Modernization Demand",
+          "Infrastructure Digitalization Demand"
+        ]
+      }
+    },
+    {
+      "rank": 74,
+      "symbol": "PEP",
+      "name": "Pepsico",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/PEP.png"
+      },
+      "profile": {
+        "upstream": [
+          "Agricultural Commodity Inputs",
+          "Packaging and Aluminum Inputs",
+          "Flavor, Sweetener, and Ingredient Inputs",
+          "Bottling and Co-Manufacturing Inputs",
+          "Cold-chain and Distribution Inputs"
+        ],
+        "services": [
+          "Sustainable Agriculture and Sourcing Services",
+          "Manufacturing and Quality Assurance Services",
+          "Route-to-Market Logistics Services",
+          "Treasury and Commodity Hedging Services"
+        ],
+        "channels": [
+          "Grocery and Modern Retail Channels",
+          "Convenience and Away-from-Home Channels",
+          "Foodservice and QSR Channels",
+          "Direct-to-Consumer and E-commerce Channels"
+        ],
+        "demand": [
+          "Snacks Demand",
+          "Beverage Demand",
+          "Functional and Zero-Sugar Portfolio Demand"
+        ]
+      }
+    },
+    {
+      "rank": 75,
+      "symbol": "GEV",
+      "name": "GE Vernova",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/GEV.png"
+      },
+      "profile": {
+        "upstream": [
+          "Turbine and Generator Component Inputs",
+          "Grid Equipment and Power Electronics Inputs",
+          "Software and Grid Digital Platform Inputs",
+          "Field Materials and Construction Inputs",
+          "Supplier Manufacturing Inputs"
+        ],
+        "services": [
+          "Project Engineering and Grid Integration Services",
+          "Field Service and Long-Term Maintenance Services",
+          "Safety, Quality, and Compliance Services",
+          "Treasury and Project Finance Services"
+        ],
+        "channels": [
+          "Utility and Grid Operator Channels",
+          "Renewable Developer Channels",
+          "Power Generation Channels",
+          "Industrial Electrification Channels"
+        ],
+        "demand": [
+          "Grid Modernization Demand",
+          "Electrification and Decarbonization Demand",
+          "Utility Reliability and Capacity Demand"
+        ]
+      }
+    },
+    {
+      "rank": 76,
+      "symbol": "SHEL",
+      "name": "Shell",
+      "hq": {
+        "city": "",
+        "country": "United Kingdom",
+        "country_code": "UK",
+        "flag_emoji": "🇬🇧",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/SHEL.png"
+      },
+      "profile": {
+        "upstream": [
+          "Upstream Exploration and Production Inputs",
+          "Refining and Petrochemical Feedstock Inputs",
+          "LNG and Gas Infrastructure Inputs",
+          "Trading and Shipping Infrastructure Inputs",
+          "Renewables and Low-Carbon Project Inputs"
+        ],
+        "services": [
+          "Global Trading and Risk Management Services",
+          "Project Engineering and Operations Services",
+          "Safety, Environmental, and Compliance Services",
+          "Treasury and Commodity Hedging Services"
+        ],
+        "channels": [
+          "Retail Fuels and Mobility Channels",
+          "Industrial and Aviation Fuel Channels",
+          "LNG and Gas Marketing Channels",
+          "Chemicals and Lubricants Channels"
+        ],
+        "demand": [
+          "Transportation Energy Demand",
+          "Industrial Fuel and Feedstock Demand",
+          "LNG and Power Demand"
+        ]
+      }
+    },
+    {
+      "rank": 77,
+      "symbol": "INTC",
+      "name": "Intel",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/INTC.png"
+      },
+      "profile": {
+        "upstream": [
+          "Wafer Fabrication and Equipment Inputs",
+          "Advanced Packaging and Substrate Inputs",
+          "EDA, IP, and Software Tool Inputs",
+          "Memory and Platform Component Inputs",
+          "Foundry Ecosystem Inputs"
+        ],
+        "services": [
+          "Manufacturing and Process Integration Services",
+          "Platform Enablement and Software Services",
+          "Supply Chain Resilience and Quality Services",
+          "Treasury and Capital Planning Services"
+        ],
+        "channels": [
+          "Client Computing Channels",
+          "Data Center and AI Channels",
+          "Foundry and External Customer Channels",
+          "Automotive and Edge Channels"
+        ],
+        "demand": [
+          "PC and Enterprise Compute Demand",
+          "AI and Data Center Acceleration Demand",
+          "Foundry Outsourcing Demand"
+        ]
+      }
+    },
+    {
+      "rank": 78,
+      "symbol": "0941.HK",
+      "name": "China Mobile",
+      "hq": {
+        "city": "",
+        "country": "China",
+        "country_code": "CN",
+        "flag_emoji": "🇨🇳",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/0941.HK.png"
+      },
+      "profile": {
+        "upstream": [
+          "Radio, Core, and Transport Network Inputs",
+          "Spectrum and Tower Infrastructure Inputs",
+          "Device Procurement and Supply Inputs",
+          "Cloud, IT, and Data Infrastructure Inputs",
+          "Cybersecurity and Network Management Inputs"
+        ],
+        "services": [
+          "Network Operations and Optimization Services",
+          "Enterprise Connectivity and Cloud Services",
+          "Regulatory and Compliance Services",
+          "Treasury and Procurement Services"
+        ],
+        "channels": [
+          "Consumer Mobile Service Channels",
+          "Enterprise and Government Channels",
+          "Home Broadband and Integrated Service Channels",
+          "Digital Platform and Value-Added Channels"
+        ],
+        "demand": [
+          "Mobile Data Demand",
+          "Enterprise Connectivity Demand",
+          "Digital Service Ecosystem Demand"
+        ]
+      }
+    },
+    {
+      "rank": 79,
+      "symbol": "MUFG",
+      "name": "Mitsubishi UFJ Financial",
+      "hq": {
+        "city": "",
+        "country": "Japan",
+        "country_code": "JP",
+        "flag_emoji": "🇯🇵",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/MUFG.png"
+      },
+      "profile": {
+        "upstream": [
+          "Core Banking and Treasury Platform Inputs",
+          "Credit and Risk Data Inputs",
+          "Payments and Settlement Network Inputs",
+          "Cloud and Cybersecurity Infrastructure Inputs"
+        ],
+        "services": [
+          "Corporate and Investment Banking Services",
+          "Wealth and Asset Management Services",
+          "Regulatory, AML, and Risk Services",
+          "Treasury and Liquidity Services"
+        ],
+        "channels": [
+          "Retail Banking Channels",
+          "Corporate and Institutional Channels",
+          "Global Markets Channels",
+          "International Banking Channels"
+        ],
+        "demand": [
+          "Corporate Treasury Demand",
+          "Consumer Banking Demand",
+          "Cross-border Finance Demand"
+        ]
+      }
+    },
+    {
+      "rank": 80,
+      "symbol": "CBA.AX",
+      "name": "Commonwealth Bank",
+      "hq": {
+        "city": "",
+        "country": "Australia",
+        "country_code": "AU",
+        "flag_emoji": "🇦🇺",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/CBA.AX.png"
+      },
+      "profile": {
+        "upstream": [
+          "Core Banking and Digital Platform Inputs",
+          "Credit and Risk Data Inputs",
+          "Payments and Settlement Infrastructure Inputs",
+          "Cloud and Cybersecurity Inputs"
+        ],
+        "services": [
+          "Retail and Business Banking Services",
+          "Wealth and Insurance Services",
+          "Risk, Compliance, and Financial Crime Services",
+          "Treasury and Funding Services"
+        ],
+        "channels": [
+          "Consumer Banking Channels",
+          "Business Banking Channels",
+          "Institutional and Market Channels",
+          "Digital and Mobile Banking Channels"
+        ],
+        "demand": [
+          "Household Credit and Deposit Demand",
+          "SME and Business Finance Demand",
+          "Digital Banking Engagement Demand"
+        ]
+      }
+    },
+    {
+      "rank": 81,
+      "symbol": "ITX.MC",
+      "name": "Inditex",
+      "hq": {
+        "city": "",
+        "country": "Spain",
+        "country_code": "ES",
+        "flag_emoji": "🇪🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/ITX.MC.png"
+      },
+      "profile": {
+        "upstream": [
+          "Textile, Cotton, and Fabric Inputs",
+          "Garment Manufacturing Partner Inputs",
+          "Dyeing, Finishing, and Trim Inputs",
+          "Packaging and Labeling Inputs",
+          "Regional Logistics and Distribution Inputs"
+        ],
+        "services": [
+          "Supplier Auditing and Responsible Sourcing Services",
+          "Quality Control and Product Compliance Services",
+          "Inventory and Omnichannel Logistics Services",
+          "Treasury and FX Risk Services"
+        ],
+        "channels": [
+          "Zara and Core Brand Store Channels",
+          "Massimo Dutti and Premium Brand Channels",
+          "E-commerce and App Channels",
+          "Global Omnichannel Fulfillment Channels"
+        ],
+        "demand": [
+          "Fast Fashion Demand",
+          "Seasonal Apparel Demand",
+          "Omnichannel Retail Demand"
+        ]
+      }
+    },
+    {
+      "rank": 82,
+      "symbol": "RELIANCE.NS",
+      "name": "Reliance Industries",
+      "hq": {
+        "city": "",
+        "country": "India",
+        "country_code": "IN",
+        "flag_emoji": "🇮🇳",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/RELIANCE.NS.png"
+      },
+      "profile": {
+        "upstream": [
+          "Crude and Gas Feedstock Inputs",
+          "Refining and Petrochemical Infrastructure Inputs",
+          "Telecom Network and Spectrum Inputs",
+          "Retail Supply and FMCG Sourcing Inputs",
+          "Renewables and New Energy Project Inputs"
+        ],
+        "services": [
+          "Refining and Operations Optimization Services",
+          "Digital Network Operations Services",
+          "Logistics and Distribution Services",
+          "Treasury and Commodity Risk Services"
+        ],
+        "channels": [
+          "Jio Consumer and Enterprise Channels",
+          "Reliance Retail Channels",
+          "Oil-to-Chemicals Industrial Channels",
+          "Energy and Petrochemical Trading Channels"
+        ],
+        "demand": [
+          "Digital Consumer Platform Demand",
+          "Organized Retail Demand",
+          "Industrial Energy and Materials Demand"
+        ]
+      }
+    },
+    {
+      "rank": 83,
+      "symbol": "NVO",
+      "name": "Novo Nordisk",
+      "hq": {
+        "city": "",
+        "country": "Denmark",
+        "country_code": "DK",
+        "flag_emoji": "🇩🇰",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/NVO.png"
+      },
+      "profile": {
+        "upstream": [
+          "API and Biologics Manufacturing Inputs",
+          "Injection Device and Pen Component Inputs",
+          "Clinical Research and Trial Inputs",
+          "Cold-chain and Packaging Inputs",
+          "External Manufacturing and Supply Inputs"
+        ],
+        "services": [
+          "Supplier Governance and Responsible Sourcing Services",
+          "Regulatory Affairs and Pharmacovigilance Services",
+          "Global Distribution and Market Access Services",
+          "Treasury and Risk Management Services"
+        ],
+        "channels": [
+          "Hospital and Specialist Care Channels",
+          "Retail and Specialty Pharmacy Channels",
+          "Government and Tender Channels",
+          "International Partner Distribution Channels"
+        ],
+        "demand": [
+          "Diabetes Care Demand",
+          "Obesity Care Demand",
+          "Chronic Disease Therapy Demand"
+        ]
+      }
+    },
+    {
+      "rank": 84,
+      "symbol": "VZ",
+      "name": "Verizon",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/VZ.png"
+      },
+      "profile": {
+        "upstream": [
+          "Spectrum and Tower Infrastructure Inputs",
+          "Radio and Core Network Equipment Inputs",
+          "Fiber and Transport Network Inputs",
+          "Cloud and Edge Infrastructure Inputs",
+          "Device Procurement Inputs"
+        ],
+        "services": [
+          "Network Operations and Field Service",
+          "Enterprise Connectivity and Managed Services",
+          "Cybersecurity and Fraud Prevention Services",
+          "Treasury and Procurement Services"
+        ],
+        "channels": [
+          "Consumer Wireless Channels",
+          "Fiber and Broadband Channels",
+          "Enterprise and Government Channels",
+          "Wholesale and IoT Channels"
+        ],
+        "demand": [
+          "Mobile Data Demand",
+          "Enterprise Connectivity Demand",
+          "Broadband and Fixed Wireless Demand"
+        ]
+      }
+    },
+    {
+      "rank": 85,
+      "symbol": "C",
+      "name": "Citigroup",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/C.png"
+      },
+      "profile": {
+        "upstream": [
+          "Core Banking and Treasury Platform Inputs",
+          "Credit and Risk Data Inputs",
+          "Payments and Settlement Infrastructure Inputs",
+          "Cloud and Cybersecurity Inputs"
+        ],
+        "services": [
+          "Transaction Banking and Treasury Services",
+          "Regulatory and Financial Crime Services",
+          "Funding and Liquidity Management Services",
+          "Wealth and Advisory Services"
+        ],
+        "channels": [
+          "Retail Banking and Card Channels",
+          "Institutional Client Channels",
+          "Treasury and Trade Solutions Channels",
+          "Private Bank and Wealth Channels"
+        ],
+        "demand": [
+          "Consumer Banking Demand",
+          "Corporate Treasury Demand",
+          "Cross-border Finance Demand"
+        ]
+      }
+    },
+    {
+      "rank": 86,
+      "symbol": "AMGN",
+      "name": "Amgen",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/AMGN.png"
+      },
+      "profile": {
+        "upstream": [
+          "Biologics and API Input Materials",
+          "External Manufacturing and Fill-Finish Inputs",
+          "Clinical Development and CRO Inputs",
+          "Packaging and Device Inputs",
+          "Cold-chain and Distribution Inputs"
+        ],
+        "services": [
+          "Supplier Qualification and Procurement Services",
+          "Regulatory, Quality, and Safety Services",
+          "Global Distribution and Access Services",
+          "Treasury and Portfolio Risk Services"
+        ],
+        "channels": [
+          "Hospital and Specialty Care Channels",
+          "Retail and Specialty Pharmacy Channels",
+          "Partner and Biosimilar Channels",
+          "International Distribution Channels"
+        ],
+        "demand": [
+          "Oncology and Inflammation Demand",
+          "Rare Disease Therapy Demand",
+          "Biosimilar and Specialty Medicine Demand"
+        ]
+      }
+    },
+    {
+      "rank": 87,
+      "symbol": "TXN",
+      "name": "Texas Instruments",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/TXN.png"
+      },
+      "profile": {
+        "upstream": [
+          "Wafer and Fab Material Inputs",
+          "Assembly and Test Partner Inputs",
+          "EDA and Design IP Inputs",
+          "Substrate and Leadframe Inputs",
+          "Manufacturing Equipment Inputs"
+        ],
+        "services": [
+          "Manufacturing Process and Quality Services",
+          "Supply Chain Resilience Services",
+          "Field Applications and Technical Services",
+          "Treasury and Working Capital Services"
+        ],
+        "channels": [
+          "Industrial and Automotive OEM Channels",
+          "Personal Electronics and Communications Channels",
+          "Enterprise Infrastructure Channels",
+          "Distribution Partner Channels"
+        ],
+        "demand": [
+          "Industrial Automation Demand",
+          "Automotive Electrification Demand",
+          "Embedded Analog Demand"
+        ]
+      }
+    },
+    {
+      "rank": 88,
+      "symbol": "T",
+      "name": "AT&T",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/T.png"
+      },
+      "profile": {
+        "upstream": [
+          "Spectrum and Network Infrastructure Inputs",
+          "Radio and Core Network Equipment Inputs",
+          "Fiber and Backhaul Inputs",
+          "Device Procurement Inputs",
+          "Cloud and Security Infrastructure Inputs"
+        ],
+        "services": [
+          "Network Operations and Field Maintenance",
+          "Customer Care and Billing Services",
+          "Cybersecurity and Fraud Protection Services",
+          "Treasury and Procurement Services"
+        ],
+        "channels": [
+          "Consumer Wireless Channels",
+          "Fiber Broadband Channels",
+          "Business and Enterprise Channels",
+          "Public Sector and Wholesale Channels"
+        ],
+        "demand": [
+          "Mobile Data Demand",
+          "Broadband Connectivity Demand",
+          "Enterprise Network Demand"
+        ]
+      }
+    },
+    {
+      "rank": 89,
+      "symbol": "BHP",
+      "name": "BHP Group",
+      "hq": {
+        "city": "",
+        "country": "Australia",
+        "country_code": "AU",
+        "flag_emoji": "🇦🇺",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/BHP.png"
+      },
+      "profile": {
+        "upstream": [
+          "Exploration and Drilling Inputs",
+          "Mining Equipment and Consumable Inputs",
+          "Rail, Port, and Export Infrastructure Inputs",
+          "Energy and Water Inputs",
+          "Contractor and Supplier Inputs"
+        ],
+        "services": [
+          "Operations, Processing, and Maintenance Services",
+          "Safety, Environmental, and Compliance Services",
+          "Shipping and Commodity Logistics Services",
+          "Treasury and Commodity Risk Services"
+        ],
+        "channels": [
+          "Iron Ore and Steelmaking Channels",
+          "Copper and Battery Metals Channels",
+          "Coal and Energy Commodity Channels",
+          "Global Industrial Customer Channels"
+        ],
+        "demand": [
+          "Steel Production Demand",
+          "Energy Transition Metals Demand",
+          "Industrial Commodity Demand"
+        ]
+      }
+    },
+    {
+      "rank": 90,
+      "symbol": "KLAC",
+      "name": "KLA",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/KLAC.png"
+      },
+      "profile": {
+        "upstream": [
+          "Precision Optics and Sensor Inputs",
+          "Electronics and Motion Control Inputs",
+          "Semiconductor Manufacturing Component Inputs",
+          "Process Data and Analytics Inputs",
+          "Supplier Manufacturing Ecosystem Inputs"
+        ],
+        "services": [
+          "Installation and Field Service Programs",
+          "Process Control Software and Analytics Services",
+          "Reliability and Quality Services",
+          "Treasury and Working Capital Services"
+        ],
+        "channels": [
+          "Foundry Customer Channels",
+          "Memory Customer Channels",
+          "Logic and Advanced Packaging Channels",
+          "Service and Upgrade Channels"
+        ],
+        "demand": [
+          "Yield Management Demand",
+          "Node Transition Demand",
+          "Advanced Packaging Process Control Demand"
+        ]
+      }
+    },
+    {
+      "rank": 91,
+      "symbol": "ABT",
+      "name": "Abbott Laboratories",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/ABT.png"
+      },
+      "profile": {
+        "upstream": [
+          "Diagnostic Reagent and Instrument Inputs",
+          "Medical Device and Sensor Component Inputs",
+          "Nutrition Ingredient and Packaging Inputs",
+          "API and Established Pharma Inputs",
+          "Contract Manufacturing and Supply Inputs"
+        ],
+        "services": [
+          "Regulatory, Quality, and Compliance Services",
+          "Global Supply and Cold-Chain Services",
+          "Clinical and Product Support Services",
+          "Treasury and Working Capital Services"
+        ],
+        "channels": [
+          "Hospital and Laboratory Channels",
+          "Retail Pharmacy and Consumer Health Channels",
+          "Nutrition and Specialty Care Channels",
+          "International Distribution Channels"
+        ],
+        "demand": [
+          "Diagnostics Demand",
+          "Medical Device Demand",
+          "Nutrition and Consumer Health Demand"
+        ]
+      }
+    },
+    {
+      "rank": 92,
+      "symbol": "601628.SS",
+      "name": "China Life Insurance",
+      "hq": {
+        "city": "",
+        "country": "China",
+        "country_code": "CN",
+        "flag_emoji": "🇨🇳",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/601628.SS.png"
+      },
+      "profile": {
+        "upstream": [
+          "Actuarial and Risk Modeling Inputs",
+          "Core Insurance Platform Inputs",
+          "Medical and Claims Data Inputs",
+          "Asset Management and Market Data Inputs"
+        ],
+        "services": [
+          "Underwriting and Claims Management Services",
+          "Regulatory and Solvency Services",
+          "Investment and Asset Allocation Services",
+          "Treasury and Settlement Services"
+        ],
+        "channels": [
+          "Agency and Advisor Channels",
+          "Bancassurance Channels",
+          "Group and Corporate Insurance Channels",
+          "Digital and Direct Channels"
+        ],
+        "demand": [
+          "Life Protection Demand",
+          "Retirement and Savings Demand",
+          "Health and Accident Coverage Demand"
+        ]
+      }
+    },
+    {
+      "rank": 93,
+      "symbol": "RIO",
+      "name": "Rio Tinto",
+      "hq": {
+        "city": "",
+        "country": "United Kingdom",
+        "country_code": "UK",
+        "flag_emoji": "🇬🇧",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/RIO.png"
+      },
+      "profile": {
+        "upstream": [
+          "Exploration and Mine Development Inputs",
+          "Heavy Equipment and Consumable Inputs",
+          "Rail, Port, and Shipping Infrastructure Inputs",
+          "Energy and Processing Inputs",
+          "Supplier and Contractor Inputs"
+        ],
+        "services": [
+          "Operations and Processing Services",
+          "Safety, Environmental, and Compliance Services",
+          "Bulk Shipping and Logistics Services",
+          "Treasury and Commodity Risk Services"
+        ],
+        "channels": [
+          "Iron Ore and Steelmaking Channels",
+          "Aluminum and Materials Channels",
+          "Copper and Energy Transition Channels",
+          "Global Industrial Customer Channels"
+        ],
+        "demand": [
+          "Steel and Construction Demand",
+          "Energy Transition Metals Demand",
+          "Industrial Materials Demand"
+        ]
+      }
+    },
+    {
+      "rank": 94,
+      "symbol": "NEE",
+      "name": "Nextera Energy",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/NEE.png"
+      },
+      "profile": {
+        "upstream": [
+          "Generation Fuel and Renewable Resource Inputs",
+          "Grid, Transmission, and Storage Inputs",
+          "Turbine, Solar, and Equipment Inputs",
+          "Construction and EPC Inputs",
+          "Technology and Forecasting Inputs"
+        ],
+        "services": [
+          "Plant Operations and Maintenance Services",
+          "Grid Reliability and Balancing Services",
+          "Regulatory and Environmental Services",
+          "Treasury and Project Finance Services"
+        ],
+        "channels": [
+          "Regulated Utility Customer Channels",
+          "Wholesale Power and Capacity Channels",
+          "Corporate Renewable Offtake Channels",
+          "Retail and Commercial Service Channels"
+        ],
+        "demand": [
+          "Electricity Demand",
+          "Renewable Energy Demand",
+          "Grid Reliability Demand"
+        ]
+      }
+    },
+    {
+      "rank": 95,
+      "symbol": "TMO",
+      "name": "Thermo Fisher Scientific",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/TMO.png"
+      },
+      "profile": {
+        "upstream": [
+          "Analytical Instrument Component Inputs",
+          "Reagents, Chemicals, and Consumable Inputs",
+          "Bioprocess and Manufacturing Inputs",
+          "Laboratory Supply and Packaging Inputs",
+          "Contract Manufacturing Inputs"
+        ],
+        "services": [
+          "Laboratory and Clinical Support Services",
+          "Regulatory and Quality Services",
+          "Global Distribution and Cold-Chain Services",
+          "Treasury and Procurement Services"
+        ],
+        "channels": [
+          "Pharma and Biotech Channels",
+          "Academic and Government Lab Channels",
+          "Clinical and Hospital Channels",
+          "Industrial and Applied Market Channels"
+        ],
+        "demand": [
+          "Biopharma R&D Demand",
+          "Clinical Diagnostics Demand",
+          "Lab Productivity and Automation Demand"
+        ]
+      }
+    },
+    {
+      "rank": 96,
+      "symbol": "DTE.DE",
+      "name": "Deutsche Telekom",
+      "hq": {
+        "city": "",
+        "country": "Germany",
+        "country_code": "DE",
+        "flag_emoji": "🇩🇪",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/DTE.DE.png"
+      },
+      "profile": {
+        "upstream": [
+          "Radio and Core Network Inputs",
+          "Fiber, Backbone, and Data Center Inputs",
+          "Spectrum and Tower Inputs",
+          "Device and CPE Procurement Inputs",
+          "Cloud and Security Platform Inputs"
+        ],
+        "services": [
+          "Network Operations and Service Assurance",
+          "Enterprise Connectivity and ICT Services",
+          "Cybersecurity and Compliance Services",
+          "Treasury and Procurement Services"
+        ],
+        "channels": [
+          "Consumer Mobile and Broadband Channels",
+          "Enterprise and Public Sector Channels",
+          "Wholesale and International Carrier Channels",
+          "Digital Service Channels"
+        ],
+        "demand": [
+          "Mobile Data Demand",
+          "Broadband and Converged Service Demand",
+          "Enterprise Connectivity Demand"
+        ]
+      }
+    },
+    {
+      "rank": 97,
+      "symbol": "SAN",
+      "name": "Santander",
+      "hq": {
+        "city": "",
+        "country": "Spain",
+        "country_code": "ES",
+        "flag_emoji": "🇪🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/SAN.png"
+      },
+      "profile": {
+        "upstream": [
+          "Core Banking and Digital Platform Inputs",
+          "Credit and Risk Data Inputs",
+          "Payments and Settlement Infrastructure Inputs",
+          "Cloud and Cybersecurity Inputs"
+        ],
+        "services": [
+          "Retail and Commercial Banking Services",
+          "Regulatory and Risk Management Services",
+          "Treasury and Liquidity Services",
+          "Wealth and Insurance Services"
+        ],
+        "channels": [
+          "Consumer Banking Channels",
+          "SME and Corporate Channels",
+          "Global Payments and Trade Channels",
+          "Digital and Mobile Banking Channels"
+        ],
+        "demand": [
+          "Consumer Credit and Deposit Demand",
+          "SME Finance Demand",
+          "International Banking Demand"
+        ]
+      }
+    },
+    {
+      "rank": 98,
+      "symbol": "GILD",
+      "name": "Gilead Sciences",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/GILD.png"
+      },
+      "profile": {
+        "upstream": [
+          "API and Biologics Manufacturing Inputs",
+          "External Manufacturing and Fill-Finish Inputs",
+          "Clinical Research and Trial Inputs",
+          "Packaging and Cold-Chain Inputs",
+          "Supplier and Procurement Inputs"
+        ],
+        "services": [
+          "Regulatory and Quality Management Services",
+          "Supplier Governance and Responsible Sourcing",
+          "Global Distribution and Market Access Services",
+          "Treasury and Portfolio Risk Services"
+        ],
+        "channels": [
+          "Hospital and Specialty Care Channels",
+          "Retail and Specialty Pharmacy Channels",
+          "Government and Global Health Channels",
+          "International Distribution Channels"
+        ],
+        "demand": [
+          "Antiviral Treatment Demand",
+          "Oncology Therapy Demand",
+          "Specialty Biopharma Demand"
+        ]
+      }
+    },
+    {
+      "rank": 99,
+      "symbol": "DIS",
+      "name": "Walt Disney",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/DIS.png"
+      },
+      "profile": {
+        "upstream": [
+          "Content Production and Studio Inputs",
+          "Streaming Infrastructure and CDN Inputs",
+          "Parks and Consumer Product Supply Inputs",
+          "Advertising and Measurement Platform Inputs",
+          "Licensing and Rights Inputs"
+        ],
+        "services": [
+          "Distribution and Platform Operations Services",
+          "Marketing and Audience Analytics Services",
+          "Cybersecurity and Compliance Services",
+          "Treasury and Rights Management Services"
+        ],
+        "channels": [
+          "Streaming and Direct-to-Consumer Channels",
+          "Linear Networks and Distribution Channels",
+          "Theatrical and Studio Channels",
+          "Parks, Experiences, and Consumer Products Channels"
+        ],
+        "demand": [
+          "Streaming Subscription Demand",
+          "Box Office and Content Demand",
+          "Parks and Experiences Demand"
+        ]
+      }
+    },
+    {
+      "rank": 100,
+      "symbol": "APH",
+      "name": "Amphenol",
+      "hq": {
+        "city": "",
+        "country": "United States",
+        "country_code": "US",
+        "flag_emoji": "🇺🇸",
+        "logo_url": "https://companiesmarketcap.com/img/company-logos/64/APH.png"
+      },
+      "profile": {
+        "upstream": [
+          "Copper, Resin, and Connector Material Inputs",
+          "Precision Manufacturing Component Inputs",
+          "Cable and Antenna Sub-assembly Inputs",
+          "Electronics and Sensor Inputs",
+          "Supplier Manufacturing Ecosystem Inputs"
+        ],
+        "services": [
+          "Engineering and Product Customization Services",
+          "Quality, Compliance, and Reliability Services",
+          "Global Distribution and Fulfillment Services",
+          "Treasury and Procurement Services"
+        ],
+        "channels": [
+          "Automotive and Transportation Channels",
+          "IT Datacom and Mobile Device Channels",
+          "Industrial and Aerospace Channels",
+          "Broadband and Communication Infrastructure Channels"
+        ],
+        "demand": [
+          "High-speed Connectivity Demand",
+          "Automotive Electronics Demand",
+          "Industrial Interconnect Demand"
+        ]
+      }
+    }
+  ],
+  "change_log": [
+    {
+      "symbol": "ALL",
+      "field": "hq",
+      "action": "updated",
+      "reason": "Enriched HQ metadata (City for top 20, Country/Flag/Logo for all)",
+      "old_summary": "Missing",
+      "new_summary": "Populated"
+    }
+  ]
+}

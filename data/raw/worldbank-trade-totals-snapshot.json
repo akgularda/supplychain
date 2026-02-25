@@ -1,0 +1,1002 @@
+{
+  "cachedAt": "2026-02-25T01:16:33.029Z",
+  "source": "World Bank API (NE.EXP.GNFS.CD, NE.IMP.GNFS.CD)",
+  "year": 2024,
+  "data": {
+    "AFE": {
+      "exportsUsd": 319825435256,
+      "year": 2024,
+      "importsUsd": 353911296001
+    },
+    "CEB": {
+      "exportsUsd": 1436116582981,
+      "year": 2024,
+      "importsUsd": 1384637635373
+    },
+    "EAR": {
+      "exportsUsd": 3978583852956,
+      "year": 2024,
+      "importsUsd": 4222794742715
+    },
+    "EAS": {
+      "exportsUsd": 9913974194655,
+      "year": 2024,
+      "importsUsd": 8957807249078
+    },
+    "EAP": {
+      "exportsUsd": 5384630257904,
+      "year": 2024,
+      "importsUsd": 4835429641641
+    },
+    "TEA": {
+      "exportsUsd": 5377618134841,
+      "year": 2024,
+      "importsUsd": 4826489709915
+    },
+    "EMU": {
+      "exportsUsd": 8105847354423,
+      "year": 2024,
+      "importsUsd": 7383770624026
+    },
+    "ECS": {
+      "exportsUsd": 13129045905189,
+      "year": 2024,
+      "importsUsd": 12136428850996
+    },
+    "ECA": {
+      "exportsUsd": 781490820324,
+      "year": 2024,
+      "importsUsd": 837949147603
+    },
+    "TEC": {
+      "exportsUsd": 1983503498064,
+      "year": 2024,
+      "importsUsd": 1933774114970
+    },
+    "EUU": {
+      "exportsUsd": 9821037472659,
+      "year": 2024,
+      "importsUsd": 8991181681614
+    },
+    "FCS": {
+      "exportsUsd": 461050974936,
+      "year": 2024,
+      "importsUsd": 527270578397
+    },
+    "HPC": {
+      "exportsUsd": 264290456342,
+      "year": 2024,
+      "importsUsd": 342795901172
+    },
+    "IBD": {
+      "exportsUsd": 10458288207060,
+      "year": 2024,
+      "importsUsd": 9956819497401
+    },
+    "IBT": {
+      "exportsUsd": 11093804905727,
+      "year": 2024,
+      "importsUsd": 10801900595071
+    },
+    "IDX": {
+      "exportsUsd": 390592253033,
+      "year": 2024,
+      "importsUsd": 552949772181
+    },
+    "IDA": {
+      "exportsUsd": 670943996186,
+      "year": 2024,
+      "importsUsd": 841007480964
+    },
+    "LTE": {
+      "exportsUsd": 9144844353437,
+      "year": 2024,
+      "importsUsd": 7977879182815
+    },
+    "LCN": {
+      "exportsUsd": 1824161655829,
+      "year": 2024,
+      "importsUsd": 1843213767926
+    },
+    "LAC": {
+      "exportsUsd": 1487828320365,
+      "year": 2024,
+      "importsUsd": 1546950345108
+    },
+    "TLA": {
+      "exportsUsd": 1728249656589,
+      "year": 2024,
+      "importsUsd": 1751273664535
+    },
+    "LDC": {
+      "exportsUsd": 322195371494,
+      "year": 2024,
+      "importsUsd": 440956289592
+    },
+    "LMY": {
+      "exportsUsd": 9651217652391,
+      "year": 2024,
+      "importsUsd": 9494074512833
+    },
+    "MNA": {
+      "exportsUsd": 540537798776,
+      "year": 2024,
+      "importsUsd": 668222490200
+    },
+    "TMN": {
+      "exportsUsd": 537645585565,
+      "year": 2024,
+      "importsUsd": 660003839614
+    },
+    "MIC": {
+      "exportsUsd": 9536831060398,
+      "year": 2024,
+      "importsUsd": 9314804151903
+    },
+    "NAC": {
+      "exportsUsd": 3926235266717,
+      "year": 2024,
+      "importsUsd": 4839044359316
+    },
+    "OED": {
+      "exportsUsd": 19162632639351,
+      "year": 2024,
+      "importsUsd": 19031181509872
+    },
+    "OSS": {
+      "exportsUsd": 159646259616,
+      "year": 2024,
+      "importsUsd": 157134076700
+    },
+    "PST": {
+      "exportsUsd": 18221379363807,
+      "year": 2024,
+      "importsUsd": 18184787949264
+    },
+    "PRE": {
+      "exportsUsd": 450052877208,
+      "year": 2024,
+      "importsUsd": 462815425359
+    },
+    "SST": {
+      "exportsUsd": 232739574750,
+      "year": 2024,
+      "importsUsd": 222373048146
+    },
+    "SAS": {
+      "exportsUsd": 904021274701,
+      "year": 2024,
+      "importsUsd": 1035307516756
+    },
+    "TSA": {
+      "exportsUsd": 904021274701,
+      "year": 2024,
+      "importsUsd": 1035307516756
+    },
+    "SSF": {
+      "exportsUsd": 560269492777,
+      "year": 2024,
+      "importsUsd": 570429772371
+    },
+    "SSA": {
+      "exportsUsd": 549328233325,
+      "year": 2024,
+      "importsUsd": 551632502572
+    },
+    "TSS": {
+      "exportsUsd": 560269492777,
+      "year": 2024,
+      "importsUsd": 570429772371
+    },
+    "WLD": {
+      "exportsUsd": 32304427319056,
+      "year": 2024,
+      "importsUsd": 31278652171634
+    },
+    "ALB": {
+      "exportsUsd": 9813761314,
+      "year": 2024,
+      "importsUsd": 11675880655
+    },
+    "DZA": {
+      "exportsUsd": 53466882957,
+      "year": 2024,
+      "importsUsd": 54624467792
+    },
+    "AGO": {
+      "exportsUsd": 31798017664,
+      "year": 2024,
+      "importsUsd": 19552084465
+    },
+    "ARG": {
+      "exportsUsd": 97349127043,
+      "year": 2024,
+      "importsUsd": 80944817978
+    },
+    "ARM": {
+      "exportsUsd": 19109663382,
+      "year": 2024,
+      "importsUsd": 19840049652
+    },
+    "ABW": {
+      "exportsUsd": 3582826086,
+      "year": 2024,
+      "importsUsd": 3257796508
+    },
+    "AUS": {
+      "exportsUsd": 432605705549,
+      "year": 2024,
+      "importsUsd": 395749225409
+    },
+    "AUT": {
+      "exportsUsd": 297762301951,
+      "year": 2024,
+      "importsUsd": 284227859384
+    },
+    "AZE": {
+      "exportsUsd": 34112882353,
+      "year": 2024,
+      "importsUsd": 27338823529
+    },
+    "BHS": {
+      "exportsUsd": 5982200000,
+      "year": 2024,
+      "importsUsd": 6564100000
+    },
+    "BHR": {
+      "exportsUsd": 41303457447,
+      "year": 2024,
+      "importsUsd": 33044414894
+    },
+    "BGD": {
+      "exportsUsd": 47087839244,
+      "year": 2024,
+      "importsUsd": 73445483484
+    },
+    "BLR": {
+      "exportsUsd": 49423786393,
+      "year": 2024,
+      "importsUsd": 50783533445
+    },
+    "BEL": {
+      "exportsUsd": 532215784956,
+      "year": 2024,
+      "importsUsd": 534804947276
+    },
+    "BLZ": {
+      "exportsUsd": 1769154200,
+      "year": 2024,
+      "importsUsd": 1721921750
+    },
+    "BEN": {
+      "exportsUsd": 4047363784,
+      "year": 2024,
+      "importsUsd": 4683140134
+    },
+    "BMU": {
+      "exportsUsd": 4814800000,
+      "year": 2024,
+      "importsUsd": 2137200000
+    },
+    "BOL": {
+      "exportsUsd": 11763846802,
+      "year": 2024,
+      "importsUsd": 14018232750
+    },
+    "BIH": {
+      "exportsUsd": 12103908243,
+      "year": 2024,
+      "importsUsd": 16075269921
+    },
+    "BWA": {
+      "exportsUsd": 5315056809,
+      "year": 2024,
+      "importsUsd": 8480830491
+    },
+    "BRA": {
+      "exportsUsd": 392105352908,
+      "year": 2024,
+      "importsUsd": 385708875014
+    },
+    "BRN": {
+      "exportsUsd": 11393732326,
+      "year": 2024,
+      "importsUsd": 8946253008
+    },
+    "BGR": {
+      "exportsUsd": 63891606678,
+      "year": 2024,
+      "importsUsd": 61042597196
+    },
+    "BFA": {
+      "exportsUsd": 6603895284,
+      "year": 2024,
+      "importsUsd": 7387126426
+    },
+    "CPV": {
+      "exportsUsd": 1158263032,
+      "year": 2024,
+      "importsUsd": 1471907534
+    },
+    "KHM": {
+      "exportsUsd": 33078910281,
+      "year": 2024,
+      "importsUsd": 33412575812
+    },
+    "CMR": {
+      "exportsUsd": 8353326094,
+      "year": 2024,
+      "importsUsd": 9982430836
+    },
+    "CAN": {
+      "exportsUsd": 727920466717,
+      "year": 2024,
+      "importsUsd": 733807159316
+    },
+    "CAF": {
+      "exportsUsd": 412917514,
+      "year": 2024,
+      "importsUsd": 864653559
+    },
+    "TCD": {
+      "exportsUsd": 5811653283,
+      "year": 2024,
+      "importsUsd": 3531613266
+    },
+    "CHL": {
+      "exportsUsd": 111377047470,
+      "year": 2024,
+      "importsUsd": 99531074993
+    },
+    "CHN": {
+      "exportsUsd": 3753056083349,
+      "year": 2024,
+      "importsUsd": 3219342570126
+    },
+    "COL": {
+      "exportsUsd": 67426785841,
+      "year": 2024,
+      "importsUsd": 87642599037
+    },
+    "COM": {
+      "exportsUsd": 142823532,
+      "year": 2024,
+      "importsUsd": 496590153
+    },
+    "COD": {
+      "exportsUsd": 34597093711,
+      "year": 2024,
+      "importsUsd": 36758285261
+    },
+    "COG": {
+      "exportsUsd": 8296952539,
+      "year": 2024,
+      "importsUsd": 6352207277
+    },
+    "CRI": {
+      "exportsUsd": 36740228685,
+      "year": 2024,
+      "importsUsd": 31274194800
+    },
+    "CIV": {
+      "exportsUsd": 22673498101,
+      "year": 2024,
+      "importsUsd": 21984235110
+    },
+    "HRV": {
+      "exportsUsd": 46623095274,
+      "year": 2024,
+      "importsUsd": 50928383014
+    },
+    "CYP": {
+      "exportsUsd": 36513113033,
+      "year": 2024,
+      "importsUsd": 35144118889
+    },
+    "CZE": {
+      "exportsUsd": 238995944035,
+      "year": 2024,
+      "importsUsd": 217301727913
+    },
+    "DNK": {
+      "exportsUsd": 301421099196,
+      "year": 2024,
+      "importsUsd": 257954032293
+    },
+    "DJI": {
+      "exportsUsd": 5248946382,
+      "year": 2024,
+      "importsUsd": 4767585148
+    },
+    "DOM": {
+      "exportsUsd": 28296491456,
+      "year": 2024,
+      "importsUsd": 36061223105
+    },
+    "ECU": {
+      "exportsUsd": 37750170800,
+      "year": 2024,
+      "importsUsd": 33568458200
+    },
+    "EGY": {
+      "exportsUsd": 63713393368,
+      "year": 2024,
+      "importsUsd": 90357257459
+    },
+    "SLV": {
+      "exportsUsd": 11585810000,
+      "year": 2024,
+      "importsUsd": 18354040000
+    },
+    "GNQ": {
+      "exportsUsd": 4488990305,
+      "year": 2024,
+      "importsUsd": 3239596744
+    },
+    "EST": {
+      "exportsUsd": 32636565839,
+      "year": 2024,
+      "importsUsd": 32506629311
+    },
+    "SWZ": {
+      "exportsUsd": 2611937419,
+      "year": 2024,
+      "importsUsd": 2610423259
+    },
+    "ETH": {
+      "exportsUsd": 8294520633,
+      "year": 2024,
+      "importsUsd": 17760943867
+    },
+    "FRO": {
+      "exportsUsd": 2211130769,
+      "year": 2024,
+      "importsUsd": 2074963893
+    },
+    "FIN": {
+      "exportsUsd": 125177301211,
+      "year": 2024,
+      "importsUsd": 124115485971
+    },
+    "FRA": {
+      "exportsUsd": 1071066237472,
+      "year": 2024,
+      "importsUsd": 1081453951069
+    },
+    "PYF": {
+      "exportsUsd": 1158591620,
+      "year": 2024,
+      "importsUsd": 2918236639
+    },
+    "GAB": {
+      "exportsUsd": 13494077458,
+      "year": 2024,
+      "importsUsd": 5739732546
+    },
+    "GMB": {
+      "exportsUsd": 210399924,
+      "year": 2024,
+      "importsUsd": 803756505
+    },
+    "GEO": {
+      "exportsUsd": 16347695471,
+      "year": 2024,
+      "importsUsd": 19023475737
+    },
+    "DEU": {
+      "exportsUsd": 1941431210622,
+      "year": 2024,
+      "importsUsd": 1764438191611
+    },
+    "GHA": {
+      "exportsUsd": 29197465999,
+      "year": 2024,
+      "importsUsd": 28244066026
+    },
+    "GRC": {
+      "exportsUsd": 107906278861,
+      "year": 2024,
+      "importsUsd": 122135634583
+    },
+    "GTM": {
+      "exportsUsd": 17990664478,
+      "year": 2024,
+      "importsUsd": 35602767957
+    },
+    "GIN": {
+      "exportsUsd": 10351843899,
+      "year": 2024,
+      "importsUsd": 14101095980
+    },
+    "GNB": {
+      "exportsUsd": 262820174,
+      "year": 2024,
+      "importsUsd": 598062698
+    },
+    "HTI": {
+      "exportsUsd": 857816740,
+      "year": 2024,
+      "importsUsd": 4754024349
+    },
+    "HND": {
+      "exportsUsd": 12444557871,
+      "year": 2024,
+      "importsUsd": 21351448804
+    },
+    "HKG": {
+      "exportsUsd": 739642429560,
+      "year": 2024,
+      "importsUsd": 723058784062
+    },
+    "HUN": {
+      "exportsUsd": 167912655727,
+      "year": 2024,
+      "importsUsd": 158386316310
+    },
+    "ISL": {
+      "exportsUsd": 14117485077,
+      "year": 2024,
+      "importsUsd": 14471061048
+    },
+    "IND": {
+      "exportsUsd": 827405227199,
+      "year": 2024,
+      "importsUsd": 918333719558
+    },
+    "IDN": {
+      "exportsUsd": 309745619367,
+      "year": 2024,
+      "importsUsd": 284696296711
+    },
+    "IRN": {
+      "exportsUsd": 111928863188,
+      "year": 2024,
+      "importsUsd": 135497500556
+    },
+    "IRQ": {
+      "exportsUsd": 104886427210,
+      "year": 2024,
+      "importsUsd": 92844392288
+    },
+    "IRL": {
+      "exportsUsd": 877092941905,
+      "year": 2024,
+      "importsUsd": 622469214439
+    },
+    "ISR": {
+      "exportsUsd": 153655742279,
+      "year": 2024,
+      "importsUsd": 140591934051
+    },
+    "ITA": {
+      "exportsUsd": 773888180686,
+      "year": 2024,
+      "importsUsd": 721835854516
+    },
+    "JPN": {
+      "exportsUsd": 917043674687,
+      "year": 2024,
+      "importsUsd": 952041559318
+    },
+    "JOR": {
+      "exportsUsd": 22734507042,
+      "year": 2024,
+      "importsUsd": 30446760563
+    },
+    "KAZ": {
+      "exportsUsd": 92070351467,
+      "year": 2024,
+      "importsUsd": 74543688674
+    },
+    "KEN": {
+      "exportsUsd": 20536686007,
+      "year": 2024,
+      "importsUsd": 27822985577
+    },
+    "KOR": {
+      "exportsUsd": 831889172091,
+      "year": 2024,
+      "importsUsd": 755486201522
+    },
+    "XKX": {
+      "exportsUsd": 4674665916,
+      "year": 2024,
+      "importsUsd": 8066641704
+    },
+    "KGZ": {
+      "exportsUsd": 7593078868,
+      "year": 2024,
+      "importsUsd": 14718020577
+    },
+    "LVA": {
+      "exportsUsd": 28540727743,
+      "year": 2024,
+      "importsUsd": 29237162725
+    },
+    "LBY": {
+      "exportsUsd": 34896676633,
+      "year": 2024,
+      "importsUsd": 27562617338
+    },
+    "LTU": {
+      "exportsUsd": 62899954052,
+      "year": 2024,
+      "importsUsd": 58504093078
+    },
+    "LUX": {
+      "exportsUsd": 178661670861,
+      "year": 2024,
+      "importsUsd": 149000525635
+    },
+    "MAC": {
+      "exportsUsd": 45603671397,
+      "year": 2024,
+      "importsUsd": 24679130369
+    },
+    "MDG": {
+      "exportsUsd": 4052441956,
+      "year": 2024,
+      "importsUsd": 5525278015
+    },
+    "MYS": {
+      "exportsUsd": 301221326764,
+      "year": 2024,
+      "importsUsd": 278760544031
+    },
+    "MDV": {
+      "exportsUsd": 5523181581,
+      "year": 2024,
+      "importsUsd": 5526396213
+    },
+    "MLI": {
+      "exportsUsd": 6046342987,
+      "year": 2024,
+      "importsUsd": 7323175198
+    },
+    "MLT": {
+      "exportsUsd": 29587849038,
+      "year": 2024,
+      "importsUsd": 24892773004
+    },
+    "MHL": {
+      "exportsUsd": 122031784,
+      "year": 2024,
+      "importsUsd": 237149025
+    },
+    "MRT": {
+      "exportsUsd": 4517112387,
+      "year": 2024,
+      "importsUsd": 5692691361
+    },
+    "MUS": {
+      "exportsUsd": 10025062117,
+      "year": 2024,
+      "importsUsd": 11697830481
+    },
+    "MEX": {
+      "exportsUsd": 681348718684,
+      "year": 2024,
+      "importsUsd": 703294122577
+    },
+    "FSM": {
+      "exportsUsd": 127000000,
+      "year": 2024,
+      "importsUsd": 337000000
+    },
+    "MDA": {
+      "exportsUsd": 5717372649,
+      "year": 2024,
+      "importsUsd": 10420162581
+    },
+    "MNG": {
+      "exportsUsd": 16350790018,
+      "year": 2024,
+      "importsUsd": 16592364970
+    },
+    "MNE": {
+      "exportsUsd": 3617891054,
+      "year": 2024,
+      "importsUsd": 5474504715
+    },
+    "MAR": {
+      "exportsUsd": 67454245753,
+      "year": 2024,
+      "importsUsd": 80608604200
+    },
+    "MOZ": {
+      "exportsUsd": 9743034216,
+      "year": 2024,
+      "importsUsd": 12015027433
+    },
+    "NAM": {
+      "exportsUsd": 5568765591,
+      "year": 2024,
+      "importsUsd": 9091147388
+    },
+    "NRU": {
+      "exportsUsd": 89948221,
+      "year": 2024,
+      "importsUsd": 179699762
+    },
+    "NPL": {
+      "exportsUsd": 3270882001,
+      "year": 2024,
+      "importsUsd": 14122194838
+    },
+    "NLD": {
+      "exportsUsd": 1001469281570,
+      "year": 2024,
+      "importsUsd": 867461920495
+    },
+    "NCL": {
+      "exportsUsd": 999771629,
+      "year": 2024,
+      "importsUsd": 2451338024
+    },
+    "NZL": {
+      "exportsUsd": 64536380922,
+      "year": 2024,
+      "importsUsd": 68735355084
+    },
+    "NIC": {
+      "exportsUsd": 7968788635,
+      "year": 2024,
+      "importsUsd": 11434873062
+    },
+    "NER": {
+      "exportsUsd": 5430937501,
+      "year": 2024,
+      "importsUsd": 4502353239
+    },
+    "MKD": {
+      "exportsUsd": 10455662631,
+      "year": 2024,
+      "importsUsd": 12653697200
+    },
+    "NOR": {
+      "exportsUsd": 229666413339,
+      "year": 2024,
+      "importsUsd": 163801535479
+    },
+    "OMN": {
+      "exportsUsd": 70788296489,
+      "year": 2024,
+      "importsUsd": 52261638492
+    },
+    "PAK": {
+      "exportsUsd": 38607805446,
+      "year": 2024,
+      "importsUsd": 63865509443
+    },
+    "PAN": {
+      "exportsUsd": 38380161274,
+      "year": 2024,
+      "importsUsd": 34017704881
+    },
+    "PRY": {
+      "exportsUsd": 16539167593,
+      "year": 2024,
+      "importsUsd": 17618518949
+    },
+    "PER": {
+      "exportsUsd": 82536982274,
+      "year": 2024,
+      "importsUsd": 66342594208
+    },
+    "PHL": {
+      "exportsUsd": 118974717245,
+      "year": 2024,
+      "importsUsd": 185164160350
+    },
+    "POL": {
+      "exportsUsd": 478889163360,
+      "year": 2024,
+      "importsUsd": 442176791004
+    },
+    "PRT": {
+      "exportsUsd": 143389625477,
+      "year": 2024,
+      "importsUsd": 137603377519
+    },
+    "PRI": {
+      "exportsUsd": 65380300000,
+      "year": 2024,
+      "importsUsd": 53872000000
+    },
+    "ROU": {
+      "exportsUsd": 136204440675,
+      "year": 2024,
+      "importsUsd": 159192458246
+    },
+    "RUS": {
+      "exportsUsd": 476430904567,
+      "year": 2024,
+      "importsUsd": 382411727676
+    },
+    "RWA": {
+      "exportsUsd": 4392652634,
+      "year": 2024,
+      "importsUsd": 5577000115
+    },
+    "WSM": {
+      "exportsUsd": 360459829,
+      "year": 2024,
+      "importsUsd": 574545149
+    },
+    "SAU": {
+      "exportsUsd": 360897333333,
+      "year": 2024,
+      "importsUsd": 317011733333
+    },
+    "SEN": {
+      "exportsUsd": 8100664780,
+      "year": 2024,
+      "importsUsd": 14254913873
+    },
+    "SRB": {
+      "exportsUsd": 48277776722,
+      "year": 2024,
+      "importsUsd": 52383977874
+    },
+    "SYC": {
+      "exportsUsd": 1845801876,
+      "year": 2024,
+      "importsUsd": 2236609631
+    },
+    "SLE": {
+      "exportsUsd": 1203610314,
+      "year": 2024,
+      "importsUsd": 1622864248
+    },
+    "SGP": {
+      "exportsUsd": 978597520043,
+      "year": 2024,
+      "importsUsd": 786020626642
+    },
+    "SVK": {
+      "exportsUsd": 120475379841,
+      "year": 2024,
+      "importsUsd": 120821798958
+    },
+    "SVN": {
+      "exportsUsd": 59047049757,
+      "year": 2024,
+      "importsUsd": 54539677618
+    },
+    "SLB": {
+      "exportsUsd": 642590820,
+      "year": 2024,
+      "importsUsd": 1121200954
+    },
+    "SOM": {
+      "exportsUsd": 3735000000,
+      "year": 2024,
+      "importsUsd": 11861000000
+    },
+    "ZAF": {
+      "exportsUsd": 127531645077,
+      "year": 2024,
+      "importsUsd": 119761291334
+    },
+    "ESP": {
+      "exportsUsd": 639462804274,
+      "year": 2024,
+      "importsUsd": 567649024934
+    },
+    "LKA": {
+      "exportsUsd": 19680136462,
+      "year": 2024,
+      "importsUsd": 22277780976
+    },
+    "SDN": {
+      "exportsUsd": 358103584,
+      "year": 2024,
+      "importsUsd": 633066206
+    },
+    "SWE": {
+      "exportsUsd": 327875208566,
+      "year": 2024,
+      "importsUsd": 311357134625
+    },
+    "CHE": {
+      "exportsUsd": 675814842375,
+      "year": 2024,
+      "importsUsd": 580072309989
+    },
+    "TZA": {
+      "exportsUsd": 15635226304,
+      "year": 2024,
+      "importsUsd": 17095546885
+    },
+    "THA": {
+      "exportsUsd": 368824202323,
+      "year": 2024,
+      "importsUsd": 351173464106
+    },
+    "TLS": {
+      "exportsUsd": 196962615,
+      "year": 2024,
+      "importsUsd": 1583732768
+    },
+    "TUN": {
+      "exportsUsd": 25667010359,
+      "year": 2024,
+      "importsUsd": 28898464568
+    },
+    "TUR": {
+      "exportsUsd": 374686274270,
+      "year": 2024,
+      "importsUsd": 367379077169
+    },
+    "TKM": {
+      "exportsUsd": 9030077768,
+      "year": 2024,
+      "importsUsd": 5735835361
+    },
+    "UGA": {
+      "exportsUsd": 9034338030,
+      "year": 2024,
+      "importsUsd": 13960593896
+    },
+    "UKR": {
+      "exportsUsd": 56097413427,
+      "year": 2024,
+      "importsUsd": 92209661950
+    },
+    "GBR": {
+      "exportsUsd": 1142086333403,
+      "year": 2024,
+      "importsUsd": 1174222748817
+    },
+    "USA": {
+      "exportsUsd": 3193500000000,
+      "year": 2024,
+      "importsUsd": 4103100000000
+    },
+    "URY": {
+      "exportsUsd": 23285155540,
+      "year": 2024,
+      "importsUsd": 19191233873
+    },
+    "UZB": {
+      "exportsUsd": 26172759004,
+      "year": 2024,
+      "importsUsd": 43642721046
+    },
+    "VEN": {
+      "exportsUsd": 20198598348,
+      "year": 2024,
+      "importsUsd": 11047411084
+    },
+    "VNM": {
+      "exportsUsd": 429484098196,
+      "year": 2024,
+      "importsUsd": 398774124844
+    },
+    "PSE": {
+      "exportsUsd": 2884800000,
+      "year": 2024,
+      "importsUsd": 8264200000
+    },
+    "ZMB": {
+      "exportsUsd": 8851528098,
+      "year": 2024,
+      "importsUsd": 6971790366
+    },
+    "ZWE": {
+      "exportsUsd": 7497382687,
+      "year": 2024,
+      "importsUsd": 9735878259
+    },
+    "IDB": {
+      "importsUsd": 284575095403,
+      "year": 2024,
+      "exportsUsd": 0
+    },
+    "MEA": {
+      "importsUsd": 1905697979517,
+      "year": 2024,
+      "exportsUsd": 0
+    }
+  }
+}

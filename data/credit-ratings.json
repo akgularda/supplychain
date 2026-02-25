@@ -1,0 +1,1976 @@
+{
+  "meta": {
+    "generatedAt": "2026-02-24T12:41:51.818Z",
+    "source": "https://api.fitchratings.com/ (public GraphQL search endpoint)",
+    "universeCount": 100,
+    "fitchCoverageCount": 55,
+    "notes": [
+      "Fitch ratings are best-effort matches based on entity search.",
+      "S&P and Moody's are placeholders; public bulk endpoints are not available in this workspace."
+    ]
+  },
+  "ratingsBySymbol": {
+    "NVDA": {
+      "symbol": "NVDA",
+      "company": "NVIDIA",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "AAPL": {
+      "symbol": "AAPL",
+      "company": "Apple",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "GOOG": {
+      "symbol": "GOOG",
+      "company": "Alphabet (Google)",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "MSFT": {
+      "symbol": "MSFT",
+      "company": "Microsoft",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "AMZN": {
+      "symbol": "AMZN",
+      "company": "Amazon",
+      "fitch": {
+        "entityName": "Amazon.com, Inc.",
+        "permalink": "amazoncom-inc-96631782",
+        "longTerm": {
+          "code": "AA-",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-11T05:00:52.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1+",
+          "outlook": "-",
+          "effectiveDate": "2026-02-11T05:00:52.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 89.67,
+        "matchTokens": [
+          "amazon"
+        ],
+        "matchTarget": "Amazon"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "TSM": {
+      "symbol": "TSM",
+      "company": "TSMC",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "META": {
+      "symbol": "META",
+      "company": "Meta Platforms (Facebook)",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "2222.SR": {
+      "symbol": "2222.SR",
+      "company": "Saudi Aramco",
+      "fitch": {
+        "entityName": "Saudi Arabian Oil Company",
+        "permalink": "saudi-arabian-oil-company-96540423",
+        "longTerm": {
+          "code": "A+",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-04T10:31:05.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1+",
+          "outlook": "-",
+          "effectiveDate": "2026-02-04T10:31:05.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "saudi",
+          "arabian",
+          "oil"
+        ],
+        "matchTarget": "Saudi Arabian Oil Company"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "AVGO": {
+      "symbol": "AVGO",
+      "company": "Broadcom",
+      "fitch": {
+        "entityName": "Broadcom Inc.",
+        "permalink": "broadcom-inc-96473152",
+        "longTerm": {
+          "code": "BBB+",
+          "outlook": "Rating Outlook Positive",
+          "effectiveDate": "2025-12-05T05:00:02.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F2",
+          "outlook": "-",
+          "effectiveDate": "2025-12-05T05:00:02.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "broadcom"
+        ],
+        "matchTarget": "Broadcom"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "TSLA": {
+      "symbol": "TSLA",
+      "company": "Tesla",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "BRK-B": {
+      "symbol": "BRK-B",
+      "company": "Berkshire Hathaway",
+      "fitch": {
+        "entityName": "Berkshire Hathaway Inc.",
+        "permalink": "berkshire-hathaway-inc-80090743",
+        "longTerm": {
+          "code": "AA-",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-11-24T18:48:33.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": null,
+        "matchScore": 168,
+        "matchTokens": [
+          "berkshire",
+          "hathaway"
+        ],
+        "matchTarget": "Berkshire Hathaway"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "WMT": {
+      "symbol": "WMT",
+      "company": "Walmart",
+      "fitch": {
+        "entityName": "Walmart, Inc.",
+        "permalink": "walmart-inc-80090564",
+        "longTerm": {
+          "code": "AA",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-03T05:00:12.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1+",
+          "outlook": "-",
+          "effectiveDate": "2026-02-03T05:00:12.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "walmart"
+        ],
+        "matchTarget": "Walmart"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "LLY": {
+      "symbol": "LLY",
+      "company": "Eli Lilly",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "005930.KS": {
+      "symbol": "005930.KS",
+      "company": "Samsung",
+      "fitch": {
+        "entityName": "Samsung Electronics Co., Ltd.",
+        "permalink": "samsung-electronics-co-ltd-82934525",
+        "longTerm": {
+          "code": "AA-",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-02-27T09:52:43.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": null,
+        "matchScore": 89.67,
+        "matchTokens": [
+          "samsung"
+        ],
+        "matchTarget": "Samsung"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "JPM": {
+      "symbol": "JPM",
+      "company": "JPMorgan Chase",
+      "fitch": {
+        "entityName": "JPMorgan Chase & Co.",
+        "permalink": "jpmorgan-chase-co-80089022",
+        "longTerm": {
+          "code": "AA-",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-06-03T20:33:44.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1+",
+          "outlook": "-",
+          "effectiveDate": "2025-06-03T20:33:44.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 128,
+        "matchTokens": [
+          "jpmorgan",
+          "chase"
+        ],
+        "matchTarget": "JPMorgan Chase"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "XOM": {
+      "symbol": "XOM",
+      "company": "Exxon Mobil",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "V": {
+      "symbol": "V",
+      "company": "Visa",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "TCEHY": {
+      "symbol": "TCEHY",
+      "company": "Tencent",
+      "fitch": {
+        "entityName": "Tencent Holdings Limited",
+        "permalink": "tencent-holdings-limited-93845090",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-06T05:00:52.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": null,
+        "matchScore": 168,
+        "matchTokens": [
+          "tencent"
+        ],
+        "matchTarget": "Tencent"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "JNJ": {
+      "symbol": "JNJ",
+      "company": "Johnson & Johnson",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "ASML": {
+      "symbol": "ASML",
+      "company": "ASML",
+      "fitch": {
+        "entityName": "ASML Holding N.V.",
+        "permalink": "asml-holding-nv-82470915",
+        "longTerm": {
+          "code": "A+",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-12-01T09:48:37.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": null,
+        "matchScore": 128,
+        "matchTokens": [
+          "asml"
+        ],
+        "matchTarget": "ASML"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "MU": {
+      "symbol": "MU",
+      "company": "Micron Technology",
+      "fitch": {
+        "entityName": "Micron Technology Inc.",
+        "permalink": "micron-technology-inc-96150940",
+        "longTerm": {
+          "code": "BBB",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-12-05T05:00:02.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": null,
+        "matchScore": 168,
+        "matchTokens": [
+          "micron",
+          "technology"
+        ],
+        "matchTarget": "Micron Technology"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "MA": {
+      "symbol": "MA",
+      "company": "Mastercard",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "000660.KS": {
+      "symbol": "000660.KS",
+      "company": "SK Hynix",
+      "fitch": {
+        "entityName": "SK hynix Inc.",
+        "permalink": "sk-hynix-inc-85375273",
+        "longTerm": {
+          "code": "BBB",
+          "outlook": "Rating Outlook Positive",
+          "effectiveDate": "2026-02-05T05:15:07.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": null,
+        "matchScore": 168,
+        "matchTokens": [
+          "sk",
+          "hynix"
+        ],
+        "matchTarget": "SK Hynix"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "COST": {
+      "symbol": "COST",
+      "company": "Costco",
+      "fitch": {
+        "entityName": "Costco Wholesale Corporation",
+        "permalink": "costco-wholesale-corporation-80091473",
+        "longTerm": {
+          "code": "AA",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-03T05:00:39.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "WD",
+          "outlook": "-",
+          "effectiveDate": "2012-05-22T04:00:00.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 89.67,
+        "matchTokens": [
+          "costco"
+        ],
+        "matchTarget": "Costco"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "ORCL": {
+      "symbol": "ORCL",
+      "company": "Oracle",
+      "fitch": {
+        "entityName": "Oracle Corporation",
+        "permalink": "oracle-corporation-81874137",
+        "longTerm": {
+          "code": "BBB",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-02T05:00:14.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F2",
+          "outlook": "-",
+          "effectiveDate": "2026-02-02T05:00:14.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "oracle"
+        ],
+        "matchTarget": "Oracle"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "ABBV": {
+      "symbol": "ABBV",
+      "company": "AbbVie",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "BAC": {
+      "symbol": "BAC",
+      "company": "Bank of America",
+      "fitch": {
+        "entityName": "Bank of America Corporation",
+        "permalink": "bank-of-america-corporation-80089031",
+        "longTerm": {
+          "code": "AA-",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-06-03T13:50:27.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1+",
+          "outlook": "-",
+          "effectiveDate": "2025-06-03T13:50:27.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "bank",
+          "america"
+        ],
+        "matchTarget": "Bank of America"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "HD": {
+      "symbol": "HD",
+      "company": "Home Depot",
+      "fitch": {
+        "entityName": "Home Depot, Inc. (The)",
+        "permalink": "home-depot-inc-the-80090927",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-12T05:00:46.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2026-02-12T05:00:46.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "home",
+          "depot"
+        ],
+        "matchTarget": "Home Depot"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "ROG.SW": {
+      "symbol": "ROG.SW",
+      "company": "Roche",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "PG": {
+      "symbol": "PG",
+      "company": "Procter & Gamble",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "BABA": {
+      "symbol": "BABA",
+      "company": "Alibaba",
+      "fitch": {
+        "entityName": "Alibaba Group Holding Limited",
+        "permalink": "alibaba-group-holding-limited-95006290",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-06T05:00:37.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": null,
+        "matchScore": 128,
+        "matchTokens": [
+          "alibaba"
+        ],
+        "matchTarget": "Alibaba"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "CVX": {
+      "symbol": "CVX",
+      "company": "Chevron",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "1398.HK": {
+      "symbol": "1398.HK",
+      "company": "ICBC",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "GE": {
+      "symbol": "GE",
+      "company": "General Electric",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "CAT": {
+      "symbol": "CAT",
+      "company": "Caterpillar",
+      "fitch": {
+        "entityName": "Caterpillar Inc.",
+        "permalink": "caterpillar-inc-80091026",
+        "longTerm": {
+          "code": "A+",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-13T22:07:05.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2026-02-13T22:07:05.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "caterpillar"
+        ],
+        "matchTarget": "Caterpillar"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "KO": {
+      "symbol": "KO",
+      "company": "Coca-Cola",
+      "fitch": {
+        "entityName": "Coca-Cola Icecek AS",
+        "permalink": "coca-cola-icecek-81957923",
+        "longTerm": {
+          "code": "BBB",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-02T09:40:02.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": null,
+        "matchScore": 103,
+        "matchTokens": [
+          "coca",
+          "cola"
+        ],
+        "matchTarget": "Coca-Cola"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "NFLX": {
+      "symbol": "NFLX",
+      "company": "Netflix",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "601288.SS": {
+      "symbol": "601288.SS",
+      "company": "Agricultural Bank of China",
+      "fitch": {
+        "entityName": "Agricultural Bank of China Limited",
+        "permalink": "agricultural-bank-of-china-limited-80360377",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-01-23T06:37:00.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1+",
+          "outlook": "-",
+          "effectiveDate": "2026-01-23T06:37:00.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "agricultural",
+          "bank",
+          "china"
+        ],
+        "matchTarget": "Agricultural Bank of China"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "601939.SS": {
+      "symbol": "601939.SS",
+      "company": "China Construction Bank",
+      "fitch": {
+        "entityName": "China Construction Bank Corporation",
+        "permalink": "china-construction-bank-corporation-80360433",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-01-23T08:00:15.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1+",
+          "outlook": "-",
+          "effectiveDate": "2026-01-23T08:00:15.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "china",
+          "construction",
+          "bank"
+        ],
+        "matchTarget": "China Construction Bank"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "AMD": {
+      "symbol": "AMD",
+      "company": "AMD",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "MC.PA": {
+      "symbol": "MC.PA",
+      "company": "LVMH",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "PLTR": {
+      "symbol": "PLTR",
+      "company": "Palantir",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "AZN": {
+      "symbol": "AZN",
+      "company": "AstraZeneca",
+      "fitch": {
+        "entityName": "AstraZeneca PLC",
+        "permalink": "astrazeneca-plc-80362434",
+        "longTerm": {
+          "code": "WD",
+          "outlook": "-",
+          "effectiveDate": "2025-08-19T07:50:08.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "WD",
+          "outlook": "-",
+          "effectiveDate": "2014-05-30T08:22:32.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "astrazeneca"
+        ],
+        "matchTarget": "AstraZeneca"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "NVS": {
+      "symbol": "NVS",
+      "company": "Novartis",
+      "fitch": {
+        "entityName": "Novartis AG",
+        "permalink": "novartis-ag-80457976",
+        "longTerm": {
+          "code": "WD",
+          "outlook": "-",
+          "effectiveDate": "2025-10-08T09:44:37.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "WD",
+          "outlook": "-",
+          "effectiveDate": "2025-10-08T09:44:37.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "novartis"
+        ],
+        "matchTarget": "Novartis"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "CSCO": {
+      "symbol": "CSCO",
+      "company": "Cisco",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "TM": {
+      "symbol": "TM",
+      "company": "Toyota",
+      "fitch": {
+        "entityName": "Toyota Motor Corporation",
+        "permalink": "toyota-motor-corporation-81756912",
+        "longTerm": {
+          "code": "A+",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-13T05:00:00.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2026-02-13T05:00:00.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 89.67,
+        "matchTokens": [
+          "toyota"
+        ],
+        "matchTarget": "Toyota"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "LRCX": {
+      "symbol": "LRCX",
+      "company": "Lam Research",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "MRK": {
+      "symbol": "MRK",
+      "company": "Merck",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "HSBC": {
+      "symbol": "HSBC",
+      "company": "HSBC",
+      "fitch": {
+        "entityName": "HSBC Holdings plc",
+        "permalink": "hsbc-holdings-plc-80359989",
+        "longTerm": {
+          "code": "A+",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-10-14T14:21:51.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1+",
+          "outlook": "-",
+          "effectiveDate": "2025-10-14T14:21:51.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "hsbc"
+        ],
+        "matchTarget": "HSBC"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "0857.HK": {
+      "symbol": "0857.HK",
+      "company": "PetroChina",
+      "fitch": {
+        "entityName": "PetroChina Company Limited",
+        "permalink": "petrochina-company-limited-82320901",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-04T05:00:28.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1+",
+          "outlook": "-",
+          "effectiveDate": "2026-02-04T05:00:28.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "petrochina"
+        ],
+        "matchTarget": "PetroChina"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "AMAT": {
+      "symbol": "AMAT",
+      "company": "Applied Materials",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "PM": {
+      "symbol": "PM",
+      "company": "Philip Morris International",
+      "fitch": {
+        "entityName": "Philip Morris International, Inc.",
+        "permalink": "philip-morris-international-inc-83229476",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-10-28T04:00:00.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2025-10-28T04:00:00.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "philip",
+          "morris",
+          "international"
+        ],
+        "matchTarget": "Philip Morris International"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "GS": {
+      "symbol": "GS",
+      "company": "Goldman Sachs",
+      "fitch": {
+        "entityName": "The Goldman Sachs Group, Inc.",
+        "permalink": "goldman-sachs-group-inc-the-80089109",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-05-21T04:00:05.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2025-05-21T04:00:05.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 128,
+        "matchTokens": [
+          "goldman",
+          "sachs"
+        ],
+        "matchTarget": "Goldman Sachs"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "MS": {
+      "symbol": "MS",
+      "company": "Morgan Stanley",
+      "fitch": {
+        "entityName": "Morgan Stanley",
+        "permalink": "morgan-stanley-80089154",
+        "longTerm": {
+          "code": "A+",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-05-21T04:00:25.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2025-05-21T04:00:25.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "morgan",
+          "stanley"
+        ],
+        "matchTarget": "Morgan Stanley"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "WFC": {
+      "symbol": "WFC",
+      "company": "Wells Fargo",
+      "fitch": {
+        "entityName": "Wells Fargo & Company",
+        "permalink": "wells-fargo-company-80088923",
+        "longTerm": {
+          "code": "A+",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-05-16T17:25:16.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2025-05-16T17:25:16.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 128,
+        "matchTokens": [
+          "wells",
+          "fargo"
+        ],
+        "matchTarget": "Wells Fargo"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "RTX": {
+      "symbol": "RTX",
+      "company": "RTX",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "600519.SS": {
+      "symbol": "600519.SS",
+      "company": "Kweichow Moutai",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "NESN.SW": {
+      "symbol": "NESN.SW",
+      "company": "Nestlé",
+      "fitch": {
+        "entityName": "Nestle SA",
+        "permalink": "nestle-sa-80361299",
+        "longTerm": {
+          "code": "WD",
+          "outlook": "-",
+          "effectiveDate": "2025-09-23T06:27:25.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "WD",
+          "outlook": "-",
+          "effectiveDate": "2025-09-23T06:27:25.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "nestle"
+        ],
+        "matchTarget": "Nestlé"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "UNH": {
+      "symbol": "UNH",
+      "company": "UnitedHealth",
+      "fitch": {
+        "entityName": "UnitedHealth Group Incorporated",
+        "permalink": "unitedhealth-group-incorporated-80091782",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Negative",
+          "effectiveDate": "2026-01-16T15:23:25.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2026-01-16T15:23:25.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 89.67,
+        "matchTokens": [
+          "unitedhealth"
+        ],
+        "matchTarget": "UnitedHealth"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "RMS.PA": {
+      "symbol": "RMS.PA",
+      "company": "Hermès",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "OR.PA": {
+      "symbol": "OR.PA",
+      "company": "L'Oréal",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "601988.SS": {
+      "symbol": "601988.SS",
+      "company": "Bank of China",
+      "fitch": {
+        "entityName": "Bank of China Limited",
+        "permalink": "bank-of-china-limited-80361325",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-01-23T06:25:50.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1+",
+          "outlook": "-",
+          "effectiveDate": "2026-01-23T06:25:50.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "bank",
+          "china"
+        ],
+        "matchTarget": "Bank of China"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "300750.SZ": {
+      "symbol": "300750.SZ",
+      "company": "CATL",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "RY": {
+      "symbol": "RY",
+      "company": "Royal Bank Of Canada",
+      "fitch": {
+        "entityName": "Royal Bank of Canada",
+        "permalink": "royal-bank-of-canada-mortgage-cover-pool-registered-covered-bonds-80089220",
+        "longTerm": {
+          "code": "AA-",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-08-13T14:39:47.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1+",
+          "outlook": "-",
+          "effectiveDate": "2025-08-13T14:39:47.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "royal",
+          "bank",
+          "canada"
+        ],
+        "matchTarget": "Royal Bank Of Canada"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "TMUS": {
+      "symbol": "TMUS",
+      "company": "T-Mobile US",
+      "fitch": {
+        "entityName": "T-Mobile US, Inc.",
+        "permalink": "t-mobile-us-inc-92144698",
+        "longTerm": {
+          "code": "BBB+",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-01-29T22:10:59.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": null,
+        "matchScore": 168,
+        "matchTokens": [
+          "mobile",
+          "us"
+        ],
+        "matchTarget": "T-Mobile US"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "IBM": {
+      "symbol": "IBM",
+      "company": "IBM",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "IHC.AE": {
+      "symbol": "IHC.AE",
+      "company": "International Holding Company",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "AXP": {
+      "symbol": "AXP",
+      "company": "American Express",
+      "fitch": {
+        "entityName": "American Express Company",
+        "permalink": "american-express-company-80091007",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-03-20T04:00:35.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2025-03-20T04:00:35.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "american",
+          "express"
+        ],
+        "matchTarget": "American Express"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "SAP": {
+      "symbol": "SAP",
+      "company": "SAP",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "MCD": {
+      "symbol": "MCD",
+      "company": "McDonald",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "LIN": {
+      "symbol": "LIN",
+      "company": "Linde",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "PRX.AS": {
+      "symbol": "PRX.AS",
+      "company": "Prosus",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "SIE.DE": {
+      "symbol": "SIE.DE",
+      "company": "Siemens",
+      "fitch": {
+        "entityName": "Siemens AG",
+        "permalink": "siemens-ag-80362385",
+        "longTerm": {
+          "code": "WD",
+          "outlook": "-",
+          "effectiveDate": "2026-02-09T13:08:47.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "WD",
+          "outlook": "-",
+          "effectiveDate": "2026-02-09T13:08:47.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "siemens"
+        ],
+        "matchTarget": "Siemens"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "PEP": {
+      "symbol": "PEP",
+      "company": "Pepsico",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "GEV": {
+      "symbol": "GEV",
+      "company": "GE Vernova",
+      "fitch": {
+        "entityName": "GE Vernova Inc.",
+        "permalink": "ge-vernova-llc-97491249",
+        "longTerm": {
+          "code": "BBB+",
+          "outlook": "Rating Outlook Positive",
+          "effectiveDate": "2026-02-02T05:00:39.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": null,
+        "matchScore": 168,
+        "matchTokens": [
+          "ge",
+          "vernova"
+        ],
+        "matchTarget": "GE Vernova"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "SHEL": {
+      "symbol": "SHEL",
+      "company": "Shell",
+      "fitch": {
+        "entityName": "Shell plc",
+        "permalink": "royal-dutch-shell-plc-80891259",
+        "longTerm": {
+          "code": "AA-",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-02T14:22:15.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1+",
+          "outlook": "-",
+          "effectiveDate": "2026-02-02T14:22:15.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "shell"
+        ],
+        "matchTarget": "Shell"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "INTC": {
+      "symbol": "INTC",
+      "company": "Intel",
+      "fitch": {
+        "entityName": "Intel Corporation",
+        "permalink": "intel-corporation-91986890",
+        "longTerm": {
+          "code": "BBB",
+          "outlook": "Rating Outlook Negative",
+          "effectiveDate": "2025-12-05T05:00:02.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F2",
+          "outlook": "-",
+          "effectiveDate": "2025-12-05T05:00:02.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "intel"
+        ],
+        "matchTarget": "Intel"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "0941.HK": {
+      "symbol": "0941.HK",
+      "company": "China Mobile",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "MUFG": {
+      "symbol": "MUFG",
+      "company": "Mitsubishi UFJ Financial",
+      "fitch": {
+        "entityName": "Mitsubishi UFJ Financial Group, Inc.",
+        "permalink": "mitsubishi-ufj-financial-group-inc-90905498",
+        "longTerm": {
+          "code": "A-",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-10-15T04:00:43.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2025-10-15T04:00:43.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "mitsubishi",
+          "ufj",
+          "financial"
+        ],
+        "matchTarget": "Mitsubishi UFJ Financial"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "CBA.AX": {
+      "symbol": "CBA.AX",
+      "company": "Commonwealth Bank",
+      "fitch": {
+        "entityName": "Commonwealth Bank of Australia",
+        "permalink": "commonwealth-bank-of-australia-80359685",
+        "longTerm": {
+          "code": "AA-",
+          "outlook": "Rating Outlook Positive",
+          "effectiveDate": "2025-03-26T04:48:34.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1+",
+          "outlook": "-",
+          "effectiveDate": "2025-03-26T04:48:34.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 103,
+        "matchTokens": [
+          "commonwealth",
+          "bank"
+        ],
+        "matchTarget": "Commonwealth Bank"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "ITX.MC": {
+      "symbol": "ITX.MC",
+      "company": "Inditex",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "RELIANCE.NS": {
+      "symbol": "RELIANCE.NS",
+      "company": "Reliance Industries",
+      "fitch": {
+        "entityName": "Reliance Industries Ltd",
+        "permalink": "reliance-industries-ltd-80596192",
+        "longTerm": {
+          "code": "BBB",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-06T05:45:54.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": null,
+        "matchScore": 168,
+        "matchTokens": [
+          "reliance",
+          "industries"
+        ],
+        "matchTarget": "Reliance Industries"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "NVO": {
+      "symbol": "NVO",
+      "company": "Novo Nordisk",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "VZ": {
+      "symbol": "VZ",
+      "company": "Verizon",
+      "fitch": {
+        "entityName": "Verizon Communications Inc.",
+        "permalink": "verizon-communications-inc-80090917",
+        "longTerm": {
+          "code": "A-",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-01-21T15:26:41.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2026-01-21T15:26:41.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 89.67,
+        "matchTokens": [
+          "verizon"
+        ],
+        "matchTarget": "Verizon"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "C": {
+      "symbol": "C",
+      "company": "Citigroup",
+      "fitch": {
+        "entityName": "Citigroup Inc.",
+        "permalink": "citigroup-inc-80089622",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-08-15T12:46:27.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2025-08-15T12:46:27.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "citigroup"
+        ],
+        "matchTarget": "Citigroup"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "AMGN": {
+      "symbol": "AMGN",
+      "company": "Amgen",
+      "fitch": {
+        "entityName": "Amgen Inc.",
+        "permalink": "amgen-inc-85094473",
+        "longTerm": {
+          "code": "BBB+",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-10T05:00:01.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F2",
+          "outlook": "-",
+          "effectiveDate": "2026-02-10T05:00:01.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "amgen"
+        ],
+        "matchTarget": "Amgen"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "TXN": {
+      "symbol": "TXN",
+      "company": "Texas Instruments",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "T": {
+      "symbol": "T",
+      "company": "AT&T",
+      "fitch": {
+        "entityName": "AT&T Inc.",
+        "permalink": "at-t-inc-80091150",
+        "longTerm": {
+          "code": "BBB+",
+          "outlook": "Rating Watch Negative",
+          "effectiveDate": "2026-01-29T22:10:56.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F2",
+          "outlook": "-",
+          "effectiveDate": "2026-01-29T22:10:56.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "at"
+        ],
+        "matchTarget": "AT&T"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "BHP": {
+      "symbol": "BHP",
+      "company": "BHP Group",
+      "fitch": {
+        "entityName": "BHP Group Limited",
+        "permalink": "bhp-group-limited-88660462",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-17T22:22:43.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2026-02-17T22:22:43.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "bhp"
+        ],
+        "matchTarget": "BHP Group"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "KLAC": {
+      "symbol": "KLAC",
+      "company": "KLA",
+      "fitch": {
+        "entityName": "KLA Corporation",
+        "permalink": "kla-corporation-86870740",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-12-08T14:04:34.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": null,
+        "matchScore": 168,
+        "matchTokens": [
+          "kla"
+        ],
+        "matchTarget": "KLA"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "ABT": {
+      "symbol": "ABT",
+      "company": "Abbott Laboratories",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "601628.SS": {
+      "symbol": "601628.SS",
+      "company": "China Life Insurance",
+      "fitch": {
+        "entityName": "China Life Insurance Company Limited",
+        "permalink": "china-life-insurance-company-limited-87601574",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-09-23T09:59:08.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": null,
+        "matchScore": 168,
+        "matchTokens": [
+          "china",
+          "life",
+          "insurance"
+        ],
+        "matchTarget": "China Life Insurance"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "RIO": {
+      "symbol": "RIO",
+      "company": "Rio Tinto",
+      "fitch": {
+        "entityName": "Rio Tinto Plc",
+        "permalink": "rio-tinto-plc-82330514",
+        "longTerm": {
+          "code": "A",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-17T19:42:26.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2026-02-17T19:42:26.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "rio",
+          "tinto"
+        ],
+        "matchTarget": "Rio Tinto"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "NEE": {
+      "symbol": "NEE",
+      "company": "Nextera Energy",
+      "fitch": {
+        "entityName": "NextEra Energy, Inc.",
+        "permalink": "nextera-energy-inc-80652435",
+        "longTerm": {
+          "code": "A-",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-13T05:00:24.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": null,
+        "matchScore": 168,
+        "matchTokens": [
+          "nextera",
+          "energy"
+        ],
+        "matchTarget": "Nextera Energy"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "TMO": {
+      "symbol": "TMO",
+      "company": "Thermo Fisher Scientific",
+      "fitch": {
+        "entityName": "Thermo Fisher Scientific Inc.",
+        "permalink": "thermo-fisher-scientific-inc-80091166",
+        "longTerm": {
+          "code": "A-",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2026-02-09T16:42:09.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2026-02-09T16:42:09.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "thermo",
+          "fisher",
+          "scientific"
+        ],
+        "matchTarget": "Thermo Fisher Scientific"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "DTE.DE": {
+      "symbol": "DTE.DE",
+      "company": "Deutsche Telekom",
+      "fitch": {
+        "entityName": "Deutsche Telekom AG",
+        "permalink": "deutsche-telekom-ag-80360263",
+        "longTerm": {
+          "code": "BBB+",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-12-15T09:24:32.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F2",
+          "outlook": "-",
+          "effectiveDate": "2025-12-15T09:24:32.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 168,
+        "matchTokens": [
+          "deutsche",
+          "telekom"
+        ],
+        "matchTarget": "Deutsche Telekom"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "SAN": {
+      "symbol": "SAN",
+      "company": "Santander",
+      "fitch": {
+        "entityName": "Santander Bank N.A.",
+        "permalink": "santander-bank-na-80091520",
+        "longTerm": {
+          "code": "A-",
+          "outlook": "Rating Outlook Stable",
+          "effectiveDate": "2025-05-19T04:00:10.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "F1",
+          "outlook": "-",
+          "effectiveDate": "2025-05-19T04:00:10.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 94.67,
+        "matchTokens": [
+          "santander"
+        ],
+        "matchTarget": "Santander"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "GILD": {
+      "symbol": "GILD",
+      "company": "Gilead Sciences",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    },
+    "DIS": {
+      "symbol": "DIS",
+      "company": "Walt Disney",
+      "fitch": {
+        "entityName": "The Walt Disney Company",
+        "permalink": "the-walt-disney-company-96733568",
+        "longTerm": {
+          "code": "WD",
+          "outlook": "-",
+          "effectiveDate": "2025-09-29T13:15:15.000Z",
+          "type": "Long Term Issuer Default Rating",
+          "display": null
+        },
+        "shortTerm": {
+          "code": "WD",
+          "outlook": "-",
+          "effectiveDate": "2025-09-29T13:15:15.000Z",
+          "type": "Short Term Issuer Default Rating",
+          "display": null
+        },
+        "matchScore": 128,
+        "matchTokens": [
+          "walt",
+          "disney"
+        ],
+        "matchTarget": "Walt Disney"
+      },
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "fitch_found"
+    },
+    "APH": {
+      "symbol": "APH",
+      "company": "Amphenol",
+      "fitch": null,
+      "spGlobal": null,
+      "moodys": null,
+      "coverage": "not_found"
+    }
+  }
+}
