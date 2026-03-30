@@ -1,8 +1,8 @@
-// Auto-generated market cap data - 2026-03-23T07:08:49.770Z
+// Auto-generated market cap data - 2026-03-30T07:25:59.472Z
 window.SUPPLY_MAP_DATA = {
-  "last_auto_update": "2026-03-23T07:08:49.768Z",
+  "last_auto_update": "2026-03-30T07:25:59.470Z",
   "update_source": "companiesmarketcap.com",
-  "snapshot_date": "2026-03-23",
+  "snapshot_date": "2026-03-30",
   "top100_source_url": "https://companiesmarketcap.com/?download=csv",
   "update_policy": "conservative_better_only",
   "companies": [
