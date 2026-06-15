@@ -1,8 +1,7 @@
-// Auto-generated market cap data - 2026-06-15T12:10:00.987Z
-window.SUPPLY_MAP_DATA = {
-  "last_auto_update": "2026-06-15T12:10:00.985Z",
+{
+  "last_auto_update": "2026-06-08T10:50:59.877Z",
   "update_source": "companiesmarketcap.com",
-  "snapshot_date": "2026-06-15",
+  "snapshot_date": "2026-06-08",
   "top100_source_url": "https://companiesmarketcap.com/?download=csv",
   "update_policy": "conservative_better_only",
   "companies": [
@@ -3796,4 +3795,4 @@ window.SUPPLY_MAP_DATA = {
       "new_summary": "Populated"
     }
   ]
-};
+}
