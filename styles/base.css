@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0a;--text:#d4d4d4;--dim:#505050;--acc:#e8453c;--blue:#4488cc;--green:#4caf50;--purple:#9c27b0;
+}
+html,body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;overflow:hidden;height:100vh;width:100vw;animation:pageFadeIn 0.4s ease forwards}
+@keyframes pageFadeIn{from{opacity:0}to{opacity:1}}
