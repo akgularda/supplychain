@@ -16,3 +16,6 @@ docs/plans/
 plan*.md
 Plan*.md
 *PLAN*.md
+
+# GSD planning artifacts ARE tracked (override the *PLAN*.md rule inside .planning/)
+!.planning/**/*PLAN*.md
