@@ -15,7 +15,7 @@ This roadmap preserves the approved spec's mandatory ordering: **Foundation firs
 
 ## Phases
 
-- [ ] **Phase 1: Foundation (Safety-Net Modularization)** - Extract inline CSS/JS into modules with zero user-visible change, tests green, baseline captured
+- [x] **Phase 1: Foundation (Safety-Net Modularization)** - Extract inline CSS/JS into modules with zero user-visible change, tests green, baseline captured (completed 2026-06-20)
 - [ ] **Phase 2: Provenance & Source Linking** - Every major figure tagged observed/estimated with a reachable inline source link
 - [ ] **Phase 3: Confidence, Methodology & Freshness** - Confidence scoring, Methodology view, freshness indicator, and trust-math tests
 - [ ] **Phase 4: Design System & Smooth Motion** - Consistent design tokens applied site-wide and jank-free D3 transitions
@@ -42,7 +42,7 @@ This roadmap preserves the approved spec's mandatory ordering: **Foundation firs
 **Plans**: 3 plans
 - [x] 01-01-PLAN.md — Pre-extraction Lighthouse/perf baseline + tooling (FOUND-04)
 - [x] 01-02-PLAN.md — Extract CSS + JS modules, semantic-shell index.html, window.* shim (FOUND-01/02/03)
-- [ ] 01-03-PLAN.md — Deploy workflow copies styles/+js/, post-extraction parity + baseline (FOUND-05/04)
+- [x] 01-03-PLAN.md — Deploy workflow copies styles/+js/, post-extraction parity + baseline (FOUND-05/04)
 **UI hint**: yes
 
 ### Phase 2: Provenance & Source Linking
@@ -160,7 +160,7 @@ This roadmap preserves the approved spec's mandatory ordering: **Foundation firs
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation (Safety-Net Modularization) | 2/3 | In Progress|  |
+| 1. Foundation (Safety-Net Modularization) | 3/3 | Complete   | 2026-06-20 |
 | 2. Provenance & Source Linking | 0/0 | Not started | - |
 | 3. Confidence, Methodology & Freshness | 0/0 | Not started | - |
 | 4. Design System & Smooth Motion | 0/0 | Not started | - |
