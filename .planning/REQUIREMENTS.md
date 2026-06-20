@@ -17,8 +17,8 @@ Requirements for this milestone ("best in the world"). Each maps to roadmap phas
 
 ### Trust
 
-- [ ] **TRUST-01**: Every displayed major figure shows a provenance badge tagging it `observed` or `estimated`
-- [ ] **TRUST-02**: Each figure exposes a reachable inline source link (e.g., SEC filing, annual report) on hover or click
+- [x] **TRUST-01**: Every displayed major figure shows a provenance badge tagging it `observed` or `estimated`
+- [x] **TRUST-02**: Each figure exposes a reachable inline source link (e.g., SEC filing, annual report) on hover or click
 - [ ] **TRUST-03**: A confidence score (0–100%) is computed per figure, weighted by source type and age decay, and shown in tooltips
 - [ ] **TRUST-04**: A dedicated Methodology view explains data sources, confidence weighting, and known limits
 - [ ] **TRUST-05**: A visible "last verified / data freshness" indicator is tied to the auto-update pipeline timestamp
@@ -76,8 +76,8 @@ Deferred to future milestones.
 | FOUND-03 | Phase 1 | Complete |
 | FOUND-04 | Phase 1 | Complete |
 | FOUND-05 | Phase 1 | Complete |
-| TRUST-01 | Phase 2 | Pending |
-| TRUST-02 | Phase 2 | Pending |
+| TRUST-01 | Phase 2 | Complete |
+| TRUST-02 | Phase 2 | Complete |
 | TRUST-03 | Phase 3 | Pending |
 | TRUST-04 | Phase 3 | Pending |
 | TRUST-05 | Phase 3 | Pending |

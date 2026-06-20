@@ -56,7 +56,7 @@ This roadmap preserves the approved spec's mandatory ordering: **Foundation firs
   3. No figure is fabricated or unsourced â provenance is driven by the existing real `data/` JSON contract, which remains unchanged.
   4. The 103-test suite stays green with provenance rendering in place.
 **Plans**: 4 plans
-- [ ] 02-01-PLAN.md — Implement data-driven trust core (provenanceFor/badgeHtml/renderProvenanceBadge) + register provenance test (TRUST-01/02)
+- [x] 02-01-PLAN.md — Implement data-driven trust core (provenanceFor/badgeHtml/renderProvenanceBadge) + register provenance test (TRUST-01/02)
 - [ ] 02-02-PLAN.md — Wire badges into viz: node/link tooltips, $cap stat bar, verified-node class (TRUST-01/02)
 - [ ] 02-03-PLAN.md — Wire badges into ui: company card, compare grid, source drawer + fix src.t→title bug (TRUST-01/02)
 - [ ] 02-04-PLAN.md — Register trust-wiring test, full-suite green gate, browser human-verify checkpoint (TRUST-01/02)
@@ -165,7 +165,7 @@ This roadmap preserves the approved spec's mandatory ordering: **Foundation firs
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation (Safety-Net Modularization) | 3/3 | Complete   | 2026-06-20 |
-| 2. Provenance & Source Linking | 0/4 | Planned | - |
+| 2. Provenance & Source Linking | 1/4 | In Progress|  |
 | 3. Confidence, Methodology & Freshness | 0/0 | Not started | - |
 | 4. Design System & Smooth Motion | 0/0 | Not started | - |
 | 5. Hero Moment & Investor Narrative | 0/0 | Not started | - |
