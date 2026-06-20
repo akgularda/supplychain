@@ -126,7 +126,7 @@ function openProvenance() {
   const profile = DATA.profiles[symbol];
   if (!provenanceItems) return;
   const rows = (profile.sources || []).map((src) => {
-    const title = escapeHtml(src.t || src.id || "Source");
+    const title = escapeHtml(src.title || src.id || "Source");
     const href = escapeHtml(src.url || "");
     return `<div class="pi"><div class="t">${title}</div>${href ? `<a href="${href}" target="_blank" rel="noopener noreferrer">${href}</a>` : ""}</div>`;
   });

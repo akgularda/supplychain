@@ -66,7 +66,7 @@ function getTopOverlap(symbol, limit = 3) {
 function parseYearsFromSources(profile) {
   const yearCounts = new Map();
   for (const source of profile?.sources || []) {
-    const text = `${source.id || ""} ${source.t || ""} ${source.url || ""}`;
+    const text = `${source.id || ""} ${source.title || ""} ${source.url || ""}`;
     const matches = text.match(/(19|20)\d{2}/g) || [];
     const uniqueYears = new Set(matches.map((y) => Number(y)).filter((y) => y >= 1990 && y <= 2099));
     uniqueYears.forEach((year) => yearCounts.set(year, (yearCounts.get(year) || 0) + 1));
