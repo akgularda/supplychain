@@ -16,7 +16,7 @@ This roadmap preserves the approved spec's mandatory ordering: **Foundation firs
 ## Phases
 
 - [x] **Phase 1: Foundation (Safety-Net Modularization)** - Extract inline CSS/JS into modules with zero user-visible change, tests green, baseline captured (completed 2026-06-20)
-- [ ] **Phase 2: Provenance & Source Linking** - Every major figure tagged observed/estimated with a reachable inline source link
+- [x] **Phase 2: Provenance & Source Linking** - Every major figure tagged observed/estimated with a reachable inline source link (completed 2026-06-20)
 - [ ] **Phase 3: Confidence, Methodology & Freshness** - Confidence scoring, Methodology view, freshness indicator, and trust-math tests
 - [ ] **Phase 4: Design System & Smooth Motion** - Consistent design tokens applied site-wide and jank-free D3 transitions
 - [ ] **Phase 5: Hero Moment & Investor Narrative** - First-30s guided hero and marketâconcentrationâriskâopportunity flow, with non-regression tests
@@ -59,7 +59,7 @@ This roadmap preserves the approved spec's mandatory ordering: **Foundation firs
 - [x] 02-01-PLAN.md — Implement data-driven trust core (provenanceFor/badgeHtml/renderProvenanceBadge) + register provenance test (TRUST-01/02)
 - [x] 02-02-PLAN.md — Wire badges into viz: node/link tooltips, $cap stat bar, verified-node class (TRUST-01/02)
 - [x] 02-03-PLAN.md — Wire badges into ui: company card, compare grid, source drawer + fix src.t→title bug (TRUST-01/02)
-- [ ] 02-04-PLAN.md — Register trust-wiring test, full-suite green gate, browser human-verify checkpoint (TRUST-01/02)
+- [x] 02-04-PLAN.md — Register trust-wiring test, full-suite green gate, browser human-verify checkpoint (TRUST-01/02)
 **UI hint**: yes
 
 ### Phase 3: Confidence, Methodology & Freshness
@@ -165,7 +165,7 @@ This roadmap preserves the approved spec's mandatory ordering: **Foundation firs
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation (Safety-Net Modularization) | 3/3 | Complete   | 2026-06-20 |
-| 2. Provenance & Source Linking | 3/4 | In Progress|  |
+| 2. Provenance & Source Linking | 4/4 | Complete   | 2026-06-20 |
 | 3. Confidence, Methodology & Freshness | 0/0 | Not started | - |
 | 4. Design System & Smooth Motion | 0/0 | Not started | - |
 | 5. Hero Moment & Investor Narrative | 0/0 | Not started | - |
