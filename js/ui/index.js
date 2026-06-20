@@ -12,6 +12,7 @@ import {
   svg, zoom, tt, labelSel, subSel, render, highlightBy, resetHighlight, toggleParticles,
   showTooltip, showLinkTooltip, moveTooltip, highlightNode,
 } from "../viz/index.js";
+import { provenanceFor, renderProvenanceBadge, badgeHtml } from "../trust/index.js";
 /* global d3 */
 
 // Cached DOM element references + module-local mutable UI state.
@@ -255,6 +256,25 @@ function openGlobal() {
   syncUrlState();
 }
 
+// Render (or clear) the company-card anchor provenance badge.
+// Created in JS and appended next to the card name (no index.html edit).
+// Guarded for the thin-JS runtime: a missing profile/anchor yields the Unknown badge.
+function renderCardAnchorBadge(profile) {
+  if (!cardName) return;
+  let badgeEl = document.getElementById("cardNameProv");
+  if (!badgeEl) {
+    badgeEl = document.createElement("span");
+    badgeEl.id = "cardNameProv";
+    badgeEl.className = "card-name-prov";
+    badgeEl.style.marginLeft = "6px";
+    if (cardName.parentElement) cardName.parentElement.appendChild(badgeEl);
+  }
+  const sourceIndex = Object.fromEntries((profile?.sources || []).map((s) => [s.id, s]));
+  const anchor = (profile?.nodes || []).find((n) => n.kind === "company") || {};
+  const prov = provenanceFor(anchor, { sourceIndex, meta: DATA.meta });
+  renderProvenanceBadge(badgeEl, prov);
+}
+
 function updateCompanyCard() {
   const symbol = STATE.mode === "profile" ? STATE.symbol : STATE.hoverSymbol;
   if (!symbol) {
@@ -288,6 +308,11 @@ function updateCompanyCard() {
   cardHqText.textContent = `${city}, ${countryName}`;
   cardLogoFallback.textContent = String(symbol || "").replace(/[^A-Z0-9]/g, "").slice(0, 4) || "--";
   
+  // Company-card anchor figure provenance badge (money/entity figure — RESEARCH Q1).
+  // Derived from the company anchor node's confidence/sourceId via the trust core;
+  // an unsourced/dangling anchor degrades to the honest "Unknown" badge (no fabrication).
+  renderCardAnchorBadge(profile);
+
   // Update stats
   if (profile) {
     cardSuppliers.textContent = profile.nodes.filter(n => n.kind === 'supplier').length;
@@ -544,7 +569,13 @@ function showCompare() {
     const services = p.nodes.filter(n => n.kind === 'service').length;
     const channels = p.nodes.filter(n => n.kind === 'channel').length;
     const demand = p.nodes.filter(n => n.kind === 'demand').length;
-    const verified = p.nodes.filter(n => n.confidence && n.confidence.includes('source')).length;
+    // Verified Entities: trust-derived (observed AND a resolving source), via the
+    // centralized provenanceFor — replaces the ad-hoc .includes('source') heuristic.
+    const sourceIndex = Object.fromEntries((p.sources || []).map(s => [s.id, s]));
+    const verified = p.nodes.filter(n => {
+      const prov = provenanceFor(n, { sourceIndex, meta: DATA.meta });
+      return prov.tag === 'observed' && Boolean(prov.source);
+    }).length;
     return `
       <div class="card">
         <h3>${escapeHtml(sym)} - ${escapeHtml(p.company)}</h3>
