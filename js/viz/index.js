@@ -5,6 +5,7 @@
 import { STATE, syncUrlState } from "../state.js";
 import { DATA, asCountryName, graphForMode } from "../data/index.js";
 import { updateCompanyCard, updateCompareButton, openProfile, hideSearchPopovers, jump } from "../ui/index.js";
+import { provenanceFor, renderProvenanceBadge, badgeHtml } from "../trust/index.js";
 
 // D3 / SVG singletons (DOM exists at module eval time — modules are deferred).
 const W = innerWidth;
@@ -169,18 +170,11 @@ function clearGraph() {
 
 function showTooltip(d, ev) {
   const tt = document.getElementById('tt');
-  
-  // Check for source verification
-  const confidenceRaw = d.confidence || 'low';
-  const confidenceLower = confidenceRaw.toLowerCase();
-  let confidenceLevel = 'low';
-  if (confidenceLower.includes('high') || confidenceLower.includes('company')) confidenceLevel = 'high';
-  else if (confidenceLower.includes('medium') || confidenceLower.includes('source')) confidenceLevel = 'medium';
-  
-  const verified = confidenceLevel === 'high' || d.sourceId;
-  const confidenceClass = `confidence-${confidenceLevel}`;
-  const confidenceLabel = confidenceLevel.charAt(0).toUpperCase() + confidenceLevel.slice(1);
-  
+
+  // Provenance is derived centrally by the trust core — no inline confidence parsing.
+  const prov = provenanceFor(d, { sourceIndex: STATE.sourceIndex, meta: DATA.meta });
+  const verified = Boolean(prov.source);
+
   // Helper to format value
   const formatValue = (v) => {
     if (typeof v === 'number') {
@@ -194,7 +188,7 @@ function showTooltip(d, ev) {
   
   tt.innerHTML = `
     <div class="tn">${(d.l || d.label || d.id || '').replace("\n", " - ")}</div>
-    <div class="tf">${d.kind || 'Node'} · <span class="confidence-badge ${confidenceClass}">${confidenceLabel} Confidence</span></div>
+    <div class="tf">${d.kind || 'Node'} · ${badgeHtml(prov)}</div>
     <div class="td">
       <div class="td-col">
         ${d.country || d.c ? `
@@ -225,13 +219,13 @@ function showTooltip(d, ev) {
         ` : ''}
       </div>
     </div>
-    ${d.sourceUrl || (d.sourceId && STATE.sourceIndex[d.sourceId]) ? `
+    ${prov.source ? `
       <div class="tu">
-        <a href="${d.sourceUrl || STATE.sourceIndex[d.sourceId].url}" target="_blank" rel="noopener" class="source-link">View Source →</a>
+        <a href="${prov.source.url}" target="_blank" rel="noopener noreferrer" class="source-link">View Source →</a>
       </div>
     ` : ''}
   `;
-  
+
   moveTooltip(ev);
   tt.style.display = 'block';
 }
@@ -245,21 +239,14 @@ function linkNodeLabel(endpoint) {
 
 function showLinkTooltip(d, ev) {
   const tt = document.getElementById('tt');
-  
-  // Check for source verification
-  const confidenceRaw = d.cf || 'low';
-  const confidenceLower = confidenceRaw.toLowerCase();
-  let confidenceLevel = 'low';
-  if (confidenceLower.includes('high') || confidenceLower.includes('company')) confidenceLevel = 'high';
-  else if (confidenceLower.includes('medium') || confidenceLower.includes('source')) confidenceLevel = 'medium';
-  
-  const verified = confidenceLevel === 'high' || d.sf;
-  const confidenceClass = `confidence-${confidenceLevel}`;
-  const confidenceLabel = confidenceLevel.charAt(0).toUpperCase() + confidenceLevel.slice(1);
-  
+
+  // Provenance derived centrally from d.cf/d.sf by the trust core.
+  const prov = provenanceFor(d, { sourceIndex: STATE.sourceIndex, meta: DATA.meta });
+  const verified = Boolean(prov.source);
+
   tt.innerHTML = `
     <div class="tn">${linkNodeLabel(d.source)} → ${linkNodeLabel(d.target)}</div>
-    <div class="tf">Relationship · <span class="confidence-badge ${confidenceClass}">${confidenceLabel} Confidence</span></div>
+    <div class="tf">Relationship · ${badgeHtml(prov)}</div>
     <div class="td">
       <div class="td-col">
         <div class="td-item">
@@ -284,9 +271,9 @@ function showLinkTooltip(d, ev) {
         ` : ''}
       </div>
     </div>
-    ${d.sf && STATE.sourceIndex[d.sf] ? `
+    ${prov.source ? `
       <div class="tu">
-        <a href="${STATE.sourceIndex[d.sf].url}" target="_blank" rel="noopener" class="source-link">View Source →</a>
+        <a href="${prov.source.url}" target="_blank" rel="noopener noreferrer" class="source-link">View Source →</a>
       </div>
     ` : ''}
   `;
