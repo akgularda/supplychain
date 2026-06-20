@@ -78,6 +78,20 @@ function updateStats() {
   animateCounter('sC', countryCount, 800);
   animateCounter('sY', layerCount, 800);
   animateCounter('sM', marketCapT, 1000, '$', 'T');
+
+  // $cap is dataset-level OBSERVED, sourced from meta (companiesmarketcap.com).
+  // Counts (#sN/#sL/#sC/#sY) are derived aggregates -> intentionally UNBADGED (RESEARCH Q1).
+  const capEl = document.getElementById('sM');
+  if (capEl && capEl.parentElement) {
+    const capProv = provenanceFor({ marketcap: true }, { meta: DATA.meta });
+    let badge = capEl.parentElement.querySelector('.cap-prov');
+    if (!badge) {
+      badge = document.createElement('span');
+      badge.className = 'cap-prov';
+      capEl.parentElement.appendChild(badge);
+    }
+    renderProvenanceBadge(badge, capProv);
+  }
 }
 
 function buildLegend() {
@@ -481,7 +495,10 @@ function render() {
     .attr("fill-opacity", (d) => d.bn ? 0.82 : 0.35)
     .attr("stroke", (d) => d.bn ? "var(--acc)" : "#222")
     .attr("stroke-width", (d) => d.bn ? 1.4 : 0.5)
-    .classed("verified-node", (d) => d.confidence && d.confidence.includes("source"));
+    .classed("verified-node", (d) => {
+      const prov = provenanceFor(d, { sourceIndex: STATE.sourceIndex, meta: DATA.meta });
+      return prov.tag === "observed" && Boolean(prov.source);
+    });
 
   labelSel = nodeSel.append("text")
     .text((d) => d.l.split("\n")[0])
