@@ -268,7 +268,9 @@
     <div id="provenanceItems"></div>
   </div>
 
+<script type="module" src="js/main.js"></script>
 <script>
+/* MONOLITH DISABLED in 01-02 Task 2 (logic now in js/* ES modules via js/main.js). Removed in Task 3.
 const loadingEl = document.getElementById("loading");
 const fatalErrorEl = document.getElementById("fatalError");
 const onboardingPanelEl = document.getElementById("onboardingPanel");
@@ -403,7 +405,11 @@ function updateStatsAnimated(nodes, links, countries, layers, marketCap) {
   animateCounter('sL', links.length, 800);
   animateCounter('sC', countries, 800);
   animateCounter('sY', layers, 800);
-  animateCounter('sM', marketCap, 1000, '$', 'T');
+  animateCounter('sM', marketCap, 1000, '
+</html>
+
+
+, 'T');
 }
 
 const titleEl = document.getElementById("title");
@@ -831,7 +837,11 @@ function updateStats() {
   animateCounter('sL', STATE.links.length, 800);
   animateCounter('sC', countryCount, 800);
   animateCounter('sY', layerCount, 800);
-  animateCounter('sM', marketCapT, 1000, '$', 'T');
+  animateCounter('sM', marketCapT, 1000, '
+</html>
+
+
+, 'T');
 }
 
 function buildLegend() {
@@ -945,10 +955,26 @@ function showTooltip(d, ev) {
   // Helper to format value
   const formatValue = (v) => {
     if (typeof v === 'number') {
-      if (v >= 1e12) return '$' + (v / 1e12).toFixed(2) + 'T';
-      if (v >= 1e9) return '$' + (v / 1e9).toFixed(2) + 'B';
-      if (v >= 1e6) return '$' + (v / 1e6).toFixed(2) + 'M';
-      return '$' + v.toFixed(2);
+      if (v >= 1e12) return '
+</html>
+
+
+ + (v / 1e12).toFixed(2) + 'T';
+      if (v >= 1e9) return '
+</html>
+
+
+ + (v / 1e9).toFixed(2) + 'B';
+      if (v >= 1e6) return '
+</html>
+
+
+ + (v / 1e6).toFixed(2) + 'M';
+      return '
+</html>
+
+
+ + v.toFixed(2);
     }
     return v;
   };
@@ -2138,7 +2164,7 @@ function renderTop10List() {
           <div class="symbol">${company.symbol}</div>
           <div class="name">${company.company.length > 20 ? company.company.slice(0, 20) + '…' : company.company}</div>
         </div>
-        <div class="marketCap">$${formatMarketCap((company.marketcap || 0) / 1e12)}</div>
+        <div class="marketCap">${formatMarketCap((company.marketcap || 0) / 1e12)}</div>
       </div>
     `;
   }).join('');
@@ -2168,6 +2194,8 @@ function openCompanyProfile(symbol) {
 // Initialize
 updateStatusIndicator();
 renderTop10List();
+
+*/
 </script>
 </body>
 </html>
