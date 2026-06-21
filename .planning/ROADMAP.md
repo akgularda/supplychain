@@ -24,7 +24,7 @@ This roadmap preserves the approved spec's mandatory ordering: **Foundation firs
 - [x] **Phase 7: Scenario Stress-Tests** - At least one real-data scenario stress-test with downstream impact, all analytics carrying provenance and tests (completed 2026-06-21)
 - [x] **Phase 8: Interaction Performance** - Memoized filter/style interactions with no full simulation restart (completed 2026-06-21)
 - [x] **Phase 9: Mobile & Keyboard Accessibility** - Full mobile usability and a complete keyboard-only journey (completed 2026-06-21)
-- [ ] **Phase 10: SEO, Social Cards & Launch Gate** - Valid SEO/social metadata and a final verification gate before launch
+- [x] **Phase 10: SEO, Social Cards & Launch Gate** - Valid SEO/social metadata and a final verification gate before launch (completed 2026-06-21)
 
 ## Phase Details
 
@@ -189,7 +189,7 @@ Plans:
 **Plans**: 2 plans
 Plans:
 - [x] 10-01-PLAN.md — SEO/OG/Twitter/JSON-LD head tags + 1200x630 og-card.png + registered seo-social test (PERF-04)
-- [ ] 10-02-PLAN.md — Launch gate: npm test green + Lighthouse recorded + deploy/pipeline integrity + LAUNCH.md (PERF-05)
+- [x] 10-02-PLAN.md — Launch gate: npm test green + Lighthouse recorded + deploy/pipeline integrity + LAUNCH.md (PERF-05)
 **UI hint**: yes
 
 ## Progress
@@ -205,7 +205,7 @@ Plans:
 | 7. Scenario Stress-Tests | 3/3 | Complete   | 2026-06-21 |
 | 8. Interaction Performance | 4/4 | Complete   | 2026-06-21 |
 | 9. Mobile & Keyboard Accessibility | 3/3 | Complete   | 2026-06-21 |
-| 10. SEO, Social Cards & Launch Gate | 1/2 | In Progress|  |
+| 10. SEO, Social Cards & Launch Gate | 2/2 | Complete   | 2026-06-21 |
 
 ---
 *Roadmap created: 2026-06-20*
