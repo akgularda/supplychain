@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-06-21T13:26:15Z"
+last_updated: "2026-06-21T13:32:34Z"
 progress:
   total_phases: 10
   completed_phases: 7
   total_plans: 28
-  completed_plans: 27
-  percent: 93
+  completed_plans: 28
+  percent: 96
 ---
 
 # Project State: Monarch Castle Technologies — Market Intelligence
@@ -25,11 +25,11 @@ progress:
 ## Current Position
 
 Phase: 08 (Interaction Performance) — EXECUTING
-Plan: 3 of 4 (08-01, 08-02 complete)
-**Phase:** 08 — Interaction Performance — IN PROGRESS (2 of 4 plans done)
-**Plan:** 08-02 complete — no-restart-invariant source guard (PERF-01) shipped; 12 guard tests green; 275/275 suite green
+Plan: 4 of 4 (08-01, 08-02, 08-03 complete)
+**Phase:** 08 — Interaction Performance — IN PROGRESS (3 of 4 plans done)
+**Plan:** 08-03 complete — PERF-01 SC2 latency record shipped; cold ≈166ms vs warm ≈2.8ms (≈60× faster, fan-in built once) recorded under docs/perf/ with the local-no-paint caveat; 275/275 suite green
 **Status:** Executing Phase 08
-**Progress:** [█████████░] 93%
+**Progress:** [██████████] 96%
 
 ## Performance Metrics
 
@@ -81,6 +81,8 @@ Plan: 3 of 4 (08-01, 08-02 complete)
 | Phase 08 P01 | 4min | 3 tasks | 3 files |
 | Phase 08 P02 | ~2min | 1 task | 1 file |
 | No-restart guard (08-02) | npm test = 275 pass / 0 fail (263 prior + 12 new no-restart-invariant); guard proven to bite (injected .restart() into applyFilters → fail, source restored byte-identical) |
+| Phase 08 P03 | 7min | 2 tasks | 2 files |
+| Interaction latency (08-03, PERF-01 SC2) | Node cold-vs-warm micro-bench (100 profile opens + 50 criticality + 50 scenario, median-of-5): cold ≈166ms → warm ≈2.8ms, ≈60× faster, warm fan-in builds=1 (199 hits); anchors live-confirmed GILD=36/NVDA=12/Taiwan=7; recorded in docs/perf/interaction-2026-06-21.md with the local-no-paint (NO_FCP) caveat; 275/275 green |
 
 ## Accumulated Context
 
@@ -134,6 +136,7 @@ Plan: 3 of 4 (08-01, 08-02 complete)
 - 07-01: js/analytics gained the pure DOM-free scenario engine. runScenario(disruption,ctx) is single-hop (a firm is "impacted" iff it loses ≥1 distinct supplier; cascade deferred); concentrationBefore/After report HHI=1/k (the MONOTONIC metric) NOT the composite score (composite is non-monotonic under removal — removing a shared single-point drops sharedFrac; 07-RESEARCH Pitfall 1). marketcap read from top-level ctx.nodes keyed by symbol (profiles do NOT carry marketcap; Pitfall 3). companyConcentration gained an ADDITIVE excludeSuppliers opt (Set|string[]|undefined→null): one filter line over uniq before k/HHI/sharedFrac; undefined leaves output byte-identical (242 prior green). SCENARIO_PRESETS.TAIWAN_SEMI bundles the 5 REAL normalized TSMC label variants (TSMC fragmented across distinct labels) — a single 'tsmc' hits only KLAC (Pitfall 2). Severity = share-of-suppliers-lost (≥0.5 high/≥0.25 medium/else low); Taiwan preset is "low" (1 of 5). "market cap exposed" = combined cap of impacted firms (exposure, NOT loss). tests/scenario.test.mjs (9 assertions, registered in scripts.test) pins real fixtures: 7 firms {NVDA,AAPL,AVGO,000660.KS,AMD,AMAT,KLAC}, totalMarketCapExposed===11360589871184 (derived live from fixture nodes then asserted equal to literal — proves not engine-baked), k 5→4 / HHI 0.20→0.25 after≥before, no-op safe, back-compat deep-equal. TDD: RED 925ee1b → GREEN c9d85ce. npm test = 251 pass / 0 fail. No deviations.
 - 08-01: js/analytics gained a per-session Map memo layer (_caches/_bucket/_memo + parallel _stats build/hit counters) — caching changes COST not VALUE (DATA frozen, no in-session writer → no invalidation). buildSupplierFanIn memoized FIRST (key "default" for DATA.profiles) so the eager default-arg fan-in rebuild at companyConcentration/supplierCriticality/runScenario is now O(1) after first build. companyConcentration key = `symbol|wHHI|wShared|sharedThreshold|profilesTag|sortedExcludeSet` (excludeSuppliers in the key is the #1 correctness risk — runScenario reads excluded scores). supplierCriticality key = `profilesTag|limit`. runScenario key = normalized SORTED disabled-label set + profilesTag, computed AFTER normalization so disableSuppliers:["tsmc"] and disableSupplier:"tsmc" collide on one entry. Test seams __resetAnalyticsCache() (clears caches + zeroes stats) + __memoStats() (shallow-copy of counters). DEVIATION (Rule 1): the plan's static profilesTag "X" for all non-default profiles caused a cache-key collision (concentration.test.mjs:73 synthetic fixture got score 12 not 36); fixed with a WeakMap per-object identity tag (X1,X2,...). Anchors unchanged: GILD=36, NVDA=12, top fan-in "credit and risk data inputs"=4, Taiwan 7 firms/$11,360,589,871,184. Both phase test files registered in scripts.test (24 total; no-restart-invariant.test.mjs authored in Plan 02 — registered-but-absent is skipped, exit 0). TDD: RED 1150a59 → GREEN e28e3d4 (+ chore 703f692). npm test = 263 pass / 0 fail (257 prior + 6 new memo). No new deps.
 - 08-02: tests/no-restart-invariant.test.mjs locks the "simple change never restarts the sim / re-renders the graph" invariant at the SOURCE level (no source edits — research confirmed every simple-change path is already opacity-only). bodyOf(src,signature) brace-matches and slices each handler body; BANNED = [/\bd3\.forceSimulation\s*\(/, /\.alpha\s*\(/, /\.restart\s*\(/, /\bupdateGraph\s*\(/, /\brender\s*\(/]. Guarded bodies: applyFilters/resetFilters/highlightChokepoints (js/ui), highlightBy/resetHighlight (js/viz), inline bLabels/bBottlenecks onclicks, bFlow (proven bare toggleParticles()), keydown l/f/b cases (sliced case→break;). ALLOW-LIST proof: asserts js/ui DOES match /alpha\(0\.22\)\.restart\(\)/ so bReset's intentional reheat (and render()/updateGraph() view-change paths) are NOT banned and cannot be silently deleted. Guard proven to BITE: injecting STATE.simulation.alpha(1).restart() into applyFilters failed the test (AssertionError /\.alpha\s*\(/); source restored byte-identical (git diff empty). 12 assertions GREEN; npm test = 275 pass / 0 fail (263 prior + 12). No deviations. T-08-03 mitigated (scoped slices + explicit allow-list); T-08-04 accepted (future new handlers must be added to the guard set).
+- 08-03: PERF-01 SC2 interaction-latency recorded via a Node cold-vs-warm micro-bench (docs/perf/_interaction-bench.cjs — ESM analytics imported into CJS via dynamic import(pathToFileURL); NOT in scripts.test). Workload = 100 companyConcentration profile opens + 50 supplierCriticality + 50 runScenario(TAIWAN_SEMI), median-of-5 with warmup. COLD = __resetAnalyticsCache() before EVERY call (fan-in rebuilt each time, models pre-memo eager default-arg cost); WARM = reset once → memoized. Result: cold ≈166ms → warm ≈2.8ms (≈60× faster), warm fanIn builds=1 / 199 hits (criticality 1/49, scenario 1/49) — the Plan-01 memoization win quantified. Bench re-prints live anchors (GILD=36/NVDA=12/Taiwan=7) so the record self-verifies (threat T-08-05 mitigated). Recorded in docs/perf/interaction-2026-06-21.md (112 lines): method + results + SC2 conclusion + the honest CAVEAT — page doesn't paint locally (committed snapshot lacks nodes/links/profiles → NO_FCP per baseline-2026-06-20.md), so the Node micro-bench is the AUTHORITATIVE SC2 measure (08-RESEARCH Pitfall 4 / OQ2); Playwright _perf-capture.cjs remains best-effort needing synthetic-data injection. No source touched, data frozen, no value changes. Tasks: feat 27118a6 (bench) → docs 6c3f769 (record). npm test = 275 pass / 0 fail. No deviations.
 - 06-01: js/analytics/index.js is a pure DOM-free engine (mirrors js/trust). companyConcentration = round(100*(0.6*(1/k)+0.4*sharedFrac)), clamped [0,100], with the equal-weight HHI=1/k assumption stated in a module comment (dataset has no per-supplier volume; all l.v=2); wHHI/wShared/sharedThreshold are opts params for tunability. sectorConcentration groups by layers[node.y] (NOT profile.category) and reports reuse%=(slots-distinct)/slots + effectiveSuppliers=1/HHI — NOT raw HHI*100 (which is an uninterpretable 1-7). supplierCriticality ranks suppliers by real fan-in via buildSupplierFanIn (Map<label,Set<symbol>> mirroring the overlap index); top chokepoint='credit and risk data inputs'=4; deterministic localeCompare tie-break; never references the editorial d.bn flag (asserted at source level). Anchors test-locked: GILD=36, NVDA=12, Healthcare reuse 12%, Finance 9%, fan-in histogram {1:439,2:13,3:5,4:1}. Both test files registered in scripts.test (18→20). npm test = 231 pass / 0 fail (214 prior + 10 concentration + 7 criticality-wiring). No deviations.
 
 ### Standing Constraints
@@ -153,7 +156,9 @@ Plan: 3 of 4 (08-01, 08-02 complete)
 
 ## Session Continuity
 
-**Last action:** Completed 08-02-PLAN.md — the no-restart-invariant source guard (PERF-01, Wave 2). Authored tests/no-restart-invariant.test.mjs (already registered by Plan 01): a bodyOf() brace-matcher slices each simple-change handler body and asserts none match BANNED = [forceSimulation(, .alpha(, .restart(, updateGraph(, render(]. Guarded applyFilters/resetFilters/highlightChokepoints (js/ui), highlightBy/resetHighlight (js/viz), inline bLabels/bBottlenecks onclicks, bFlow (bare toggleParticles()), keydown l/f/b cases; ALLOW-LIST asserts bReset's legitimate /alpha\(0\.22\)\.restart\(\)/ remains (boundary documented, render/updateGraph NOT banned). Proved the guard bites (injected .restart() into applyFilters → fail; source restored byte-identical). NO source edits. 12 assertions GREEN; npm test = 275 pass / 0 fail (263 prior + 12 new). Committed test aa9b850. No deviations. Next: Plan 08-03/04 (latency bench + recorded number / phase gate).
+**Last action:** Completed 08-03-PLAN.md — the PERF-01 SC2 interaction-latency record (Wave 2). Authored docs/perf/_interaction-bench.cjs (feat 27118a6): a Node cold-vs-warm micro-benchmark that dynamic-imports the ESM analytics into CommonJS, loads the real data/top100-map.json, and times a 200-call interaction workload (100 companyConcentration profile opens + 50 supplierCriticality + 50 runScenario Taiwan) COLD (__resetAnalyticsCache() before every call → fan-in rebuilt each time) vs WARM (reset once → memoized), median-of-5 with warmup. Measured: cold ≈166ms → warm ≈2.8ms (≈60× faster), warm fan-in builds=1 (199 hits); anchors re-printed from the warm cache GILD=36/NVDA=12/Taiwan=7 (self-verifying, T-08-05). Recorded the result in docs/perf/interaction-2026-06-21.md (docs 6c3f769): method + results table + SC2 conclusion + the honest local-no-paint caveat (NO_FCP per baseline-2026-06-20.md → Node micro-bench is the authoritative SC2 measure, 08-RESEARCH Pitfall 4/OQ2). Bench kept OUT of scripts.test (tooling). No source edits, data frozen. npm test = 275 pass / 0 fail. No deviations. Next: Plan 08-04 (phase gate).
+
+**Prior action:** Completed 08-02-PLAN.md — the no-restart-invariant source guard (PERF-01, Wave 2). Authored tests/no-restart-invariant.test.mjs (already registered by Plan 01): a bodyOf() brace-matcher slices each simple-change handler body and asserts none match BANNED = [forceSimulation(, .alpha(, .restart(, updateGraph(, render(]. Guarded applyFilters/resetFilters/highlightChokepoints (js/ui), highlightBy/resetHighlight (js/viz), inline bLabels/bBottlenecks onclicks, bFlow (bare toggleParticles()), keydown l/f/b cases; ALLOW-LIST asserts bReset's legitimate /alpha\(0\.22\)\.restart\(\)/ remains (boundary documented, render/updateGraph NOT banned). Proved the guard bites (injected .restart() into applyFilters → fail; source restored byte-identical). NO source edits. 12 assertions GREEN; npm test = 275 pass / 0 fail (263 prior + 12 new). Committed test aa9b850. No deviations. Next: Plan 08-03/04 (latency bench + recorded number / phase gate).
 
 **Prior action:** Completed 08-01-PLAN.md — analytics memoization (PERF-01, Wave 0/1). Registered both phase test files in package.json scripts.test (chore 703f692; no-restart-invariant.test.mjs authored later in Plan 02 — Wave-0 gate). Authored tests/analytics-memo.test.mjs RED (test 1150a59) then added a per-session Map memo layer + __resetAnalyticsCache/__memoStats seams to js/analytics, memoizing buildSupplierFanIn FIRST then companyConcentration (key includes sorted excludeSuppliers), supplierCriticality, runScenario (key = normalized sorted disabled set) GREEN (feat e28e3d4). Caching changes COST not VALUE — anchors unchanged (GILD=36, NVDA=12, fan-in top=4, Taiwan 7/$11.36T). Auto-fixed one Rule-1 cache-key collision (static "X" profilesTag → WeakMap per-object identity tag) before the GREEN commit. npm test = 263 pass / 0 fail (257 prior + 6 new). No new deps. Next: Plan 02 authors tests/no-restart-invariant.test.mjs (already registered) + the source-guard.
 
@@ -163,7 +168,7 @@ Plan: 3 of 4 (08-01, 08-02 complete)
 
 **Earlier action:** Completed 06-02-PLAN.md — the concentration display + chokepoints wiring plan. Added a branch-0 `derived` provenance tag to js/trust (provenanceFor + badgeHtml 'Derived', never 'Observed') under TDD (test aee630b → feat a0b60a7). Wired companyConcentration into the profile panel as 'Supplier concentration: NN/100' with a Derived badge (#cardConcentration), added a #chokepointsPanel listing supplierCriticality top-8 by real fan-in with a #bChokepoints highlightBy graph highlight + #bChokepointsReset, and documented both formulas (incl. the equal-weight HHI=1/k limit) in the Methodology modal (feat 0c3870c). NEW index.html IDs only; inline-bootstrap + all prior IDs intact (index-ui-integrity green). npm test = 242 pass / 0 fail (231 prior + 11 new). DEPTH-01 + DEPTH-02 display complete. No deviations.
 
-**Next step:** Phase 8 in progress (2/4). Execute Plan 08-03 (latency micro-benchmark + recorded number, PERF-01 SC2).
+**Next step:** Phase 8 in progress (3/4). Execute Plan 08-04 (phase gate).
 
 ---
 *State initialized: 2026-06-20*
