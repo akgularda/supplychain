@@ -3,9 +3,9 @@
 // D3 force simulation, rendering, motion, tooltips, highlighting.
 /* global d3 */
 import { STATE, syncUrlState } from "../state.js";
-import { DATA, asCountryName, graphForMode } from "../data/index.js";
+import { DATA, asCountryName, graphForMode, sourceYear } from "../data/index.js";
 import { updateCompanyCard, updateCompareButton, openProfile, hideSearchPopovers, jump } from "../ui/index.js";
-import { provenanceFor, renderProvenanceBadge, badgeHtml } from "../trust/index.js";
+import { provenanceFor, renderProvenanceBadge, badgeHtml, confidenceScore } from "../trust/index.js";
 
 // D3 / SVG singletons (DOM exists at module eval time — modules are deferred).
 const W = innerWidth;
@@ -189,6 +189,17 @@ function showTooltip(d, ev) {
   const prov = provenanceFor(d, { sourceIndex: STATE.sourceIndex, meta: DATA.meta });
   const verified = Boolean(prov.source);
 
+  // Live confidence score: nowYear from meta.generatedAt (never hardcoded); the figure's
+  // source year resolves its FK so older sources decay (see js/trust confidenceScore).
+  const nowYear = new Date(DATA.meta?.generatedAt || Date.now()).getUTCFullYear();
+  const src = STATE.sourceIndex?.[d.sourceId ?? d.sf];
+  const score = confidenceScore(d, {
+    sourceIndex: STATE.sourceIndex,
+    meta: DATA.meta,
+    sourceYear: src ? sourceYear(src, nowYear) : null,
+    now: nowYear,
+  });
+
   // Helper to format value
   const formatValue = (v) => {
     if (typeof v === 'number') {
@@ -202,7 +213,7 @@ function showTooltip(d, ev) {
   
   tt.innerHTML = `
     <div class="tn">${(d.l || d.label || d.id || '').replace("\n", " - ")}</div>
-    <div class="tf">${d.kind || 'Node'} · ${badgeHtml(prov)}</div>
+    <div class="tf">${d.kind || 'Node'} · ${badgeHtml(prov)} · Confidence: ${score}%</div>
     <div class="td">
       <div class="td-col">
         ${d.country || d.c ? `
@@ -258,9 +269,19 @@ function showLinkTooltip(d, ev) {
   const prov = provenanceFor(d, { sourceIndex: STATE.sourceIndex, meta: DATA.meta });
   const verified = Boolean(prov.source);
 
+  // Live confidence score (link FK is d.sf); nowYear from meta.generatedAt.
+  const nowYear = new Date(DATA.meta?.generatedAt || Date.now()).getUTCFullYear();
+  const src = STATE.sourceIndex?.[d.sf];
+  const score = confidenceScore(d, {
+    sourceIndex: STATE.sourceIndex,
+    meta: DATA.meta,
+    sourceYear: src ? sourceYear(src, nowYear) : null,
+    now: nowYear,
+  });
+
   tt.innerHTML = `
     <div class="tn">${linkNodeLabel(d.source)} → ${linkNodeLabel(d.target)}</div>
-    <div class="tf">Relationship · ${badgeHtml(prov)}</div>
+    <div class="tf">Relationship · ${badgeHtml(prov)} · Confidence: ${score}%</div>
     <div class="td">
       <div class="td-col">
         <div class="td-item">
