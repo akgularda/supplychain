@@ -2,14 +2,16 @@
 
 // Entry module: imports the responsibility modules, reproduces the monolith's top-level
 // execution order, installs the window.* export shim (incl. openCompanyProfile), runs init.
-import { STATE, applyUrlState } from "./state.js";
+import { STATE, applyUrlState, safeReadFlag, safeWriteFlag } from "./state.js";
 import { DATA } from "./data/index.js";
-import { render, svg } from "./viz/index.js";
+import { render, svg, highlightBy, resetHighlight } from "./viz/index.js";
 import "./trust/index.js";
 import {
   applyFilters, resetFilters, closeCompare, toggleHelp, loadView, deleteView, openCompanyProfile,
   showFatalError, maybeShowOnboarding, updateStatusIndicator, renderTop10List, wireUI,
+  openGlobal, openProfile,
 } from "./ui/index.js";
+import { buildNarrative, createHeroController } from "./ui/narrative.js";
 
 // Global error surfaces (match monolith).
 window.addEventListener("error", (event) => {
@@ -50,6 +52,73 @@ Object.assign(window, {
 // Init sequence — exact order from the monolith.
 applyUrlState();
 render();
-maybeShowOnboarding();
+
+// --- Phase 05 (STORY-02/STORY-04): hero narration tour wiring ---------------
+// Pure narrative engine (js/ui/narrative.js) driven by the real dataset and the
+// existing view controls. All side effects (storage/timers/reducedMotion/render)
+// are injected here so the engine stays DOM-free + unit-testable in Node.
+const heroData = (typeof window !== "undefined" && window.SUPPLY_MAP_DATA) || DATA;
+const heroSteps = buildNarrative(heroData);
+const heroControls = { openGlobal, openProfile, highlightBy, resetHighlight };
+const heroStorage = { read: safeReadFlag, write: safeWriteFlag };
+const heroReducedMotion = () =>
+  (typeof window !== "undefined" && window.matchMedia)
+    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    : false;
+const heroTimers = {
+  setTimeout: window.setTimeout.bind(window),
+  clearTimeout: window.clearTimeout.bind(window),
+};
+// render callback — caption card paint/clear. textContent ONLY (T-05-01, no innerHTML).
+const heroRender = (step, index, total) => {
+  const o = document.getElementById("heroOverlay");
+  if (!o) return;
+  if (!step) { o.hidden = true; return; }
+  const titleEl = document.getElementById("heroTitle");
+  const captionEl = document.getElementById("heroCaption");
+  const progressEl = document.getElementById("heroProgress");
+  if (titleEl) titleEl.textContent = step.title;
+  if (captionEl) captionEl.textContent = step.caption;
+  if (progressEl) progressEl.textContent = "Step " + (index + 1) + "/" + total;
+  o.hidden = false;
+  o.focus?.();
+};
+const heroController = createHeroController({
+  steps: heroSteps,
+  controls: heroControls,
+  storage: heroStorage,
+  reducedMotion: heroReducedMotion,
+  timers: heroTimers,
+  render: heroRender,
+});
+
+// First-visit precedence (RESEARCH OQ1): hero plays first; the Quick-Start
+// Quick-Start onboarding is suppressed during a fresh-visit auto tour.
+const heroFirstVisit = safeReadFlag("heroSeen") !== "1";
+if (heroFirstVisit) {
+  heroController.play();
+} else {
+  maybeShowOnboarding();
+}
+
+// Replay control — always allowed, independent of heroSeen.
+document.getElementById("bTour")?.addEventListener("click", () => heroController.play());
+// Overlay controls.
+document.getElementById("heroNext")?.addEventListener("click", () => heroController.next());
+document.getElementById("heroPrev")?.addEventListener("click", () => heroController.prev());
+document.getElementById("heroPause")?.addEventListener("click", () => heroController.pause());
+document.getElementById("heroSkip")?.addEventListener("click", () => heroController.skip());
+// ESC -> skip while the overlay is visible (scoped; does not compete with the
+// existing global ESC switch in ui/index.js when the overlay is hidden).
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape") return;
+  const o = document.getElementById("heroOverlay");
+  if (o && !o.hidden) {
+    e.stopPropagation();
+    heroController.skip();
+  }
+});
+// ----------------------------------------------------------------------------
+
 updateStatusIndicator();
 renderTop10List();

@@ -97,7 +97,10 @@ export function buildNarrative(data) {
 //   steps        : array of { id, title, caption, apply(controls) }  (from buildNarrative)
 //   controls     : { openGlobal, openProfile, highlightBy, resetHighlight }
 //   storage      : { read(key), write(key, value) }   // Plan 03 -> safeReadFlag/safeWriteFlag
-//   reducedMotion: () => boolean                       // Plan 03 -> matchMedia(prefers-reduced-motion)
+//   reducedMotion: () => boolean
+//       Injected so this module stays pure/DOM-free. Plan 03 (js/main.js) supplies the
+//       canonical browser implementation: matchMedia('(prefers-reduced-motion: reduce)').matches
+//       (mirrors viz/index.js). When it returns true, scheduleNext() never arms the timer.
 //   timers       : { setTimeout(fn, ms), clearTimeout(id) }
 //   render       : (step|null, index, total) => void   // Plan 03 paints/clears #heroOverlay
 //
