@@ -122,7 +122,11 @@ Plans:
   1. A supply-chain concentration score is computed and displayed per company/sector using real data only.
   2. Risk and bottleneck analytics highlight critical single points of failure in the network.
   3. Each displayed analytic carries provenance consistent with the Phase 2â3 trust layer (no unsourced derived numbers).
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 06-01-PLAN.md — Wave 0 test gate + pure js/analytics: company/sector concentration + supplier criticality (DEPTH-01, DEPTH-02)
+- [ ] 06-02-PLAN.md — Derived provenance branch + profile concentration badge, chokepoints panel + graph highlight, Methodology copy (DEPTH-01, DEPTH-02)
+- [ ] 06-03-PLAN.md — Full-suite green + Playwright integration smoke + human-verify gate (DEPTH-01, DEPTH-02)
 **UI hint**: yes
 
 ### Phase 7: Scenario Stress-Tests
@@ -182,7 +186,7 @@ Plans:
 | 3. Confidence, Methodology & Freshness | 4/4 | Complete   | 2026-06-21 |
 | 4. Design System & Smooth Motion | 4/4 | Complete   | 2026-06-21 |
 | 5. Hero Moment & Investor Narrative | 3/3 | Complete   | 2026-06-21 |
-| 6. Concentration & Risk Analytics | 0/0 | Not started | - |
+| 6. Concentration & Risk Analytics | 0/3 | Not started | - |
 | 7. Scenario Stress-Tests | 0/0 | Not started | - |
 | 8. Interaction Performance | 0/0 | Not started | - |
 | 9. Mobile & Keyboard Accessibility | 0/0 | Not started | - |
