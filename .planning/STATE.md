@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-06-21T05:55:35.264Z"
+last_updated: "2026-06-21T00:00:00.000Z"
 progress:
   total_phases: 10
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 15
-  completed_plans: 14
-  percent: 30
+  completed_plans: 15
+  percent: 40
 ---
 
 # Project State: Monarch Castle Technologies — Market Intelligence
@@ -24,12 +24,12 @@ progress:
 
 ## Current Position
 
-Phase: 04 (Design System & Smooth Motion) — EXECUTING
-Plan: 3 of 4 (Plans 04-01, 04-02 complete)
-**Phase:** 04 — Design System & Smooth Motion — EXECUTING
-**Plan:** 04-02 complete — 2 of 4 plans done
-**Status:** Executing Phase 04
-**Progress:** [█████████░] 93%
+Phase: 04 (Design System & Smooth Motion) — COMPLETE
+Plan: 4 of 4 (all Phase-4 plans complete)
+**Phase:** 04 — Design System & Smooth Motion — COMPLETE
+**Plan:** 04-04 complete — 4 of 4 plans done
+**Status:** Phase 04 complete; ready for Phase 05
+**Progress:** [████░░░░░░] 40%
 
 ## Performance Metrics
 
@@ -63,6 +63,8 @@ Plan: 3 of 4 (Plans 04-01, 04-02 complete)
 | Phase 04 P02 | ~12min | 2 tasks | 3 files |
 | Token-migration gate (04-02) | npm test = 191 tests / 187 pass / 4 fail — migration-evidence now GREEN (layout=19/components=25/theme=17 var(--)); theme.css prefers-reduced-motion present; trust-hue contract preserved; 4 remaining RED are Plan-03 viz refactor |
 | Phase 04 P03 | ~15min | 2 tasks | 1 files |
+| Phase 04 P04 | ~12min | 1 task + 1 checkpoint | 1 file |
+| Phase-4 gate (04-04) | npm test = 191 pass / 0 fail; design/motion smoke PASS — 100 nodes painted over http-server, :root tokens resolve at runtime (--color-bg #0a0a0a, --color-observed #66bb6a, --fs-base 10px, --dur-base 200ms), .prov-badge color matches confidence class (NVDA confidence-low = rgb(158,158,158)), global→profile switch keeps exactly ONE g.nodes layer (build-once, no teardown; 100→17), reduced-motion run paints + switches, ZERO console errors. Human-verify auto-approved under AUTO_MODE (visual gate). STORY-01 + STORY-03 verified; Phase 4 complete (4/4) |
 
 ## Accumulated Context
 
@@ -123,9 +125,9 @@ Plan: 3 of 4 (Plans 04-01, 04-02 complete)
 
 ## Session Continuity
 
-**Last action:** Completed 04-02-PLAN.md — token migration + reduced-motion CSS. Migrated styles/layout.css (19 var(--)) + styles/components.css (25 var(--)) to consume base.css tokens with exact-value-preserving swaps, preserving the .confidence-* trust contract (semantic tokens for color:, byte-identical rgba backgrounds/borders) (f98d66e); migrated styles/theme.css (17 var(--)) and appended a @media (prefers-reduced-motion: reduce) block (622a01e). npm test = 191 tests / 187 pass / 4 fail — migration-evidence now GREEN; 4 remaining RED are all Plan-03 viz refactor (buildSimulation/updateGraph + nodes/links re-bind + mental-map carry + viz matchMedia). Zero intended visual change. STORY-01 token application complete site-wide; CSS half of STORY-03 (reduced-motion) in place. **Phase 04 — 2 of 4 plans done.**
+**Last action:** Completed 04-04-PLAN.md — the Phase-4 closing gate. Authored docs/perf/_design-motion-smoke-0404.cjs (5248f99): http-server + Playwright (chromium) over the real served data, proving paint (100 nodes), runtime token resolution on :root, the .prov-badge color↔confidence-class contract (T-04-09), a build-once global→profile mode switch keeping exactly one g.nodes layer (T-04-10), and a reduced-motion reload — all with zero console errors. npm test = 191/191 green; smoke PASS; Task-2 human-verify auto-approved under AUTO_MODE (visual gate, not a package-legitimacy blocking-human gate). STORY-01 + STORY-03 verified end to end. **Phase 04 — COMPLETE, 4 of 4 plans done.**
 
-**Next step:** Execute 04-03-PLAN.md — refactor js/viz/index.js to build-once / update-on-change (buildSimulation/updateGraph, simulation.nodes(/force("link").links( re-bind, mental-map position carry, gentle alphaTarget reheat) + add the matchMedia('(prefers-reduced-motion: reduce)') guard — closes the remaining 4 viz-motion REDs.
+**Next step:** Phase 04 is complete (15/15 plans, 4/10 phases). Proceed to Phase 05 — Hero Moment & Investor Narrative (STORY-02, STORY-04, STORY-05): run /gsd:plan-phase for Phase 5.
 
 ---
 *State initialized: 2026-06-20*
