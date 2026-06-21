@@ -103,7 +103,7 @@
   }
 }
 @media print {
-  #top,#bar,#searchWrap,#companyCard,#hint,#lg,#ly,#filterPanel,#loading,#helpModal,#compareModal,#footer,#provenanceDrawer,#mobileToggle,#mobileSheet{display:none!important}
+  #top,#bar,#searchWrap,#companyCard,#hint,#lg,#ly,#filterPanel,#loading,#helpModal,#methodologyModal,#compareModal,#footer,#provenanceDrawer,#mobileToggle,#mobileSheet{display:none!important}
   #canvas{position:static;width:100%;height:600px}
   body{background:white;color:black;overflow:visible}
 }

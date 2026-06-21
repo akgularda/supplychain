@@ -47,6 +47,7 @@ const searchSuggestEl = document.getElementById("searchSuggest");
 const searchHistoryEl = document.getElementById("searchHistory");
 const helpModalEl = document.getElementById("helpModal");
 const compareModalEl = document.getElementById("compareModal");
+const methodologyModalEl = document.getElementById("methodologyModal");
 const onboardingDismissEl = document.getElementById("onboardingDismiss");
 const jump = document.getElementById("companyJump");
 const searchInput = document.getElementById("q");
@@ -596,6 +597,14 @@ function closeCompare() {
   closeModal(compareModalEl);
 }
 
+function openMethodology() {
+  openModal(methodologyModalEl, "flex");
+}
+
+function closeMethodology() {
+  closeModal(methodologyModalEl);
+}
+
 function toggleHelp(forceOpen) {
   const isOpen = helpModalEl?.style.display === "flex";
   const shouldOpen = typeof forceOpen === "boolean" ? forceOpen : !isOpen;
@@ -795,6 +804,13 @@ function wireUI() {
       if (event.target === compareModalEl) closeCompare();
     });
   }
+  document.getElementById("bMethodology")?.addEventListener("click", openMethodology);
+  document.getElementById("methodologyClose")?.addEventListener("click", closeMethodology);
+  if (methodologyModalEl) {
+    methodologyModalEl.addEventListener("click", (event) => {
+      if (event.target === methodologyModalEl) closeMethodology();
+    });
+  }
 
   DATA.nodes.sort((a, b) => a.rank - b.rank).forEach((n) => {
     const o = document.createElement("option");
@@ -889,6 +905,7 @@ function wireUI() {
     if (activeModal && key === "escape") {
       e.preventDefault();
       if (activeModal === helpModalEl) toggleHelp(false);
+      else if (activeModal === methodologyModalEl) closeMethodology();
       else if (activeModal === compareModalEl) closeCompare();
       else if (activeModal === onboardingPanelEl) dismissOnboarding();
       else if (activeModal === mobileSheet) setMobileSheetOpen(false);
@@ -997,4 +1014,5 @@ export {
   applyFilters, resetFilters, closeCompare, toggleHelp, loadView, deleteView, openCompanyProfile,
   openProfile, updateCompanyCard, updateCompareButton, showToast, showFatalError, hideSearchPopovers,
   maybeShowOnboarding, updateStatusIndicator, renderTop10List, wireUI, jump,
+  openMethodology, closeMethodology,
 };

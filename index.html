@@ -80,6 +80,41 @@
     </div>
   </div>
 
+  <div id="methodologyModal" role="dialog" aria-modal="true" aria-labelledby="methodologyTitle" tabindex="-1">
+    <div class="content" style="position:relative">
+      <button class="close" id="methodologyClose" type="button" aria-label="Close methodology dialog">&times;</button>
+      <h2 id="methodologyTitle">Methodology &amp; Data Sources</h2>
+
+      <h3>Data sources</h3>
+      <p>Profiles for the top 100 companies cite <strong>407 sources</strong> in total. Of these, roughly <strong>131 sources</strong> carry a parseable publication year, which is what powers the age-decay signal below. Sources include SEC 10-K filings, annual reports, and official company disclosures.</p>
+
+      <h3>Confidence weighting</h3>
+      <p>Every figure inherits a confidence tier from the source backing it. The dataset carries two real disclosure tiers — <strong>120 high-qualifier</strong> figures (direct company disclosure) and <strong>3,447 medium-qualifier</strong> figures (source-backed). A figure with no resolving source falls to an explicit Unknown floor rather than being scored upward.</p>
+      <ul>
+        <li><strong>Observed</strong> — high (company disclosure): base weight 90.</li>
+        <li><strong>Estimated</strong> — medium (source-backed): base weight 65.</li>
+        <li><strong>Unknown</strong> — no resolving source: floor weight 25 (never decayed up).</li>
+      </ul>
+
+      <h3>Age decay</h3>
+      <p>Source-backed figures decay with the age of their source: an exponential half-life of about <strong>4 years</strong> measured against the dataset generation date, floored at half weight so old-but-real sources are never zeroed. When no publication year can be parsed, <strong>no decay is applied</strong> — absence of a date is not treated as evidence of staleness.</p>
+
+      <h3>What the badges mean</h3>
+      <ul>
+        <li><strong>Observed</strong> — backed by a high-disclosure source.</li>
+        <li><strong>Estimated</strong> — backed by a source-backed reference, not direct disclosure.</li>
+        <li><strong>Unknown</strong> — no resolving source; shown explicitly rather than guessed.</li>
+      </ul>
+
+      <h3>Known limits</h3>
+      <ul>
+        <li>About <strong>75 dangling source references</strong> (source FKs that do not resolve to a listed source) remain in the dataset; figures behind them score at the Unknown floor.</li>
+        <li>Many relationships are <strong>estimated</strong> from structural dependencies rather than directly disclosed.</li>
+        <li>Market caps are <strong>auto-updated weekly</strong>; the freshness indicator reflects the live update timestamp.</li>
+      </ul>
+    </div>
+  </div>
+
   <div id="compareModal" role="dialog" aria-modal="true" aria-labelledby="compareTitle" tabindex="-1">
     <div class="content">
       <div class="header">
@@ -127,6 +162,7 @@
     <button id="bSave" title="Save view (Ctrl+S)" aria-label="Save current view">Save</button>
     <button id="bBookmarks" title="Bookmarks" aria-label="Open saved views">Bookmarks</button>
     <button id="bCompare" aria-label="Compare selected companies">Compare</button>
+    <button id="bMethodology" aria-label="Open methodology and data sources">Methodology</button>
     <button id="bHelp" style="border-color:var(--acc);color:var(--acc)" aria-label="Open help dialog">?</button>
     <span class="sep"></span>
     <select id="companyJump" aria-label="Open company profile"><option value="">Open company...</option></select>
