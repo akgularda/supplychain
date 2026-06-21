@@ -19,7 +19,7 @@ This roadmap preserves the approved spec's mandatory ordering: **Foundation firs
 - [x] **Phase 2: Provenance & Source Linking** - Every major figure tagged observed/estimated with a reachable inline source link (completed 2026-06-20)
 - [x] **Phase 3: Confidence, Methodology & Freshness** - Confidence scoring, Methodology view, freshness indicator, and trust-math tests (completed 2026-06-21)
 - [x] **Phase 4: Design System & Smooth Motion** - Consistent design tokens applied site-wide and jank-free D3 transitions
-- [ ] **Phase 5: Hero Moment & Investor Narrative** - First-30s guided hero and marketâconcentrationâriskâopportunity flow, with non-regression tests
+- [x] **Phase 5: Hero Moment & Investor Narrative** - First-30s guided hero and marketâconcentrationâriskâopportunity flow, with non-regression tests (completed 2026-06-21)
 - [ ] **Phase 6: Concentration & Risk Analytics** - Per-company/sector concentration scoring and single-point-of-failure bottleneck analytics on real data
 - [ ] **Phase 7: Scenario Stress-Tests** - At least one real-data scenario stress-test with downstream impact, all analytics carrying provenance and tests
 - [ ] **Phase 8: Interaction Performance** - Memoized filter/style interactions with no full simulation restart
@@ -110,7 +110,7 @@ Plans:
 Plans:
 - [x] 05-01-PLAN.md — Wave 0 test gate + pure buildNarrative(data) 4-step data engine (STORY-04, STORY-05)
 - [x] 05-02-PLAN.md — createHeroController factory: autoplay/skip/replay/reduced-motion, all deps injected (STORY-02, STORY-05)
-- [ ] 05-03-PLAN.md — index.html overlay + #bTour + main.js wiring; full suite green (STORY-02, STORY-04, STORY-05)
+- [x] 05-03-PLAN.md — index.html overlay + #bTour + main.js wiring; full suite green (STORY-02, STORY-04, STORY-05)
 **UI hint**: yes
 
 ### Phase 6: Concentration & Risk Analytics
@@ -181,7 +181,7 @@ Plans:
 | 2. Provenance & Source Linking | 4/4 | Complete   | 2026-06-20 |
 | 3. Confidence, Methodology & Freshness | 4/4 | Complete   | 2026-06-21 |
 | 4. Design System & Smooth Motion | 4/4 | Complete   | 2026-06-21 |
-| 5. Hero Moment & Investor Narrative | 2/3 | In Progress|  |
+| 5. Hero Moment & Investor Narrative | 3/3 | Complete   | 2026-06-21 |
 | 6. Concentration & Risk Analytics | 0/0 | Not started | - |
 | 7. Scenario Stress-Tests | 0/0 | Not started | - |
 | 8. Interaction Performance | 0/0 | Not started | - |
