@@ -2,8 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: complete
-last_updated: "2026-06-21T17:47:07.574Z"
+status: Awaiting next milestone
+last_updated: "2026-06-21T20:20:39.410Z"
+last_activity: 2026-06-21 — Milestone v1.0 completed and archived
 progress:
   total_phases: 10
   completed_phases: 10
@@ -24,12 +25,10 @@ progress:
 
 ## Current Position
 
-Phase: 10 (SEO, Social Cards & Launch Gate) — COMPLETE
-Plan: 2 of 2 (10-01 complete; 10-02 complete — PERF-05 launch gate satisfied, all v1 requirements done)
-**Phase:** 09 — Mobile & Keyboard Accessibility — COMPLETE
-**Plan:** 09-03 complete — PERF-02 + PERF-03 Playwright gate. Authored the real tests/mobile-keyboard.spec.mjs (replacing the 09-01 skip placeholder): a 390x844 hasTouch context that taps a node → opens #companyCard + reaches #mobileSheet (PERF-02), a keyboard-only journey ('/'→type→Enter→Escape) with an accessible-name gate (PERF-03), and a hero focus-trap assertion (focus inside #heroOverlay on open, Tab stays trapped, never #bReset). Spec serves over a 127.0.0.1 ephemeral http-server (no file://), gates on selectors (not timeouts), and skips-with-note if chromium is absent (Node a11y test = structural fallback). Surfaced + fixed TWO real defects (Rule 1): (a) tapping a node did nothing on touch because d3.drag preventDefaults touchstart and suppresses the synthesized click — recovered the stationary touch tap in the drag end handler (js/viz/index.js); (b) hero focus-in no-opped because #heroSkip was focused synchronously before the overlay finished un-hiding — deferred to requestAnimationFrame so the trap engages (js/ui/index.js). npm test = 294 pass / 0 fail / 0 skipped (chromium present → Playwright ran). Human-verify checkpoint ⚡ auto-approved under AUTO_MODE.
-**Status:** v1.0 COMPLETE — all 10 phases / 33 plans / 25 v1 requirements done; PERF-05 launch gate passed
-**Progress:** [██████████] 100%
+Phase: Milestone v1.0 complete
+Plan: —
+Status: Awaiting next milestone
+Last activity: 2026-06-21 — Milestone v1.0 completed and archived
 
 ## Performance Metrics
 
@@ -198,3 +197,7 @@ Plan: 2 of 2 (10-01 complete; 10-02 complete — PERF-05 launch gate satisfied, 
 
 ---
 *State initialized: 2026-06-20*
+
+## Operator Next Steps
+
+- Start the next milestone with /gsd-new-milestone

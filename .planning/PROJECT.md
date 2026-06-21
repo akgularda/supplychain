@@ -28,16 +28,20 @@ trustworthy and traceable to a source.
 - ✓ Country macro data, credit ratings, and trade-flow layers — existing
 - ✓ Weekly automated data refresh via GitHub Actions; static GitHub-Pages deploy — existing
 - ✓ Node test suite (103 tests passing) covering UI integrity, data schema, ingestion — existing
+- ✓ Foundation: monolithic index.html modularized into `styles/` + `js/` ES modules; tests green; perf baseline — v1.0
+- ✓ Trust layer: observed/estimated/unknown provenance badges + source links + 0–100% confidence + Methodology view + live freshness — v1.0
+- ✓ Visual wow + storytelling: full design-token system, build-once smooth D3 motion, first-30s guided hero + investor narrative — v1.0
+- ✓ Depth of intelligence: HHI concentration score, supplier criticality/chokepoints, Taiwan scenario stress-test (7 firms/$11.36T) — all with honest derived provenance — v1.0
+- ✓ Performance, accessibility & launch: ~60× memoized filters (no full-sim restart), mobile + full keyboard journey, SEO/OG/Twitter/JSON-LD + social card, launch gate — v1.0
 
 ### Active
 
-<!-- This milestone: elevate to "best in the world" for investors. From the approved spec. -->
+<!-- Next milestone candidates (deferred from v1.0 as honest, documented limits). -->
 
-- [ ] Foundation: safe modularization of monolithic index.html (CSS/JS modules), tests stay green, perf baseline
-- [ ] Trust layer: provenance badge (observed/estimated) on every figure, inline source links, confidence scoring, methodology view, freshness guarantee
-- [ ] Visual wow + storytelling: refined design system, first-30s guided hero moment, smooth D3 motion, investor narrative flow
-- [ ] Depth of intelligence: risk/bottleneck analytics, concentration scoring, scenario stress-tests, investor signals
-- [ ] Performance, accessibility & launch: memoized filters (no full-sim restart), mobile excellence, full keyboard journey, SEO/social cards, verification gate
+- [ ] Per-supplier volume weighting so concentration uses true HHI (v1.0 used equal-weight 1/k — no volume in data)
+- [ ] Multi-hop cascade in scenario stress-tests (v1.0 ships single-hop direct-dependents only)
+- [ ] Backfill the ~75 dangling source FKs (currently degrade honestly to the Unknown confidence floor)
+- [ ] Fix the cosmetic timestamp-echo quoting bug in `auto-update-data.yml` (non-blocking, disclosed in LAUNCH.md)
 
 ### Out of Scope
 
@@ -92,4 +96,13 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-20 after initialization*
+## Current State
+
+**Shipped v1.0 (2026-06-21)** — live at https://akgularda.github.io/supplychain/ — 10 phases, 33 plans,
+25/25 requirements, **301/301 tests green**, milestone audit PASSED. Lighthouse SEO 100 / Best-Practices 100 /
+A11y 93 / Perf 58 (cold loopback). Buildless static GitHub-Pages deploy + weekly auto-update pipeline intact.
+The original "best supply-chain website in the world for investors" goal is delivered across all three pillars
+(trust → wow → depth). See `LAUNCH.md` and `.planning/milestones/v1.0-*`.
+
+---
+*Last updated: 2026-06-21 after v1.0 milestone*
