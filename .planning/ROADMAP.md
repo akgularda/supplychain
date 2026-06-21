@@ -106,7 +106,11 @@ Plans:
   1. A first-time visitor sees a "first 30 seconds" guided hero moment that auto-reveals the global map with narration.
   2. An investor narrative flow guides the user market â concentration â risk â opportunity.
   3. Storytelling/hero behavior is covered by non-regression tests, and the full suite stays green.
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 05-01-PLAN.md — Wave 0 test gate + pure buildNarrative(data) 4-step data engine (STORY-04, STORY-05)
+- [ ] 05-02-PLAN.md — createHeroController factory: autoplay/skip/replay/reduced-motion, all deps injected (STORY-02, STORY-05)
+- [ ] 05-03-PLAN.md — index.html overlay + #bTour + main.js wiring; full suite green (STORY-02, STORY-04, STORY-05)
 **UI hint**: yes
 
 ### Phase 6: Concentration & Risk Analytics
