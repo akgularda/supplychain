@@ -1012,7 +1012,7 @@ function wireUI() {
 
 export {
   applyFilters, resetFilters, closeCompare, toggleHelp, loadView, deleteView, openCompanyProfile,
-  openProfile, updateCompanyCard, updateCompareButton, showToast, showFatalError, hideSearchPopovers,
+  openProfile, openGlobal, updateCompanyCard, updateCompareButton, showToast, showFatalError, hideSearchPopovers,
   maybeShowOnboarding, updateStatusIndicator, renderTop10List, wireUI, jump,
   openMethodology, closeMethodology,
 };
