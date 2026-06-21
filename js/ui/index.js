@@ -5,7 +5,7 @@
 import { STATE, syncUrlState, applyUrlState, safeSaveJSON, safeReadFlag, safeWriteFlag } from "../state.js";
 import {
   DATA, CREDIT_RATINGS, SEARCH_TARGETS, HQ_CITY_BY_SYMBOL, COUNTRY_CAPITAL_BY_CODE,
-  escapeHtml, getTopOverlap, parseYearsFromSources, computeProfileRisk, ratingText,
+  escapeHtml, normalizeEntityLabel, getTopOverlap, parseYearsFromSources, computeProfileRisk, ratingText,
   getRatingsForSymbol, asCountryName, getInitials, formatMarketCap, logoCandidatesForSymbol, flagCdnCode,
 } from "../data/index.js";
 import {
@@ -13,6 +13,7 @@ import {
   showTooltip, showLinkTooltip, moveTooltip, highlightNode,
 } from "../viz/index.js";
 import { provenanceFor, renderProvenanceBadge, badgeHtml } from "../trust/index.js";
+import { companyConcentration, supplierCriticality } from "../analytics/index.js";
 /* global d3 */
 
 // Cached DOM element references + module-local mutable UI state.
@@ -35,8 +36,10 @@ const cardRatings = document.getElementById("cardRatings");
 const cardRiskBadge = document.getElementById("cardRiskBadge");
 const cardRiskText = document.getElementById("cardRiskText");
 const cardRiskDetails = document.getElementById("cardRiskDetails");
+const cardConcentration = document.getElementById("cardConcentration");
 const cardOverlap = document.getElementById("cardOverlap");
 const cardTimeline = document.getElementById("cardTimeline");
+const chokepointsListEl = document.getElementById("chokepointsList");
 const cardSourcesBtn = document.getElementById("cardSourcesBtn");
 const provenanceDrawer = document.getElementById("provenanceDrawer");
 const provenanceItems = document.getElementById("provenanceItems");
@@ -431,6 +434,7 @@ function renderCardRatings(symbol) {
 function renderCardInsights(symbol, profile) {
   if (!profile) {
     if (cardRiskDetails) cardRiskDetails.innerHTML = "";
+    if (cardConcentration) cardConcentration.innerHTML = "";
     if (cardOverlap) cardOverlap.innerHTML = "";
     if (cardTimeline) cardTimeline.innerHTML = "";
     if (cardRiskText) cardRiskText.textContent = "Open a profile to view insights.";
@@ -455,6 +459,20 @@ function renderCardInsights(symbol, profile) {
       `<div class="cItem"><span>Geographic concentration</span><b>${risk.geoRisk}</b></div>`,
       `<div class="cItem"><span>Source-backed ratio</span><b>${Math.round(risk.sourceRatio * 100)}%</b></div>`,
     ].join("");
+  }
+
+  // Derived supplier-concentration score (DEPTH-01). Badged "Derived" — never
+  // "Observed" — and links to the Methodology view for the formula + equal-weight limit.
+  if (cardConcentration) {
+    const c = companyConcentration(symbol, { profiles: DATA.profiles });
+    if (!c) {
+      cardConcentration.innerHTML = `<div class="cMuted">No concentration data available.</div>`;
+    } else {
+      const badge = badgeHtml(provenanceFor({ derived: true, n: c.n }, { methodologyUrl: "#methodology" }));
+      cardConcentration.innerHTML =
+        `<div class="cItem"><span>Supplier concentration <span class="cMuted">(HHI-based)</span></span>` +
+        `<b>${c.score}/100 ${badge}</b></div>`;
+    }
   }
 
   const overlaps = getTopOverlap(symbol, 3);
@@ -603,6 +621,42 @@ function openMethodology() {
 
 function closeMethodology() {
   closeModal(methodologyModalEl);
+}
+
+// --- Critical chokepoints (DEPTH-02) -------------------------------------
+// Top suppliers by real fan-in (companies depending on them), rendered into
+// #chokepointsList. Every supplier label is escaped before innerHTML (T-06-03);
+// fanIn is an integer from pure math.
+const CHOKEPOINT_LIMIT = 8;
+
+function getChokepoints() {
+  return supplierCriticality({ profiles: DATA.profiles, limit: CHOKEPOINT_LIMIT });
+}
+
+function renderChokepoints() {
+  if (!chokepointsListEl) return;
+  const rows = getChokepoints();
+  if (!rows.length) {
+    chokepointsListEl.innerHTML = `<div class="cMuted">No chokepoints detected.</div>`;
+    return;
+  }
+  chokepointsListEl.innerHTML = rows
+    .map((row) => {
+      const n = row.fanIn;
+      return `<div class="cItem"><span>${escapeHtml(row.supplier)}</span>` +
+        `<b>${n} compan${n === 1 ? "y" : "ies"}</b></div>`;
+    })
+    .join("");
+}
+
+// Highlight the chokepoint supplier nodes in the global graph. Predicate matches
+// global supplier nodes whose normalized first-line label is in the chokepoint set.
+function highlightChokepoints() {
+  const set = new Set(getChokepoints().map((r) => r.supplier));
+  highlightBy((d) =>
+    d.kind === "supplier" &&
+    set.has(normalizeEntityLabel((d.l || "").split("\n")[0]))
+  );
 }
 
 function toggleHelp(forceOpen) {
@@ -812,6 +866,11 @@ function wireUI() {
     });
   }
 
+  // Critical chokepoints panel: render the fan-in ranking + wire the graph highlight.
+  renderChokepoints();
+  document.getElementById("bChokepoints")?.addEventListener("click", highlightChokepoints);
+  document.getElementById("bChokepointsReset")?.addEventListener("click", resetHighlight);
+
   DATA.nodes.sort((a, b) => a.rank - b.rank).forEach((n) => {
     const o = document.createElement("option");
     o.value = n.symbol;
@@ -1015,4 +1074,5 @@ export {
   openProfile, openGlobal, updateCompanyCard, updateCompareButton, showToast, showFatalError, hideSearchPopovers,
   maybeShowOnboarding, updateStatusIndicator, renderTop10List, wireUI, jump,
   openMethodology, closeMethodology,
+  renderChokepoints, highlightChokepoints,
 };

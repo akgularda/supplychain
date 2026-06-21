@@ -106,6 +106,17 @@
         <li><strong>Unknown</strong> — no resolving source; shown explicitly rather than guessed.</li>
       </ul>
 
+      <h3>Supplier concentration (derived)</h3>
+      <p>Each company gets a 0&ndash;100 <strong>Supplier concentration</strong> score &mdash; a <em>derived</em> aggregate, badged <strong>Derived</strong> (never Observed). It is a composite of two real graph signals:</p>
+      <p style="font-family:monospace;font-size:11px">C = round(100 &middot; (0.6 &middot; HHI + 0.4 &middot; sharedFrac))</p>
+      <ul>
+        <li><strong>HHI</strong> is the Herfindahl index over a company&rsquo;s suppliers. The dataset has <strong>no per-supplier volume field</strong> &mdash; every supplier link weight is the constant <code>l.v = 2</code> &mdash; so HHI is taken under the <strong>equal-weight</strong> assumption, where it reduces exactly to <strong>HHI = 1/k</strong> for a company with <em>k</em> distinct suppliers. This equal-weight limit is stated explicitly: without volumes, all k-supplier firms share the same raw HHI, so HHI alone cannot differentiate them.</li>
+        <li><strong>sharedFrac</strong> is the fraction of a company&rsquo;s suppliers that are <em>shared single-points</em> (a supplier depended on by more than one company), which breaks the equal-weight HHI tie using real structure.</li>
+      </ul>
+
+      <h3>Critical chokepoints (derived)</h3>
+      <p>The chokepoints ranking is the supplier <strong>fan-in</strong>: the real count of companies depending on each supplier, sorted descending. The top chokepoint is depended on by <strong>4</strong> companies. This is a <em>derived</em> aggregate computed from the graph, kept separate from the curated editorial bottleneck flag.</p>
+
       <h3>Known limits</h3>
       <ul>
         <li>About <strong>75 dangling source references</strong> (source FKs that do not resolve to a listed source) remain in the dataset; figures behind them score at the Unknown floor.</li>
@@ -245,6 +256,9 @@
       </div>
       <div class="cList" id="cardRiskDetails"></div>
 
+      <div class="cSecTitle" style="margin-top:8px">Supplier Concentration</div>
+      <div class="cList" id="cardConcentration"></div>
+
       <div class="cSecTitle" style="margin-top:8px">Shared Supplier Overlap</div>
       <div class="cList" id="cardOverlap"></div>
 
@@ -254,6 +268,16 @@
       <div class="cActions">
         <button id="cardSourcesBtn" type="button" aria-label="Open source provenance panel">Sources</button>
       </div>
+    </div>
+  </div>
+
+  <div id="chokepointsPanel" role="region" aria-label="Critical supply-chain chokepoints">
+    <div class="cSecTitle">Critical Chokepoints</div>
+    <div class="cMuted" style="margin-bottom:6px">Top suppliers by dependent-company count (derived fan-in)</div>
+    <div class="cList" id="chokepointsList"></div>
+    <div class="cActions">
+      <button id="bChokepoints" type="button" aria-label="Highlight critical chokepoints in the graph">Highlight in graph</button>
+      <button id="bChokepointsReset" type="button" aria-label="Clear chokepoint highlight">Reset</button>
     </div>
   </div>
 

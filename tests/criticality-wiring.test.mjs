@@ -117,3 +117,44 @@ test("badgeHtml derived gates the source link on http(s) (non-http degrades to l
   assert.match(httpUrl, /<a /, "http(s) methodology url must emit an <a>");
   assert.match(httpUrl, /rel="noopener noreferrer"/, "source link must carry rel=noopener noreferrer");
 });
+
+// --- DEPTH-01/02: js/ui + js/viz + index.html string wiring ---------------
+
+const UI = readFileSync("js/ui/index.js", "utf8");
+const HTML = readFileSync("index.html", "utf8");
+
+test("js/ui imports companyConcentration + supplierCriticality from ../analytics", () => {
+  assert.match(UI, /companyConcentration/, "ui must reference companyConcentration");
+  assert.match(UI, /supplierCriticality/, "ui must reference supplierCriticality");
+  assert.match(UI, /from\s+["']\.\.\/analytics\/index\.js["']/, "ui must import from ../analytics/index.js");
+});
+
+test("js/ui renders a derived-badged concentration line via provenanceFor + badgeHtml", () => {
+  assert.match(UI, /derived\s*:\s*true/, "ui must build derived provenance for the concentration line");
+  assert.match(UI, /badgeHtml/, "ui must render the derived badge via badgeHtml");
+  assert.match(UI, /Supplier concentration/i, "ui must render the 'Supplier concentration' line");
+});
+
+test("js/ui wires the chokepoints panel + highlightBy graph highlight", () => {
+  assert.match(UI, /supplierCriticality\(/, "ui must call supplierCriticality for the chokepoints panel");
+  assert.match(UI, /highlightBy/, "ui must wire highlightBy for the chokepoint graph highlight");
+  assert.match(UI, /bChokepoints/, "ui must wire the #bChokepoints button");
+});
+
+test("index.html declares the chokepoints panel + concentration hosts (new IDs only)", () => {
+  assert.match(HTML, /id="cardConcentration"/, "company card must host #cardConcentration");
+  assert.match(HTML, /id="chokepointsPanel"/, "a #chokepointsPanel host is required");
+  assert.match(HTML, /id="bChokepoints"/, "a #bChokepoints highlight button is required");
+});
+
+test("index.html Methodology modal documents the concentration + criticality formulas", () => {
+  // concentration formula + equal-weight (l.v constant) limit
+  assert.match(HTML, /concentration/i, "methodology must explain concentration");
+  assert.match(HTML, /0\.6/, "methodology must show the 0.6 HHI weight");
+  assert.match(HTML, /0\.4/, "methodology must show the 0.4 sharedFrac weight");
+  assert.match(HTML, /equal-weight/i, "methodology must state the equal-weight HHI limit");
+  assert.match(HTML, /1\s*\/\s*k|1\/k/i, "methodology must show HHI = 1/k");
+  // criticality fan-in ranking
+  assert.match(HTML, /fan-in|fan in/i, "methodology must explain fan-in criticality");
+  assert.match(HTML, /derived/i, "methodology must note these are derived aggregates");
+});
