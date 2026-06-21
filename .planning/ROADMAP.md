@@ -21,7 +21,7 @@ This roadmap preserves the approved spec's mandatory ordering: **Foundation firs
 - [x] **Phase 4: Design System & Smooth Motion** - Consistent design tokens applied site-wide and jank-free D3 transitions
 - [x] **Phase 5: Hero Moment & Investor Narrative** - First-30s guided hero and marketâconcentrationâriskâopportunity flow, with non-regression tests (completed 2026-06-21)
 - [x] **Phase 6: Concentration & Risk Analytics** - Per-company/sector concentration scoring and single-point-of-failure bottleneck analytics on real data (completed 2026-06-21)
-- [ ] **Phase 7: Scenario Stress-Tests** - At least one real-data scenario stress-test with downstream impact, all analytics carrying provenance and tests
+- [x] **Phase 7: Scenario Stress-Tests** - At least one real-data scenario stress-test with downstream impact, all analytics carrying provenance and tests (completed 2026-06-21)
 - [ ] **Phase 8: Interaction Performance** - Memoized filter/style interactions with no full simulation restart
 - [ ] **Phase 9: Mobile & Keyboard Accessibility** - Full mobile usability and a complete keyboard-only journey
 - [ ] **Phase 10: SEO, Social Cards & Launch Gate** - Valid SEO/social metadata and a final verification gate before launch
@@ -142,7 +142,7 @@ Plans:
 Plans:
 - [x] 07-01-PLAN.md — Wave 0 test gate + pure runScenario engine + TAIWAN_SEMI preset + excludeSuppliers opt (DEPTH-03)
 - [x] 07-02-PLAN.md — Scenario UI panel + Taiwan preset/chokepoint select + graph highlight + derived provenance + methodology copy (DEPTH-03, DEPTH-04)
-- [ ] 07-03-PLAN.md — Full-suite green + Playwright scenario smoke + human-verify gate (DEPTH-03, DEPTH-04)
+- [x] 07-03-PLAN.md — Full-suite green + Playwright scenario smoke + human-verify gate (DEPTH-03, DEPTH-04)
 **UI hint**: yes
 
 ### Phase 8: Interaction Performance
@@ -191,7 +191,7 @@ Plans:
 | 4. Design System & Smooth Motion | 4/4 | Complete   | 2026-06-21 |
 | 5. Hero Moment & Investor Narrative | 3/3 | Complete   | 2026-06-21 |
 | 6. Concentration & Risk Analytics | 3/3 | Complete   | 2026-06-21 |
-| 7. Scenario Stress-Tests | 2/3 | In Progress|  |
+| 7. Scenario Stress-Tests | 3/3 | Complete   | 2026-06-21 |
 | 8. Interaction Performance | 0/0 | Not started | - |
 | 9. Mobile & Keyboard Accessibility | 0/0 | Not started | - |
 | 10. SEO, Social Cards & Launch Gate | 0/0 | Not started | - |
