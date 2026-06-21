@@ -87,3 +87,97 @@ export function buildNarrative(data) {
     },
   ];
 }
+
+// ---------------------------------------------------------------------------
+// createHeroController — the autoplay/stepper state machine (STORY-02).
+//
+// Pure and DOM-free: EVERY side-effect is injected, so it unit-tests in Node
+// with fake timers/storage/reducedMotion/controls/render (RESEARCH Pattern 2).
+//
+//   steps        : array of { id, title, caption, apply(controls) }  (from buildNarrative)
+//   controls     : { openGlobal, openProfile, highlightBy, resetHighlight }
+//   storage      : { read(key), write(key, value) }   // Plan 03 -> safeReadFlag/safeWriteFlag
+//   reducedMotion: () => boolean                       // Plan 03 -> matchMedia(prefers-reduced-motion)
+//   timers       : { setTimeout(fn, ms), clearTimeout(id) }
+//   render       : (step|null, index, total) => void   // Plan 03 paints/clears #heroOverlay
+//
+// Returns { play, pause, next, prev, skip, getIndex }. play() restarts from step 0
+// regardless of stored heroSeen (replay always allowed — RESEARCH mechanic 4).
+// ---------------------------------------------------------------------------
+export function createHeroController({ steps, controls, storage, reducedMotion, timers, render }) {
+  // ~5.5s/step (Claude's discretion): 4 steps ~= 22s + reveal, within the ~30s STORY-02 target.
+  const STEP_MS = 5500;
+  const list = Array.isArray(steps) ? steps : [];
+
+  let index = 0;
+  let playing = false;
+  let timerId = null;
+
+  // Paint the current step: run its view mutation, then render the caption card.
+  function show() {
+    const step = list[index];
+    if (step && typeof step.apply === "function") step.apply(controls);
+    render(step, index, list.length);
+  }
+
+  // Arm the next auto-advance — but NEVER under reduced motion (RESEARCH mechanic 5):
+  // the overlay still shows the current caption; the user advances manually via next().
+  function scheduleNext() {
+    if (reducedMotion && reducedMotion()) return;
+    timerId = timers.setTimeout(() => {
+      if (index < list.length - 1) {
+        index++;
+        show();
+        scheduleNext();
+      } else {
+        stop();
+      }
+    }, STEP_MS);
+  }
+
+  function play() {
+    playing = true;
+    index = 0;
+    show();
+    scheduleNext();
+  }
+
+  function pause() {
+    playing = false;
+    if (timerId != null) {
+      timers.clearTimeout(timerId);
+      timerId = null;
+    }
+  }
+
+  function next() {
+    pause();
+    if (index < list.length - 1) {
+      index++;
+      show();
+    } else {
+      stop();
+    }
+  }
+
+  function prev() {
+    pause();
+    if (index > 0) {
+      index--;
+      show();
+    }
+  }
+
+  // Teardown for skip / ESC / end-of-tour: stop the timer, persist heroSeen,
+  // un-dim the map (RESEARCH Pitfall 4 — never leave it locked), clear the overlay.
+  function stop() {
+    pause();
+    storage.write("heroSeen", "1");
+    if (controls && typeof controls.resetHighlight === "function") controls.resetHighlight();
+    render(null, index, list.length);
+  }
+
+  const skip = stop;
+
+  return { play, pause, next, prev, skip, getIndex: () => index };
+}
