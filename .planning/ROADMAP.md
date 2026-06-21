@@ -140,7 +140,7 @@ Plans:
   3. The full suite, including the new analytic tests, stays green.
 **Plans**: 3 plans
 Plans:
-- [ ] 07-01-PLAN.md — Wave 0 test gate + pure runScenario engine + TAIWAN_SEMI preset + excludeSuppliers opt (DEPTH-03)
+- [x] 07-01-PLAN.md — Wave 0 test gate + pure runScenario engine + TAIWAN_SEMI preset + excludeSuppliers opt (DEPTH-03)
 - [ ] 07-02-PLAN.md — Scenario UI panel + Taiwan preset/chokepoint select + graph highlight + derived provenance + methodology copy (DEPTH-03, DEPTH-04)
 - [ ] 07-03-PLAN.md — Full-suite green + Playwright scenario smoke + human-verify gate (DEPTH-03, DEPTH-04)
 **UI hint**: yes
@@ -191,7 +191,7 @@ Plans:
 | 4. Design System & Smooth Motion | 4/4 | Complete   | 2026-06-21 |
 | 5. Hero Moment & Investor Narrative | 3/3 | Complete   | 2026-06-21 |
 | 6. Concentration & Risk Analytics | 3/3 | Complete   | 2026-06-21 |
-| 7. Scenario Stress-Tests | 0/3 | Planned | - |
+| 7. Scenario Stress-Tests | 1/3 | In progress | - |
 | 8. Interaction Performance | 0/0 | Not started | - |
 | 9. Mobile & Keyboard Accessibility | 0/0 | Not started | - |
 | 10. SEO, Social Cards & Launch Gate | 0/0 | Not started | - |
