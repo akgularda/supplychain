@@ -110,32 +110,32 @@
 @keyframes fadeOut{0%{opacity:1}80%{opacity:1}100%{opacity:0}}
 
 /* Smooth Transitions */
-#companyCard,#tt,#filterPanel,#provenanceDrawer{transition:opacity 0.2s ease,transform 0.2s ease}
-#bar button,#bar select{transition:all 0.15s cubic-bezier(0.4,0,0.2,1)}
+#companyCard,#tt,#filterPanel,#provenanceDrawer{transition:opacity var(--dur-base) ease,transform var(--dur-base) ease}
+#bar button,#bar select{transition:all var(--dur-fast) var(--ease-standard)}
 #bar button:hover{transform:translateY(-1px)}
 #bar button:active{transform:translateY(0)}
-.node{transition:filter 0.2s ease,opacity 0.2s ease}
+.node{transition:filter var(--dur-base) ease,opacity var(--dur-base) ease}
 .node:hover{filter:brightness(1.2) drop-shadow(0 0 8px currentColor)}
-.link{transition:opacity 0.2s ease}
+.link{transition:opacity var(--dur-base) ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-#companyCard.show,#tt.show,.modal.show{animation:fadeIn 0.2s ease forwards}
-.btn-press{transition:transform 0.05s ease}
+#companyCard.show,#tt.show,.modal.show{animation:fadeIn var(--dur-base) ease forwards}
+.btn-press{transition:transform var(--dur-fastest) ease}
 .btn-press:active{transform:scale(0.96)}
 
 /* Update Status Indicator */
-#footer{display:flex;align-items:center;gap:8px}
-#footer .updateStatus{display:inline-flex;align-items:center;gap:4px;font-size:8px;color:#666}
-#footer .statusDot{width:6px;height:6px;border-radius:50%;animation:pulse 2s ease-in-out infinite}
-#footer .statusDot.fresh{background:#4caf50}
-#footer .statusDot.stale{background:#ff9800}
-#footer .statusDot.outdated{background:#f44336}
+#footer{display:flex;align-items:center;gap:var(--space-4)}
+#footer .updateStatus{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--fs-xs);color:#666}
+#footer .statusDot{width:var(--space-3);height:var(--space-3);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+#footer .statusDot.fresh{background:var(--color-success)}
+#footer .statusDot.stale{background:var(--color-warning)}
+#footer .statusDot.outdated{background:var(--color-danger)}
 
 /* Top 10 Compact Sidebar */
-#top10Sidebar{background:rgba(10,10,10,0.95);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:10px}
+#top10Sidebar{background:rgba(10,10,10,0.95);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-lg);padding:var(--space-5)}
 #top10Sidebar::-webkit-scrollbar{width:4px}
 #top10Sidebar::-webkit-scrollbar-track{background:transparent}
 #top10Sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px}
-.top10-item{display:flex;align-items:center;gap:8px;padding:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:4px;cursor:pointer;transition:all 0.15s}
+.top10-item{display:flex;align-items:center;gap:var(--space-4);padding:var(--space-4);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-md);cursor:pointer;transition:all var(--dur-fast)}
 .top10-item:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.12);transform:translateX(2px)}
 .top10-item .rank{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#666;min-width:20px}
 .top10-item .logo{width:24px;height:24px;border-radius:4px;object-fit:contain;background:#0f0f0f;border:1px solid rgba(255,255,255,0.08)}
@@ -143,5 +143,16 @@
 .top10-item .info{flex:1;min-width:0}
 .top10-item .symbol{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#fff}
 .top10-item .name{font-family:'Inter',sans-serif;font-size:8px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.top10-item .marketCap{font-family:'JetBrains Mono',monospace;font-size:8px;color:#4caf50;font-weight:600}
+.top10-item .marketCap{font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--color-success);font-weight:var(--fw-semibold)}
 @media(max-width:768px){#top10Sidebar{display:none!important}}
+
+/* Reduced-motion: honor the OS-level prefers-reduced-motion setting (theme.css loads
+   last, so these win the cascade). Source: MDN prefers-reduced-motion. */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:0.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:0.01ms!important;
+  }
+  .node,.link,#companyCard,#tt,.modal{transition:none!important;animation:none!important}
+}
