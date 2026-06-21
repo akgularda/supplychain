@@ -8,7 +8,7 @@ progress:
   total_phases: 10
   completed_phases: 4
   total_plans: 18
-  completed_plans: 16
+  completed_plans: 17
   percent: 40
 ---
 
@@ -25,9 +25,9 @@ progress:
 ## Current Position
 
 Phase: 05 (Hero Moment & Investor Narrative) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 **Phase:** 04 — Design System & Smooth Motion — COMPLETE
-**Plan:** 05-01 complete — 1 of 3 plans done in Phase 05
+**Plan:** 05-02 complete — 2 of 3 plans done in Phase 05
 **Status:** Executing Phase 05
 **Progress:** [████░░░░░░] 40%
 
@@ -66,6 +66,8 @@ Plan: 2 of 3
 | Phase 04 P04 | ~12min | 1 task + 1 checkpoint | 1 file |
 | Phase-4 gate (04-04) | npm test = 191 pass / 0 fail; design/motion smoke PASS — 100 nodes painted over http-server, :root tokens resolve at runtime (--color-bg #0a0a0a, --color-observed #66bb6a, --fs-base 10px, --dur-base 200ms), .prov-badge color matches confidence class (NVDA confidence-low = rgb(158,158,158)), global→profile switch keeps exactly ONE g.nodes layer (build-once, no teardown; 100→17), reduced-motion run paints + switches, ZERO console errors. Human-verify auto-approved under AUTO_MODE (visual gate). STORY-01 + STORY-03 verified; Phase 4 complete (4/4) |
 | Phase 05 P01 | 3 min | 2 tasks | 4 files |
+| Phase 05 P02 | 4 min | 2 tasks | 2 files |
+| Hero-controller gate (05-02) | npm test = 214 tests / 210 pass / 4 fail — narrative suite 18/18 (+11 controller); 191 prior green; 1 prior Wave-0 RED (controller-presence+reduced-motion) flipped GREEN; 4 remaining RED are Plan-03 hero-wiring (index.html #heroOverlay markup + main.js heroSeen/#bTour) |
 
 ## Accumulated Context
 
@@ -111,6 +113,8 @@ Plan: 2 of 3
 - 05-01: buildNarrative(data) is PURE/DOM-free — each step apply(controls) injects openGlobal/highlightBy/openProfile; no DOM/d3 access and NO js/ui/index.js import (RESEARCH Pitfall 5) so it unit-tests in plain Node. Side effects flow only through the injected controls argument.
 - 05-01: captions are data-derived at runtime (combined cap Σmarketcap/1e12, bn count, dominant layer idx+name+count, top-cap bottleneck). Two-fixture diff test proves non-fabrication (market+risk captions differ across fixtures; market caption embeds fixture combined-cap + meta.count). topSymbol = highest-marketcap node that is ALSO bn, falling back to overall highest — never hardcoded (robust to weekly refresh; makes opportunity the payoff of risk).
 - 05-01: Wave 0 gate — tests/narrative.test.mjs (7 assertions GREEN) + tests/hero-wiring.test.mjs (5 assertions INTENDED RED, closed by Plans 02 controller + 03 markup/main-wiring) registered in scripts.test (18 files). npm test = 203 / 198 pass / 5 RED (mirrors 04-01 Wave-0 pattern). Deviation: topSymbol prefers bn over the RESEARCH reference's global-max (Task-1 behavior), pinned by a fallback test.
+- 05-02: createHeroController({steps,controls,storage,reducedMotion,timers,render}) is PURE/DOM-free (RESEARCH Pattern 2) — single timerId state machine, STEP_MS=5500 (~5.5s/step, 4 steps ~22s within ~30s STORY-02). scheduleNext() returns BEFORE timers.setTimeout when reducedMotion() truthy (zero timers under reduced motion; show()/apply()/render still run so captions display; manual next() unaffected). play() always restarts at index 0 ignoring stored heroSeen (replay always allowed). stop()/skip() (skip is an alias of stop) = pause + storage.write('heroSeen','1') + resetHighlight + render(null,...) so the map is never left dimmed (Pitfall 4); end-of-autoplay and next()-past-last both route through stop(). pause/next/prev clear the single timerId via timers.clearTimeout (bounded autoplay, T-05-04 mitigated). Returns {play,pause,next,prev,skip,getIndex}.
+- 05-02: narrative suite 18/18 (+11 controller assertions: play schedules one timer, fire advances+re-arms, full autoplay stops+writes heroSeen, pause clears, next/prev bounds, next-past-last stop, skip teardown, reduced-motion zero-timer + manual next, replay). npm test = 214 / 210 pass / 4 fail — the controller-presence+reduced-motion hero-wiring assertion flipped GREEN; 4 remaining RED are Plan-03's #heroOverlay markup + main.js heroSeen/#bTour wiring. No deviations.
 
 ### Standing Constraints
 
@@ -129,9 +133,9 @@ Plan: 2 of 3
 
 ## Session Continuity
 
-**Last action:** Completed 04-04-PLAN.md — the Phase-4 closing gate. Authored docs/perf/_design-motion-smoke-0404.cjs (5248f99): http-server + Playwright (chromium) over the real served data, proving paint (100 nodes), runtime token resolution on :root, the .prov-badge color↔confidence-class contract (T-04-09), a build-once global→profile mode switch keeping exactly one g.nodes layer (T-04-10), and a reduced-motion reload — all with zero console errors. npm test = 191/191 green; smoke PASS; Task-2 human-verify auto-approved under AUTO_MODE (visual gate, not a package-legitimacy blocking-human gate). STORY-01 + STORY-03 verified end to end. **Phase 04 — COMPLETE, 4 of 4 plans done.**
+**Last action:** Completed 05-02-PLAN.md — the hero controller state machine. Added createHeroController({steps,controls,storage,reducedMotion,timers,render}) to js/ui/narrative.js (feat 5aec676), driven by 11 new fake-deps controller tests in tests/narrative.test.mjs (test a10a78a). Pure/DOM-free: autoplay ~5.5s/step via injected timers, pause/next/prev/skip/replay, reduced-motion suppresses the auto-advance timer (manual Next only), stop/skip writes heroSeen + resetHighlight + render(null). TDD RED→GREEN clean, no deviations. npm test = 214/210 pass/4 fail — narrative suite 18/18, the 4 remaining RED are Plan-03's hero-wiring contract (markup + main.js).
 
-**Next step:** Phase 04 is complete (15/15 plans, 4/10 phases). Proceed to Phase 05 — Hero Moment & Investor Narrative (STORY-02, STORY-04, STORY-05): run /gsd:plan-phase for Phase 5.
+**Next step:** Run 05-03-PLAN.md — the final Phase-5 plan: add the #heroOverlay markup + #bTour button in index.html and wire createHeroController in js/main.js (controls from js/ui exports, storage=safeReadFlag/safeWriteFlag, reducedMotion=matchMedia, timers=window setTimeout/clearTimeout, render→#heroOverlay), gate first play on heroSeen, route ESC/#heroSkip→skip(). That closes the 4 remaining hero-wiring REDs and Phase 5 (STORY-02/04/05).
 
 ---
 *State initialized: 2026-06-20*
