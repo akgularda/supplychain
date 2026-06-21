@@ -4,7 +4,7 @@
 
 import test from "node:test";
 import assert from "node:assert/strict";
-import { buildNarrative } from "../js/ui/narrative.js";
+import { buildNarrative, createHeroController } from "../js/ui/narrative.js";
 
 // A tiny fake dataset. Two layers (y=0 dominant with 3 nodes, y=1 with 1),
 // two bottlenecks (bn:true), and a clear highest-marketcap-and-bn node (BBB).
@@ -149,4 +149,200 @@ test("opportunity prefers the highest-marketcap bottleneck, falling back to top 
   const c = spyControls();
   opportunity.apply(c);
   assert.equal(c.calls[0].args[0], "PQR", "fallback to highest-marketcap overall when no bn node");
+});
+
+// ---------------------------------------------------------------------------
+// createHeroController — autoplay/stepper state machine (Plan 02, STORY-02).
+// Every side-effect is injected: fake timers/storage/reducedMotion/controls/render.
+// These run DOM-free in Node — no real timers, no window, no document.
+// ---------------------------------------------------------------------------
+
+// A fake `timers` object: setTimeout records the callback (does NOT fire it),
+// returns an incrementing id; fireTimer() invokes the LAST recorded callback
+// (mirrors the chained scheduleNext re-arm); clearTimeout marks an id cleared.
+function fakeTimers() {
+  let nextId = 0;
+  const scheduled = []; // { id, fn, delay, cleared }
+  return {
+    scheduled,
+    setTimeout(fn, delay) {
+      const id = ++nextId;
+      scheduled.push({ id, fn, delay, cleared: false });
+      return id;
+    },
+    clearTimeout(id) {
+      const entry = scheduled.find((s) => s.id === id);
+      if (entry) entry.cleared = true;
+    },
+    // Number of setTimeout calls made so far.
+    get scheduledCount() {
+      return scheduled.length;
+    },
+    // The most recently scheduled (live) callback.
+    last() {
+      return scheduled[scheduled.length - 1];
+    },
+    // Fire the last scheduled callback if it hasn't been cleared.
+    fireTimer() {
+      const entry = this.last();
+      if (entry && !entry.cleared) entry.fn();
+    },
+  };
+}
+
+// A fake `storage`: in-memory map + a writes log of [key, value] tuples.
+function fakeStorage(initial = {}) {
+  const map = { ...initial };
+  const writes = [];
+  return {
+    map,
+    writes,
+    read: (key) => (key in map ? map[key] : null),
+    write: (key, value) => {
+      map[key] = value;
+      writes.push([key, value]);
+    },
+  };
+}
+
+// A fake `render`: records every (step, index, total) tuple it receives.
+function fakeRender() {
+  const calls = [];
+  const fn = (step, index, total) => calls.push({ step, index, total });
+  fn.calls = calls;
+  return fn;
+}
+
+// Build a controller wired to deterministic fakes. reducedMotion defaults false.
+function makeController({ reduced = false, storageInit = {} } = {}) {
+  const steps = buildNarrative(fixtureA());
+  const controls = spyControls();
+  const storage = fakeStorage(storageInit);
+  const timers = fakeTimers();
+  const render = fakeRender();
+  const reducedMotion = () => reduced;
+  const ctrl = createHeroController({ steps, controls, storage, reducedMotion, timers, render });
+  return { ctrl, steps, controls, storage, timers, render };
+}
+
+test("controller: play() shows step 0 and schedules an auto-advance timer", () => {
+  const { ctrl, timers, render } = makeController();
+  ctrl.play();
+  assert.equal(ctrl.getIndex(), 0, "play starts at step 0");
+  assert.equal(timers.scheduledCount, 1, "play schedules exactly one timer");
+  assert.equal(render.calls[0].index, 0, "render invoked with step index 0");
+  assert.equal(render.calls[0].total, 4, "render receives total step count");
+  assert.ok(render.calls[0].step && render.calls[0].step.id === "market", "first rendered step is market");
+});
+
+test("controller: firing the timer auto-advances 0 -> 1 and re-schedules", () => {
+  const { ctrl, timers } = makeController();
+  ctrl.play();
+  timers.fireTimer();
+  assert.equal(ctrl.getIndex(), 1, "auto-advance moved to step 1");
+  assert.equal(timers.scheduledCount, 2, "a new timer was scheduled after advancing");
+});
+
+test("controller: autoplay through the last step stops and writes heroSeen", () => {
+  const { ctrl, timers, storage, render } = makeController();
+  ctrl.play();
+  // 4 steps (indices 0..3). Fire the timer 3 times to reach the last step,
+  // then once more to trigger stop() at the end.
+  timers.fireTimer(); // -> 1
+  timers.fireTimer(); // -> 2
+  timers.fireTimer(); // -> 3 (last)
+  assert.equal(ctrl.getIndex(), 3, "reached the final step via autoplay");
+  timers.fireTimer(); // at last step -> stop()
+  assert.deepEqual(
+    storage.writes.find((w) => w[0] === "heroSeen"),
+    ["heroSeen", "1"],
+    "end of autoplay writes heroSeen=1",
+  );
+  assert.equal(render.calls[render.calls.length - 1].step, null, "overlay cleared via render(null) at end");
+});
+
+test("controller: pause() clears the timer so no further auto-advance occurs", () => {
+  const { ctrl, timers } = makeController();
+  ctrl.play();
+  const before = ctrl.getIndex();
+  ctrl.pause();
+  // The previously scheduled timer must be marked cleared; firing it is a no-op.
+  timers.fireTimer();
+  assert.equal(ctrl.getIndex(), before, "index unchanged after pause + fire");
+});
+
+test("controller: next() advances and pauses auto-advance", () => {
+  const { ctrl, timers } = makeController();
+  ctrl.play();
+  ctrl.next();
+  assert.equal(ctrl.getIndex(), 1, "next moved to step 1");
+  // The original autoplay timer should be cleared by next()'s pause; firing is a no-op.
+  timers.fireTimer();
+  assert.equal(ctrl.getIndex(), 1, "no auto-advance after manual next");
+});
+
+test("controller: prev() decrements and respects the lower bound", () => {
+  const { ctrl } = makeController();
+  ctrl.play();
+  ctrl.next(); // -> 1
+  ctrl.prev(); // -> 0
+  assert.equal(ctrl.getIndex(), 0, "prev returned to step 0");
+  ctrl.prev(); // already at 0
+  assert.equal(ctrl.getIndex(), 0, "prev never goes negative");
+});
+
+test("controller: next() at the last step triggers stop teardown", () => {
+  const { ctrl, storage, controls, render } = makeController();
+  ctrl.play();
+  ctrl.next(); // 1
+  ctrl.next(); // 2
+  ctrl.next(); // 3 (last)
+  ctrl.next(); // beyond last -> stop()
+  assert.deepEqual(
+    storage.writes.find((w) => w[0] === "heroSeen"),
+    ["heroSeen", "1"],
+    "next past the last step writes heroSeen=1",
+  );
+  assert.ok(
+    controls.calls.some((x) => x.name === "resetHighlight"),
+    "stop resets the highlight",
+  );
+  assert.equal(render.calls[render.calls.length - 1].step, null, "stop clears the overlay");
+});
+
+test("controller: skip() writes heroSeen, resets highlight, and renders null", () => {
+  const { ctrl, storage, controls, render } = makeController();
+  ctrl.play();
+  ctrl.skip();
+  assert.deepEqual(
+    storage.writes.find((w) => w[0] === "heroSeen"),
+    ["heroSeen", "1"],
+    "skip writes heroSeen=1",
+  );
+  const resets = controls.calls.filter((x) => x.name === "resetHighlight");
+  assert.equal(resets.length, 1, "skip calls resetHighlight exactly once");
+  assert.equal(render.calls[render.calls.length - 1].step, null, "skip clears the overlay (render(null))");
+});
+
+test("controller: reduced-motion suppresses the auto-advance timer", () => {
+  const { ctrl, timers, render } = makeController({ reduced: true });
+  ctrl.play();
+  assert.equal(timers.scheduledCount, 0, "reduced-motion schedules ZERO timers");
+  assert.equal(render.calls[0].index, 0, "reduced-motion still renders step 0");
+});
+
+test("controller: reduced-motion still allows manual next()", () => {
+  const { ctrl, timers, render } = makeController({ reduced: true });
+  ctrl.play();
+  ctrl.next();
+  assert.equal(ctrl.getIndex(), 1, "manual next advances under reduced motion");
+  assert.equal(timers.scheduledCount, 0, "still no timer scheduled under reduced motion");
+  assert.equal(render.calls[render.calls.length - 1].index, 1, "render reflects the manual advance");
+});
+
+test("controller: replay — play() runs even when heroSeen is already '1'", () => {
+  const { ctrl, render } = makeController({ storageInit: { heroSeen: "1" } });
+  ctrl.play();
+  assert.equal(ctrl.getIndex(), 0, "replay restarts from step 0 regardless of stored heroSeen");
+  assert.ok(render.calls.length >= 1, "replay renders the overlay again");
 });
