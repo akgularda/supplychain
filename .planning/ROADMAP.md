@@ -22,7 +22,7 @@ This roadmap preserves the approved spec's mandatory ordering: **Foundation firs
 - [x] **Phase 5: Hero Moment & Investor Narrative** - First-30s guided hero and marketâconcentrationâriskâopportunity flow, with non-regression tests (completed 2026-06-21)
 - [x] **Phase 6: Concentration & Risk Analytics** - Per-company/sector concentration scoring and single-point-of-failure bottleneck analytics on real data (completed 2026-06-21)
 - [x] **Phase 7: Scenario Stress-Tests** - At least one real-data scenario stress-test with downstream impact, all analytics carrying provenance and tests (completed 2026-06-21)
-- [x] **Phase 8: Interaction Performance** - Memoized filter/style interactions with no full simulation restart (completed 2026-06-21)
+- [x] **Phase 8: Interaction Performance** - Memoized filter/style interactions with no full simulation restart (completed 2026-06-21)
 - [ ] **Phase 9: Mobile & Keyboard Accessibility** - Full mobile usability and a complete keyboard-only journey
 - [ ] **Phase 10: SEO, Social Cards & Launch Gate** - Valid SEO/social metadata and a final verification gate before launch
 
@@ -171,7 +171,10 @@ Plans:
   1. The site is fully usable on mobile (responsive layout, working touch interactions).
   2. A complete keyboard-only journey covers search â filter â select â reset.
   3. The full test suite stays green and the accessibility (ARIA) baseline is preserved or improved.
-**Plans**: TBD
+**Plans**: 3 plans (0/3 Planned)
+- [ ] 09-01-PLAN.md — Mobile layout + responsive @media for new panels/modals + 4 mobile-sheet controls (PERF-02)
+- [ ] 09-02-PLAN.md — Hero overlay focus trap + keyboard-only journey + ARIA assertions (PERF-03)
+- [ ] 09-03-PLAN.md — Playwright 390x844 + keyboard + focus-trap smoke; full-suite green gate + human-verify (PERF-02/03)
 **UI hint**: yes
 
 ### Phase 10: SEO, Social Cards & Launch Gate
@@ -198,7 +201,7 @@ Plans:
 | 6. Concentration & Risk Analytics | 3/3 | Complete   | 2026-06-21 |
 | 7. Scenario Stress-Tests | 3/3 | Complete   | 2026-06-21 |
 | 8. Interaction Performance | 4/4 | Complete   | 2026-06-21 |
-| 9. Mobile & Keyboard Accessibility | 0/0 | Not started | - |
+| 9. Mobile & Keyboard Accessibility | 0/3 | Planned | - |
 | 10. SEO, Social Cards & Launch Gate | 0/0 | Not started | - |
 
 ---
