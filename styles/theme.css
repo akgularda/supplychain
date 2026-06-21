@@ -101,6 +101,54 @@
     max-width: calc(100vw - 24px);
     padding: 14px;
   }
+
+  /* New Phase 5-7 panels: full-width, bottom-anchored above the mobile toolbar,
+     bounded height with scroll so they are usable and never clipped on a phone. */
+  #chokepointsPanel, #scenarioPanel {
+    left: 8px;
+    right: 8px;
+    width: auto;
+    max-height: 40vh;
+  }
+  #chokepointsPanel {
+    bottom: calc(var(--space-6) + 56px);
+  }
+  #scenarioPanel {
+    bottom: 56px;
+  }
+
+  /* Filter panel: usable mobile width instead of the desktop 280px column */
+  #filterPanel {
+    left: 8px;
+    right: 8px;
+    max-width: none;
+    width: auto;
+    top: 70px;
+  }
+
+  /* Hero tour overlay: span the viewport width with safe insets */
+  #heroOverlay {
+    left: 8px !important;
+    right: 8px;
+    width: auto !important;
+    max-width: none !important;
+    transform: none !important;
+    bottom: 64px;
+  }
+
+  /* Modals: give the dialog content a usable mobile width and inset */
+  #helpModal .content, #methodologyModal .content {
+    max-width: calc(100vw - 24px);
+    width: calc(100vw - 24px);
+    max-height: 85vh;
+  }
+  #compareModal .content {
+    max-width: 100%;
+    padding: 16px;
+  }
+  #compareModal .grid {
+    grid-template-columns: 1fr;
+  }
 }
 @media print {
   #top,#bar,#searchWrap,#companyCard,#hint,#lg,#ly,#filterPanel,#loading,#helpModal,#methodologyModal,#compareModal,#footer,#provenanceDrawer,#mobileToggle,#mobileSheet{display:none!important}

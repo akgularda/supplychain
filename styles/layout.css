@@ -20,6 +20,12 @@
 #bar button:hover,#bar button.on,#bar select:hover{background:var(--color-surface-raised);border-color:var(--acc);color:var(--acc)}
 #bar .sep{width:1px;background:var(--color-surface-raised);align-self:stretch;margin:0 var(--space-2)}
 button:focus-visible,select:focus-visible,input:focus-visible{outline:1px solid var(--acc);outline-offset:1px}
+/* New Phase 5-7 panels: take them out of static flow so they no longer overlap
+   the fixed #top header / #bar toolbar. Docked bottom-left on desktop, scrollable,
+   stacked with distinct bottom offsets so the two panels never overlap each other. */
+#chokepointsPanel,#scenarioPanel{position:fixed;left:var(--space-6);z-index:95;width:280px;max-height:38vh;overflow-y:auto;background:rgba(10,10,10,0.95);border:1px solid var(--color-surface-raised);border-radius:var(--radius-lg);padding:var(--space-5)}
+#chokepointsPanel{bottom:calc(var(--space-6) + 200px)}
+#scenarioPanel{bottom:var(--space-6)}
 #searchWrap{position:fixed;top:52px;right:var(--space-6);z-index:100;width:260px}
 #q{position:static;background:#111;border:1px solid var(--color-border);color:var(--text);font-family:var(--font-mono);font-size:var(--fs-sm);padding:5px var(--space-5);width:100%;outline:none}
 #q:focus{border-color:var(--acc)}
