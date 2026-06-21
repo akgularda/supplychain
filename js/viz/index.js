@@ -27,12 +27,20 @@ const legendEl = document.getElementById("lg");
 const layerEl = document.getElementById("ly");
 const countryBtns = document.getElementById("countryBtns");
 
-// Mutable D3 selections — reassigned only inside this module (render), so local `let` is safe.
+// Mutable D3 selections — reassigned by updateGraph() on every view change. The on("tick")
+// handler in buildSimulation reads these module-level bindings (never a stale closure copy).
 let nodeSel;
 let linkSel;
 let labelSel;
 let subSel;
 let particleLayer;
+
+// Reduced-motion guard for the D3 (JS-driven) transition path. The CSS @media block in
+// theme.css covers DOM transitions; this gates D3 .transition().duration(...) on view change.
+const prefersReducedMotion = () =>
+  (typeof window !== "undefined" && window.matchMedia)
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    : false;
 
 function animateCounter(elementId, target, duration = 1000, prefix = '', suffix = '') {
   const el = document.getElementById(elementId);
@@ -407,8 +415,226 @@ function toggleParticles() {
   step();
 }
 
+// Shared force-simulation tick handler. Reads the CURRENT module-level nodeSel/linkSel
+// (reassigned by updateGraph each view change) — never a stale closure — and applies the
+// canvas boundary clamp (topPad 78 / bottomPad 20 / m = (z||10)+12) on every tick.
+function ticked() {
+  STATE.nodes.forEach((n) => {
+    const m = (n.z || 10) + 12;
+    const topPad = 78;
+    const bottomPad = 20;
+    n.x = Math.max(m, Math.min(W - m, n.x));
+    n.y = Math.max(topPad + m, Math.min(H - bottomPad - m, n.y));
+  });
+  if (linkSel) linkSel.attr("x1", (d) => d.source.x).attr("y1", (d) => d.source.y).attr("x2", (d) => d.target.x).attr("y2", (d) => d.target.y);
+  if (nodeSel) nodeSel.attr("transform", (d) => `translate(${d.x},${d.y})`);
+}
+
+// Build the force simulation EXACTLY ONCE (idempotent). View changes never recreate it —
+// updateGraph() re-binds nodes/links and re-tunes the mode-dependent forces in place.
+// Forces are created with no node argument; mode-dependent values are set by updateGraph.
+function buildSimulation() {
+  if (STATE.simulation) return STATE.simulation;
+  STATE.simulation = d3.forceSimulation()
+    .force("link", d3.forceLink().id((d) => d.id).distance((d) => d.v >= 3 ? 70 : 110).strength((d) => (d.v || 1) * 0.11))
+    .force("charge", d3.forceManyBody())
+    .force("x", d3.forceX())
+    .force("y", d3.forceY())
+    .force("collision", d3.forceCollide().radius((d) => (d.z || 10) + 8))
+    .alphaDecay(0.016)
+    .on("tick", ticked);
+  return STATE.simulation;
+}
+
+// Attach the standard children (bn-ring, .mc circle with verified-node class, label/sub/
+// country texts) to a freshly entered node <g>. Used by updateGraph's enter selection.
+function buildNodeChildren(sel) {
+  sel.filter((d) => d.bn).append("circle").attr("r", (d) => (d.z || 10) + 5).attr("class", "bn-ring");
+  sel.append("circle").attr("class", "mc").attr("r", (d) => d.z || 10)
+    .attr("fill", (d) => DATA.countries[d.c]?.c || "#777")
+    .attr("fill-opacity", (d) => d.bn ? 0.82 : 0.35)
+    .attr("stroke", (d) => d.bn ? "var(--acc)" : "#222")
+    .attr("stroke-width", (d) => d.bn ? 1.4 : 0.5)
+    .classed("verified-node", (d) => {
+      const prov = provenanceFor(d, { sourceIndex: STATE.sourceIndex, meta: DATA.meta });
+      return prov.tag === "observed" && Boolean(prov.source);
+    });
+
+  sel.append("text")
+    .text((d) => d.l.split("\n")[0])
+    .attr("dy", (d) => -(d.z || 10) - 4)
+    .attr("text-anchor", "middle")
+    .attr("fill", (d) => d.bn ? "#ccc" : "#666")
+    .attr("font-size", (d) => d.z >= 18 ? "9px" : "7px")
+    .attr("font-family", "'JetBrains Mono',monospace")
+    .attr("pointer-events", "none")
+    .attr("class", "node-label");
+
+  sel.append("text")
+    .text((d) => d.l.split("\n")[1] || "")
+    .attr("dy", (d) => -(d.z || 10) + 6)
+    .attr("text-anchor", "middle")
+    .attr("fill", "#444")
+    .attr("font-size", "6px")
+    .attr("font-family", "'JetBrains Mono',monospace")
+    .attr("pointer-events", "none")
+    .attr("class", "node-sub");
+
+  sel.append("text")
+    .text((d) => d.c)
+    .attr("dy", (d) => (d.z || 10) + 11)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "7px")
+    .attr("fill", "#333")
+    .attr("font-family", "'JetBrains Mono',monospace")
+    .attr("pointer-events", "none");
+}
+
+// Wire the node-level drag + mouse/click handlers onto a node selection.
+function wireNodeHandlers(sel) {
+  sel.attr("cursor", "pointer")
+    .call(d3.drag()
+      .on("start", (e, d) => { if (!e.active) STATE.simulation.alphaTarget(0.06).restart(); d.fx = d.x; d.fy = d.y; })
+      .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; })
+      .on("end", (e, d) => { if (!e.active) STATE.simulation.alphaTarget(0); d.fx = null; d.fy = null; }))
+    .on("mouseenter", (ev, d) => {
+      if (STATE.mode === "global" && d.symbol) {
+        STATE.hoverSymbol = d.symbol;
+        updateCompanyCard();
+      }
+      if (!STATE.lockId) { showTooltip(d, ev); highlightNode(d); }
+    })
+    .on("mousemove", (ev) => { if (!STATE.lockId) moveTooltip(ev); })
+    .on("mouseleave", () => {
+      if (STATE.mode === "global") {
+        STATE.hoverSymbol = null;
+        updateCompanyCard();
+      }
+      if (!STATE.lockId) { tt.style.display = "none"; resetHighlight(); }
+    })
+    .on("click", (ev, d) => {
+      ev.stopPropagation();
+      if (STATE.mode === "global" && d.symbol && DATA.profiles[d.symbol]) {
+        openProfile(d.symbol);
+        return;
+      }
+      if (STATE.lockId === d.id) {
+        STATE.lockId = null;
+        tt.style.display = "none";
+        resetHighlight();
+      } else {
+        STATE.lockId = d.id;
+        showTooltip(d, ev);
+        highlightNode(d);
+      }
+    });
+}
+
+// Wire the link-level mouse handlers onto a link selection.
+function wireLinkHandlers(sel) {
+  sel.attr("marker-end", "url(#a)")
+    .attr("cursor", "pointer")
+    .on("mouseenter", (ev, d) => { if (!STATE.lockId) showLinkTooltip(d, ev); })
+    .on("mousemove", (ev) => { if (!STATE.lockId) moveTooltip(ev); })
+    .on("mouseleave", () => { if (!STATE.lockId) tt.style.display = "none"; });
+}
+
+// Update on EVERY view change: carry positions (mental map), re-tune forces in place,
+// data-join enter/update/exit with reduced-motion-gated transitions, re-bind the SAME
+// simulation's nodes/links, then gently reheat (alphaTarget(0.3) → 0). Never a
+// from-scratch full reheat, never a new d3.forceSimulation.
+function updateGraph(graph) {
+  const sim = buildSimulation();
+
+  // 1. MENTAL MAP: carry x/y/vx/vy from prior nodes by id. graph.nodes already carry
+  //    computed band/profile SEED positions (set by render's layout pass); existing nodes
+  //    overwrite those seeds with their settled prior positions so they don't fly in.
+  const prev = new Map(STATE.nodes.map((n) => [n.id, n]));
+  graph.nodes.forEach((n) => {
+    const p = prev.get(n.id);
+    if (p) { n.x = p.x; n.y = p.y; n.vx = p.vx; n.vy = p.vy; }
+  });
+  STATE.nodes = graph.nodes;
+  STATE.links = graph.links;
+
+  // 2. Re-tune the mode-dependent forces IN PLACE (same values as the old inline forceSimulation).
+  sim.force("charge").strength(STATE.mode === "global" ? -180 : -220);
+  sim.force("x").x((d) => STATE.mode === "global" ? W / 2 : d.targetX).strength(STATE.mode === "global" ? 0.03 : 0.25);
+  sim.force("y").y((d) => d.targetY).strength(STATE.mode === "global" ? 0.4 : 0.14);
+
+  // 3. Data-join links + nodes with reduced-motion-gated enter/exit transitions.
+  const dur = prefersReducedMotion() ? 0 : 350;
+
+  linkSel = linkLayer.selectAll("line").data(STATE.links, (d) => {
+    const s = typeof d.source === "object" ? d.source.id : d.source;
+    const t = typeof d.target === "object" ? d.target.id : d.target;
+    return `${s}->${t}`;
+  }).join(
+    (enter) => {
+      const line = enter.append("line")
+        .attr("stroke-opacity", 0);
+      wireLinkHandlers(line);
+      line.transition().duration(dur).ease(d3.easeCubic).attr("stroke-opacity", 1);
+      return line;
+    },
+    (update) => update,
+    (exit) => exit.call((e) => e.transition().duration(dur).ease(d3.easeCubic).attr("stroke-opacity", 0).remove()),
+  );
+  // Keep static link styling current for both entering and updating links.
+  linkSel.attr("stroke", (d) => d.v >= 3 ? "rgba(232,69,60,.18)" : d.v >= 2 ? "#1e1e1e" : "#151515")
+    .attr("stroke-width", (d) => d.v >= 3 ? 1.4 : d.v >= 2 ? 0.7 : 0.35);
+
+  nodeSel = nodeLayer.selectAll("g.node").data(STATE.nodes, (d) => d.id).join(
+    (enter) => {
+      const grp = enter.append("g").attr("class", "node").attr("opacity", 0);
+      buildNodeChildren(grp);
+      wireNodeHandlers(grp);
+      grp.transition().duration(dur).ease(d3.easeCubic).attr("opacity", 1);
+      return grp;
+    },
+    (update) => update,
+    (exit) => exit.call((e) => e.transition().duration(dur).ease(d3.easeCubic).attr("opacity", 0).remove()),
+  );
+  // Refresh module-level child selections used by highlight/reset functions.
+  labelSel = nodeSel.select(".node-label");
+  subSel = nodeSel.select(".node-sub");
+
+  // 4. Re-bind data to the SAME simulation (re-initializes bound forces; carried positions stay).
+  const simulation = sim;
+  simulation.nodes(STATE.nodes);
+  simulation.force("link").links(STATE.links);
+
+  // 5. GENTLE reheat — warm toward 0.3, then settle to 0 after ~600ms (never a full reheat).
+  if (STATE.settleTimer) clearTimeout(STATE.settleTimer);
+  if (prefersReducedMotion()) {
+    // Reduced motion: skip the visible reheat, snap toward a settled layout.
+    sim.alphaTarget(0).alpha(0.05).restart();
+    STATE.settleTimer = setTimeout(() => sim.stop(), 0);
+  } else {
+    sim.alphaTarget(0.3).restart();
+    STATE.settleTimer = setTimeout(() => sim.alphaTarget(0), 600);
+  }
+}
+
+// Stable layers created once so they survive view changes. z-order (append order):
+// bands (back) → links → particles → nodes (front). Bands are redrawn per view; the
+// link/node/particle groups persist so the data-join + particle timer keep working.
+let bandLayer;
+let linkLayer;
+let nodeLayer;
+
+function ensureLayers() {
+  if (bandLayer && linkLayer && nodeLayer && particleLayer) return;
+  bandLayer = g.append("g").attr("class", "bands");
+  linkLayer = g.append("g").attr("class", "links");
+  particleLayer = g.append("g").attr("class", "particles");
+  nodeLayer = g.append("g").attr("class", "nodes");
+}
+
+// Public entry. Builds graph for the current mode, updates chrome + layer bands, then
+// delegates node/link binding + simulation to updateGraph (build-once / update-on-change).
+// NO clearGraph() on a view change — that teardown is what caused the jank (STORY-03).
 function render() {
-  clearGraph();
   hideSearchPopovers();
   const graph = graphForMode();
   STATE.nodes = graph.nodes;
@@ -438,16 +664,20 @@ function render() {
   buildLayerSidebar();
   buildCountryButtons();
 
+  ensureLayers();
+
+  // Layer bands + labels are view-specific chrome: redraw them each view change.
+  bandLayer.selectAll("*").remove();
   const layerKeys = [...new Set(STATE.nodes.map((n) => n.layer))].sort((a, b) => a - b);
   const bandH = H / Math.max(1, layerKeys.length);
 
   layerKeys.forEach((layer, i) => {
     const y = (layerKeys.length - 1 - i) * bandH;
     if (STATE.mode === "global") {
-      g.append("rect").attr("x", -10000).attr("y", y).attr("width", 20000).attr("height", bandH)
+      bandLayer.append("rect").attr("x", -10000).attr("y", y).attr("width", 20000).attr("height", bandH)
         .attr("fill", i % 2 === 0 ? "#0d0d0d" : "transparent").attr("pointer-events", "none");
     }
-    g.append("text")
+    bandLayer.append("text")
       .attr("x", STATE.mode === "global" ? -9950 : 40)
       .attr("y", y + 16)
       .attr("fill", "#1e1e1e")
@@ -457,6 +687,8 @@ function render() {
       .attr("pointer-events", "none");
   });
 
+  // Seed positions for NEW nodes (existing nodes have their carried positions restored in
+  // updateGraph by id). Always compute targetX/targetY so the forces aim correctly.
   STATE.nodes.forEach((n) => {
     if (STATE.mode === "global") {
       const idx = layerKeys.indexOf(n.layer);
@@ -490,94 +722,6 @@ function render() {
     });
   }
 
-  linkSel = g.append("g").selectAll("line").data(STATE.links).join("line")
-    .attr("stroke", (d) => d.v >= 3 ? "rgba(232,69,60,.18)" : d.v >= 2 ? "#1e1e1e" : "#151515")
-    .attr("stroke-width", (d) => d.v >= 3 ? 1.4 : d.v >= 2 ? 0.7 : 0.35)
-    .attr("marker-end", "url(#a)")
-    .attr("cursor", "pointer")
-    .on("mouseenter", (ev, d) => { if (!STATE.lockId) showLinkTooltip(d, ev); })
-    .on("mousemove", (ev) => { if (!STATE.lockId) moveTooltip(ev); })
-    .on("mouseleave", () => { if (!STATE.lockId) tt.style.display = "none"; });
-
-  particleLayer = g.append("g");
-
-  nodeSel = g.append("g").selectAll("g").data(STATE.nodes).join("g").attr("cursor", "pointer")
-    .call(d3.drag()
-      .on("start", (e, d) => { if (!e.active) STATE.simulation.alphaTarget(0.06).restart(); d.fx = d.x; d.fy = d.y; })
-      .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; })
-      .on("end", (e, d) => { if (!e.active) STATE.simulation.alphaTarget(0); d.fx = null; d.fy = null; }));
-
-  nodeSel.filter((d) => d.bn).append("circle").attr("r", (d) => (d.z || 10) + 5).attr("class", "bn-ring");
-  nodeSel.append("circle").attr("class", "mc").attr("r", (d) => d.z || 10)
-    .attr("fill", (d) => DATA.countries[d.c]?.c || "#777")
-    .attr("fill-opacity", (d) => d.bn ? 0.82 : 0.35)
-    .attr("stroke", (d) => d.bn ? "var(--acc)" : "#222")
-    .attr("stroke-width", (d) => d.bn ? 1.4 : 0.5)
-    .classed("verified-node", (d) => {
-      const prov = provenanceFor(d, { sourceIndex: STATE.sourceIndex, meta: DATA.meta });
-      return prov.tag === "observed" && Boolean(prov.source);
-    });
-
-  labelSel = nodeSel.append("text")
-    .text((d) => d.l.split("\n")[0])
-    .attr("dy", (d) => -(d.z || 10) - 4)
-    .attr("text-anchor", "middle")
-    .attr("fill", (d) => d.bn ? "#ccc" : "#666")
-    .attr("font-size", (d) => d.z >= 18 ? "9px" : "7px")
-    .attr("font-family", "'JetBrains Mono',monospace")
-    .attr("pointer-events", "none");
-
-  subSel = nodeSel.append("text")
-    .text((d) => d.l.split("\n")[1] || "")
-    .attr("dy", (d) => -(d.z || 10) + 6)
-    .attr("text-anchor", "middle")
-    .attr("fill", "#444")
-    .attr("font-size", "6px")
-    .attr("font-family", "'JetBrains Mono',monospace")
-    .attr("pointer-events", "none");
-
-  nodeSel.append("text")
-    .text((d) => d.c)
-    .attr("dy", (d) => (d.z || 10) + 11)
-    .attr("text-anchor", "middle")
-    .attr("font-size", "7px")
-    .attr("fill", "#333")
-    .attr("font-family", "'JetBrains Mono',monospace")
-    .attr("pointer-events", "none");
-
-  nodeSel
-    .on("mouseenter", (ev, d) => {
-      if (STATE.mode === "global" && d.symbol) {
-        STATE.hoverSymbol = d.symbol;
-        updateCompanyCard();
-      }
-      if (!STATE.lockId) { showTooltip(d, ev); highlightNode(d); }
-    })
-    .on("mousemove", (ev) => { if (!STATE.lockId) moveTooltip(ev); })
-    .on("mouseleave", () => {
-      if (STATE.mode === "global") {
-        STATE.hoverSymbol = null;
-        updateCompanyCard();
-      }
-      if (!STATE.lockId) { tt.style.display = "none"; resetHighlight(); }
-    })
-    .on("click", (ev, d) => {
-      ev.stopPropagation();
-      if (STATE.mode === "global" && d.symbol && DATA.profiles[d.symbol]) {
-        openProfile(d.symbol);
-        return;
-      }
-      if (STATE.lockId === d.id) {
-        STATE.lockId = null;
-        tt.style.display = "none";
-        resetHighlight();
-      } else {
-        STATE.lockId = d.id;
-        showTooltip(d, ev);
-        highlightNode(d);
-      }
-    });
-
   svg.on("click", () => {
     if (STATE.lockId) {
       STATE.lockId = null;
@@ -586,31 +730,11 @@ function render() {
     }
   });
 
-  STATE.simulation = d3.forceSimulation(STATE.nodes)
-    .force("link", d3.forceLink(STATE.links).id((d) => d.id).distance((d) => d.v >= 3 ? 70 : 110).strength((d) => (d.v || 1) * 0.11))
-    .force("charge", d3.forceManyBody().strength(STATE.mode === "global" ? -180 : -220))
-    .force("x", d3.forceX((d) => STATE.mode === "global" ? W / 2 : d.targetX).strength(STATE.mode === "global" ? 0.03 : 0.25))
-    .force("y", d3.forceY((d) => d.targetY).strength(STATE.mode === "global" ? 0.4 : 0.14))
-    .force("collision", d3.forceCollide().radius((d) => (d.z || 10) + 8))
-    .alphaDecay(0.016)
-    .on("tick", () => {
-      STATE.nodes.forEach((n) => {
-        const m = (n.z || 10) + 12;
-        const topPad = 78;
-        const bottomPad = 20;
-        n.x = Math.max(m, Math.min(W - m, n.x));
-        n.y = Math.max(topPad + m, Math.min(H - bottomPad - m, n.y));
-      });
-      linkSel.attr("x1", (d) => d.source.x).attr("y1", (d) => d.source.y).attr("x2", (d) => d.target.x).attr("y2", (d) => d.target.y);
-      nodeSel.attr("transform", (d) => `translate(${d.x},${d.y})`);
-    });
+  // Delegate node/link binding + the single simulation to updateGraph (carry positions,
+  // gentle reheat). graph already holds STATE.nodes (with seeds) — pass it through.
+  updateGraph(graph);
 
-  STATE.settleTimer = setTimeout(() => {
-    if (STATE.simulation) STATE.simulation.stop();
-    STATE.settleTimer = null;
-  }, STATE.mode === "global" ? 7000 : 4500);
-
-  svg.transition().duration(450).call(zoom.transform, d3.zoomIdentity.scale(0.8));
+  svg.transition().duration(prefersReducedMotion() ? 0 : 450).call(zoom.transform, d3.zoomIdentity.scale(0.8));
   syncUrlState();
 }
 
