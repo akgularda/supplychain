@@ -173,7 +173,7 @@ Plans:
   3. The full test suite stays green and the accessibility (ARIA) baseline is preserved or improved.
 **Plans**: 3 plans (1/3 Complete)
 - [x] 09-01-PLAN.md — Mobile layout + responsive @media for new panels/modals + 4 mobile-sheet controls (PERF-02)
-- [ ] 09-02-PLAN.md — Hero overlay focus trap + keyboard-only journey + ARIA assertions (PERF-03)
+- [x] 09-02-PLAN.md — Hero overlay focus trap + keyboard-only journey + ARIA assertions (PERF-03)
 - [ ] 09-03-PLAN.md — Playwright 390x844 + keyboard + focus-trap smoke; full-suite green gate + human-verify (PERF-02/03)
 **UI hint**: yes
 
@@ -201,7 +201,7 @@ Plans:
 | 6. Concentration & Risk Analytics | 3/3 | Complete   | 2026-06-21 |
 | 7. Scenario Stress-Tests | 3/3 | Complete   | 2026-06-21 |
 | 8. Interaction Performance | 4/4 | Complete   | 2026-06-21 |
-| 9. Mobile & Keyboard Accessibility | 1/3 | In Progress | - |
+| 9. Mobile & Keyboard Accessibility | 2/3 | In Progress|  |
 | 10. SEO, Social Cards & Launch Gate | 0/0 | Not started | - |
 
 ---

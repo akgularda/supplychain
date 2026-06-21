@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-06-21T16:35:10.625Z"
+last_updated: "2026-06-21T17:30:00.000Z"
 progress:
   total_phases: 10
   completed_phases: 8
   total_plans: 31
-  completed_plans: 29
-  percent: 81
+  completed_plans: 31
+  percent: 97
 ---
 
 # Project State: Monarch Castle Technologies — Market Intelligence
@@ -25,11 +25,11 @@ progress:
 ## Current Position
 
 Phase: 09 (Mobile & Keyboard Accessibility) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 **Phase:** 09 — Mobile & Keyboard Accessibility — EXECUTING
-**Plan:** 09-01 complete — PERF-02 mobile responsive layout: #chokepointsPanel/#scenarioPanel now position:fixed (no header overlap on any viewport), extended @media(max-width:768px) covers panels+filter+hero+modals, 4 mobile-sheet controls (Method/Tour/Chokepts/Scenario) wired via wireMobile. npm test = 283 tests / 282 pass / 0 fail / 1 skipped (Playwright placeholder deferred to 09-03). Both new test files registered.
+**Plan:** 09-02 complete — PERF-03 keyboard/hero focus-trap: #heroOverlay now routes through the existing openModal/closeModal/trapFocus + activeModal machinery via 3 new exported helpers (registerHeroOverlay/openHeroOverlay/closeHeroOverlay) — focus moves to #heroSkip on open, Tab traps inside, focus restores on close; ESC handled ONCE by the central switch (main.js scoped ESC->skip handler removed). Keyboard journey search('/')→filter→select→reset(Escape) confirmed wired; a11y test extended with hero-trap + accessible-name + focus-ring assertions. Autoplay/skip/replay + heroSeen/resetHighlight preserved; no simulation.restart (PERF-01). npm test = 292 tests / 291 pass / 0 fail / 1 skipped (Playwright placeholder deferred to 09-03).
 **Status:** Executing Phase 09
-**Progress:** [██████████] 29/29 plans-to-date; 8/10 phases
+**Progress:** [██████████] 97%
 
 ## Performance Metrics
 
@@ -86,6 +86,8 @@ Plan: 2 of 3
 | Phase 08 P04 | 3min | 1 tasks | 0 files |
 | Phase 09 P01 | ~3min | 3 tasks | 5 files |
 | Mobile responsive gate (09-01, PERF-02) | npm test = 283 tests / 282 pass / 0 fail / 1 skipped (275 prior + 8 a11y subtests; 1 skipped = registered Playwright placeholder for 09-03). #chokepointsPanel/#scenarioPanel position:fixed (no #top/#bar overlap); @media(max-width:768px) covers panels+#filterPanel+#heroOverlay+modals; 4 wired mobile-sheet controls reachable ≤768px. index-ui-integrity + design-tokens green (NEW IDs + existing tokens only). |
+| Phase 09 P02 | ~6min | 2 tasks | 4 files |
+| Keyboard/hero focus-trap gate (09-02, PERF-03) | npm test = 292 tests / 291 pass / 0 fail / 1 skipped (282 prior + 9 new: 5 hero-wiring PERF-03 + 4 a11y keyboard/ARIA). #heroOverlay routed through activeModal/trapFocus + central ESC switch via registerHeroOverlay/openHeroOverlay/closeHeroOverlay (focus→#heroSkip on open, Tab trap, restore on close); single ESC binding (main.js scoped handler removed). Keyboard journey search('/')→filter→select→reset(Escape) confirmed wired; new controls + 4 mobile-sheet buttons focusable + named; :focus-visible ring preserved. Autoplay/skip/replay + heroSeen/resetHighlight intact; no simulation.restart (PERF-01). |
 
 ## Accumulated Context
 
@@ -161,7 +163,9 @@ Plan: 2 of 3
 
 ## Session Continuity
 
-**Last action:** Completed 09-01-PLAN.md — PERF-02 mobile responsive layout + mobile-sheet controls (Phase 9, Wave 0/1). Authored + registered tests/mobile-keyboard-a11y.test.mjs (Node static asserts, RED on the unbuilt panel/sheet/css checks) plus a { skip:true } tests/mobile-keyboard.spec.mjs placeholder (full Playwright journey deferred to 09-03); both in package.json scripts.test (test 141f483). Gave #chokepointsPanel/#scenarioPanel position:fixed token layout in layout.css (they had ZERO CSS, overlapping the fixed #top/#bar) and extended the existing @media(max-width:768px) block in theme.css to cover the two panels + #filterPanel + #heroOverlay + help/methodology/compare modals (feat 357036d). Added 4 NEW #mobileSheet buttons (#mMethodology/#mTour/#mChokepoints/#mScenario, textContent only) wired via wireMobile to the toolbar buttons (feat 598fd57). :focus-visible ring + all existing IDs/inline bootstrap preserved (index-ui-integrity green); design-tokens green. npm test = 283 tests / 282 pass / 0 fail / 1 skipped. One Rule-3 deviation (placeholder spec so both files register without breaking the suite). Next: Phase 9 Plan 02.
+**Last action:** Completed 09-02-PLAN.md — PERF-03 keyboard accessibility + hero focus-trap (Phase 9, Wave 2). Routed #heroOverlay through the existing js/ui/index.js modal machinery via 3 minimal exported helpers: registerHeroOverlay(el, onEscape) (main.js hands in the overlay + skip callback), openHeroOverlay() (stores pre-open focus, sets activeModal=heroOverlayEl, moves focus to #heroSkip — escape one key away), closeHeroOverlay() (clears activeModal, restores focus). The central keydown ESC switch gained one branch (activeModal === heroOverlayEl → heroEscapeCallback()) so ESC is bound exactly once; the scoped ESC->skip handler in js/main.js was removed. heroRender now opens via openHeroOverlay() on the hidden→visible transition only (wasHidden guard, so manual Next/Prev keep focus inside) and closes via closeHeroOverlay() on render(null). The existing Tab branch trapFocus(e, activeModal) traps the hero with no change. Visibility/content stay owned by heroRender (o.hidden + textContent) so autoplay/reducedMotion timing is untouched; skip still writes heroSeen + resetHighlight via the controller; no simulation.restart (PERF-01). Extended tests/hero-wiring.test.mjs (+5 PERF-03) and tests/mobile-keyboard-a11y.test.mjs (+4: hero-trap wiring, search('/')→filter→select→reset(Escape) journey wired, every new control + 4 mobile-sheet buttons focusable+named, button:focus-visible --acc ring preserved). Commits: feat 9db8c6b (Task A) → test de9fda5 (Task B). npm test = 292 tests / 291 pass / 0 fail / 1 skipped. macro-site-accessibility.test.mjs is orphaned (not in scripts.test, macro-site/ fixtures absent in this checkout) — untouched, pre-existing ENOENT standalone, authoritative npm gate green. No deviations. Next: Phase 9 Plan 03 (full Playwright keyboard journey + phase gate).
+
+**Prior action:** Completed 09-01-PLAN.md — PERF-02 mobile responsive layout + mobile-sheet controls (Phase 9, Wave 0/1). Authored + registered tests/mobile-keyboard-a11y.test.mjs (Node static asserts, RED on the unbuilt panel/sheet/css checks) plus a { skip:true } tests/mobile-keyboard.spec.mjs placeholder (full Playwright journey deferred to 09-03); both in package.json scripts.test (test 141f483). Gave #chokepointsPanel/#scenarioPanel position:fixed token layout in layout.css (they had ZERO CSS, overlapping the fixed #top/#bar) and extended the existing @media(max-width:768px) block in theme.css to cover the two panels + #filterPanel + #heroOverlay + help/methodology/compare modals (feat 357036d). Added 4 NEW #mobileSheet buttons (#mMethodology/#mTour/#mChokepoints/#mScenario, textContent only) wired via wireMobile to the toolbar buttons (feat 598fd57). :focus-visible ring + all existing IDs/inline bootstrap preserved (index-ui-integrity green); design-tokens green. npm test = 283 tests / 282 pass / 0 fail / 1 skipped. One Rule-3 deviation (placeholder spec so both files register without breaking the suite). Next: Phase 9 Plan 02.
 
 **Prior action:** Completed 08-04-PLAN.md — the Phase-8 integration gate (PERF-01, Wave 3, verification-only). Ran `npm test` → exit 0, 275 pass / 0 fail / 0 skipped. Proved both phase test files (tests/analytics-memo.test.mjs + tests/no-restart-invariant.test.mjs) are registered in package.json scripts.test AND execute (targeted node --test of both = 55 green); gate's automated check printed `GATE OK` (registration + docs/perf/interaction-2026-06-21.md accessSync). Confirmed anchors unchanged in-run (GILD=36, NVDA=12, fan-in top "credit and risk data inputs"=4, Taiwan 7 firms / totalMarketCapExposed===11360589871184 / HHI 0.20→0.25, single 'tsmc'→KLAC) and the no-restart guard's opacity-only assertions green with bReset's reheat allow-listed. Latency record present (~60× cold→warm). Perceptual-immediacy human-verify (gate=blocking) auto-approved under AUTO_MODE on the recorded micro-bench + opacity-only invariant (page doesn't paint locally — documented NO_FCP). NO source edits, data frozen, no packages installed. PERF-01 SC1+SC2+SC3 satisfied; Phase 8 COMPLETE (4/4). No deviations. Next: Phase 9 (Mobile & Keyboard Accessibility, PERF-02/PERF-03).
 
@@ -177,7 +181,7 @@ Plan: 2 of 3
 
 **Earlier action:** Completed 06-02-PLAN.md — the concentration display + chokepoints wiring plan. Added a branch-0 `derived` provenance tag to js/trust (provenanceFor + badgeHtml 'Derived', never 'Observed') under TDD (test aee630b → feat a0b60a7). Wired companyConcentration into the profile panel as 'Supplier concentration: NN/100' with a Derived badge (#cardConcentration), added a #chokepointsPanel listing supplierCriticality top-8 by real fan-in with a #bChokepoints highlightBy graph highlight + #bChokepointsReset, and documented both formulas (incl. the equal-weight HHI=1/k limit) in the Methodology modal (feat 0c3870c). NEW index.html IDs only; inline-bootstrap + all prior IDs intact (index-ui-integrity green). npm test = 242 pass / 0 fail (231 prior + 11 new). DEPTH-01 + DEPTH-02 display complete. No deviations.
 
-**Next step:** Phase 9 Plan 01 COMPLETE (PERF-02 mobile layout). Begin Phase 9 Plan 02 (PERF-03 keyboard / hero focus-trap path).
+**Next step:** Phase 9 Plan 02 COMPLETE (PERF-03 keyboard / hero focus-trap). Begin Phase 9 Plan 03 (full Playwright keyboard journey + phase integration gate).
 
 ---
 *State initialized: 2026-06-20*
