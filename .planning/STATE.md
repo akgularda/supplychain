@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-06-21T13:22:36.812Z"
+last_updated: "2026-06-21T13:26:15Z"
 progress:
   total_phases: 10
   completed_phases: 7
   total_plans: 28
-  completed_plans: 25
-  percent: 70
+  completed_plans: 27
+  percent: 93
 ---
 
 # Project State: Monarch Castle Technologies — Market Intelligence
@@ -25,11 +25,11 @@ progress:
 ## Current Position
 
 Phase: 08 (Interaction Performance) — EXECUTING
-Plan: 2 of 4 (08-01 complete)
-**Phase:** 08 — Interaction Performance — IN PROGRESS (1 of 4 plans done)
-**Plan:** 08-01 complete — analytics memoization (PERF-01) shipped; anchors unchanged; 263/263 green
+Plan: 3 of 4 (08-01, 08-02 complete)
+**Phase:** 08 — Interaction Performance — IN PROGRESS (2 of 4 plans done)
+**Plan:** 08-02 complete — no-restart-invariant source guard (PERF-01) shipped; 12 guard tests green; 275/275 suite green
 **Status:** Executing Phase 08
-**Progress:** [█████████░] 89%
+**Progress:** [█████████░] 93%
 
 ## Performance Metrics
 
@@ -79,6 +79,8 @@ Plan: 2 of 4 (08-01 complete)
 | Phase 07 P03 | ~6min | 2 tasks + 1 checkpoint | 1 file |
 | Scenario integration gate (07-03) | npm test = 257 pass / 0 fail; scenario smoke PASS over http-server — Taiwan preset → live "7 companies impacted · $11.36T market cap exposed" headline + 7 impact rows + Derived badge (Observed absent) + 7-node highlight (93 dimmed) + reset restores graph, 0 console errors (d3 CDN reachable, real paint, synthetic fallback not needed). Human-verify auto-approved under AUTO_MODE. Phase 7 complete (3/3) |
 | Phase 08 P01 | 4min | 3 tasks | 3 files |
+| Phase 08 P02 | ~2min | 1 task | 1 file |
+| No-restart guard (08-02) | npm test = 275 pass / 0 fail (263 prior + 12 new no-restart-invariant); guard proven to bite (injected .restart() into applyFilters → fail, source restored byte-identical) |
 
 ## Accumulated Context
 
@@ -131,6 +133,7 @@ Plan: 2 of 4 (08-01 complete)
 - 07-02: scenario UI slice shipped. index.html: #scenarioPanel (sibling of #chokepointsPanel, NEW IDs only — scenarioPanel/scenarioSummary/scenarioImpactList/scenarioProv/bScenarioTaiwan/scenarioChokepointSelect/bScenarioReset) with Taiwan preset button + generalized chokepoint <select> + reset; Methodology modal gained a 'Scenario stress-tests (derived)' block (single-hop/direct-dependents, HHI=1/k monotonic [composite excluded — non-monotonic], 'market cap exposed'=exposure NOT a loss estimate, Taiwan preset disables real TSMC label variants). js/ui: import runScenario+SCENARIO_PRESETS; renderScenario writes a LIVE headline (`${result.impactedCompanies.length} companies impacted · $${(totalMarketCapExposed/1e12).toFixed(2)}T market cap exposed` — no 7/11.36 literal anywhere, T-07-05 test-enforced) + escaped impact list (lost / before→after suppliers / before→after HHI) + #scenarioProv badge via badgeHtml(provenanceFor({derived:true,n})) (Derived, never Observed); highlightImpacted→highlightBy(n=>impacted.has(n.symbol)); runTaiwanScenario uses the bundled preset, runChokepointScenario(label) uses disableSupplier for the <select>; resetScenario clears summary/list/prov+select+resetHighlight. <select> options use textContent (safe), innerHTML path escaped via escapeHtml (T-07-03). tests/scenario-wiring.test.mjs registered (6 assertions). DEPTH-03+DEPTH-04 complete. npm test = 257 pass / 0 fail (251 prior + 6). index-ui-integrity 5/5. No deviations.
 - 07-01: js/analytics gained the pure DOM-free scenario engine. runScenario(disruption,ctx) is single-hop (a firm is "impacted" iff it loses ≥1 distinct supplier; cascade deferred); concentrationBefore/After report HHI=1/k (the MONOTONIC metric) NOT the composite score (composite is non-monotonic under removal — removing a shared single-point drops sharedFrac; 07-RESEARCH Pitfall 1). marketcap read from top-level ctx.nodes keyed by symbol (profiles do NOT carry marketcap; Pitfall 3). companyConcentration gained an ADDITIVE excludeSuppliers opt (Set|string[]|undefined→null): one filter line over uniq before k/HHI/sharedFrac; undefined leaves output byte-identical (242 prior green). SCENARIO_PRESETS.TAIWAN_SEMI bundles the 5 REAL normalized TSMC label variants (TSMC fragmented across distinct labels) — a single 'tsmc' hits only KLAC (Pitfall 2). Severity = share-of-suppliers-lost (≥0.5 high/≥0.25 medium/else low); Taiwan preset is "low" (1 of 5). "market cap exposed" = combined cap of impacted firms (exposure, NOT loss). tests/scenario.test.mjs (9 assertions, registered in scripts.test) pins real fixtures: 7 firms {NVDA,AAPL,AVGO,000660.KS,AMD,AMAT,KLAC}, totalMarketCapExposed===11360589871184 (derived live from fixture nodes then asserted equal to literal — proves not engine-baked), k 5→4 / HHI 0.20→0.25 after≥before, no-op safe, back-compat deep-equal. TDD: RED 925ee1b → GREEN c9d85ce. npm test = 251 pass / 0 fail. No deviations.
 - 08-01: js/analytics gained a per-session Map memo layer (_caches/_bucket/_memo + parallel _stats build/hit counters) — caching changes COST not VALUE (DATA frozen, no in-session writer → no invalidation). buildSupplierFanIn memoized FIRST (key "default" for DATA.profiles) so the eager default-arg fan-in rebuild at companyConcentration/supplierCriticality/runScenario is now O(1) after first build. companyConcentration key = `symbol|wHHI|wShared|sharedThreshold|profilesTag|sortedExcludeSet` (excludeSuppliers in the key is the #1 correctness risk — runScenario reads excluded scores). supplierCriticality key = `profilesTag|limit`. runScenario key = normalized SORTED disabled-label set + profilesTag, computed AFTER normalization so disableSuppliers:["tsmc"] and disableSupplier:"tsmc" collide on one entry. Test seams __resetAnalyticsCache() (clears caches + zeroes stats) + __memoStats() (shallow-copy of counters). DEVIATION (Rule 1): the plan's static profilesTag "X" for all non-default profiles caused a cache-key collision (concentration.test.mjs:73 synthetic fixture got score 12 not 36); fixed with a WeakMap per-object identity tag (X1,X2,...). Anchors unchanged: GILD=36, NVDA=12, top fan-in "credit and risk data inputs"=4, Taiwan 7 firms/$11,360,589,871,184. Both phase test files registered in scripts.test (24 total; no-restart-invariant.test.mjs authored in Plan 02 — registered-but-absent is skipped, exit 0). TDD: RED 1150a59 → GREEN e28e3d4 (+ chore 703f692). npm test = 263 pass / 0 fail (257 prior + 6 new memo). No new deps.
+- 08-02: tests/no-restart-invariant.test.mjs locks the "simple change never restarts the sim / re-renders the graph" invariant at the SOURCE level (no source edits — research confirmed every simple-change path is already opacity-only). bodyOf(src,signature) brace-matches and slices each handler body; BANNED = [/\bd3\.forceSimulation\s*\(/, /\.alpha\s*\(/, /\.restart\s*\(/, /\bupdateGraph\s*\(/, /\brender\s*\(/]. Guarded bodies: applyFilters/resetFilters/highlightChokepoints (js/ui), highlightBy/resetHighlight (js/viz), inline bLabels/bBottlenecks onclicks, bFlow (proven bare toggleParticles()), keydown l/f/b cases (sliced case→break;). ALLOW-LIST proof: asserts js/ui DOES match /alpha\(0\.22\)\.restart\(\)/ so bReset's intentional reheat (and render()/updateGraph() view-change paths) are NOT banned and cannot be silently deleted. Guard proven to BITE: injecting STATE.simulation.alpha(1).restart() into applyFilters failed the test (AssertionError /\.alpha\s*\(/); source restored byte-identical (git diff empty). 12 assertions GREEN; npm test = 275 pass / 0 fail (263 prior + 12). No deviations. T-08-03 mitigated (scoped slices + explicit allow-list); T-08-04 accepted (future new handlers must be added to the guard set).
 - 06-01: js/analytics/index.js is a pure DOM-free engine (mirrors js/trust). companyConcentration = round(100*(0.6*(1/k)+0.4*sharedFrac)), clamped [0,100], with the equal-weight HHI=1/k assumption stated in a module comment (dataset has no per-supplier volume; all l.v=2); wHHI/wShared/sharedThreshold are opts params for tunability. sectorConcentration groups by layers[node.y] (NOT profile.category) and reports reuse%=(slots-distinct)/slots + effectiveSuppliers=1/HHI — NOT raw HHI*100 (which is an uninterpretable 1-7). supplierCriticality ranks suppliers by real fan-in via buildSupplierFanIn (Map<label,Set<symbol>> mirroring the overlap index); top chokepoint='credit and risk data inputs'=4; deterministic localeCompare tie-break; never references the editorial d.bn flag (asserted at source level). Anchors test-locked: GILD=36, NVDA=12, Healthcare reuse 12%, Finance 9%, fan-in histogram {1:439,2:13,3:5,4:1}. Both test files registered in scripts.test (18→20). npm test = 231 pass / 0 fail (214 prior + 10 concentration + 7 criticality-wiring). No deviations.
 
 ### Standing Constraints
@@ -150,7 +153,9 @@ Plan: 2 of 4 (08-01 complete)
 
 ## Session Continuity
 
-**Last action:** Completed 08-01-PLAN.md — analytics memoization (PERF-01, Wave 0/1). Registered both phase test files in package.json scripts.test (chore 703f692; no-restart-invariant.test.mjs authored later in Plan 02 — Wave-0 gate). Authored tests/analytics-memo.test.mjs RED (test 1150a59) then added a per-session Map memo layer + __resetAnalyticsCache/__memoStats seams to js/analytics, memoizing buildSupplierFanIn FIRST then companyConcentration (key includes sorted excludeSuppliers), supplierCriticality, runScenario (key = normalized sorted disabled set) GREEN (feat e28e3d4). Caching changes COST not VALUE — anchors unchanged (GILD=36, NVDA=12, fan-in top=4, Taiwan 7/$11.36T). Auto-fixed one Rule-1 cache-key collision (static "X" profilesTag → WeakMap per-object identity tag) before the GREEN commit. npm test = 263 pass / 0 fail (257 prior + 6 new). No new deps. Next: Plan 02 authors tests/no-restart-invariant.test.mjs (already registered) + the source-guard.
+**Last action:** Completed 08-02-PLAN.md — the no-restart-invariant source guard (PERF-01, Wave 2). Authored tests/no-restart-invariant.test.mjs (already registered by Plan 01): a bodyOf() brace-matcher slices each simple-change handler body and asserts none match BANNED = [forceSimulation(, .alpha(, .restart(, updateGraph(, render(]. Guarded applyFilters/resetFilters/highlightChokepoints (js/ui), highlightBy/resetHighlight (js/viz), inline bLabels/bBottlenecks onclicks, bFlow (bare toggleParticles()), keydown l/f/b cases; ALLOW-LIST asserts bReset's legitimate /alpha\(0\.22\)\.restart\(\)/ remains (boundary documented, render/updateGraph NOT banned). Proved the guard bites (injected .restart() into applyFilters → fail; source restored byte-identical). NO source edits. 12 assertions GREEN; npm test = 275 pass / 0 fail (263 prior + 12 new). Committed test aa9b850. No deviations. Next: Plan 08-03/04 (latency bench + recorded number / phase gate).
+
+**Prior action:** Completed 08-01-PLAN.md — analytics memoization (PERF-01, Wave 0/1). Registered both phase test files in package.json scripts.test (chore 703f692; no-restart-invariant.test.mjs authored later in Plan 02 — Wave-0 gate). Authored tests/analytics-memo.test.mjs RED (test 1150a59) then added a per-session Map memo layer + __resetAnalyticsCache/__memoStats seams to js/analytics, memoizing buildSupplierFanIn FIRST then companyConcentration (key includes sorted excludeSuppliers), supplierCriticality, runScenario (key = normalized sorted disabled set) GREEN (feat e28e3d4). Caching changes COST not VALUE — anchors unchanged (GILD=36, NVDA=12, fan-in top=4, Taiwan 7/$11.36T). Auto-fixed one Rule-1 cache-key collision (static "X" profilesTag → WeakMap per-object identity tag) before the GREEN commit. npm test = 263 pass / 0 fail (257 prior + 6 new). No new deps. Next: Plan 02 authors tests/no-restart-invariant.test.mjs (already registered) + the source-guard.
 
 **Prior action:** Completed 07-03-PLAN.md — the Phase-7 scenario stress-test integration gate (DEPTH-03 + DEPTH-04, 3 of 3). Confirmed the full suite green at 257 (242 prior + 9 scenario unit + 6 scenario-wiring; both new files in the run command) with no source edits. Created docs/perf/_scenario-smoke-0703.cjs (test 747b41e) — a Playwright smoke that boots http-server (real repo root, http:// not file://), clicks #bScenarioTaiwan, and asserts at runtime the live-derived "7 companies impacted · $11.36T market cap exposed" headline + 7 #scenarioImpactList rows + a "Derived" #scenarioProv badge ("Observed" absent) + exactly 7 lit / 93 dimmed circle.mc + reset clears panel & restores graph, with 0 console errors. d3 CDN reachable → real paint (100 nodes), synthetic fallback not needed. Smoke PASS. Human-verify checkpoint auto-approved under AUTO_MODE (visual gate). Phase 7 complete (3/3).
 
@@ -158,7 +163,7 @@ Plan: 2 of 4 (08-01 complete)
 
 **Earlier action:** Completed 06-02-PLAN.md — the concentration display + chokepoints wiring plan. Added a branch-0 `derived` provenance tag to js/trust (provenanceFor + badgeHtml 'Derived', never 'Observed') under TDD (test aee630b → feat a0b60a7). Wired companyConcentration into the profile panel as 'Supplier concentration: NN/100' with a Derived badge (#cardConcentration), added a #chokepointsPanel listing supplierCriticality top-8 by real fan-in with a #bChokepoints highlightBy graph highlight + #bChokepointsReset, and documented both formulas (incl. the equal-weight HHI=1/k limit) in the Methodology modal (feat 0c3870c). NEW index.html IDs only; inline-bootstrap + all prior IDs intact (index-ui-integrity green). npm test = 242 pass / 0 fail (231 prior + 11 new). DEPTH-01 + DEPTH-02 display complete. No deviations.
 
-**Next step:** Phase 8 in progress (1/4). Execute Plan 08-02 (no-restart-invariant source guard — the registered test file).
+**Next step:** Phase 8 in progress (2/4). Execute Plan 08-03 (latency micro-benchmark + recorded number, PERF-01 SC2).
 
 ---
 *State initialized: 2026-06-20*
