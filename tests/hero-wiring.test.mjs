@@ -61,3 +61,57 @@ test("main.js gates first-visit hero on heroSeen via safe storage flags (Plan 03
   assert.match(MAIN, /safeWriteFlag/, "main.js must persist heroSeen via safeWriteFlag");
   assert.match(MAIN, /bTour/, "main.js must wire the #bTour replay control");
 });
+
+// --- Plan 09-02 (PERF-03): hero overlay routed through the modal machinery ----
+const UI = read("js", "ui", "index.js");
+
+test("hero overlay is routed through the central modal machinery (Plan 09-02)", () => {
+  // main.js must reach the shared open/close-hero helpers exported from ui/index.js
+  // rather than only toggling o.hidden — so focus moves in, traps, and restores.
+  assert.match(
+    MAIN,
+    /openHeroOverlay|closeHeroOverlay|registerHeroOverlay/,
+    "main.js heroRender must route the hero overlay through ui/index.js modal helpers",
+  );
+});
+
+test("ui/index.js exports hero-overlay modal helpers (Plan 09-02)", () => {
+  assert.match(UI, /openHeroOverlay/, "ui/index.js must define openHeroOverlay");
+  assert.match(UI, /closeHeroOverlay/, "ui/index.js must define closeHeroOverlay");
+  assert.match(UI, /registerHeroOverlay/, "ui/index.js must define registerHeroOverlay");
+  // exported for main.js consumption
+  assert.match(
+    UI,
+    /export\s*\{[\s\S]*openHeroOverlay[\s\S]*\}/,
+    "openHeroOverlay must be exported",
+  );
+});
+
+test("the hero overlay participates in activeModal/trapFocus + the central ESC switch (Plan 09-02)", () => {
+  // openHeroOverlay must set activeModal so the existing Tab branch traps within it
+  // and focus the Skip control first (RESEARCH Pattern 3 / OQ2).
+  assert.match(UI, /activeModal\s*=\s*heroOverlayEl/, "openHeroOverlay must set activeModal = hero overlay");
+  assert.match(UI, /heroSkip/, "openHeroOverlay must move initial focus to #heroSkip");
+  // the central keydown ESC switch must route the hero overlay to its skip callback
+  assert.match(
+    UI,
+    /activeModal\s*===\s*heroOverlayEl/,
+    "the central ESC switch must handle the hero overlay (single ESC binding)",
+  );
+});
+
+test("main.js no longer hand-rolls a scoped ESC->skip keydown handler (Plan 09-02)", () => {
+  // The old scoped handler matched on `o.hidden`; it must be folded into the central
+  // switch so Escape is bound exactly once.
+  assert.doesNotMatch(
+    MAIN,
+    /addEventListener\("keydown"[\s\S]*?o\.hidden[\s\S]*?heroController\.skip\(\)/,
+    "main.js must NOT keep a separate scoped ESC->skip keydown handler",
+  );
+});
+
+test("hero focus wiring never restarts the simulation (PERF-01 invariant)", () => {
+  // The hero open/close path must not reach a simulation restart.
+  const slice = UI.slice(UI.indexOf("function openHeroOverlay"), UI.indexOf("function openHeroOverlay") + 1200);
+  assert.doesNotMatch(slice, /\.restart\s*\(/, "openHeroOverlay must not restart the simulation");
+});

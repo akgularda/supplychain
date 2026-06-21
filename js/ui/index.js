@@ -65,6 +65,16 @@ let focusBeforeModal = null;
 let logoLoadToken = 0;
 let activeSuggestIndex = 0;
 
+// --- Hero overlay modal registration (PERF-03 / Plan 09-02) -----------------
+// The hero overlay (#heroOverlay) declares role=dialog aria-modal=true but was
+// previously toggled via `hidden` only, so it never trapped focus. main.js
+// registers the overlay element + its skip callback here so the hero joins the
+// SAME activeModal/trapFocus + central ESC machinery as every other dialog.
+// We do NOT toggle the overlay's visibility here (heroRender owns hidden/content);
+// we only manage focus-in / trap / focus-restore + single ESC binding.
+let heroOverlayEl = null;
+let heroEscapeCallback = null;
+
 function showFatalError(message, detail = "") {
   if (!fatalErrorEl) return;
   const detailLine = detail ? `<br><b>Details:</b> ${String(detail)}` : "";
@@ -108,6 +118,42 @@ function closeModal(modal) {
   if (!modal) return;
   modal.style.display = "none";
   if (activeModal === modal) activeModal = null;
+  if (focusBeforeModal && typeof focusBeforeModal.focus === "function") {
+    focusBeforeModal.focus();
+  }
+}
+
+// Register the hero overlay element + its escape/skip callback so the central
+// keydown switch can close it with a SINGLE Escape binding (replaces main.js's
+// old scoped ESC->skip handler — no double-binding).
+function registerHeroOverlay(el, onEscape) {
+  heroOverlayEl = el || null;
+  heroEscapeCallback = typeof onEscape === "function" ? onEscape : null;
+}
+
+// Hero open: route through the shared modal machinery. Stores the pre-open focus,
+// marks the overlay as the activeModal (so the existing Tab branch traps within
+// it), and moves focus to #heroSkip — escape-without-mouse is one key away
+// (RESEARCH Pattern 3 / OQ2). Visibility/content is owned by heroRender; this
+// function never restarts the simulation (PERF-01 invariant) or loads data.
+function openHeroOverlay() {
+  if (!heroOverlayEl) return;
+  focusBeforeModal = document.activeElement;
+  activeModal = heroOverlayEl;
+  const skip = heroOverlayEl.querySelector("#heroSkip");
+  if (skip && typeof skip.focus === "function") skip.focus();
+  else {
+    const focusable = getFocusableElements(heroOverlayEl);
+    if (focusable[0]) focusable[0].focus();
+    else heroOverlayEl.focus?.();
+  }
+}
+
+// Hero close: clear the activeModal pointer (only if it is the hero) and restore
+// focus to the element that was focused before the overlay opened.
+function closeHeroOverlay() {
+  if (!heroOverlayEl) return;
+  if (activeModal === heroOverlayEl) activeModal = null;
   if (focusBeforeModal && typeof focusBeforeModal.focus === "function") {
     focusBeforeModal.focus();
   }
@@ -1066,6 +1112,9 @@ function wireUI() {
       else if (activeModal === compareModalEl) closeCompare();
       else if (activeModal === onboardingPanelEl) dismissOnboarding();
       else if (activeModal === mobileSheet) setMobileSheetOpen(false);
+      // Hero overlay: single ESC binding (folds in main.js's old scoped handler).
+      // The skip callback persists heroSeen + resetHighlight via the controller.
+      else if (activeModal === heroOverlayEl && heroEscapeCallback) heroEscapeCallback();
       return;
     }
 
@@ -1176,6 +1225,7 @@ export {
   openProfile, openGlobal, updateCompanyCard, updateCompareButton, showToast, showFatalError, hideSearchPopovers,
   maybeShowOnboarding, updateStatusIndicator, renderTop10List, wireUI, jump,
   openMethodology, closeMethodology,
+  registerHeroOverlay, openHeroOverlay, closeHeroOverlay,
   renderChokepoints, highlightChokepoints,
   renderScenario, highlightImpacted, runTaiwanScenario, runChokepointScenario, resetScenario,
 };

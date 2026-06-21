@@ -10,6 +10,7 @@ import {
   applyFilters, resetFilters, closeCompare, toggleHelp, loadView, deleteView, openCompanyProfile,
   showFatalError, maybeShowOnboarding, updateStatusIndicator, renderTop10List, wireUI,
   openGlobal, openProfile,
+  registerHeroOverlay, openHeroOverlay, closeHeroOverlay,
 } from "./ui/index.js";
 import { buildNarrative, createHeroController } from "./ui/narrative.js";
 
@@ -69,19 +70,38 @@ const heroTimers = {
   setTimeout: window.setTimeout.bind(window),
   clearTimeout: window.clearTimeout.bind(window),
 };
+// Register the hero overlay with the central modal machinery (PERF-03 / Plan 09-02)
+// so it shares the same activeModal/trapFocus + single-ESC switch as the other
+// dialogs. The skip callback persists heroSeen + un-dims the map via the controller.
+const heroOverlayEl = document.getElementById("heroOverlay");
+registerHeroOverlay(heroOverlayEl, () => heroController.skip());
+
 // render callback — caption card paint/clear. textContent ONLY (T-05-01, no innerHTML).
+// Visibility transitions are routed through the modal machinery: on the FIRST open
+// (hidden -> visible) focus moves into the overlay (#heroSkip) and Tab is trapped;
+// on close (render(null)) focus is restored to the pre-open element. The autoplay
+// timing + reducedMotion behavior is untouched (no timer logic lives here).
 const heroRender = (step, index, total) => {
   const o = document.getElementById("heroOverlay");
   if (!o) return;
-  if (!step) { o.hidden = true; return; }
+  if (!step) {
+    if (!o.hidden) {
+      o.hidden = true;
+      closeHeroOverlay();
+    }
+    return;
+  }
   const titleEl = document.getElementById("heroTitle");
   const captionEl = document.getElementById("heroCaption");
   const progressEl = document.getElementById("heroProgress");
   if (titleEl) titleEl.textContent = step.title;
   if (captionEl) captionEl.textContent = step.caption;
   if (progressEl) progressEl.textContent = "Step " + (index + 1) + "/" + total;
+  const wasHidden = o.hidden;
   o.hidden = false;
-  o.focus?.();
+  // Only move focus into the overlay on the open transition — not on every step
+  // (so manual Next/Prev keep focus on the pressed control / inside the overlay).
+  if (wasHidden) openHeroOverlay();
 };
 const heroController = createHeroController({
   steps: heroSteps,
@@ -108,16 +128,9 @@ document.getElementById("heroNext")?.addEventListener("click", () => heroControl
 document.getElementById("heroPrev")?.addEventListener("click", () => heroController.prev());
 document.getElementById("heroPause")?.addEventListener("click", () => heroController.pause());
 document.getElementById("heroSkip")?.addEventListener("click", () => heroController.skip());
-// ESC -> skip while the overlay is visible (scoped; does not compete with the
-// existing global ESC switch in ui/index.js when the overlay is hidden).
-document.addEventListener("keydown", (e) => {
-  if (e.key !== "Escape") return;
-  const o = document.getElementById("heroOverlay");
-  if (o && !o.hidden) {
-    e.stopPropagation();
-    heroController.skip();
-  }
-});
+// ESC handling for the hero overlay is now owned by the central keydown switch in
+// js/ui/index.js (registered via registerHeroOverlay above) so Escape is bound
+// exactly once across all dialogs — no separate scoped ESC->skip handler here.
 // ----------------------------------------------------------------------------
 
 updateStatusIndicator();
