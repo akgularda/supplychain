@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-06-21T00:00:00.000Z"
+last_updated: "2026-06-21T06:24:32.463Z"
 progress:
   total_phases: 10
   completed_phases: 4
-  total_plans: 15
-  completed_plans: 15
+  total_plans: 18
+  completed_plans: 16
   percent: 40
 ---
 
@@ -18,17 +18,17 @@ progress:
 
 **Core Value:** Investors trust every number and instantly grasp supply-chain structure, concentration, and risk — credibility first, then beauty, then unique depth.
 
-**Current Focus:** Phase 04 — Design System & Smooth Motion
+**Current Focus:** Phase 05 — Hero Moment & Investor Narrative
 
 **Mode:** mvp | **Granularity:** fine
 
 ## Current Position
 
-Phase: 04 (Design System & Smooth Motion) — COMPLETE
-Plan: 4 of 4 (all Phase-4 plans complete)
+Phase: 05 (Hero Moment & Investor Narrative) — EXECUTING
+Plan: 2 of 3
 **Phase:** 04 — Design System & Smooth Motion — COMPLETE
-**Plan:** 04-04 complete — 4 of 4 plans done
-**Status:** Phase 04 complete; ready for Phase 05
+**Plan:** 05-01 complete — 1 of 3 plans done in Phase 05
+**Status:** Executing Phase 05
 **Progress:** [████░░░░░░] 40%
 
 ## Performance Metrics
@@ -65,6 +65,7 @@ Plan: 4 of 4 (all Phase-4 plans complete)
 | Phase 04 P03 | ~15min | 2 tasks | 1 files |
 | Phase 04 P04 | ~12min | 1 task + 1 checkpoint | 1 file |
 | Phase-4 gate (04-04) | npm test = 191 pass / 0 fail; design/motion smoke PASS — 100 nodes painted over http-server, :root tokens resolve at runtime (--color-bg #0a0a0a, --color-observed #66bb6a, --fs-base 10px, --dur-base 200ms), .prov-badge color matches confidence class (NVDA confidence-low = rgb(158,158,158)), global→profile switch keeps exactly ONE g.nodes layer (build-once, no teardown; 100→17), reduced-motion run paints + switches, ZERO console errors. Human-verify auto-approved under AUTO_MODE (visual gate). STORY-01 + STORY-03 verified; Phase 4 complete (4/4) |
+| Phase 05 P01 | 3 min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -107,6 +108,9 @@ Plan: 4 of 4 (all Phase-4 plans complete)
 - 04-01: GATE LANDMINE closed up front — tests/design-tokens.test.mjs + tests/viz-motion.test.mjs authored AND registered in scripts.test in Task 0 (16 unique .test.mjs). 5 assertions are INTENDED Wave 0 RED: migration evidence (layout=9/theme=2 var(--), need ≥10 → Plan 02), buildSimulation/updateGraph split + nodes/links re-bind + mental-map carry + viz matchMedia (→ Plan 03), theme.css prefers-reduced-motion (→ Plan 02). npm test = 191 / 186 pass / 5 RED.
 - 04-02: token migration is EXACT-VALUE-PRESERVING — a literal is swapped to var(--token) only when the token resolves byte-identical (#222→--color-border, #1a1a1a→--color-surface-raised, #0f0f0f→--color-surface, #fff→--color-text-bright, #888→--color-text-muted, #505050→--color-text-dim, fs/space/radius/shadow tokens, 0.2s→--dur-base, 0.15s→--dur-fast, 0.05s→--dur-fastest, cubic-bezier(0.4,0,0.2,1)→--ease-standard). #111 (no exact surface token), 3px #bar gap (no 3px spacing token), #666/#777 (no exact dim token) LEFT as literals. layout=19, components=25, theme=17 var(--); zero rendered change.
 - 04-02: .confidence-* color: mapped to SEMANTIC trust tokens --color-observed/estimated/unknown (values #66bb6a/#ffb300/#9e9e9e, identical to prior literals); rgba(76,175,80,...)/rgba(255,193,7,...)/rgba(158,158,158,...) background/border literals kept byte-identical (T-04-03 mitigated, design-tokens rgba assertions still GREEN). No selector/#id renamed (T-04-04). theme.css gained @media (prefers-reduced-motion: reduce) block zeroing transitions/animations + explicit transition:none/animation:none on .node/.link/#companyCard/#tt/.modal (T-04-05; CSS half of STORY-03). npm test = 191 / 187 pass / 4 fail — migration-evidence now GREEN; 4 remaining RED are Plan-03 viz refactor (buildSimulation/updateGraph + nodes/links re-bind + mental-map carry + viz matchMedia).
+- 05-01: buildNarrative(data) is PURE/DOM-free — each step apply(controls) injects openGlobal/highlightBy/openProfile; no DOM/d3 access and NO js/ui/index.js import (RESEARCH Pitfall 5) so it unit-tests in plain Node. Side effects flow only through the injected controls argument.
+- 05-01: captions are data-derived at runtime (combined cap Σmarketcap/1e12, bn count, dominant layer idx+name+count, top-cap bottleneck). Two-fixture diff test proves non-fabrication (market+risk captions differ across fixtures; market caption embeds fixture combined-cap + meta.count). topSymbol = highest-marketcap node that is ALSO bn, falling back to overall highest — never hardcoded (robust to weekly refresh; makes opportunity the payoff of risk).
+- 05-01: Wave 0 gate — tests/narrative.test.mjs (7 assertions GREEN) + tests/hero-wiring.test.mjs (5 assertions INTENDED RED, closed by Plans 02 controller + 03 markup/main-wiring) registered in scripts.test (18 files). npm test = 203 / 198 pass / 5 RED (mirrors 04-01 Wave-0 pattern). Deviation: topSymbol prefers bn over the RESEARCH reference's global-max (Task-1 behavior), pinned by a fallback test.
 
 ### Standing Constraints
 

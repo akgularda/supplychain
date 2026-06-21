@@ -108,7 +108,7 @@ Plans:
   3. Storytelling/hero behavior is covered by non-regression tests, and the full suite stays green.
 **Plans**: 3 plans
 Plans:
-- [ ] 05-01-PLAN.md — Wave 0 test gate + pure buildNarrative(data) 4-step data engine (STORY-04, STORY-05)
+- [x] 05-01-PLAN.md — Wave 0 test gate + pure buildNarrative(data) 4-step data engine (STORY-04, STORY-05)
 - [ ] 05-02-PLAN.md — createHeroController factory: autoplay/skip/replay/reduced-motion, all deps injected (STORY-02, STORY-05)
 - [ ] 05-03-PLAN.md — index.html overlay + #bTour + main.js wiring; full suite green (STORY-02, STORY-04, STORY-05)
 **UI hint**: yes
@@ -181,7 +181,7 @@ Plans:
 | 2. Provenance & Source Linking | 4/4 | Complete   | 2026-06-20 |
 | 3. Confidence, Methodology & Freshness | 4/4 | Complete   | 2026-06-21 |
 | 4. Design System & Smooth Motion | 4/4 | Complete   | 2026-06-21 |
-| 5. Hero Moment & Investor Narrative | 0/0 | Not started | - |
+| 5. Hero Moment & Investor Narrative | 1/3 | In Progress|  |
 | 6. Concentration & Risk Analytics | 0/0 | Not started | - |
 | 7. Scenario Stress-Tests | 0/0 | Not started | - |
 | 8. Interaction Performance | 0/0 | Not started | - |
