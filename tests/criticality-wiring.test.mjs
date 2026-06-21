@@ -6,6 +6,7 @@ import {
   supplierCriticality,
   buildSupplierFanIn,
 } from "../js/analytics/index.js";
+import { provenanceFor, badgeHtml } from "../js/trust/index.js";
 
 // Rich dataset (test suite reads the JSON; the browser loads the thin .js).
 // Mirror tests/provenance.test.mjs:9 — pass profiles in explicitly so the pure
@@ -71,4 +72,48 @@ test("supplierCriticality source contains no reference to the editorial d.bn fla
   assert.ok(start >= 0, "supplierCriticality export not found");
   const body = src.slice(start);
   assert.ok(!/\.bn\b/.test(body), "supplierCriticality must not reference d.bn");
+});
+
+// --- DEPTH-02/04: derived provenance (never observed) ---------------------
+
+test("provenanceFor({derived:true,n}) returns tag 'derived' + Methodology source", () => {
+  const prov = provenanceFor({ derived: true, n: 5 }, { methodologyUrl: "#methodology" });
+  assert.equal(prov.tag, "derived");
+  assert.equal(prov.note, "computed from 5 relationships");
+  assert.deepEqual(prov.source, { label: "Methodology", url: "#methodology" });
+  assert.notEqual(prov.tag, "observed");
+});
+
+test("provenanceFor derived note is singular for n===1", () => {
+  const prov = provenanceFor({ derived: true, n: 1 }, { methodologyUrl: "#methodology" });
+  assert.equal(prov.note, "computed from 1 relationship");
+});
+
+test("provenanceFor derived note is 'computed from 0 relationships' for missing/non-finite n", () => {
+  assert.equal(provenanceFor({ derived: true }).note, "computed from 0 relationships");
+  assert.equal(provenanceFor({ derived: true, n: NaN }).note, "computed from 0 relationships");
+  assert.equal(provenanceFor({ derived: true, n: Infinity }).note, "computed from 0 relationships");
+});
+
+test("provenanceFor derived with no methodologyUrl has tag+note and NO source key", () => {
+  const prov = provenanceFor({ derived: true, n: 3 });
+  assert.equal(prov.tag, "derived");
+  assert.equal(prov.note, "computed from 3 relationships");
+  assert.ok(!("source" in prov) || prov.source === undefined, "no source key without methodologyUrl");
+});
+
+test("badgeHtml(derived) emits 'Derived' (confidence-medium) and NEVER 'Observed'", () => {
+  const html = badgeHtml(provenanceFor({ derived: true, n: 5 }, { methodologyUrl: "#methodology" }));
+  assert.match(html, /Derived/);
+  assert.match(html, /confidence-medium/);
+  assert.doesNotMatch(html, /Observed/);
+});
+
+test("badgeHtml derived gates the source link on http(s) (non-http degrades to label-only)", () => {
+  const nonHttp = badgeHtml(provenanceFor({ derived: true, n: 2 }, { methodologyUrl: "#methodology" }));
+  assert.doesNotMatch(nonHttp, /<a /, "non-http methodology anchor must NOT emit an <a>");
+
+  const httpUrl = badgeHtml(provenanceFor({ derived: true, n: 2 }, { methodologyUrl: "https://example.com/methodology" }));
+  assert.match(httpUrl, /<a /, "http(s) methodology url must emit an <a>");
+  assert.match(httpUrl, /rel="noopener noreferrer"/, "source link must carry rel=noopener noreferrer");
 });
