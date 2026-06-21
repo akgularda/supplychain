@@ -89,7 +89,12 @@ This roadmap preserves the approved spec's mandatory ordering: **Foundation firs
   2. D3 transitions are smooth with no jarring full-simulation restart on view changes.
   3. All existing trust affordances (provenance badges, source links, confidence, freshness) remain visible and correct under the new design system.
   4. The 103-test suite plus the trust tests stay green.
-**Plans**: TBD
+**Plans**: 4 plans
+Plans:
+- [ ] 04-01-PLAN.md — Token set in base.css :root + register design-tokens & viz-motion tests (STORY-01/03)
+- [ ] 04-02-PLAN.md — Migrate layout/components/theme to tokens + reduced-motion CSS block (STORY-01/03)
+- [ ] 04-03-PLAN.md — Build-once D3 motion: buildSimulation + updateGraph + position carry + matchMedia guard (STORY-03)
+- [ ] 04-04-PLAN.md — Full-suite green gate + render/motion smoke + human visual verify (STORY-01/03)
 **UI hint**: yes
 
 ### Phase 5: Hero Moment & Investor Narrative
@@ -171,7 +176,7 @@ This roadmap preserves the approved spec's mandatory ordering: **Foundation firs
 | 1. Foundation (Safety-Net Modularization) | 3/3 | Complete   | 2026-06-20 |
 | 2. Provenance & Source Linking | 4/4 | Complete   | 2026-06-20 |
 | 3. Confidence, Methodology & Freshness | 4/4 | Complete   | 2026-06-21 |
-| 4. Design System & Smooth Motion | 0/0 | Not started | - |
+| 4. Design System & Smooth Motion | 0/4 | Planned | - |
 | 5. Hero Moment & Investor Narrative | 0/0 | Not started | - |
 | 6. Concentration & Risk Analytics | 0/0 | Not started | - |
 | 7. Scenario Stress-Tests | 0/0 | Not started | - |
