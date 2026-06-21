@@ -18,6 +18,12 @@ const g = svg.append("g");
 const zoom = d3.zoom().scaleExtent([0.12, 6]).on("zoom", (e) => g.attr("transform", e.transform));
 svg.call(zoom);
 
+// Touch-tap recovery for nodes: d3.drag() preventDefaults touchstart and thus
+// suppresses the synthesized click on touch. We detect a stationary touch
+// gesture in the drag `end` handler (< TAP_SLOP px) and activate the node there.
+const TAP_SLOP = 10; // px: movement above this is a drag, not a tap
+let nodeDragStart = null;
+
 // DOM render targets owned by viz.
 const tt = document.getElementById("tt");
 const titleEl = document.getElementById("title");
@@ -494,9 +500,30 @@ function buildNodeChildren(sel) {
 function wireNodeHandlers(sel) {
   sel.attr("cursor", "pointer")
     .call(d3.drag()
-      .on("start", (e, d) => { if (!e.active) STATE.simulation.alphaTarget(0.06).restart(); d.fx = d.x; d.fy = d.y; })
+      // clickDistance lets a near-stationary press still emit a real click (mouse).
+      .clickDistance(TAP_SLOP)
+      .on("start", (e, d) => {
+        if (!e.active) STATE.simulation.alphaTarget(0.06).restart();
+        d.fx = d.x; d.fy = d.y;
+        nodeDragStart = { x: e.x, y: e.y };
+      })
       .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; })
-      .on("end", (e, d) => { if (!e.active) STATE.simulation.alphaTarget(0); d.fx = null; d.fy = null; }))
+      .on("end", (e, d) => {
+        if (!e.active) STATE.simulation.alphaTarget(0);
+        d.fx = null; d.fy = null;
+        // Touch tap recovery: d3.drag() preventDefaults the touchstart, which
+        // suppresses the browser's synthesized click on touch — so without this,
+        // tapping a node on a phone did nothing (a real mobile defect). For a
+        // TOUCH gesture that did not move (< TAP_SLOP px), activate the node here
+        // (the same path as a mouse click). Mouse still uses the click handler
+        // below, so this branch is touch-only to avoid double activation.
+        const src = e.sourceEvent;
+        const isTouch = src && (src.type.startsWith("touch") || src.pointerType === "touch");
+        if (!isTouch || !nodeDragStart) { nodeDragStart = null; return; }
+        const moved = Math.hypot(e.x - nodeDragStart.x, e.y - nodeDragStart.y);
+        nodeDragStart = null;
+        if (moved <= TAP_SLOP) activateNode(e.sourceEvent || e, d);
+      }))
     .on("mouseenter", (ev, d) => {
       if (STATE.mode === "global" && d.symbol) {
         STATE.hoverSymbol = d.symbol;
@@ -512,22 +539,27 @@ function wireNodeHandlers(sel) {
       }
       if (!STATE.lockId) { tt.style.display = "none"; resetHighlight(); }
     })
-    .on("click", (ev, d) => {
-      ev.stopPropagation();
-      if (STATE.mode === "global" && d.symbol && DATA.profiles[d.symbol]) {
-        openProfile(d.symbol);
-        return;
-      }
-      if (STATE.lockId === d.id) {
-        STATE.lockId = null;
-        tt.style.display = "none";
-        resetHighlight();
-      } else {
-        STATE.lockId = d.id;
-        showTooltip(d, ev);
-        highlightNode(d);
-      }
-    });
+    // Mouse click activates the node. (Touch is handled in the drag `end`
+    // handler above, because d3.drag suppresses the synthetic click on touch.)
+    .on("click", (ev, d) => activateNode(ev, d));
+}
+
+// Shared node activation for both mouse click and touch tap (see wireNodeHandlers).
+function activateNode(ev, d) {
+  ev.stopPropagation();
+  if (STATE.mode === "global" && d.symbol && DATA.profiles[d.symbol]) {
+    openProfile(d.symbol);
+    return;
+  }
+  if (STATE.lockId === d.id) {
+    STATE.lockId = null;
+    tt.style.display = "none";
+    resetHighlight();
+  } else {
+    STATE.lockId = d.id;
+    showTooltip(d, ev);
+    highlightNode(d);
+  }
 }
 
 // Wire the link-level mouse handlers onto a link selection.

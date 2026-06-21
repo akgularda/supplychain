@@ -140,13 +140,25 @@ function openHeroOverlay() {
   if (!heroOverlayEl) return;
   focusBeforeModal = document.activeElement;
   activeModal = heroOverlayEl;
-  const skip = heroOverlayEl.querySelector("#heroSkip");
-  if (skip && typeof skip.focus === "function") skip.focus();
-  else {
-    const focusable = getFocusableElements(heroOverlayEl);
-    if (focusable[0]) focusable[0].focus();
-    else heroOverlayEl.focus?.();
-  }
+  // Move focus in on the next frame: heroRender flips `hidden` off in the SAME
+  // synchronous task that calls this, and an element transitioning out of
+  // display:none is not focusable until the browser commits the style/layout.
+  // Focusing synchronously here silently no-ops in Chromium (focus stays on the
+  // trigger and Tab can leak to background controls). rAF (with a microtask
+  // fallback for headless/no-rAF contexts) defers focus until the overlay is
+  // actually rendered, so the focus trap engages.
+  const moveFocusIn = () => {
+    if (activeModal !== heroOverlayEl) return; // closed again before the frame ran
+    const skip = heroOverlayEl.querySelector("#heroSkip");
+    if (skip && typeof skip.focus === "function") skip.focus();
+    else {
+      const focusable = getFocusableElements(heroOverlayEl);
+      if (focusable[0]) focusable[0].focus();
+      else heroOverlayEl.focus?.();
+    }
+  };
+  if (typeof requestAnimationFrame === "function") requestAnimationFrame(moveFocusIn);
+  else Promise.resolve().then(moveFocusIn);
 }
 
 // Hero close: clear the activeModal pointer (only if it is the hero) and restore
