@@ -163,6 +163,7 @@
     <button id="bBookmarks" title="Bookmarks" aria-label="Open saved views">Bookmarks</button>
     <button id="bCompare" aria-label="Compare selected companies">Compare</button>
     <button id="bMethodology" aria-label="Open methodology and data sources">Methodology</button>
+    <button id="bTour" aria-label="Take the guided tour">Take the tour</button>
     <button id="bHelp" style="border-color:var(--acc);color:var(--acc)" aria-label="Open help dialog">?</button>
     <span class="sep"></span>
     <select id="companyJump" aria-label="Open company profile"><option value="">Open company...</option></select>
@@ -302,6 +303,19 @@
       <button id="provenanceClose" type="button" aria-label="Close provenance panel">&times;</button>
     </div>
     <div id="provenanceItems"></div>
+  </div>
+
+  <div id="heroOverlay" role="dialog" aria-modal="true" aria-labelledby="heroTitle" tabindex="-1" hidden
+       style="position:fixed;left:50%;bottom:48px;transform:translateX(-50%);z-index:140;background:rgba(10,10,10,.97);border:1px solid #252525;border-radius:8px;padding:16px 18px;max-width:420px;width:calc(100% - 32px);box-shadow:0 8px 32px rgba(0,0,0,.55)">
+    <div id="heroProgress" style="font-size:8px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px"></div>
+    <h3 id="heroTitle" style="font-family:'Bricolage Grotesque',sans-serif;font-size:15px;color:#fff;margin-bottom:6px"></h3>
+    <p id="heroCaption" style="font-size:11px;color:#a8a8a8;line-height:1.55;margin-bottom:12px"></p>
+    <div style="display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap">
+      <button id="heroPrev" type="button" aria-label="Previous tour step" style="background:#111;border:1px solid #333;color:#ddd;padding:5px 10px;font-size:9px;cursor:pointer;text-transform:uppercase;letter-spacing:.5px">Prev</button>
+      <button id="heroPause" type="button" aria-label="Pause tour" style="background:#111;border:1px solid #333;color:#ddd;padding:5px 10px;font-size:9px;cursor:pointer;text-transform:uppercase;letter-spacing:.5px">Pause</button>
+      <button id="heroNext" type="button" aria-label="Next tour step" style="background:#111;border:1px solid #333;color:#ddd;padding:5px 10px;font-size:9px;cursor:pointer;text-transform:uppercase;letter-spacing:.5px">Next</button>
+      <button id="heroSkip" type="button" aria-label="Skip tour" style="background:#111;border:1px solid var(--acc);color:var(--acc);padding:5px 10px;font-size:9px;cursor:pointer;text-transform:uppercase;letter-spacing:.5px">Skip</button>
+    </div>
   </div>
 
 <script type="module" src="js/main.js"></script>
