@@ -27,6 +27,20 @@ test("index.html declares #scenarioPanel + all 7 new scenario IDs", () => {
   }
 });
 
+// --- CASC-02: multi-hop hop-breakdown panel id ---------------------------
+
+test("index.html declares the #scenarioHopBreakdown direct-vs-indirect panel", () => {
+  assert.match(HTML, /id="scenarioHopBreakdown"/, "index.html missing id=\"scenarioHopBreakdown\"");
+});
+
+// --- CASC-02: UI opts into multi-hop + derives the split live ------------
+
+test("js/ui wires the multi-hop result (maxHops + byHop + maxHopReached)", () => {
+  assert.match(UI, /maxHops\s*:\s*3/, "ui must pass maxHops:3 at the scenario call sites");
+  assert.match(UI, /byHop/, "ui must read byHop for the direct-vs-indirect split");
+  assert.match(UI, /maxHopReached/, "headline must derive the hop count from maxHopReached");
+});
+
 // --- DEPTH-03: js/ui imports the engine from ../analytics ----------------
 
 test("js/ui imports runScenario + SCENARIO_PRESETS from ../analytics/index.js", () => {
@@ -60,6 +74,14 @@ test("index.html methodology modal documents the scenario model (single-hop + HH
   assert.match(HTML, /exposure/i, "methodology must say 'exposure' (not loss)");
   assert.match(HTML, /not a loss|exposure, not/i, "methodology must clarify exposure is NOT a loss estimate");
   assert.match(HTML, /tsmc|taiwan/i, "methodology must reference the Taiwan/TSMC label set");
+});
+
+// --- CASC-03: methodology now describes the bounded multi-hop model -------
+
+test("index.html methodology describes the multi-hop model AND keeps 'direct dependents'", () => {
+  assert.match(HTML, /multi-hop|hop 2|second-order|cycle-safe/i, "methodology must signal the multi-hop cascade model");
+  // The literal phrase must remain so the single-hop|direct-dependents regex stays satisfied.
+  assert.match(HTML, /direct dependents/, "methodology must keep the literal phrase 'direct dependents'");
 });
 
 // --- T-07-05: headline derived live, NOT hardcoded -----------------------
