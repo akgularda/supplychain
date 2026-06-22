@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Depth & Integrity Polish
-status: planning
-last_updated: "2026-06-22T03:30:00.000Z"
-last_activity: 2026-06-22
+status: executing
+last_updated: "2026-06-22T03:22:51.274Z"
+last_activity: 2026-06-22 -- Phase 11 execution started
 progress:
   total_phases: 2
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
-  percent: 0
+  total_plans: 2
+  completed_plans: 1
+  percent: 50
 ---
 
 # Project State: Monarch Castle Technologies — Market Intelligence
@@ -19,16 +19,16 @@ progress:
 
 **Core Value:** Investors trust every number and instantly grasp supply-chain structure, concentration, and risk — credibility first, then beauty, then unique depth.
 
-**Current Focus:** Phase 11 — Multi-Hop Scenario Cascade (v1.1)
+**Current Focus:** Phase 11 — Multi-Hop Scenario Cascade
 
 **Mode:** mvp | **Granularity:** fine
 
 ## Current Position
 
-Phase: Phase 11 — Multi-Hop Scenario Cascade (not started)
-Plan: —
-Status: Roadmap created — ready to plan Phase 11
-Last activity: 2026-06-22 — v1.1 roadmap created (2 phases, 8/8 requirements mapped)
+Phase: 11 (Multi-Hop Scenario Cascade) — EXECUTING
+Plan: 2 of 2
+Status: Executing Phase 11
+Last activity: 2026-06-22 -- Completed 11-01 (multi-hop cascade engine); npm test 310 pass / 0 fail
 
 ## v1.1 Phases
 
@@ -44,6 +44,8 @@ Last activity: 2026-06-22 — v1.1 roadmap created (2 phases, 8/8 requirements m
 | v1.1 phases complete | 0/2 |
 | v1.1 requirements mapped | 8/8 |
 | Test suite baseline (start of v1.1) | 301 passing / 0 fail |
+| Plan 11-01 | 3 tasks (1 RED, 1 TDD feat, 1 gate), 3 files, ~4 min |
+| Multi-hop cascade gate (11-01) | npm test = 310 pass / 0 fail (301 + 9 cascade); Taiwan maxHops:1 = 7/$11.36T, maxHops>=2 = 8/$13.28T byHop{1:7,2:1} |
 | v1.0 milestone | 10 phases / 33 plans / 25 requirements — SHIPPED 2026-06-21 |
 
 <details>
@@ -85,6 +87,7 @@ Full v1.0 decision log and session continuity preserved in `.planning/milestones
 
 ### Key Decisions (carried into v1.1)
 
+- Multi-hop `runScenario` (11-01): engine default `maxHops=1` reproduces the v1.0 single-hop anchor byte-identically; multi-hop is opt-in. Exactly 6 real bridge edges (TSM, TCEHY, ASML, AZN, AMAT, LIN) derived by `buildSelfLabels` via exact `normalizeEntityLabel` matching — no alias map, no fabricated edges. Memo key appends `|h${maxHops}`. Cycle-safety via a visited `hopOf` set (proven by a synthetic 2-cycle fixture), bound via `maxHops`. hop>=2 `lostSuppliers` = the wave/bridge labels that reached the firm (A2). Result gained `hop`/`byHop`/`maxHopReached` (additive superset).
 - Real-data-only — NO fabricated weights or sources. Volume-weighted HHI is DEFERRED (HHI-01, blocked-on-real-data): the dataset has no per-supplier volume, so a true HHI cannot be computed without fabricating weights.
 - Cascade output stays honestly `Derived` (never Observed); multi-hop assumptions + termination bound documented in Methodology.
 - Keep buildless static GitHub-Pages deploy + weekly auto-update Actions pipeline intact.
@@ -117,9 +120,9 @@ Full v1.0 decision log and session continuity preserved in `.planning/milestones
 
 ## Session Continuity
 
-**Last action:** Created the v1.1 roadmap. Continued phase numbering from v1.0 (ended at Phase 10) — v1.1 starts at Phase 11. Derived 2 phases from the 8 v1.1 requirements: Phase 11 Multi-Hop Scenario Cascade (CASC-01..04, extends the single-hop `runScenario`; UI hint yes) and Phase 12 Source-FK Integrity & Workflow Fix (INTG-01..03 + INFRA-01 folded in — the one-line workflow fix is too thin for its own phase and shares the integrity/trust-surface + suite-green constraint). 8/8 requirements mapped, 100% coverage, no orphans. Appended the v1.1 grouping to ROADMAP.md (preserving the collapsed v1.0 section), updated REQUIREMENTS.md traceability, and refreshed this STATE.md position.
+**Last action:** Executed Plan 11-01 (multi-hop scenario cascade engine). Extended `runScenario` to a bounded cycle-safe multi-hop BFS (default maxHops:1, v1.0 byte-identical), added exported `buildSelfLabels` (the 6 real bridges), added per-entry `hop` + `byHop` + `maxHopReached`, and keyed the memo on maxHops. Authored + registered `tests/scenario-cascade.test.mjs`. `npm test` = 310 pass / 0 fail (301 baseline + 9 cascade). CASC-01 + CASC-04 complete.
 
-**Next step:** Plan Phase 11 with `/gsd:plan-phase 11`.
+**Next step:** Execute Plan 11-02 (scenario UI hop breakdown + methodology copy) with `/gsd:execute-phase 11`.
 
 ---
 *State initialized: 2026-06-20 · v1.1 position refreshed: 2026-06-22*
