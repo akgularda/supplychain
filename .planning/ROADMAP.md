@@ -42,7 +42,9 @@ Full details: [milestones/v1.0-ROADMAP.md](milestones/v1.0-ROADMAP.md)
   2. The scenario panel shows a hop breakdown (direct vs. indirect impact); the impacted-company count and total market-cap exposed reflect the full multi-hop result and are derived live (no hardcoded 7 / $11.36T literal)
   3. Cascade output renders the honest `Derived` provenance badge (never Observed), and the Methodology view explains the multi-hop model, its termination bound, and its assumptions — replacing the v1.0 "single-hop only" note
   4. New registered unit tests assert cascade correctness (cycle termination, hop-count accuracy, multi-hop impact ⊇ single-hop impact, against real fixtures) and the full suite (301 baseline) stays green
-**Plans**: TBD
+**Plans**: 2 plans
+- [ ] 11-01-PLAN.md — Extend runScenario with bounded cycle-safe maxHops BFS + 6-bridge selfLabels + cascade unit tests (CASC-01, CASC-04)
+- [ ] 11-02-PLAN.md — Scenario panel hop breakdown + maxHops:3 call sites + live headline + multi-hop methodology copy + wiring/smoke gate (CASC-02, CASC-03)
 **UI hint**: yes
 
 ### Phase 12: Source-FK Integrity & Workflow Fix
@@ -71,7 +73,7 @@ Full details: [milestones/v1.0-ROADMAP.md](milestones/v1.0-ROADMAP.md)
 | 8. Interaction Performance | v1.0 | 4/4 | Complete | 2026-06-21 |
 | 9. Mobile & Keyboard Accessibility | v1.0 | 3/3 | Complete | 2026-06-21 |
 | 10. SEO, Social Cards & Launch Gate | v1.0 | 2/2 | Complete | 2026-06-21 |
-| 11. Multi-Hop Scenario Cascade | v1.1 | 0/? | Not started | - |
+| 11. Multi-Hop Scenario Cascade | v1.1 | 0/2 | Planned | - |
 | 12. Source-FK Integrity & Workflow Fix | v1.1 | 0/? | Not started | - |
 
 ---
