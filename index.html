@@ -157,7 +157,7 @@
       <h3>Scenario stress-tests (derived)</h3>
       <p>A scenario disables one or more <em>real</em> suppliers and lists the companies that lose at least one supplier as a result. Like the concentration and chokepoint figures, scenario output is a <em>derived</em> aggregate, badged <strong>Derived</strong> &mdash; never <strong>Observed</strong>. It is a structural what-if over the graph, not a forecast.</p>
       <ul>
-        <li><strong>Single-hop only.</strong> The model reports <em>direct dependents</em> of the disabled suppliers. Cascading / propagation effects (a disrupted firm in turn disrupting <em>its</em> customers) are explicitly out of scope for v1.</li>
+        <li><strong>Bounded multi-hop cascade.</strong> The model starts from the <em>direct dependents</em> (hop 1) of the disabled suppliers, then propagates: a firm impacted at one hop that is itself a real supplier disrupts <em>its</em> dependents at the next hop (hop 2+). Traversal is <em>cycle-safe</em> &mdash; a visited set guarantees each firm is reached once, so the cascade always terminates &mdash; and <em>bounded</em> to at most N hops (the UI runs N=3). Real second-order edges are sparse, so the multi-hop result often equals the direct-dependent set; no edges are fabricated.</li>
         <li><strong>Concentration shift is reported as HHI = 1/k</strong>, which <em>rises</em> when a supplier is removed (fewer distinct suppliers &rarr; more concentrated). The composite concentration score above is <em>not</em> used here because it is not monotonic under removal &mdash; dropping a shared supplier can lower its <code>sharedFrac</code> term even as the firm becomes more concentrated.</li>
         <li><strong>&ldquo;Market cap exposed&rdquo; is exposure, not a loss estimate.</strong> It is the combined market capitalization of the impacted firms &mdash; the dollar value of companies <em>touched</em> by the disruption, <em>not</em> a projected loss or write-down.</li>
         <li>The <strong>Taiwan semiconductor</strong> preset disables the real <strong>TSMC</strong> supplier-label variants found in the data (TSMC is fragmented across several normalized labels), so the headline reflects the true union of dependents rather than a single label.</li>
@@ -329,8 +329,9 @@
 
   <div id="scenarioPanel" role="region" aria-label="Scenario stress-test what-if disruption">
     <div class="cSecTitle">Scenario Stress-Test <span id="scenarioProv"></span></div>
-    <div class="cMuted" style="margin-bottom:6px">Run a what-if disruption &mdash; direct downstream impact (single-hop)</div>
+    <div class="cMuted" style="margin-bottom:6px">Run a what-if disruption &mdash; multi-hop downstream cascade (bounded, cycle-safe)</div>
     <div class="cMuted" id="scenarioSummary" style="margin-bottom:6px">No scenario run yet.</div>
+    <div class="cMuted" id="scenarioHopBreakdown" style="margin-bottom:6px"></div>
     <div class="cList" id="scenarioImpactList"></div>
     <div class="cActions">
       <button id="bScenarioTaiwan" type="button" aria-label="Run the Taiwan semiconductor disruption scenario">Run: Taiwan semiconductor disruption</button>

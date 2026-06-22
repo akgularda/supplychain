@@ -43,6 +43,7 @@ const chokepointsListEl = document.getElementById("chokepointsList");
 const scenarioPanelEl = document.getElementById("scenarioPanel");
 const scenarioSummaryEl = document.getElementById("scenarioSummary");
 const scenarioImpactListEl = document.getElementById("scenarioImpactList");
+const scenarioHopBreakdownEl = document.getElementById("scenarioHopBreakdown");
 const scenarioProvEl = document.getElementById("scenarioProv");
 const scenarioChokepointSelectEl = document.getElementById("scenarioChokepointSelect");
 const cardSourcesBtn = document.getElementById("cardSourcesBtn");
@@ -724,8 +725,9 @@ function highlightChokepoints() {
 
 // --- Scenario stress-tests (DEPTH-03 / DEPTH-04) -------------------------
 // Run a what-if disruption via the pure runScenario engine and render the live
-// downstream impact (single-hop). The headline is DERIVED from the result
-// (impactedCompanies.length + totalMarketCapExposed) — never hardcoded — and
+// bounded multi-hop downstream cascade. The headline is DERIVED from the result
+// (impactedCompanies.length + maxHopReached + totalMarketCapExposed) — never
+// hardcoded — with a direct-vs-indirect (byHop[1]) split — and
 // the output is badged "Derived" (never "Observed") with a Methodology link.
 // Every supplier/company label is escaped before innerHTML (T-07-03).
 
@@ -733,8 +735,16 @@ function highlightChokepoints() {
 function renderScenario(result) {
   if (scenarioSummaryEl) {
     scenarioSummaryEl.textContent =
-      `${result.impactedCompanies.length} companies impacted · ` +
-      `$${(result.totalMarketCapExposed / 1e12).toFixed(2)}T market cap exposed`;
+      `${result.impactedCompanies.length} companies impacted across ` +
+      `${result.maxHopReached} hop(s) · ` +
+      `$${(result.totalMarketCapExposed / 1e12).toFixed(2)}T exposed`;
+  }
+  if (scenarioHopBreakdownEl) {
+    const direct = result.byHop?.[1]?.length || 0;
+    const indirect = result.impactedCompanies.length - direct;
+    scenarioHopBreakdownEl.textContent = result.impactedCompanies.length
+      ? `${direct} direct · ${indirect} indirect`
+      : "";
   }
   if (scenarioImpactListEl) {
     if (!result.impactedCompanies.length) {
@@ -744,7 +754,7 @@ function renderScenario(result) {
         .map((c) => {
           const before = c.suppliersBefore;
           const after = c.suppliersAfter;
-          return `<div class="cItem"><span>${escapeHtml(c.company)} (${escapeHtml(c.symbol)})</span>` +
+          return `<div class="cItem"><span>${escapeHtml(c.company)} (${escapeHtml(c.symbol)}) <em class="cMuted">hop ${escapeHtml(String(c.hop))}</em></span>` +
             `<b>${c.lostSuppliers.length} lost · ${before}→${after} suppliers · ` +
             `${c.concentrationBefore.toFixed(2)}→${c.concentrationAfter.toFixed(2)} HHI</b></div>`;
         })
@@ -768,10 +778,13 @@ function highlightImpacted(result) {
 
 // Run the bundled Taiwan semiconductor preset (5 real TSMC label variants).
 function runTaiwanScenario() {
-  const result = runScenario(SCENARIO_PRESETS.TAIWAN_SEMI.disruption, {
-    profiles: DATA.profiles,
-    nodes: DATA.nodes,
-  });
+  const result = runScenario(
+    { ...SCENARIO_PRESETS.TAIWAN_SEMI.disruption, maxHops: 3 },
+    {
+      profiles: DATA.profiles,
+      nodes: DATA.nodes,
+    }
+  );
   renderScenario(result);
   highlightImpacted(result);
 }
@@ -779,7 +792,7 @@ function runTaiwanScenario() {
 // Generalized chokepoint disruption: disable a single supplier label.
 function runChokepointScenario(label) {
   if (!label) return;
-  const result = runScenario({ disableSupplier: label }, {
+  const result = runScenario({ disableSupplier: label, maxHops: 3 }, {
     profiles: DATA.profiles,
     nodes: DATA.nodes,
   });
@@ -791,6 +804,7 @@ function runChokepointScenario(label) {
 function resetScenario() {
   resetHighlight();
   if (scenarioSummaryEl) scenarioSummaryEl.textContent = "No scenario run yet.";
+  if (scenarioHopBreakdownEl) scenarioHopBreakdownEl.textContent = "";
   if (scenarioImpactListEl) scenarioImpactListEl.innerHTML = "";
   if (scenarioProvEl) scenarioProvEl.innerHTML = "";
   if (scenarioChokepointSelectEl) scenarioChokepointSelectEl.value = "";
