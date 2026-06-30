@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="docs/logo.png" alt="Supply Chain logo" width="140"/>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/monarchcastletech/supplychain/master/docs/logo-dark.png"><img src="docs/logo.png" alt="Supply Chain logo" width="140"></picture>
   <!-- CODEX: generate a clean product logo here — a minimal, corporate emblem suggesting a node-and-link supply-chain network fused with a market-cap/finance motif, in deep navy (#0b1f3a) and Monarch blue (#1f6feb) on transparent background; should read well at 140px and pair with the Monarch Castle house style. -->
 
   # Supply Chain
